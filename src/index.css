@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .text-mode-primary{
+        @apply  text-primary dark:text-white;
+    }
+    .text-mode-slate{
+        @apply  text-slate-500 dark:text-slate-400;
+    }
+
+    .app-body{
+        @apply bg-slate-100 dark:bg-slate-800 min-h-screen flex flex-col;
+    }
+    .app-banner{
+        @apply fixed top-0 left-0 w-full h-20 bg-white dark:bg-slate-700 flex items-center;
+    }
+    .app-main{
+        @apply flex-grow;
+    }
+    .app-search-home {
+        @apply bg-slate-100 flex items-center rounded-xl dark:bg-slate-600 ;
+    }
+    .app-search-home > input {
+        @apply bg-transparent p-2;
+    }
+    .app-search-home > div {
+        @apply p-2 border-r-2 border-slate-200;
+    }
+
+    .app-search-home > input:active {
+        border: none;
+        outline: none;
+    }
+
+    .app-search-home > input:focus {
+        border: none;
+        outline: none;
+    }
+
+}

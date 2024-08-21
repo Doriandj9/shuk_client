@@ -1,0 +1,45 @@
+{
+  "name": "shuk_client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "css-watch": "tailwindcss -i ./src/index.css -o ./src/styles/main.css --watch",
+    "css": "tailwindcss -i ./src/index.css -o ./src/styles/main.css",
+    "interface-core": "i18next-resources-for-ts interface -i ./src/modules/core/translations/es -o ./src/modules/core/@types/resources.d.ts"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/roboto": "^5.0.14",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
+    "i18next": "^23.12.2",
+    "i18next-resources-for-ts": "^1.5.0",
+    "path": "^0.12.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.0.1",
+    "react-icons": "^5.2.1",
+    "react-router-dom": "^6.26.0",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "tailwindcss": "^3.4.9",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.4"
+  }
+}
