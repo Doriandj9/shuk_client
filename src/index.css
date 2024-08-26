@@ -6,6 +6,9 @@
     .text-mode-primary{
         @apply  text-primary dark:text-white;
     }
+    .text-mode-secondary{
+        @apply text-secondary dark:text-slate-400;
+    }
     .text-mode-slate{
         @apply  text-slate-500 dark:text-slate-400;
     }
@@ -18,7 +21,7 @@
         @apply bg-slate-100 dark:bg-slate-800 min-h-screen flex flex-col;
     }
     .app-banner{
-        @apply fixed top-0 left-0 w-full h-16 bg-white dark:bg-slate-700 flex items-center;
+        @apply fixed top-0 left-0 z-10 w-full h-16 bg-primary/5 dark:bg-slate-700 flex items-center;
     }
     .app-main{
         @apply flex-grow flex;
@@ -27,10 +30,10 @@
         @apply bg-slate-100 flex items-center rounded-xl dark:bg-slate-600 ;
     }
     .app-search-home > input {
-        @apply bg-transparent p-2 md:p-1 text-base md:text-xs ;
+        @apply bg-transparent p-2 md:p-2 text-base md:text-xs ;
     }
     .app-search-home > div {
-        @apply p-2 md:p-1 border-r-2 border-slate-200;
+        @apply p-2 md:p-2 border-r-2 border-slate-200;
     }
 
     .app-search-home > input:active {
@@ -44,19 +47,21 @@
     }
 
     .option-menu{
-        @apply w-full h-full fixed top-0 left-0 bg-slate-100 dark:bg-slate-800;
+        @apply w-full h-full fixed top-0 left-0 bg-slate-100 dark:bg-slate-800 z-20;
     }
     .app-container-fade{
         @apply bg-white shadow-lg rounded-xl dark:bg-slate-700 dark:shadow-slate-800;
     }
     .app-navbar{
-        @apply w-[15rem] fixed top-16 left-0 bg-slate-100 dark:bg-slate-800;
-        height: calc(100vh - 5.926vh);
+        @apply w-[20rem] fixed top-0 left-0 bg-slate-100 dark:bg-slate-800 md:w-[20rem] lg:w-[20rem] xl:w-[18rem] 2xl:w-[20rem];
+        height: 100vh;
+        z-index: 1;
     }
 
     .app-navbar-right{
-        @apply w-[8rem] md:w-[12rem] fixed top-16 right-0 bg-slate-100 dark:bg-slate-800;
-        height: calc(100vh - 5.926vh);
+        @apply w-[15rem] md:w-[12rem] lg:w-[16rem] xl:w-[18rem] 2xl:w-[20rem] fixed top-16 right-0 bg-slate-100 dark:bg-slate-800;
+        height: 100vh;
+        z-index: 1;
     }
     .app-insert-post{
         @apply flex justify-center;

@@ -17,13 +17,13 @@ const AppSearchHome = () => {
         <React.Fragment>
             <div className="app-search-home hidden md:flex">
                 <div>
-                    <SearchIcon className=""  />
+                    <SearchIcon className="text-mode-secondary"  />
                 </div>
                 <input className="w-60" type="text" placeholder={t('header.search-placeholder')} />
             </div>
 
             <div className="flex md:hidden justify-center">
-                    <IconButton onClick={() => handleShowSearch()}> <SearchIcon sx={{width: 30, height: 30}} /> </IconButton>
+                    <IconButton onClick={() => handleShowSearch()}> <SearchIcon className="text-mode-secondary" sx={{width: 30, height: 30}} /> </IconButton>
             </div>
 
             <AnimatePresence>
@@ -39,7 +39,7 @@ const AppSearchHome = () => {
                                 <div className="flex gap-0 items-center pt-4 pr-4 pb-4">
                                 <div>
                                     <IconButton sx={{padding: 0, margin: 0}} onClick={() => handleShowSearch()}>
-                                        <KeyboardArrowLeftIcon fontSize="large"  />
+                                        <KeyboardArrowLeftIcon className="text-mode-secondary" fontSize="large"  />
                                     </IconButton>
                                 </div>
                                 <div className="app-search-home w-full">

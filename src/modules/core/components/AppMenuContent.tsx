@@ -96,7 +96,7 @@ const AppMenuContent: React.FC<AppMenuContent>  = ({ i18n, }) => {
         onClick={handleClick}
       >
         <Badge badgeContent={language} color="primary">
-            <LanguageIcon className="text-mode-slate pointer-events-none " />
+            <LanguageIcon className="text-mode-secondary pointer-events-none " />
         </Badge>
       </Button>
       <StyledMenu

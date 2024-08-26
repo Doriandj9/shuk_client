@@ -17,6 +17,7 @@ import { MenuOutlined } from '@mui/icons-material';
 import { ThemeOptions } from '@/config/@types/app';
 import AppMenuContent from '@core/components/AppMenuContent';
 import { motion, AnimatePresence } from "framer-motion";
+import AppNavbar from '@core/components/AppNavbar';
 import HomeIcon from '@mui/icons-material/Home';
 import profileImg from '@/assets/img/profile.png';
 
@@ -24,6 +25,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
 
     const [t,i18n] = useTranslation('core');
     const [showMovil, setShowMovil] = useState<boolean>(true);
+    const [showNavbar, setShowNavbar] = useState<boolean>(false);
 
     const {theme:themeMode, update: updateThemeMode} = useThemeMode((state) => state);
     const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)');
@@ -43,6 +45,10 @@ const AppLayout: React.FC<Children> = ({ children }) => {
 
     const handleShowMovil = () => {
         setShowMovil(!showMovil);
+    };
+
+    const handleShowNavbar = () => {
+        setShowNavbar(!showNavbar);
     };
 
     useEffect(() => {
@@ -73,16 +79,21 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                 -
                             */}
                             <div className="flex py-2 flex-row max-w-32 w-32  md:max-w-60 md:w-60 justify-center gap-4 items-center">
+                                <div className="hidden md:block xl:hidden">
+                                 <IconButton onClick={() => handleShowNavbar()}  sx={{margin: 0, padding: 0}} >
+                                    <MenuOutlined className="text-mode-secondary" />
+                                 </IconButton>
+                               </div>
                                 <div className="hidden md:block">
-                                    <img src={logo} alt="LOGO SHUK" className="w-32 h-10 mt-2" />
+                                    <img src={logo} alt="LOGO SHUK" className="w-28 xl:w-32 h-10 mt-2" />
                                 </div>
                                 <div className="flex gap-2">
                                     <div className="flex flex-col justify-center items-center w-6 mt-2">
-                                        <AiOutlineLike  className="w-4 h-4" />
+                                        <AiOutlineLike  className="text-mode-secondary w-4 h-4" />
                                         <span className="text-[0.5rem]">999+</span>
                                     </div>
                                     <div className="flex flex-col justify-center items-center w-6 mt-2">
-                                        <AiOutlineDislike  className="w-4 h-4" />
+                                        <AiOutlineDislike  className="text-mode-secondary w-4 h-4" />
                                         <span className="text-[0.5rem]">999+</span>
                                     </div>
                                 </div>
@@ -120,11 +131,11 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                                   themeMode === 'dark' 
                                                   ?
                                                   <button onClick={() => handleModeDark('light')}>
-                                                    <DarkModeIcon className="text-mode-slate pointer-events-none"  />
+                                                    <DarkModeIcon className="text-mode-secondary pointer-events-none"  />
                                                   </button>
                                                   :
                                                   <button onClick={() => handleModeDark('dark')}>
-                                                      <Brightness7Icon className="text-mode-slate pointer-events-none" />
+                                                      <Brightness7Icon className="text-mode-secondary pointer-events-none" />
                                                   </button>
                                                 }
                                         </li>
@@ -133,12 +144,12 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                         </li>
                                         <li className="hidden md:block">
                                             <Link to={'/'} className="text-sm text-mode-slate flex items-center gap-1">
-                                            <LoginIcon className="text-mode-slate pointer-events-none" />
+                                            <LoginIcon className="text-mode-secondary pointer-events-none" />
                                                 {t('header.login')}
                                             </Link>
                                         </li>
-                                        <li className="hidden md:block">
-                                            <IconButton>
+                                        <li className="hidden md:block border-2 rounded-full border-secondary mr-2 dark:border-slate-400">
+                                            <IconButton sx={{margin: 0, padding: 0.75}}>
                                                 <Avatar
                                                         alt="Remy Sharp"
                                                         src={profileImg}
@@ -150,7 +161,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                </div>
                                <div className="block md:hidden">
                                  <IconButton onClick={() => handleShowMovil()}>
-                                    <MenuOutlined />
+                                    <MenuOutlined className="text-mode-secondary" />
                                  </IconButton>
                                </div>
                             </div>
@@ -190,11 +201,11 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                                                 themeMode === 'dark'
                                                                 ?
                                                                 <button onClick={() => handleModeDark('light')}>
-                                                                    <DarkModeIcon className="text-mode-slate pointer-events-none"  />
+                                                                    <DarkModeIcon className="text-mode-secondary pointer-events-none"  />
                                                                 </button>
                                                                 :
                                                                 <button onClick={() => handleModeDark('dark')}>
-                                                                    <Brightness7Icon className="text-mode-slate pointer-events-none" />
+                                                                    <Brightness7Icon className="text-mode-secondary pointer-events-none" />
                                                                 </button>
                                                                 }
                                                         </li>
@@ -203,7 +214,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                                         </li>
                                                         <li>
                                                         <IconButton onClick={() => handleShowMovil()}>
-                                                            <HomeIcon />
+                                                            <HomeIcon className="text-mode-secondary" />
                                                         </IconButton>
                                                         </li>
                                                     </ul>
@@ -240,9 +251,28 @@ const AppLayout: React.FC<Children> = ({ children }) => {
 
                     <main role="content" className="app-main">
                         <div className="w-1/4 hidden xl:block" />
-                        <div className="app-navbar hidden xl:block">
-
+                        <div className="app-navbar hidden xl:block overflow-y-auto">
+                            <AppNavbar />
                         </div>
+                        <AnimatePresence>
+                            {
+                                showNavbar && (<React.Fragment>
+                                    <motion.div
+                                    className="app-navbar"
+                                    initial={{ x: '-100vw' }} 
+                                    animate={{ x: 0, y: 0 }} 
+                                    exit={{ x: '-100vw' }} 
+                                    transition={{ type: 'spring', stiffness: 400, damping: 50 }} 
+                                    >
+                                        <div >
+                                            <AppNavbar />
+                                        </div>
+                                    </motion.div>
+
+                                </React.Fragment>)
+                            }
+                        </AnimatePresence>                    
+
                         <div className="flex-grow p-2 xl:p-4">
                             {children}
                         </div>
