@@ -85,7 +85,9 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                  </IconButton>
                                </div>
                                 <div className="hidden md:block">
-                                    <img src={logo} alt="LOGO SHUK" className="w-28 xl:w-32 h-10 mt-2" />
+                                    <Link to='/'>
+                                        <img src={logo} alt="LOGO SHUK" className="w-28 xl:w-32 h-10 mt-2" />
+                                    </Link>
                                 </div>
                                 <div className="flex gap-2">
                                     <div className="flex flex-col justify-center items-center w-6 mt-2">

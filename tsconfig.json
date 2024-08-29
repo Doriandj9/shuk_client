@@ -4,7 +4,8 @@
     "target": "ESNext",
     "paths": {
       "@/*": ["./src/*"],
-      "@core/*": ["./src/modules/core/*"]
+      "@core/*": ["./src/modules/core/*"],
+      "@web/*": ["./src/modules/web/*"]
     },
     "useDefineForClassFields": true,
     "lib": ["DOM","DOM.Iterable","ESNext"],
