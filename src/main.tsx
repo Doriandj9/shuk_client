@@ -13,6 +13,8 @@ import { I18nextProvider } from 'react-i18next';
 import core_es from '@core/translations/es/core.json';
 import core_en from '@core/translations/en/core.json';
 import {LanguageApp} from '@/config/@types/app';
+import { QueryClient,  QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const routes = createBrowserRouter(routesApp);
 
@@ -48,12 +50,15 @@ i18next.init({
   }
 });
 
-
+const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <I18nextProvider i18n={i18next}>
-    <RouterProvider router={routes} />
+    <QueryClientProvider client={client}>
+      <RouterProvider router={routes} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
     </I18nextProvider>
   </React.StrictMode>,
 );

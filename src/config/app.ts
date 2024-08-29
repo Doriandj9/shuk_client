@@ -1,9 +1,10 @@
 import {AppConfig} from '@/config/@types/app';
 import { ThemeOptions } from "@mui/material";
+import axios from 'axios';
 
 
 export const app: AppConfig = {
-    server: 'aaa',
+    server: 'http://127.0.0.1:8000/api/',
     colors: {
         primary: '#232C56',
         secondary: '#F6A605',
@@ -23,3 +24,17 @@ export const appTheme: ThemeOptions = {
         }
     }
 };
+
+export const api = axios.create({
+    baseURL: app.server,
+    transformRequest: [function(data) {
+
+        if(app.environment !== 'prod'){
+            if(data._error){
+                return {...data, message: data._error, _error: data.message};
+            }
+
+            return data;
+        }
+    }]
+});
