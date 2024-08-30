@@ -5,6 +5,7 @@ import {useThemeMode} from '@/store/themeMode';
 import { Avatar, createTheme, CssBaseline, IconButton, ThemeProvider, useMediaQuery } from "@mui/material";
 import { appTheme } from '@/config/app';
 import logo from '@/assets/img/shuk_logo.png';
+import logo_dark from '@/assets/img/logo_shuks/shuk_bn.png';
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import AppSearchHome from "../components/AppSearchHome";
@@ -20,6 +21,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import AppNavbar from '@core/components/AppNavbar';
 import HomeIcon from '@mui/icons-material/Home';
 import profileImg from '@/assets/img/profile.png';
+import { webRoutes } from '@/config/webRoutes';
+
+const {path:pathLogin} = webRoutes.login;
+const {path:pathHome} = webRoutes.home;
+
 
 const AppLayout: React.FC<Children> = ({ children }) => {
 
@@ -85,8 +91,11 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                  </IconButton>
                                </div>
                                 <div className="hidden md:block">
-                                    <Link to='/'>
-                                        <img src={logo} alt="LOGO SHUK" className="w-28 xl:w-32 h-10 mt-2" />
+                                    <Link to={pathHome}>
+                                        <img src={ themeMode === 'system' || themeMode === 'light' ? logo : logo_dark } 
+                                        
+                                        alt="LOGO SHUK" 
+                                        className="w-28 xl:w-32 h-10 mt-2" />
                                     </Link>
                                 </div>
                                 <div className="flex gap-2">
@@ -145,7 +154,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                             <AppMenuContent i18n={i18n.changeLanguage} />
                                         </li>
                                         <li className="hidden md:block">
-                                            <Link to={'/'} className="text-sm text-mode-slate flex items-center gap-1">
+                                            <Link to={pathLogin} className="text-sm text-mode-slate flex items-center gap-1">
                                             <LoginIcon className="text-mode-secondary pointer-events-none" />
                                                 {t('header.login')}
                                             </Link>
