@@ -50,10 +50,11 @@ const StyledMenu = styled((props: MenuProps) => (
 }));
 
 type AppMenuContent = {
-    i18n: (language: string) => void
+    i18n: (language: string) => void,
+    mobile?:  boolean;
 }
 
-const AppMenuContent: React.FC<AppMenuContent>  = ({ i18n, }) => {
+const AppMenuContent: React.FC<AppMenuContent>  = ({ i18n, mobile}) => {
   const {language,update:updateLanguage} = useLanguageApp((state) => state);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -96,7 +97,7 @@ const AppMenuContent: React.FC<AppMenuContent>  = ({ i18n, }) => {
         onClick={handleClick}
       >
         <Badge badgeContent={language} color="primary">
-            <LanguageIcon className="text-mode-secondary pointer-events-none " />
+            <LanguageIcon className={`${mobile ? 'text-mode-secondary' : 'text-mode-primary'} pointer-events-none`} />
         </Badge>
       </Button>
       <StyledMenu

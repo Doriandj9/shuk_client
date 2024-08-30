@@ -561,7 +561,7 @@ video {
 
 .text-mode-primary:where(.dark, .dark *) {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 
 .text-mode-secondary {
@@ -616,7 +616,8 @@ video {
   height: 4rem;
   width: 100%;
   align-items: center;
-  background-color: rgb(35 44 86 / 0.05);
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 166 5 / var(--tw-bg-opacity));
 }
 
 .app-banner:where(.dark, .dark *) {
@@ -807,10 +808,6 @@ video {
   pointer-events: none;
 }
 
-.fixed {
-  position: fixed;
-}
-
 .absolute {
   position: absolute;
 }
@@ -981,6 +978,11 @@ video {
 
 .border-t {
   border-top-width: 1px;
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .border-secondary {

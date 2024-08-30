@@ -5,7 +5,11 @@ import { IconButton } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
-const AppSearchHome = () => {
+type SearchHome = {
+    mobile?: boolean;
+};
+
+const AppSearchHome: React.FC<SearchHome> = ({mobile}) => {
     const [t] = useTranslation("core");
     const [showSearch, setShowSearch] = useState(false);
 
@@ -23,7 +27,7 @@ const AppSearchHome = () => {
             </div>
 
             <div className="flex md:hidden justify-center">
-                    <IconButton onClick={() => handleShowSearch()}> <SearchIcon className="text-mode-secondary" sx={{width: 30, height: 30}} /> </IconButton>
+                    <IconButton onClick={() => handleShowSearch()}> <SearchIcon className={`${ mobile ? 'text-mode-secondary' : 'text-mode-primary'}`} sx={{width: 30, height: 30}} /> </IconButton>
             </div>
 
             <AnimatePresence>

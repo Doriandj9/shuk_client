@@ -4,7 +4,7 @@
 
 @layer components {
     .text-mode-primary{
-        @apply  text-primary dark:text-white;
+        @apply  text-primary dark:text-slate-400;
     }
     .text-mode-secondary{
         @apply text-secondary dark:text-slate-400;
@@ -17,11 +17,15 @@
         @apply  text-black dark:text-white;
     }
 
+    .text-mode-black{
+        @apply  text-white dark:text-slate-400;
+    }
+
     .app-body{
         @apply bg-slate-100 dark:bg-slate-800 min-h-screen flex flex-col;
     }
     .app-banner{
-        @apply fixed top-0 left-0 z-10 w-full h-16 bg-primary/5 dark:bg-slate-700 flex items-center;
+        @apply fixed top-0 left-0 z-10 w-full h-16 bg-secondary dark:bg-slate-700 flex items-center;
     }
     .app-main{
         @apply flex-grow flex;

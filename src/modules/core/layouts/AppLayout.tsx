@@ -6,6 +6,7 @@ import { Avatar, createTheme, CssBaseline, IconButton, ThemeProvider, useMediaQu
 import { appTheme } from '@/config/app';
 import logo from '@/assets/img/shuk_logo.png';
 import logo_dark from '@/assets/img/logo_shuks/shuk_bn.png';
+import logo_mobile from '@/assets/img/logo_shuks/SHUK-ICONO.png';
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import AppSearchHome from "../components/AppSearchHome";
@@ -87,24 +88,31 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                             <div className="flex py-2 flex-row max-w-32 w-32  md:max-w-60 md:w-60 justify-center gap-4 items-center">
                                 <div className="hidden md:block xl:hidden">
                                  <IconButton onClick={() => handleShowNavbar()}  sx={{margin: 0, padding: 0}} >
-                                    <MenuOutlined className="text-mode-secondary" />
+                                    <MenuOutlined className="text-mode-primary" />
                                  </IconButton>
                                </div>
                                 <div className="hidden md:block">
                                     <Link to={pathHome}>
-                                        <img src={ themeMode === 'system' || themeMode === 'light' ? logo : logo_dark } 
-                                        
-                                        alt="LOGO SHUK" 
+                                        <img src={ themeMode === 'system' || themeMode === 'light' ? logo : logo_dark }
+                                        alt="LOGO SHUK"
+                                        className="w-28 xl:w-32 h-10 mt-2" />
+                                    </Link>
+                                </div>
+                                {/* mobile logo  */}
+                                <div className="block md:hidden">
+                                    <Link to={pathHome}>
+                                        <img src={ themeMode === 'system' || themeMode === 'light' ? logo_mobile : logo_mobile }
+                                        alt="LOGO SHUK"
                                         className="w-28 xl:w-32 h-10 mt-2" />
                                     </Link>
                                 </div>
                                 <div className="flex gap-2">
                                     <div className="flex flex-col justify-center items-center w-6 mt-2">
-                                        <AiOutlineLike  className="text-mode-secondary w-4 h-4" />
+                                        <AiOutlineLike  className="text-mode-primary w-4 h-4" />
                                         <span className="text-[0.5rem]">999+</span>
                                     </div>
                                     <div className="flex flex-col justify-center items-center w-6 mt-2">
-                                        <AiOutlineDislike  className="text-mode-secondary w-4 h-4" />
+                                        <AiOutlineDislike  className="text-mode-primary w-4 h-4" />
                                         <span className="text-[0.5rem]">999+</span>
                                     </div>
                                 </div>
@@ -142,11 +150,11 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                                   themeMode === 'dark' 
                                                   ?
                                                   <button onClick={() => handleModeDark('light')}>
-                                                    <DarkModeIcon className="text-mode-secondary pointer-events-none"  />
+                                                    <DarkModeIcon className="text-mode-primary pointer-events-none"  />
                                                   </button>
                                                   :
                                                   <button onClick={() => handleModeDark('dark')}>
-                                                      <Brightness7Icon className="text-mode-secondary pointer-events-none" />
+                                                      <Brightness7Icon className="text-mode-primary pointer-events-none" />
                                                   </button>
                                                 }
                                         </li>
@@ -154,13 +162,13 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                             <AppMenuContent i18n={i18n.changeLanguage} />
                                         </li>
                                         <li className="hidden md:block">
-                                            <Link to={pathLogin} className="text-sm text-mode-slate flex items-center gap-1">
-                                            <LoginIcon className="text-mode-secondary pointer-events-none" />
+                                            <Link to={pathLogin} className="text-sm text-mode-primary flex items-center gap-1">
+                                            <LoginIcon className="text-mode-primary pointer-events-none" />
                                                 {t('header.login')}
                                             </Link>
                                         </li>
-                                        <li className="hidden md:block border-2 rounded-full border-secondary mr-2 dark:border-slate-400">
-                                            <IconButton sx={{margin: 0, padding: 0.75}}>
+                                        <li className="hidden md:block border-2 rounded-full border-black mr-2 dark:border-slate-400">
+                                            <IconButton sx={{margin: 0, padding: 0.5}}>
                                                 <Avatar
                                                         alt="Remy Sharp"
                                                         src={profileImg}
@@ -172,7 +180,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                </div>
                                <div className="block md:hidden">
                                  <IconButton onClick={() => handleShowMovil()}>
-                                    <MenuOutlined className="text-mode-secondary" />
+                                    <MenuOutlined className="text-mode-primary" />
                                  </IconButton>
                                </div>
                             </div>
@@ -199,7 +207,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                             </div>
                                             <div className="flex-grow">
                                                 <div className="w-full h-full flex justify-center">
-                                                    <AppSearchHome />
+                                                    <AppSearchHome mobile />
                                                 </div>
                                             </div>
 
@@ -221,7 +229,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                                                 }
                                                         </li>
                                                         <li className="">
-                                                            <AppMenuContent i18n={i18n.changeLanguage} />
+                                                            <AppMenuContent i18n={i18n.changeLanguage} mobile />
                                                         </li>
                                                         <li>
                                                         <IconButton onClick={() => handleShowMovil()}>

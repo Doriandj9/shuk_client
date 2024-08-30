@@ -4,6 +4,6 @@ export const webRoutes = {
         path: '/'
     },
     login: {
-        path: 'auth/login'
+        path: '/auth/login'
     }
 };
