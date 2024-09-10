@@ -1,8 +1,19 @@
-import { routeLogin } from '@/modules/web/routes/login';
-import { routeHome } from '@web/routes/home';
-import { RouteObject } from 'react-router-dom';
+import { Route } from "react-router-dom";
+import { CustomRoutes } from "./CustomRoutes";
+import { webRoutes } from "@/config/webRoutes";
+import Home from "@web/pages/Home/Home";
+import Login from "@web/pages/Login/Login";
 
 
-export const routesApp: RouteObject[] = [
-    routeHome,routeLogin
-];
+
+const RootRoutes = () => {
+
+    return (
+           <CustomRoutes>
+            <Route path={webRoutes.home.path}  element={<Home />} />
+            <Route path={webRoutes.login.path} element={<Login />} />
+           </CustomRoutes>
+    );
+};
+
+export default RootRoutes;

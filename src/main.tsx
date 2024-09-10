@@ -5,18 +5,16 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import {routesApp} from '@/routes/rootRoutes.tsx';
 import i18next from 'i18next';
 import { I18nextProvider } from 'react-i18next';
-
+import { BrowserRouter as Router } from 'react-router-dom';
 import core_es from '@core/translations/es/core.json';
 import core_en from '@core/translations/en/core.json';
 import {LanguageApp} from '@/config/@types/app';
 import { QueryClient,  QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import App from './App';
 
-const routes = createBrowserRouter(routesApp);
 
 let lngDefault: LanguageApp = 'es';
 
@@ -56,7 +54,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <I18nextProvider i18n={i18next}>
     <QueryClientProvider client={client}>
-      <RouterProvider router={routes} />
+      <Router>
+        <App />
+      </Router>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
     </I18nextProvider>
