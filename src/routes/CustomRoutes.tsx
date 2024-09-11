@@ -1,4 +1,5 @@
 import { app } from '@/config/app';
+import ErrorBoundary from '@core/classes/ErrorBoundary';
 import { useThemeMode } from '@/store/themeMode';
 import {Children} from '@core/@types/core';
 import { useCallback, useEffect, useState } from 'react';
@@ -47,9 +48,11 @@ export const CustomRoutes: React.FC<Children> = ({children}) => {
     return (
         <>
         {progress && <TopBarProgress />}
-        <Routes>
-            { children }
-        </Routes>
+        <ErrorBoundary>
+            <Routes>
+                { children }
+            </Routes>
+        </ErrorBoundary>
         </>
     );
 };

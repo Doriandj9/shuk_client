@@ -70,4 +70,26 @@
     .app-insert-post{
         @apply flex justify-center;
     }
+    .app-login-container{
+        @apply rounded-lg p-2;
+    }
+    .app-login{ 
+        @apply w-full sm:w-10/12 md:w-10/12 m-auto 2xl:w-8/12;
+    }
+    .app-login-img{
+        @apply m-auto w-24 h-24;
+    }   
+
+    .app-login-header{
+        @apply w-full;
+    }
+    .app-login-header h3{
+        @apply text-2xl font-bold text-center tracking-wide;
+    }
+    .app-login-header aside{
+        @apply text-center text-sm text-slate-500 mt-2;
+    }
+    .app-login-content{
+        @apply w-96 m-auto;
+    }
 }
