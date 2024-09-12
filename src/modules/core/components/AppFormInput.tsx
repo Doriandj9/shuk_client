@@ -6,6 +6,7 @@ import { app } from "@/config/app";
 
 type FormControlChakra = {
     label: string;
+    withProvider?: boolean;
     disabledControl?: boolean;
     disabledInput?: boolean;
     labelStrong?: boolean;
@@ -17,14 +18,15 @@ type FormControlChakra = {
 const AppFormInput: React.FC<FormControlChakra> = ({
     label,disabledControl=false, disabledInput=false, 
     labelStrong= true, propsControl, propsInputs,
-    propsLabel
+    propsLabel, withProvider = false
 }) => {
 
     const theme = useThemeMode((state) => state.theme);
 
     return (
         <>
-        <ComponentChakra>
+        
+        <ComponentChakra whitProvider={withProvider}>
             <FormControl isDisabled={disabledControl} {...propsControl}>
                 <FormLabel {...propsLabel}>
                     {labelStrong ? 

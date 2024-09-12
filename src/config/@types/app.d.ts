@@ -19,6 +19,10 @@ export type AppConfig = {
      * @param {Environment} environment mode app 
      */
     environment: Environment;
+    /**
+     * @param {string} oAuthId id client use in app 
+     */
+    oAuthId?: string;
 };
 
 

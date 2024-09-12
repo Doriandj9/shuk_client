@@ -10,7 +10,8 @@ export const app: AppConfig = {
         secondary: '#F6A605',
         ternary: '#E42823'
     },
-    environment: 'local'
+    environment: 'local',
+    oAuthId: '913311559669-4lp0mh31a80mdd9favrsvoch3ks0skqr.apps.googleusercontent.com'
 };
 
 

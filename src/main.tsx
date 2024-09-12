@@ -54,9 +54,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <I18nextProvider i18n={i18next}>
     <QueryClientProvider client={client}>
-      <Router>
-        <App />
-      </Router>
+        <Router>
+          <App />
+        </Router>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
     </I18nextProvider>

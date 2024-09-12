@@ -24,13 +24,24 @@ const theme = extendBaseTheme({
     }
   });
 
-const ComponentChakra: React.FC<Children> = ({children}) => {
+type WhitProvider = {
+    whitProvider?: boolean;
+}
+
+const ComponentChakra: React.FC<Children & WhitProvider> = ({children, whitProvider= true}) => {
 
     return (
         <>
+            {
+            whitProvider ? 
             <ChakraBaseProvider theme={theme}>
                 {children}
             </ChakraBaseProvider>
+            :
+            <>
+                {children}
+            </>
+            }
         </>
     );
 };
