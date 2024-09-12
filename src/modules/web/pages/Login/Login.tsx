@@ -11,56 +11,58 @@ const Login: React.FC<Children> = () => {
     return (<>
         <AppLayout>
             <div className="w-full flex justify-center flex-grow h-full">
-                <div className="w-full app-container-fade app-login-container">
-                    <div className="app-login">
-                        <div className="app-login-img">
-                            <img src={logo} className="w-20 h-20" />
-                        </div>
+                <div className="app-container-fade w-full h-full flex-grow flex justify-center items-center">
+                    <div className="w-full app-login-container">
+                        <div className="app-login">
+                            <div className="app-login-img">
+                                <img src={logo} className="w-20 h-20" />
+                            </div>
 
-                        <div className="app-login-header">
-                            <h3>
-                            Log in to your account
-                            </h3>
-                            <aside>Start making your dreams come true</aside>
-                        </div>
-                        <div className="app-login-content">
-                            <AppFormInput 
-                            label=""
-                            propsInputs={{placeholder: 'Enter your email'}}
-                            />
-                            <ComponentChakra>
-                                <Button colorScheme="yellow" className="w-full mt-4">
-                                <span className="text-sm">Continue with email</span>
-                                </Button>
-                            </ComponentChakra>
-                            <div className="mt-2 text-center">
-                                <span className="me-2">Not account shuk?</span>
-                                <Link className="text-sm text-blue-500" to={''}>
-                                    Register for Shuk
-                                </Link>
+                            <div className="app-login-header">
+                                <h3>
+                                Log in to your account
+                                </h3>
+                                <aside>Start making your dreams come true</aside>
                             </div>
-                        </div>
-                        <div className="my-2">
-                            <div className="flex items-center app-login-content gap-2">
-                                <span className="flex-grow border-t border-slate-200 h-[1px]" />
-                                <span className="text-slate-500 font-regular">OR</span>
-                                <span className="flex-grow border-t border-slate-200 h-[1px]" /> 
+                            <div className="app-login-content">
+                                <AppFormInput 
+                                label=""
+                                propsInputs={{placeholder: 'Enter your email'}}
+                                />
+                                <ComponentChakra>
+                                    <Button colorScheme="yellow" className="w-full mt-4">
+                                    <span className="text-sm">Continue with email</span>
+                                    </Button>
+                                </ComponentChakra>
+                                <div className="mt-2 text-center">
+                                    <span className="me-2">Not account shuk?</span>
+                                    <Link className="text-sm text-blue-500" to={''}>
+                                        Register for Shuk
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-                        <div className="app-login-content">
-                        <ComponentChakra>
-                                <Button colorScheme="gray" variant='outline' className="w-full">
-                                 <Svg /> google
-                                </Button>
-                            </ComponentChakra>
+                            <div className="my-2">
+                                <div className="flex items-center app-login-content gap-2">
+                                    <span className="flex-grow border-t border-slate-200 h-[1px]" />
+                                    <span className="text-slate-500 font-regular">OR</span>
+                                    <span className="flex-grow border-t border-slate-200 h-[1px]" /> 
+                                </div>
+                            </div>
+                            <div className="app-login-content">
                             <ComponentChakra>
-                                <Button colorScheme="gray" variant='outline' className="w-full mt-4">
-                                 <Svg /> google
-                                </Button>
-                            </ComponentChakra>
-                        </div>
-                        <div className="app-login-content text-center my-4">
-                            <div>Having issues? <a className="text-blue-500">Contact us</a></div>
+                                    <Button colorScheme="gray" variant='outline' className="w-full">
+                                    <Svg /> google
+                                    </Button>
+                                </ComponentChakra>
+                                <ComponentChakra>
+                                    <Button colorScheme="gray" variant='outline' className="w-full mt-4">
+                                    <Svg /> google
+                                    </Button>
+                                </ComponentChakra>
+                            </div>
+                            <div className="app-login-content text-center my-4">
+                                <div>Having issues? <a className="text-blue-500">Contact us</a></div>
+                            </div>
                         </div>
                     </div>
                 </div>

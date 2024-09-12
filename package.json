@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -13,6 +13,7 @@
     "interface-core": "i18next-resources-for-ts interface -i ./src/modules/core/translations/es -o ./src/modules/core/@types/resources.d.ts"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.0.14",
@@ -21,7 +22,7 @@
     "@tanstack/react-query-devtools": "^5.52.2",
     "@types/react-query": "^1.2.9",
     "axios": "^1.7.5",
-    "framer-motion": "^11.3.30",
+    "framer-motion": "^11.5.4",
     "i18next": "^23.14.0",
     "i18next-resources-for-ts": "^1.5.0",
     "path": "^0.12.7",

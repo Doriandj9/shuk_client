@@ -106,7 +106,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                         className="w-28 xl:w-32 h-10 mt-2" />
                                     </Link>
                                 </div>
-                                <div className="flex gap-2">
+                                <div className="flex gap-2 leading-3">
                                     <div className="flex flex-col justify-center items-center w-6 mt-2">
                                         <AiOutlineLike  className="text-mode-primary w-4 h-4" />
                                         <span className="text-[0.5rem]">999+</span>

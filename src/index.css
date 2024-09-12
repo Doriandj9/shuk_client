@@ -84,12 +84,12 @@
         @apply w-full;
     }
     .app-login-header h3{
-        @apply text-2xl font-bold text-center tracking-wide;
+        @apply text-3xl font-bold text-center tracking-tighter;
     }
     .app-login-header aside{
         @apply text-center text-sm text-slate-500 mt-2;
     }
     .app-login-content{
-        @apply w-96 m-auto;
+        @apply w-[96] md:w-[30rem] m-auto;
     }
 }
