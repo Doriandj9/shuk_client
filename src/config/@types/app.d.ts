@@ -20,9 +20,13 @@ export type AppConfig = {
      */
     environment: Environment;
     /**
-     * @param {string} oAuthId id client use in app 
+     * @param {string} oAuthIdGoogle id client google use in app 
      */
-    oAuthId?: string;
+    oAuthIdGoogle?: string;
+    /**
+     * @param {string} oAuthIdFacebook id client facebook use in app 
+     */
+    oAuthIdFacebook?: string;
 };
 
 

@@ -11,7 +11,8 @@ export const app: AppConfig = {
         ternary: '#E42823'
     },
     environment: 'local',
-    oAuthId: '913311559669-4lp0mh31a80mdd9favrsvoch3ks0skqr.apps.googleusercontent.com'
+    oAuthIdGoogle: '913311559669-4lp0mh31a80mdd9favrsvoch3ks0skqr.apps.googleusercontent.com',
+    oAuthIdFacebook: '1179066826681637'
 };
 
 
