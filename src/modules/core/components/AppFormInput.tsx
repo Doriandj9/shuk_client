@@ -27,7 +27,7 @@ const AppFormInput: React.FC<FormControlChakra> = ({
         <>
         
         <ComponentChakra whitProvider={withProvider}>
-            <FormControl isDisabled={disabledControl} {...propsControl}>
+            <FormControl className="mt-2" isDisabled={disabledControl} {...propsControl}>
                 <FormLabel {...propsLabel}>
                     {labelStrong ? 
                     <strong className="text-mode-primary">{label}</strong> 
@@ -42,7 +42,7 @@ const AppFormInput: React.FC<FormControlChakra> = ({
                         outlineColor: 'none',
                     },
                     borderColor: theme !== 'dark' ? '#ccc' : 'white',
-                    backgroundColor: theme !== 'dark' ? 'white' : 'white'
+                    backgroundColor: theme !== 'dark' ? 'white' : '#e2e8f0'
                     }} />
             </FormControl>
         </ComponentChakra>

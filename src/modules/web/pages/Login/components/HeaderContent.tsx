@@ -1,14 +1,18 @@
+import { useTranslation } from "react-i18next";
 
 
-const HeaderContent = () => {
-
+type PropsHederContent = {
+    isRegister: boolean;
+};
+const HeaderContent: React.FC<PropsHederContent> = ({isRegister}) => {
+    const [t] = useTranslation('web');
     return (
         <>
             <div className="app-login-header">
-                <h3>
-                    Log in to your account
+                <h3 className="text-mode-white-primary">
+                    { isRegister ? t('register.header.title') : t('login.header.title')}
                 </h3>
-                <aside>Start making your dreams come true</aside>
+                <aside>{t('login.header.aside')}</aside>
             </div>
         </>
     );

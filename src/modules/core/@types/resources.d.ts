@@ -9,7 +9,7 @@ interface Resources {
       "profile": "Mi perfil"
     },
     "post": {
-      "introduction": "Nosotros sabemos de tus ganar de compartir tus ideales realiza un nuevo post y comparte con la comunidad SHUK",
+      "introduction": "Nosotros sabemos de tus ganar de compartir tus ideales, realiza un nuevo post y comparte con la comunidad SHUK",
       "new": "Nuevo Post"
     }
   }

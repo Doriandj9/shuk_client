@@ -1,11 +1,11 @@
 import { ChakraBaseProvider, extendBaseTheme, theme as chakraTheme, } from "@chakra-ui/react";
 import { Children } from "../@types/core";
 
-const { Button, Input, FormLabel} = chakraTheme.components;
+const { Button, Input, FormLabel, Form} = chakraTheme.components;
 
 const theme = extendBaseTheme({
     components: {
-      Button, Input, FormLabel
+      Button, Input, FormLabel, Form
     },
     styles: {
         global:{

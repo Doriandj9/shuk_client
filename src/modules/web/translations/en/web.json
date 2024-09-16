@@ -1,0 +1,58 @@
+{
+    "login": {
+        "header": {
+            "title": "Log in to your account",
+            "aside": "Start making your dreams come true"
+        },
+        "inputs": {
+            "email": {
+                "placeholder": "Enter your email"
+            },  
+            "password": {
+                "placeholder": "Enter your password"
+            }
+        },
+        "buttons": {
+            "login": "Continue with email",
+            "google": "Continue with Google",
+            "facebook": "Continue with Facebook"
+        },
+        "labels": {
+            "not-account": "You don't have a shuk account?",
+            "register-account": "Register here",
+            "problems-login": "Having issues?",
+            "contact": "Contact us",
+            "or": "or"
+        }
+    },
+    "register": {
+        "header": {
+            "title": "Register on Shuk"
+        },
+        "inputs": {
+            "full-name": {
+                "label": "First and last names",
+                "placeholder": "Ex: John Michael Anderson."
+            },
+            "email": {
+                "label": "Email",
+                "placeholder": "Ex: jhon@mail.com"
+            },
+            "birthday": {
+                "label": "Birthdate",
+                "placeholder": ""
+            },
+            "phone": {
+                "label": "Cell phone number",
+                "placeholder": "Ex: +1 (555) 123-4567"
+            }
+        },
+        "buttons": {
+            "save": "Continue with registration"
+        },
+        "labels": {
+            "whit-account": "Do you have an account?",
+            "login": "Sign in"
+        }
+    }
+}

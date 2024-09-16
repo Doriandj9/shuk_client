@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "css-watch": "tailwindcss -i ./src/index.css -o ./src/styles/main.css --watch",
     "css": "tailwindcss -i ./src/index.css -o ./src/styles/main.css",
-    "interface-core": "i18next-resources-for-ts interface -i ./src/modules/core/translations/es -o ./src/modules/core/@types/resources.d.ts"
+    "interface-core": "i18next-resources-for-ts interface -i ./src/modules/core/translations/es -o ./src/modules/core/@types/resources.d.ts",
+    "interface-web": "i18next-resources-for-ts interface -i ./src/modules/web/translations/es -o ./src/modules/web/@types/resources.d.ts"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
@@ -35,6 +36,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.26.1",
     "react-topbar-progress-indicator": "^4.1.1",
+    "reactjs-social-login": "^2.6.3",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

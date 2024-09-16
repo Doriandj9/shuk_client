@@ -4,8 +4,10 @@ import { Button } from "@chakra-ui/react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { LoginSocialFacebook } from "reactjs-social-login";
 import { app } from "@/config/app";
+import { useTranslation } from "react-i18next";
 
 const AlternativeLogin = () => {
+    const [t] = useTranslation('web');
     const login = useGoogleLogin({
         onSuccess: response => {
             console.log(response);
@@ -30,8 +32,11 @@ const AlternativeLogin = () => {
     return (
         <>
             <div className="app-login-content font-semibold">
-                <Button onClick={() => login()} colorScheme="gray" variant='outline' className="w-full flex gap-2">
-                    <Google className="w-4 h-4" /> Continue with Google
+                <Button onClick={() => login()} colorScheme="gray" variant='outline' className="w-full flex gap-2 group items-center">
+                    <Google className="w-4 h-4" />
+                    <span className="text-mode-white dark:group-hover:text-black">
+                        {t('login.buttons.google')}
+                    </span> 
                 </Button>
                 <LoginSocialFacebook
                     appId={app.oAuthIdFacebook || ''}
@@ -42,8 +47,11 @@ const AlternativeLogin = () => {
                         console.log(err);
                     }}
                 >
-                    <Button colorScheme="gray" variant='outline' className="w-full mt-2 flex gap-2">
-                        <Facebook className="w-4 h-4 text-blue-500" /> Continue with Facebook
+                    <Button colorScheme="gray" variant='outline' className="w-full mt-2 flex gap-2 group items-center">
+                        <Facebook className="w-4 h-4 text-blue-500" /> 
+                        <span className="text-mode-white dark:group-hover:text-black">
+                            {t('login.buttons.facebook')}
+                        </span>
                     </Button>
                 </LoginSocialFacebook>
             </div>

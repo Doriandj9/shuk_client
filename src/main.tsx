@@ -10,6 +10,8 @@ import { I18nextProvider } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
 import core_es from '@core/translations/es/core.json';
 import core_en from '@core/translations/en/core.json';
+import web_es from '@web/translations/es/web.json';
+import web_en from '@web/translations/en/web.json';
 import {LanguageApp} from '@/config/@types/app';
 import { QueryClient,  QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -40,10 +42,12 @@ i18next.init({
   interpolation: { escapeValue: true },
   resources: {
     es: {
-      core: core_es
+      core: core_es,
+      web: web_es
     },
     en: {
-      core: core_en
+      core: core_en,
+      web: web_en
     }
   }
 });

@@ -20,6 +20,9 @@
     .text-mode-black{
         @apply  text-white dark:text-slate-400;
     }
+    .text-mode-white-primary{
+        @apply  text-primary dark:text-white;
+    }
 
     .app-body{
         @apply bg-slate-100 dark:bg-slate-800 min-h-screen flex flex-col;
