@@ -27,6 +27,10 @@ export type AppConfig = {
      * @param {string} oAuthIdFacebook id client facebook use in app 
      */
     oAuthIdFacebook?: string;
+    /**
+     * @param {string} apiV version the api server
+     */
+    apiV: string;
 };
 
 

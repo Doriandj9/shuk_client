@@ -11,6 +11,9 @@ import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { useState } from "react"; 
 import RegisterMail from "./components/RegisterMail";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const client2 = new QueryClient();
 
 const Login: React.FC<Children> = () => {
   const [t] = useTranslation("web");
@@ -22,6 +25,8 @@ const Login: React.FC<Children> = () => {
 
   return (
     <>
+    <QueryClientProvider client={client2}>
+
       <AppLayout>
         <GoogleOAuthProvider
           clientId={
@@ -115,6 +120,7 @@ const Login: React.FC<Children> = () => {
           </ComponentChakra>
         </GoogleOAuthProvider>
       </AppLayout>
+    </QueryClientProvider>
     </>
   );
 };

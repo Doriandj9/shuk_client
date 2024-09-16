@@ -12,7 +12,8 @@ export const app: AppConfig = {
     },
     environment: 'local',
     oAuthIdGoogle: '913311559669-4lp0mh31a80mdd9favrsvoch3ks0skqr.apps.googleusercontent.com',
-    oAuthIdFacebook: '1179066826681637'
+    oAuthIdFacebook: '1179066826681637',
+    apiV: 'v1'
 };
 
 
@@ -28,15 +29,9 @@ export const appTheme: ThemeOptions = {
 };
 
 export const api = axios.create({
-    baseURL: app.server,
-    transformRequest: [function(data) {
-
-        if(app.environment !== 'prod'){
-            if(data._error){
-                return {...data, message: data._error, _error: data.message};
-            }
-
-            return data;
-        }
+    baseURL: app.server + app.apiV,
+    transformResponse: [function(data){
+        console.log('api',typeof data)
+        return data
     }]
 });
