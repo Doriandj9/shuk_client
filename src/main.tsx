@@ -13,8 +13,8 @@ import core_en from '@core/translations/en/core.json';
 import web_es from '@web/translations/es/web.json';
 import web_en from '@web/translations/en/web.json';
 import {LanguageApp} from '@/config/@types/app';
-import { QueryClient,  QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import App from './App';
 
 
@@ -53,6 +53,7 @@ i18next.init({
 });
 
 const client = new QueryClient();
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

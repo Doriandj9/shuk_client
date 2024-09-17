@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAuth } from "@web/hooks/auth/hooksAuth";
+import { useAuth, useTest } from "@web/hooks/auth/hooksAuth";
 
 
 type PropsLoginMail = {
@@ -15,20 +15,22 @@ type Inputs = {
     password: string;
 };
 
+
 const LoginMail: React.FC<PropsLoginMail> = ({handleChangeMode}) => {
     const [t] = useTranslation('web');
-    const {auth} = useAuth();
-
-    const { register, handleSubmit, formState: {errors}, watch } = useForm<Inputs>();
+    const {auth, test} = useAuth(onSuccessSubmit);
+    const {data} = useTest();
+    const { register, handleSubmit } = useForm<Inputs>();
 
 
     const handleLogin: SubmitHandler<Inputs> = (data) => {
-        console.log('data', data);
-        auth.mutate(data);
+        test.mutate(data);
     };
 
-    console.log(auth.error);
-
+    function onSuccessSubmit (data:unknown) {
+        console.log(data);
+    };
+    
     return (
         <>
         <form onSubmit={handleSubmit(handleLogin)}>

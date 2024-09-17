@@ -31,7 +31,18 @@ export const appTheme: ThemeOptions = {
 export const api = axios.create({
     baseURL: app.server + app.apiV,
     transformResponse: [function(data){
-        console.log('api',typeof data)
-        return data
+       try {
+            const response = JSON.parse(data);
+            if(app.environment !== 'prod' && !response.status) {
+                return {...response, _error: response.message, message: response._error };
+            }
+
+            return response;
+       } catch (e) {
+            if(app.environment !== 'prod'){
+                console.error(e);
+            }
+        return data;
+       }
     }]
 });
