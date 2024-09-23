@@ -54,5 +54,12 @@
             "whit-account": "Do you have an account?",
             "login": "Sign in"
         }
+    },
+    "validations": {
+        "messages": {
+            "email-required": "Email field is required",
+            "password-required": "The password field is required",
+            "email-type": "The email is invalid"
+        }
     }
 }

@@ -28,7 +28,7 @@ interface Resources {
     },
     "register": {
       "header": {
-        "title": "Register on Shuk"
+        "title": "Regístrate en Shuk"
       },
       "inputs": {
         "full-name": {
@@ -54,6 +54,13 @@ interface Resources {
       "labels": {
         "whit-account": "¿Tienes una cuenta?",
         "login": "Inicia sesión"
+      }
+    },
+    "validations": {
+      "messages": {
+        "email-required": "Se requiere el campo correo electrónico",
+        "password-required": "Se requiere el campo contraseña",
+        "email-type": "El correo electrónico es invalido"
       }
     }
   }

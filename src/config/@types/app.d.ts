@@ -31,6 +31,10 @@ export type AppConfig = {
      * @param {string} apiV version the api server
      */
     apiV: string;
+     /**
+     * @param {string} apiV version the api server
+     */
+    socialProviders: SocialProvidersValues;
 };
 
 
@@ -44,6 +48,12 @@ export type ThemeUI = {
 
 export type LanguageApp = 'es' | 'en';
 
+export type ModulesApp = 'web' | 'core';
+
+export type SocialProvidersValues = {
+    google: 1;
+    facebook: 2;
+};
 
 export type LanguageAppHook = {
     language: string;

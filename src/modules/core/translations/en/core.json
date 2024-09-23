@@ -10,5 +10,13 @@
     "post": {
         "introduction": "We know about your desire to share your ideals, make a new post and share with the SHUK community",
         "new": "New Post"
+    },
+    "messages": {
+        "errors": {
+            "requests": {
+                "off-server": "The server is not responding",
+                "unknown": "Unknown error while trying to query the API"
+            }
+        }
     }
 }

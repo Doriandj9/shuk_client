@@ -9,11 +9,19 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { app } from "@/config/app";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import React, { useState } from "react";
 import RegisterMail from "./components/RegisterMail";
+
+type ContextAuthLogin = {
+  authLogin: boolean;
+  setAuthLogin: CallableFunction;
+}
+
+export const LoadingAuthContext = React.createContext<ContextAuthLogin>({authLogin: false, setAuthLogin: () => {} });
 
 const Login: React.FC<Children> = () => {
   const [t] = useTranslation("web");
+  const [authLogin, setAuthLogin] = useState<boolean>(false);
   const [isRegister, setIsRegister] = useState<boolean>(false);
 
   const handleChangeRegister = () => {
@@ -27,6 +35,8 @@ const Login: React.FC<Children> = () => {
           clientId={app.oAuthIdGoogle || ''}
         >
           <ComponentChakra>
+            <LoadingAuthContext.Provider value={{authLogin, setAuthLogin}}>
+              
             <div className="app-container-fade w-full justify-center h-full">
               {!isRegister && (
                 <motion.div
@@ -109,6 +119,7 @@ const Login: React.FC<Children> = () => {
               )}
 
             </div>
+            </LoadingAuthContext.Provider>
           </ComponentChakra>
         </GoogleOAuthProvider>
       </AppLayout>

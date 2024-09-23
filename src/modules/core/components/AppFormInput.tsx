@@ -13,12 +13,14 @@ type FormControlChakra = {
     propsControl?: FormControlOptions;
     propsInputs?: InputProps;
     propsLabel?: FormLabelProps;
+    validation?: string | boolean
 };
 
 const AppFormInput: React.FC<FormControlChakra> = ({
     label,disabledControl=false, disabledInput=false, 
     labelStrong= true, propsControl, propsInputs,
-    propsLabel, withProvider = false
+    propsLabel, withProvider = false, 
+    validation= false
 }) => {
 
     const theme = useThemeMode((state) => state.theme);
@@ -43,7 +45,9 @@ const AppFormInput: React.FC<FormControlChakra> = ({
                     },
                     borderColor: theme !== 'dark' ? '#ccc' : 'white',
                     backgroundColor: theme !== 'dark' ? 'white' : '#e2e8f0'
-                    }} />
+                    }}
+                    />
+                {validation && <span className="text-red-500 dark:text-red-400 text-xs">{validation}</span>}
             </FormControl>
         </ComponentChakra>
         </>

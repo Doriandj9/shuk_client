@@ -13,7 +13,11 @@ export const app: AppConfig = {
     environment: 'local',
     oAuthIdGoogle: '913311559669-4lp0mh31a80mdd9favrsvoch3ks0skqr.apps.googleusercontent.com',
     oAuthIdFacebook: '1179066826681637',
-    apiV: 'v1'
+    apiV: 'v1',
+    socialProviders: {
+        google: 1,
+        facebook: 2
+    }
 };
 
 
