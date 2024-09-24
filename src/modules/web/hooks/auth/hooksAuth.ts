@@ -24,7 +24,8 @@ export const useAuth = (handleSuccessLogin?:CallableFunction | null, handleSucce
 
         return useQuery({
             queryKey: ['user_google', accessToken],
-            queryFn: async () => await infoUserGoogle(accessToken)
+            queryFn: async () => await infoUserGoogle(accessToken),
+            enabled: accessToken  !== ''
         });
     };
     // const test = useMutation({
