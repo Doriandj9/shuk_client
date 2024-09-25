@@ -23,6 +23,9 @@ import AppNavbar from '@core/components/AppNavbar';
 import HomeIcon from '@mui/icons-material/Home';
 import profileImg from '@/assets/img/profile.png';
 import { webRoutes } from '@/config/webRoutes';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Text } from "@chakra-ui/react";
 
 const {path:pathLogin} = webRoutes.login;
 const {path:pathHome} = webRoutes.home;
@@ -244,7 +247,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
 
                                         <div>
                                             <div className="px-2">
-                                                <div className="app-container-fade w-full h-16">
+                                                <div className="app-container-fade w-full h-28">
                                                     <h3 className="text-mode-slate text-center text-sm pt-1">{t('menu.profile')}</h3>
                                                     <div className="flex justify-center gap-2 items-center">
                                                         <IconButton sx={{ padding: 0, margin: 0 }}>
@@ -257,6 +260,20 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                                                         </IconButton>
 
                                                         <p className="text-mode-white">Dorian Armijos Josue Gadvay</p>
+                                                    </div>
+                                                    <div className="mt-1 flex justify-center items-center">
+                                                        <div>
+                                                            <IconButton color="secondary">
+                                                            <ManageAccountsIcon /> 
+                                                            <span className="text-secondary text-xs">Configuraciones</span>
+                                                            </IconButton>
+                                                        </div>
+                                                        <div>
+                                                        <IconButton color="error">
+                                                            <LogoutIcon />
+                                                            <span className="text-secondary text-xs">Cerrar sescion</span>
+                                                        </IconButton>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
