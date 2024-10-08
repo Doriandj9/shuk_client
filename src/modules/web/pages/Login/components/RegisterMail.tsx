@@ -42,7 +42,7 @@ const RegisterMail: React.FC<PropsLoginMail> = ({handleChangeMode}) => {
                     </Button>
                     <div className="mt-2 text-center">
                         <span className="me-2 text-mode-white-primary">{t('register.labels.whit-account')}</span>
-                        <button className="text-sm text-blue-500" onClick={() => handleChangeMode()} >
+                        <button type='submit' className="text-sm text-blue-500" onClick={() => handleChangeMode()} >
                             {t('register.labels.login')}
                         </button>
                     </div>

@@ -1,7 +1,8 @@
 import { Children } from "@/modules/core/@types/core";
 import { useAuthStore } from "@/store/auth";
+import { Outlet } from "react-router-dom";
 
-const AuthPages: React.FC<Children> = ({children}) => {
+const AuthPages: React.FC<Children> = () => {
     const {isLogin} = useAuthStore((state) => state);
 
     if(!isLogin){
@@ -15,7 +16,7 @@ const AuthPages: React.FC<Children> = ({children}) => {
 
     return (
         <>
-            {children}
+            <Outlet />
         </>
     );
 };

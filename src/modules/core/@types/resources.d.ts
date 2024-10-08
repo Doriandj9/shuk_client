@@ -19,6 +19,13 @@ interface Resources {
           "unknown": "Error desconocido al intentar realizar la consulta en el API"
         }
       }
+    },
+    "mobile": {
+      "menu": {
+        "configuration": "Configuración",
+        "login": "Iniciar Sesión",
+        "logout": "Cerrar Sesión"
+      }
     }
   }
 }

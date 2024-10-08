@@ -11,12 +11,10 @@ const RootRoutes = () => {
       <CustomRoutes>
         <Route path={webRoutes.home.path} element={<Home />} />
         <Route path={webRoutes.login.path} element={<Login />} />
-      </CustomRoutes>
-      <AuthPages>
-        <CustomRoutes>
+        <Route element={<AuthPages />}>
           <Route path="/test-login" element={<>paso login</>} />
-        </CustomRoutes>
-      </AuthPages>
+        </Route>
+      </CustomRoutes>
     </>
   );
 };

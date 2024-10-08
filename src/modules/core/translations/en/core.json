@@ -18,5 +18,12 @@
                 "unknown": "Unknown error while trying to query the API"
             }
         }
+    },
+    "mobile": {
+        "menu": {
+            "configuration": "Configuration",
+            "login": "Login",
+            "logout": "Log Out"
+        }
     }
 }
