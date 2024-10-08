@@ -41,7 +41,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
   const [t, i18n] = useTranslation("core");
   const [showMovil, setShowMovil] = useState<boolean>(true);
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
-  const { isLogin } = useAuthStore((state) => state);
+  const { isLogin, user } = useAuthStore((state) => state);
   const navigate = useNavigate();
 
   const { theme: themeMode, update: updateThemeMode } = useThemeMode(
@@ -293,13 +293,13 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                               <IconButton sx={{ padding: 0, margin: 0 }}>
                                 <Avatar
                                   alt="Remy Sharp"
-                                  src={profileImg}
+                                  src={user?.photo || profileImg}
                                   sx={{ width: 32, height: 32 }}
                                 />
                               </IconButton>
                               {isLogin && (
                                 <p className="text-mode-white">
-                                  Dorian Armijos Josue Gadvay
+                                  {user?.full_name}
                                 </p>
                               )}
                             </div>

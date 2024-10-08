@@ -10,12 +10,17 @@ import { LoadingAuthContext } from "../Login";
 import AppLoading from "@/modules/core/components/AppLoading";
 import { toast } from "sonner";
 import AppToast from "@/modules/core/components/AppToast";
+import { useAuthStore } from "@/store/auth";
+import { ResponseUserProps } from "@/modules/web/@types/web";
+import { useNavigate } from "react-router-dom";
 
 const AlternativeLogin = () => {
   const [t] = useTranslation("web");
+  const navigate = useNavigate();
+
   const { authLogin, setAuthLogin } = useContext(LoadingAuthContext);
   const [googleUserToken, setGoogleUserToken] = useState<string | null>(null);
-
+  const { updateToken, updateUser } = useAuthStore((state) => state);
   const { authProvider, useGetInfoGoogle } = useAuth(null, successLogin);
 
   const { data, isLoading } = useGetInfoGoogle(googleUserToken || "");
@@ -30,8 +35,10 @@ const AlternativeLogin = () => {
       )),
   });
 
-  function successLogin(data: unknown) {
-    console.log(data);
+  function successLogin(data: ResponseUserProps) {
+    updateToken(data.token);
+    updateUser(data.jwt);
+    navigate("/test-login");
   }
   
   useEffect(() => {
@@ -41,6 +48,7 @@ const AlternativeLogin = () => {
           id_client: data?.id,
           id_provider: app.socialProviders.google,
           payload: JSON.stringify(data),
+          email: data?.email
         },
         {
           onError: () => {
@@ -74,8 +82,9 @@ const AlternativeLogin = () => {
             authProvider.mutate(
               {
                 id_client: response.data?.userID,
-                id_provider: app.socialProviders.google,
-                payload: JSON.stringify(data),
+                id_provider: app.socialProviders.facebook,
+                payload: JSON.stringify(response.data),
+                email: response.data?.email
               },
               {
                 onError: () => {}

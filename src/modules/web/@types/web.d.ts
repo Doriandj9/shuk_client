@@ -1,4 +1,5 @@
 import { DocStatus } from "@/modules/core/@types/core";
+import { facebookUser, googleUser } from "@/modules/core/@types/gUser";
 
 export type ResponseUserProps = {
     token: string;
@@ -23,6 +24,6 @@ export type User = {
     is_active?: boolean;
     doc_status?: DocStatus;
     abilities?: string | null;
-    data_login_social_media?: string | null;
+    data_login_social_media?: string | null | googleUser | facebookUser;
     is_user_provider?: boolean
 }
