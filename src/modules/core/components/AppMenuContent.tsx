@@ -15,6 +15,7 @@ const StyledMenu = styled((props: MenuProps) => (
       vertical: 'bottom',
       horizontal: 'right',
     }}
+    disableScrollLock
     transformOrigin={{
       vertical: 'top',
       horizontal: 'right',

@@ -10,6 +10,7 @@ import { LoadingAuthContext } from "../Login";
 import { ResponseUserProps } from "@/modules/web/@types/web";
 import { useAuthStore } from "@/store/auth";
 import { useNavigate } from "react-router-dom";
+import { webRoutes } from "@/config/webRoutes";
 
 type PropsLoginMail = {
   handleChangeMode: CallableFunction;
@@ -48,9 +49,9 @@ const LoginMail: React.FC<PropsLoginMail> = ({ handleChangeMode }) => {
   };
 
   function handleSuccessLogin(data: ResponseUserProps) {
-    updateToken(data.token);
+    updateToken(data.token, data.time_expired_token);
     updateUser(data.jwt);
-    navigate("/test-login");
+    navigate(webRoutes.home.path);
   }
 
   useEffect(() => {

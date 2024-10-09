@@ -4,13 +4,16 @@ import { webRoutes } from "@/config/webRoutes";
 import Home from "@web/pages/Home/Home";
 import Login from "@web/pages/Login/Login";
 import AuthPages from "./AuthPages";
+import MiddlewareLogin from "./MiddlewareLogin";
 
 const RootRoutes = () => {
   return (
     <>
       <CustomRoutes>
         <Route path={webRoutes.home.path} element={<Home />} />
-        <Route path={webRoutes.login.path} element={<Login />} />
+        <Route element={<MiddlewareLogin />}>
+          <Route path={webRoutes.login.path} element={<Login />} />
+        </Route>
         <Route element={<AuthPages />}>
           <Route path="/test-login" element={<>paso login</>} />
         </Route>

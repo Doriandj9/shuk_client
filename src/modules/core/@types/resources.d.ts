@@ -24,7 +24,8 @@ interface Resources {
       "menu": {
         "configuration": "Configuración",
         "login": "Iniciar Sesión",
-        "logout": "Cerrar Sesión"
+        "logout": "Cerrar Sesión",
+        "account-settings": "Configuración de cuenta"
       }
     }
   }

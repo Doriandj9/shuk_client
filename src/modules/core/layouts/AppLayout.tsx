@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react";
 import { useThemeMode } from "@/store/themeMode";
 import {
   Avatar,
+  Badge,
   createTheme,
   CssBaseline,
   IconButton,
@@ -33,6 +34,9 @@ import { webRoutes } from "@/config/webRoutes";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuthStore } from "@/store/auth";
+import AppUserMenu from "../components/AppUserMenu";
+import NotificationsIcon from '@mui/icons-material/Notifications';
+
 
 const { path: pathLogin } = webRoutes.login;
 const { path: pathHome } = webRoutes.home;
@@ -179,8 +183,8 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                             */}
 
               <div className="min-w-30 md:min-w-60 flex">
-                <div className="">
-                  <ul className="flex gap-0 md:gap-2 items-center">
+                <div className="w-full">
+                  <ul className={`flex gap-0 md:gap-2 items-center ${isLogin ? 'justify-between' : ''}`}>
                     <li>
                       {themeMode === "dark" ? (
                         <button onClick={() => handleModeDark("light")}>
@@ -195,23 +199,30 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                     <li className="">
                       <AppMenuContent i18n={i18n.changeLanguage} />
                     </li>
-                    <li className="hidden md:block">
-                      <Link
-                        to={pathLogin}
-                        className="text-sm text-mode-primary flex items-center gap-1"
-                      >
-                        <LoginIcon className="text-mode-primary pointer-events-none" />
-                        {t("header.login")}
-                      </Link>
-                    </li>
-                    <li className="hidden md:block border-2 rounded-full border-black mr-2 dark:border-slate-400">
-                      <IconButton sx={{ margin: 0, padding: 0.5 }}>
-                        <Avatar
-                          alt="Remy Sharp"
-                          src={profileImg}
-                          sx={{ width: 24, height: 24 }}
-                        />
-                      </IconButton>
+                    {
+                      !isLogin &&
+                      <li className="hidden md:block">
+                        <Link
+                          to={pathLogin}
+                          className="text-sm text-mode-primary flex items-center gap-1"
+                        >
+                          <LoginIcon className="text-mode-primary pointer-events-none" />
+                          {t("header.login")}
+                        </Link>
+                      </li>
+                    }
+                    {
+                      isLogin &&
+                      <li className="mr-2">
+                        <IconButton>
+                          <Badge color="primary" badgeContent={993} max={99}>
+                            <NotificationsIcon className="text-mode-primary" />
+                          </Badge>
+                        </IconButton>
+                      </li>
+                    }
+                    <li className="hidden md:block border-2 rounded-full border-primary mr-2 dark:border-slate-400">
+                      <AppUserMenu />
                     </li>
                   </ul>
                 </div>

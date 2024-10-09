@@ -23,7 +23,8 @@
         "menu": {
             "configuration": "Configuration",
             "login": "Login",
-            "logout": "Log Out"
+            "logout": "Log Out",
+            "account-setting": "Account setting"
         }
     }
 }

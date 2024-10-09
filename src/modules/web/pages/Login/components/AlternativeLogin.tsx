@@ -13,6 +13,7 @@ import AppToast from "@/modules/core/components/AppToast";
 import { useAuthStore } from "@/store/auth";
 import { ResponseUserProps } from "@/modules/web/@types/web";
 import { useNavigate } from "react-router-dom";
+import { webRoutes } from "@/config/webRoutes";
 
 const AlternativeLogin = () => {
   const [t] = useTranslation("web");
@@ -36,9 +37,9 @@ const AlternativeLogin = () => {
   });
 
   function successLogin(data: ResponseUserProps) {
-    updateToken(data.token);
+    updateToken(data.token, data.time_expired_token);
     updateUser(data.jwt);
-    navigate("/test-login");
+    navigate(webRoutes.home.path);
   }
   
   useEffect(() => {

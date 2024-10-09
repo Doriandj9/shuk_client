@@ -60,7 +60,11 @@ interface Resources {
       "messages": {
         "email-required": "Se requiere el campo correo electrónico",
         "password-required": "Se requiere el campo contraseña",
-        "email-type": "El correo electrónico es invalido"
+        "email-type": "El correo electrónico es invalido",
+        "full-name-required": "El campo de nombre y apellido es obligatorio",
+        "full-name-min": "Ingrese un mínimo de 3 caracteres",
+        "birthday-required": "El campo de cumpleaños es obligatorio",
+        "phone-required": "El campo numero de celular es obligatorio"
       }
     }
   }

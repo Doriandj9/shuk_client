@@ -59,7 +59,11 @@
         "messages": {
             "email-required": "Email field is required",
             "password-required": "The password field is required",
-            "email-type": "The email is invalid"
+            "email-type": "The email is invalid",
+            "full-name-required": "The first and last names field is required",
+            "full-name-min": "Enter a minimum of 3 characters",
+            "birthday-required": "The birthday field is required",
+            "phone-required": "The cell phone number field is required"
         }
     }
 }
