@@ -95,4 +95,52 @@
     .app-login-content{
         @apply w-[96] md:w-[30rem] m-auto;
     }
+    .app-post-grid{
+        display: grid;
+        gap: 1px;
+        @apply grid-cols-12;
+        grid-template-areas:
+        "content navbar"
+        "menu menu"
+    }   
+    
+    .post-grid-content{
+        grid-area: content;
+        grid-column: span 10;
+    }
+
+    .post-grid-navbar{
+        grid-area: navbar;
+        grid-column: span 2;
+    }
+
+    .post-grid-menu{
+        grid-area: menu;
+        grid-column: span 12;
+    }
+}
+
+
+@media (max-width: 640px) {
+    .app-post-grid{
+        grid-template-areas:
+        "navbar navbar"
+        "content content"
+        "menu menu"
+    }
+
+    .post-grid-content{
+        grid-area: content;
+        grid-column: span 12;
+    }
+
+    .post-grid-navbar{
+        grid-area: navbar;
+        grid-column: span 12;
+    }
+
+    .post-grid-menu{
+        grid-area: menu;
+        grid-column: span 12;
+    }
 }

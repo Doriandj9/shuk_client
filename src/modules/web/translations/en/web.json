@@ -65,5 +65,11 @@
             "birthday-required": "The birthday field is required",
             "phone-required": "The cell phone number field is required"
         }
+    },
+    "titles": {
+        "create-post": "Create new post"
+    },
+    "descriptions": {
+        "post": "Post"
     }
 }

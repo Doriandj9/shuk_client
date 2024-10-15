@@ -105,11 +105,25 @@ const AppLayout: React.FC<Children> = ({ children }) => {
     }
   }, [prefersDarkMode, updateThemeMode]);
 
+  useEffect(() => {
+    if(themeMode == 'dark' && !document.body.classList.contains(themeMode)){
+      document.body.classList.remove('light');
+
+      document.body.classList.add(themeMode);
+    };
+
+    if(themeMode == 'light' && !document.body.classList.contains(themeMode)){
+      document.body.classList.remove('dark');
+      document.body.classList.add(themeMode);
+    };
+
+  }, [themeMode]);
+
   return (
     <React.Fragment>
       <ThemeProvider theme={themeApp}>
         <CssBaseline />
-        <div id="body-main" className={`app-body ${themeMode}`}>
+        <div id="body-main" className={`app-body`}>
           <header role="banner" className="h-16">
             <div className="app-banner">
               {/* 

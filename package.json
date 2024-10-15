@@ -11,6 +11,7 @@
     "css-watch": "tailwindcss -i ./src/index.css -o ./src/styles/main.css --watch",
     "css": "tailwindcss -i ./src/index.css -o ./src/styles/main.css",
     "interface-core": "i18next-resources-for-ts interface -i ./src/modules/core/translations/es -o ./src/modules/core/@types/resources.d.ts",
+    "interface-web": "i18next-resources-for-ts interface -i ./src/modules/web/translations/es -o ./src/modules/web/@types/resources.d.ts",
     "interface-user-google": "i18next-resources-for-ts interface -i ./src/modules/core/@types/interfaces -o ./src/modules/core/@types/gUser.d.ts",
     "interface-user-facebook": "i18next-resources-for-ts interface -i ./src/modules/core/@types/interfaces -o ./src/modules/core/@types/fUser.d.ts"
   },

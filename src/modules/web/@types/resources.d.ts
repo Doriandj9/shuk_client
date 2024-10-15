@@ -66,6 +66,12 @@ interface Resources {
         "birthday-required": "El campo de cumpleaños es obligatorio",
         "phone-required": "El campo numero de celular es obligatorio"
       }
+    },
+    "titles": {
+      "create-post": "Crear nueva publicación"
+    },
+    "descriptions": {
+      "post": "Publicar"
     }
   }
 }
