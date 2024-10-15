@@ -64,6 +64,16 @@ const AppLayout: React.FC<Children> = ({ children }) => {
           mode:
             themeMode === "system" || themeMode === "light" ? "light" : "dark",
         },
+        components: {
+          MuiBackdrop: {
+              styleOverrides: {
+                  root: {
+                      backgroundColor: themeMode === "system" || themeMode === "light" ? "rgba(250,250,250,0.75)" : "rgba(250,250,250,0.25)",
+                      zIndex: appTheme.zIndex?.drawer ?  appTheme.zIndex?.drawer + 1 : 99
+                  }
+              }
+          }
+      }
       }),
     [themeMode]
   );
