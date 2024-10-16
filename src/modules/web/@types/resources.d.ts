@@ -71,7 +71,10 @@ interface Resources {
       "create-post": "Crear nueva publicación"
     },
     "descriptions": {
-      "post": "Publicar"
+      "post": "Publicar",
+      "post-text": "Publicación de texto",
+      "post-img": "Publicación con imagen",
+      "post-video": "Publicación con video"
     }
   }
 }

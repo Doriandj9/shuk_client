@@ -70,6 +70,9 @@
         "create-post": "Create new post"
     },
     "descriptions": {
-        "post": "Post"
+        "post": "Post",
+        "post-text": "Text post",
+        "post-img": "Image post",
+        "post-video": "Video post"
     }
 }

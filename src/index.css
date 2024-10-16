@@ -107,6 +107,7 @@
     .post-grid-content{
         grid-area: content;
         grid-column: span 10;
+        @apply w-full h-full;
     }
 
     .post-grid-navbar{
@@ -120,15 +121,18 @@
     }
 
     .post-navbar-item{
-        @apply w-16 h-16 sm:w-16 sm:h-16 xl:w-20 xl:h-20 2xl:w-24 2xl:h-24 border-4 border-slate-200 rounded-lg
-        dark:border-slate-500 hover:bg-blue-50 flex justify-center items-center 
+        @apply w-14 h-14 sm:w-16 sm:h-16 xl:w-20 xl:h-20  border-2 border-slate-200 rounded-lg
+        dark:border-slate-500 hover:bg-blue-100 flex justify-center items-center flex-col dark:hover:bg-primary
         ;
     }
     
+    .post-navbar-item span {
+        @apply text-center text-[0.5rem] md:text-[0.6rem] text-mode-primary;
+    }
 }
 
 
-@media (max-width: 820px) {
+@media (max-width: 770px) {
     .app-post-grid{
         grid-template-areas:
         "navbar navbar"

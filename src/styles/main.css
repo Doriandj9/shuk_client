@@ -892,6 +892,8 @@ video {
 .post-grid-content{
   grid-area: content;
   grid-column: span 10;
+  height: 100%;
+  width: 100%;
 }
 
 .post-grid-navbar{
@@ -905,17 +907,21 @@ video {
 }
 
 .post-navbar-item {
-  height: 4rem;
-  width: 4rem;
+  display: flex;
+  height: 3.5rem;
+  width: 3.5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 0.5rem;
-  border-width: 4px;
+  border-width: 2px;
   --tw-border-opacity: 1;
   border-color: rgb(226 232 240 / var(--tw-border-opacity));
 }
 
 .post-navbar-item:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(239 246 255 / var(--tw-bg-opacity));
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 640px) {
@@ -932,16 +938,35 @@ video {
   }
 }
 
-@media (min-width: 1536px) {
-  .post-navbar-item {
-    height: 6rem;
-    width: 6rem;
-  }
-}
-
 .post-navbar-item:where(.dark, .dark *) {
   --tw-border-opacity: 1;
   border-color: rgb(100 116 139 / var(--tw-border-opacity));
+}
+
+.post-navbar-item:hover:where(.dark, .dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(35 44 86 / var(--tw-bg-opacity));
+}
+
+.post-navbar-item span {
+  --tw-text-opacity: 1;
+  color: rgb(35 44 86 / var(--tw-text-opacity));
+}
+
+.post-navbar-item span:where(.dark, .dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+
+.post-navbar-item span {
+  text-align: center;
+  font-size: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .post-navbar-item span {
+    font-size: 0.6rem;
+  }
 }
 
 .pointer-events-none {
@@ -1114,6 +1139,10 @@ video {
   width: 100%;
 }
 
+.w-8 {
+  width: 2rem;
+}
+
 .max-w-32 {
   max-width: 8rem;
 }
@@ -1196,6 +1225,10 @@ video {
 
 .rounded-xl {
   border-radius: 0.75rem;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .border-2 {
@@ -1353,7 +1386,7 @@ video {
   transition-duration: 150ms;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 770px) {
   .app-post-grid{
     grid-template-areas:
         "navbar navbar"
@@ -1440,12 +1473,20 @@ video {
     width: 15rem;
   }
 
+  .md\:w-full {
+    width: 100%;
+  }
+
   .md\:min-w-60 {
     min-width: 15rem;
   }
 
   .md\:max-w-60 {
     max-width: 15rem;
+  }
+
+  .md\:flex-col {
+    flex-direction: column;
   }
 
   .md\:gap-2 {
