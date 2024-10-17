@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SettingsIcon from '@mui/icons-material/Settings';
+import AppAvatar from "./AppAvatar";
 
 
 const AppUserMenu = () => {
@@ -37,11 +38,7 @@ const AppUserMenu = () => {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                    <Avatar
-                        alt={user?.full_name || 'Unknown'}
-                        src={user?.photo || profileImg}
-                        sx={{ width: 24, height: 24 }}
-                    />
+                    <AppAvatar size="small" />
 
                     {
                         isLogin &&

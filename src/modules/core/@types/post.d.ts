@@ -7,15 +7,20 @@ export type TypesPost = {
 export type PostImage = {
     description?: string | null;  
     typePost: 'PI';
+    file: Blob;
+    payloadPost: string;
+
 };
 
 export type PostText = {
     description?: string;  
     typePost: 'PT';
-    payloadPost?: string;
+    payloadPost: string;
 };
 
 export type PostVideo = {
     description?: string;  
     typePost: 'PV';
+    file: Blob;
+    payloadPost: string;
 };

@@ -16,6 +16,11 @@
             "requests": {
                 "off-server": "The server is not responding",
                 "unknown": "Unknown error while trying to query the API"
+            },
+            "post": {
+                "not-type": "No post type entered",
+                "not-payload": "No content was entered to be published",
+                "not-file": "No photo or video was entered for posting"
             }
         }
     },

@@ -554,6 +554,40 @@ video {
   display: none;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
 .text-mode-primary {
   --tw-text-opacity: 1;
   color: rgb(35 44 86 / var(--tw-text-opacity));
@@ -883,7 +917,17 @@ video {
 .app-post-grid{
   display: grid;
   gap: 1px;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  max-width: 100%;
+  grid-template-columns: repeat(12, minmax(0, 1fr))
+}
+
+@media (min-width: 640px) {
+  .app-post-grid {
+    width: 32rem;
+  }
+}
+
+.app-post-grid{
   grid-template-areas:
         "content navbar"
         "menu menu"
@@ -928,13 +972,6 @@ video {
   .post-navbar-item {
     height: 4rem;
     width: 4rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .post-navbar-item {
-    height: 5rem;
-    width: 5rem;
   }
 }
 
@@ -1101,6 +1138,22 @@ video {
   height: 100%;
 }
 
+.h-9 {
+  height: 2.25rem;
+}
+
+.h-14 {
+  height: 3.5rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.h-11 {
+  height: 2.75rem;
+}
+
 .min-h-40 {
   min-height: 10rem;
 }
@@ -1147,6 +1200,26 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-9 {
+  width: 2.25rem;
+}
+
+.w-10 {
+  width: 2.5rem;
+}
+
+.w-14 {
+  width: 3.5rem;
+}
+
+.w-8 {
+  width: 2rem;
+}
+
+.w-11 {
+  width: 2.75rem;
 }
 
 .max-w-32 {
@@ -1260,6 +1333,16 @@ video {
   border-color: rgb(226 232 240 / var(--tw-border-opacity));
 }
 
+.border-slate-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(241 245 249 / var(--tw-border-opacity));
+}
+
+.border-slate-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(100 116 139 / var(--tw-border-opacity));
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1346,6 +1429,10 @@ video {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 .lowercase {
@@ -1457,6 +1544,10 @@ video {
     width: 75%;
   }
 
+  .sm\:w-auto {
+    width: auto;
+  }
+
   .sm\:w-full {
     width: 100%;
   }
@@ -1516,6 +1607,11 @@ video {
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .md\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 

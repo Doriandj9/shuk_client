@@ -98,7 +98,7 @@
     .app-post-grid{
         display: grid;
         gap: 1px;
-        @apply grid-cols-12;
+        @apply grid-cols-12 max-w-full sm:w-[32rem] ;
         grid-template-areas:
         "content navbar"
         "menu menu"
@@ -121,7 +121,7 @@
     }
 
     .post-navbar-item{
-        @apply w-14 h-14 sm:w-16 sm:h-16 xl:w-20 xl:h-20  border-2 border-slate-200 rounded-lg
+        @apply w-14 h-14 sm:w-16 sm:h-16  border-2 border-slate-200 rounded-lg
         dark:border-slate-500 hover:bg-blue-100 flex justify-center items-center flex-col dark:hover:bg-primary
         ;
     }

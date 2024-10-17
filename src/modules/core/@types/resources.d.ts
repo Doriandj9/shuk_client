@@ -10,13 +10,18 @@ interface Resources {
     },
     "post": {
       "introduction": "Nosotros sabemos de tus ganar de compartir tus ideales, realiza un nuevo post y comparte con la comunidad SHUK",
-      "new": "Nuevo Post"
+      "new": "Nueva Publicación"
     },
     "messages": {
       "errors": {
         "requests": {
           "off-server": "El servidor no responde",
           "unknown": "Error desconocido al intentar realizar la consulta en el API"
+        },
+        "post": {
+          "not-type": "No se ha introducido ningún tipo de publicación",
+          "not-payload": "No se ingresó ningún contenido para ser publicado",
+          "not-file": "No se ingresó ninguna foto o video para publicar"
         }
       }
     },

@@ -6,7 +6,7 @@ type AppModalProps = ModalProps & {
     isNotCloseClick?: boolean;
     open: boolean;
     onClose: ((event: object, reason: "backdropClick" | "escapeKeyDown") => void) & CallableFunction;
-    sizeModal?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full";
+    sizeModal?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full" | "auto";
     title?: string;
 };
 
@@ -21,7 +21,8 @@ const sizeWidth = {
     "4xl": 'sm:w-8/12',
     "5xl": 'sm:w-9/12',
     "6xl": 'sm:w-10/12',
-    "full": 'sm:w-full'
+    "full": 'sm:w-full',
+    "auto": 'sm:w-auto'
 };
 
 const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isNotCloseClick = true, open, onClose, sizeModal = 'md', ...props }) => {
@@ -40,7 +41,7 @@ const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isN
                     <div className="w-full">
                         <header className={`relative flex items-center w-full ${title != '' ? 'py-2' : 'py-4'}`}>
                             <div className="flex-grow">
-                                <h2 className="text-center font-black text-md md:text-2xl px-4">{title}</h2>
+                                <h2 className="text-center font-semibold text-md md:text-xl px-4">{title}</h2>
                             </div>
                             <div>
                                 {
