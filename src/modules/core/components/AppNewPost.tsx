@@ -41,8 +41,8 @@ const AppNewPost = () => {
     setIsOpen(false);
   };
 
-  const handleCreatePost = SubmitHandler<FormPostSchema> = (data) => {
-
+  const handleCreatePost: SubmitHandler<FormPostSchema> = (data) => {
+    console.log(data);
   };
  
 
@@ -67,7 +67,7 @@ const AppNewPost = () => {
               <div className="post-grid-navbar">
                 <AppItem>
                   <div className="flex justify-center items-center flex-row md:flex-col">
-                    <button className="post-navbar-item ">
+                    <button type="button" className="post-navbar-item ">
                       <TextFieldsIcon fontSize="large" color="secondary" />
                       <span className="">
                         {tWeb('descriptions.post-text')}
@@ -76,7 +76,7 @@ const AppNewPost = () => {
                     <div className="my-2 w-4 md:w-full">
                       <Divider />
                     </div>
-                    <button className="post-navbar-item">
+                    <button type="button" className="post-navbar-item">
                       <ImageIcon fontSize="large" color="success" />
                       <span className="">
                         {tWeb('descriptions.post-img')}
@@ -85,7 +85,7 @@ const AppNewPost = () => {
                     <div className="my-2 w-4 md:w-full">
                       <Divider />
                     </div>
-                    <button className="post-navbar-item ">
+                    <button type="button" className="post-navbar-item ">
                       <VideoCameraBackIcon fontSize="large" color="warning" />
                       <span className="">
                         {tWeb('descriptions.post-video')}
