@@ -948,6 +948,16 @@ video {
   background-color: rgb(35 44 86 / var(--tw-bg-opacity));
 }
 
+.tab-select {
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+}
+
+.tab-select:where(.dark, .dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(35 44 86 / var(--tw-bg-opacity));
+}
+
 .post-navbar-item span {
   --tw-text-opacity: 1;
   color: rgb(35 44 86 / var(--tw-text-opacity));
@@ -1137,10 +1147,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-8 {
-  width: 2rem;
 }
 
 .max-w-32 {

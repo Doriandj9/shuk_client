@@ -73,6 +73,7 @@
         "post": "Post",
         "post-text": "Text post",
         "post-img": "Image post",
-        "post-video": "Video post"
+        "post-video": "Video post",
+        "exit-post": "This page asks you to confirm that you want to log out; the information you have entered may not be saved."
     }
 }

@@ -73,8 +73,9 @@ interface Resources {
     "descriptions": {
       "post": "Publicar",
       "post-text": "Publicación de texto",
-      "post-img": "Publicación con imagen",
-      "post-video": "Publicación con video"
+      "post-img": "Publicación de imagen",
+      "post-video": "Publicación de video",
+      "exit-post": "Esta página le pide que confirme que desea salir; puede que la información que haya introducido no se guarde."
     }
   }
 }

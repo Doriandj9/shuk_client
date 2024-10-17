@@ -125,6 +125,10 @@
         dark:border-slate-500 hover:bg-blue-100 flex justify-center items-center flex-col dark:hover:bg-primary
         ;
     }
+
+    .tab-select {
+        @apply bg-blue-100 dark:bg-primary;
+    }
     
     .post-navbar-item span {
         @apply text-center text-[0.5rem] md:text-[0.6rem] text-mode-primary;
