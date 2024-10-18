@@ -133,6 +133,15 @@
     .post-navbar-item span {
         @apply text-center text-[0.5rem] md:text-[0.6rem] text-mode-primary;
     }
+
+    .app-description-post {
+       @apply w-full h-full text-start border-none focus:border-none
+       focus:outline-none relative
+       ;
+    }
+    .app-content-a-post {
+        @apply absolute top-0 left-0 w-full h-full;
+    }
 }
 
 

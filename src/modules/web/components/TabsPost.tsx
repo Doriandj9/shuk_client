@@ -41,8 +41,9 @@ const TabsPost = () => {
   };
 
   return (<>
-      <div>
+      <div className="flex gap-2 items-center">
         <AppAvatar  size="large" />
+        <h4 className="font-bold text-sm">{user?.full_name}</h4>
       </div>
     <div className="app-post-grid">
       <div className="post-grid-content">
