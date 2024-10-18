@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export type TypesPost = {
     TEXT : 'PT',
     IMG  : 'PI',
@@ -24,3 +26,14 @@ export type PostVideo = {
     file: Blob;
     payloadPost: string;
 };
+
+export type ModifierType = {
+    style: CSSProperties;
+}
+
+
+export type ContentFormPost = {
+    type: 'PT' | 'PI' | 'PV',
+    modifier: ModifierType,
+    value: object
+  };

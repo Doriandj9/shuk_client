@@ -136,7 +136,7 @@
 
     .app-description-post {
        @apply w-full h-full text-start border-none focus:border-none
-       focus:outline-none relative
+       focus:outline-none relative bg-blue-100
        ;
     }
     .app-content-a-post {

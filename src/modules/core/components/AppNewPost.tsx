@@ -15,17 +15,17 @@ import * as z from 'zod';
 import { useAuthStore } from "@/store/auth";
 import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
+import { ContentFormPost } from "../@types/post";
 
-export type ContentFormPost = {
-  description: string,
-};
+
 
 type PostTypeSchemaState = [string, ZodType<unknown, ZodTypeDef>];
 
 type ContextPostType = {
   hastContent: boolean;
   setHasContent: Dispatch<SetStateAction<boolean>>;
-  content?: ContentFormPost;
+  content: ContentFormPost | null;
+  setContent: Dispatch<SetStateAction<ContentFormPost>>
 };
 
 type ContextPostSchema<T> = {
@@ -41,7 +41,7 @@ type TypeWithScheme = [
 
 
 
-export const CreatePostContext = React.createContext<ContextPostType>({ hastContent: false, setHasContent: () => { } });
+export const CreatePostContext = React.createContext<ContextPostType>({ hastContent: false, setHasContent: () => { }, content: null, setContent : () => { }});
 export const SchemasPostContext = React.createContext<ContextPostSchema<PostTypeSchemaState>>({ defaultSchema: ['PT', z.object({})], changeSchema: () => { } });
 
 
@@ -59,6 +59,7 @@ const AppNewPost = () => {
   const [defaultSchema, setDefaultSchema] = useState<PostTypeSchemaState>(schemaPosts[0]);
 
   const [hastContent, setHasContent] = useState<boolean>(false);
+  const [content, setContent] = useState<ContentFormPost>({type:'PT', modifier: {style: {}}, value: {}});
 
   const methods = useForm<FormPostSchema>({
     resolver: zodResolver(defaultSchema[1])
@@ -90,7 +91,7 @@ const AppNewPost = () => {
   return (
     <>
       <CreatePostContext.Provider
-        value={{ hastContent, setHasContent }}
+        value={{ hastContent, setHasContent, content, setContent }}
       >
         <AppModal
           open={isOpen}
