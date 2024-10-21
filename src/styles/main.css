@@ -1019,10 +1019,9 @@ video {
 .app-description-post {
   position: relative;
   height: 100%;
+  height: 18rem;
   width: 100%;
   border-style: none;
-  --tw-bg-opacity: 1;
-  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
   text-align: start;
 }
 
@@ -1030,6 +1029,12 @@ video {
   border-style: none;
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.app-description-post {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-x: scroll;
 }
 
 .app-content-a-post {
@@ -1066,10 +1071,6 @@ video {
 
 .z-10 {
   z-index: 10;
-}
-
-.-z-10 {
-  z-index: -10;
 }
 
 .m-auto {
