@@ -36,6 +36,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuthStore } from "@/store/auth";
 import AppUserMenu from "../components/AppUserMenu";
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useAppLoading } from "@/store/loadingStore";
+import AppLoading from "../components/AppLoading";
 
 
 const { path: pathLogin } = webRoutes.login;
@@ -43,6 +45,7 @@ const { path: pathHome } = webRoutes.home;
 
 const AppLayout: React.FC<Children> = ({ children }) => {
   const [t, i18n] = useTranslation("core");
+  const {loading} = useAppLoading((state) => state);
   const [showMovil, setShowMovil] = useState<boolean>(true);
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
   const { isLogin, user } = useAuthStore((state) => state);
@@ -123,6 +126,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
     <React.Fragment>
       <ThemeProvider theme={themeApp}>
         <CssBaseline />
+        <AppLoading isOpen={loading} />
         <div id="body-main" className={`app-body`}>
           <header role="banner" className="h-16">
             <div className="app-banner">

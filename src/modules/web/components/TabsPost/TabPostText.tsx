@@ -1,65 +1,50 @@
 import { PostText } from "@/modules/core/@types/post";
 import { CreatePostContext } from "@/modules/core/components/AppNewPost";
-import { lettersAndComponents } from "@/modules/core/utilities/lettersAndComponents";
+// import { lettersAndComponents } from "@/modules/core/utilities/lettersAndComponents";
 import { KeyboardEvent, useContext, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 const TabPostText = () => {
-  const { register, watch } = useFormContext<PostText>();
+  const { register, setValue } = useFormContext<PostText>();
   const { content, setContent } = useContext(CreatePostContext);
   const refContent = useRef<HTMLParagraphElement | null>(null);
 
   const handleKeyUp = (e: KeyboardEvent<HTMLParagraphElement>) => {
-    const html =  refContent.current?.innerHTML;
-    const [letters, components] = lettersAndComponents(
-            html || ""
-          );
-          if (letters > 50 || components > 8) {
-            setContent({
-              type: content?.type || "PT",
-              modifier: {
-                style: {
-                  ...content?.modifier.style,
-                  fontSize: "0.85rem",
-                },
-              },
-              value: { ...content?.value },
-            });
-          }
-          if(refContent.current){
-            refContent.current.innerHTML = html || '';
-          }
-          
+
+    if (!e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey) {
+      const response = {
+        type: content?.type || "PT",
+        modifier: {
+          style: {
+            ...content?.modifier.style,
+          },
+        },
+        value: { html: refContent.current?.innerHTML || '' },
+      };
+      setValue('payloadPost', JSON.stringify(response));
+      setContent(response);
+    }
   };
 
-  // useEffect(() => {
-  //   if (refContent) {
-  //     const [letters, components] = lettersAndComponents(
-  //       refContent.current?.innerHTML || ""
-  //     );
-  //     if (letters > 50 || components > 8) {
-  //       setContent({
-  //         type: content?.type || "PT",
-  //         modifier: {
-  //           style: {
-  //             ...content?.modifier.style,
-  //             fontSize: "0.85rem",
-  //           },
-  //         },
-  //         value: { ...content?.value },
-  //       });
-  //     }
-  //   }
 
-  //   setContent({
-  //     type: "PT",
-  //     modifier: { ...(content?.modifier || { style: {} }) },
-  //     value: { ...content?.value },
-  //   });
-  // }, []);
+  useEffect(() => {
+    if (refContent.current && content?.value?.html) {
+      refContent.current.focus({ preventScroll: true });
+      refContent.current.innerHTML = content?.value?.html;
+
+      const range = document.createRange();
+      range.selectNodeContents(refContent.current);
+      range.collapse(false);
+      const selection = window.getSelection();
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+    }
+  }, []);
 
   return (
     <>
+    <input type="hidden" {...register('payloadPost')} />
+    <input type="hidden" {...register('typePost', {value: 'PT'})} />
       <div className="flex items-center justify-center w-full h-full relative">
         <div
           data-placeholder=""

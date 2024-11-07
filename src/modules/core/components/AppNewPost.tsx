@@ -54,12 +54,12 @@ const AppNewPost = () => {
   const isLoginUser = useAuthStore((state) => state.isLogin);
 
   const schema = usePostSchema();
-  const schemaPosts: TypeWithScheme = [['PT', schema.partial({ file: true })], ['PI', schema], ['PV', schema]];
+  const schemaPosts: TypeWithScheme = [['PT',schema.partial({ file: true, description: true })], ['PI', schema], ['PV', schema]];
 
   const [defaultSchema, setDefaultSchema] = useState<PostTypeSchemaState>(schemaPosts[0]);
 
   const [hastContent, setHasContent] = useState<boolean>(false);
-  const [content, setContent] = useState<ContentFormPost>({type:'PT', modifier: {style: { fontSize: '1.5rem' }}, value: {}});
+  const [content, setContent] = useState<ContentFormPost>({type:'PT', modifier: {style: { fontSize: '1.5rem' }}, value: {html: ''}});
 
   const methods = useForm<FormPostSchema>({
     resolver: zodResolver(defaultSchema[1])
@@ -86,7 +86,7 @@ const AppNewPost = () => {
     console.log(data);
   };
 
-  console.log(methods.formState.errors.payloadPost?.message);
+  console.log(methods.formState.errors);
 
   return (
     <>

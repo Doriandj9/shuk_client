@@ -9,6 +9,7 @@ import TabPostText from "./TabsPost/TabPostText";
 import { SchemasPostContext } from "@/modules/core/components/AppNewPost";
 import { useAuthStore } from "@/store/auth";
 import AppAvatar from "@/modules/core/components/AppAvatar";
+import TextMenuPost from "./TabsMenuPost/TextMenuPost";
 
 type TabNum = 1 | 2 | 3;
 
@@ -95,7 +96,13 @@ const TabsPost = () => {
         </AppItem>
       </div>
       <div className="post-grid-menu">
-        <AppItem>Menu</AppItem>
+        <AppItem>
+            {
+              tab === 1 &&
+              <TextMenuPost />
+            }
+
+        </AppItem>
       </div>
     </div>
   </>);

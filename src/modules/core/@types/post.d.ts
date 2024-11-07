@@ -35,5 +35,7 @@ export type ModifierType = {
 export type ContentFormPost = {
     type: 'PT' | 'PI' | 'PV',
     modifier: ModifierType,
-    value: object
+    value: {
+        html: string;
+    }
   };

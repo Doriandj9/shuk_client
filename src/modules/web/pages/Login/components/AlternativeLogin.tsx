@@ -7,13 +7,13 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "@/modules/web/hooks/auth/hooksAuth";
 import { useContext, useEffect, useState } from "react";
 import { LoadingAuthContext } from "../Login";
-import AppLoading from "@/modules/core/components/AppLoading";
 import { toast } from "sonner";
 import AppToast from "@/modules/core/components/AppToast";
 import { useAuthStore } from "@/store/auth";
 import { ResponseUserProps } from "@/modules/web/@types/web";
 import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
+import { useAppLoading } from "@/store/loadingStore";
 
 const AlternativeLogin = () => {
   const [t] = useTranslation("web");
@@ -22,6 +22,7 @@ const AlternativeLogin = () => {
   const { authLogin, setAuthLogin } = useContext(LoadingAuthContext);
   const [googleUserToken, setGoogleUserToken] = useState<string | null>(null);
   const { updateToken, updateUser } = useAuthStore((state) => state);
+  const { update } = useAppLoading((state) => state);
   const { authProvider, useGetInfoGoogle } = useAuth(null, successLogin);
 
   const { data, isLoading } = useGetInfoGoogle(googleUserToken || "");
@@ -39,6 +40,7 @@ const AlternativeLogin = () => {
   function successLogin(data: ResponseUserProps) {
     updateToken(data.token, data.time_expired_token);
     updateUser(data.jwt);
+    update(false);
     navigate(webRoutes.home.path);
   }
   
@@ -61,9 +63,13 @@ const AlternativeLogin = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    
+    update(isLoading || authProvider.isPending);
+  },[isLoading, authProvider.isPending]);
+
   return (
     <>
-      <AppLoading isOpen={isLoading || authProvider.isPending} />
       <div className="app-login-content font-semibold">
         <Button
           onClick={() => loginGoogle()}
