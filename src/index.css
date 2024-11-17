@@ -3,171 +3,178 @@
 @tailwind utilities;
 
 @layer components {
-    .text-mode-primary{
-        @apply  text-primary dark:text-slate-400;
-    }
-    .text-mode-secondary{
-        @apply text-secondary dark:text-slate-400;
-    }
-    .text-mode-slate{
-        @apply  text-slate-500 dark:text-slate-400;
-    }
+  .text-mode-primary {
+    @apply text-primary dark:text-slate-400;
+  }
+  .text-mode-secondary {
+    @apply text-secondary dark:text-slate-400;
+  }
+  .text-mode-slate {
+    @apply text-slate-500 dark:text-slate-400;
+  }
 
-    .text-mode-white{
-        @apply  text-black dark:text-white;
-    }
+  .text-mode-white {
+    @apply text-black dark:text-white;
+  }
 
-    .text-mode-black{
-        @apply  text-white dark:text-slate-400;
-    }
-    .text-mode-white-primary{
-        @apply  text-primary dark:text-white;
-    }
+  .text-mode-black {
+    @apply text-white dark:text-slate-400;
+  }
+  .text-mode-white-primary {
+    @apply text-primary dark:text-white;
+  }
+  .bg-mode-principal {
+    @apply bg-slate-100 dark:bg-slate-800;
+  }
+  .app-body {
+    @apply bg-slate-100 dark:bg-slate-800 min-h-screen flex flex-col;
+  }
+  .app-banner {
+    @apply fixed top-0 left-0 z-10 w-full h-16 bg-secondary dark:bg-slate-700 flex items-center;
+  }
+  .app-main {
+    @apply flex-grow flex;
+  }
+  .app-search-home {
+    @apply bg-slate-100 flex items-center rounded-xl dark:bg-slate-600;
+  }
+  .app-search-home > input {
+    @apply bg-transparent p-2 md:p-2 text-base md:text-xs;
+  }
+  .app-search-home > div {
+    @apply p-2 md:p-2 border-r-2 border-slate-200;
+  }
 
-    .app-body{
-        @apply bg-slate-100 dark:bg-slate-800 min-h-screen flex flex-col;
-    }
-    .app-banner{
-        @apply fixed top-0 left-0 z-10 w-full h-16 bg-secondary dark:bg-slate-700 flex items-center;
-    }
-    .app-main{
-        @apply flex-grow flex;
-    }
-    .app-search-home {
-        @apply bg-slate-100 flex items-center rounded-xl dark:bg-slate-600 ;
-    }
-    .app-search-home > input {
-        @apply bg-transparent p-2 md:p-2 text-base md:text-xs ;
-    }
-    .app-search-home > div {
-        @apply p-2 md:p-2 border-r-2 border-slate-200;
-    }
+  .app-search-home > input:active {
+    border: none;
+    outline: none;
+  }
 
-    .app-search-home > input:active {
-        border: none;
-        outline: none;
-    }
+  .app-search-home > input:focus {
+    border: none;
+    outline: none;
+  }
 
-    .app-search-home > input:focus {
-        border: none;
-        outline: none;
-    }
+  .option-menu {
+    @apply w-full h-full fixed top-0 left-0 bg-slate-100 dark:bg-slate-800 z-20;
+  }
+  .app-container-fade {
+    @apply bg-white shadow-lg rounded-xl dark:bg-slate-700 dark:shadow-slate-800;
+  }
+  .app-navbar {
+    @apply w-[20rem] fixed top-0 left-0 bg-slate-100 dark:bg-slate-800 md:w-[20rem] lg:w-[20rem] xl:w-[18rem] 2xl:w-[20rem];
+    height: 100vh;
+    z-index: 1;
+  }
 
-    .option-menu{
-        @apply w-full h-full fixed top-0 left-0 bg-slate-100 dark:bg-slate-800 z-20;
-    }
-    .app-container-fade{
-        @apply bg-white shadow-lg rounded-xl dark:bg-slate-700 dark:shadow-slate-800;
-    }
-    .app-navbar{
-        @apply w-[20rem] fixed top-0 left-0 bg-slate-100 dark:bg-slate-800 md:w-[20rem] lg:w-[20rem] xl:w-[18rem] 2xl:w-[20rem];
-        height: 100vh;
-        z-index: 1;
-    }
+  .app-navbar-right {
+    @apply w-[15rem] md:w-[12rem] lg:w-[16rem] xl:w-[18rem] 2xl:w-[20rem] fixed top-16 right-0 bg-slate-100 dark:bg-slate-800;
+    height: 100vh;
+    z-index: 1;
+  }
+  .app-insert-post {
+    @apply flex justify-center;
+  }
+  .app-login-container {
+    @apply rounded-lg p-2;
+  }
+  .app-login {
+    @apply w-full sm:w-10/12 md:w-10/12 m-auto 2xl:w-8/12;
+  }
+  .app-login-img {
+    @apply m-auto w-24 h-24;
+  }
 
-    .app-navbar-right{
-        @apply w-[15rem] md:w-[12rem] lg:w-[16rem] xl:w-[18rem] 2xl:w-[20rem] fixed top-16 right-0 bg-slate-100 dark:bg-slate-800;
-        height: 100vh;
-        z-index: 1;
-    }
-    .app-insert-post{
-        @apply flex justify-center;
-    }
-    .app-login-container{
-        @apply rounded-lg p-2;
-    }
-    .app-login{ 
-        @apply w-full sm:w-10/12 md:w-10/12 m-auto 2xl:w-8/12;
-    }
-    .app-login-img{
-        @apply m-auto w-24 h-24;
-    }   
+  .app-login-header {
+    @apply w-full;
+  }
+  .app-login-header h3 {
+    @apply text-3xl font-bold text-center tracking-tighter;
+  }
+  .app-login-header aside {
+    @apply text-center text-sm text-slate-500 mt-2;
+  }
+  .app-login-content {
+    @apply w-[96] md:w-[30rem] m-auto;
+  }
+  .app-post-grid {
+    display: grid;
+    gap: 1px;
+    @apply grid-cols-12 max-w-full sm:w-[32rem];
+    grid-template-areas:
+      "content navbar"
+      "menu menu";
+  }
 
-    .app-login-header{
-        @apply w-full;
-    }
-    .app-login-header h3{
-        @apply text-3xl font-bold text-center tracking-tighter;
-    }
-    .app-login-header aside{
-        @apply text-center text-sm text-slate-500 mt-2;
-    }
-    .app-login-content{
-        @apply w-[96] md:w-[30rem] m-auto;
-    }
-    .app-post-grid{
-        display: grid;
-        gap: 1px;
-        @apply grid-cols-12 max-w-full sm:w-[32rem] ;
-        grid-template-areas:
-        "content navbar"
-        "menu menu"
-    }   
-    
-    .post-grid-content{
-        grid-area: content;
-        grid-column: span 10;
-        @apply w-full h-full;
-    }
+  .post-grid-content {
+    grid-area: content;
+    grid-column: span 10;
+    @apply w-full h-full;
+  }
 
-    .post-grid-navbar{
-        grid-area: navbar;
-        grid-column: span 2;
-    }
+  .post-grid-navbar {
+    grid-area: navbar;
+    grid-column: span 2;
+  }
 
-    .post-grid-menu{
-        grid-area: menu;
-        grid-column: span 12;
-    }
+  .post-grid-menu {
+    grid-area: menu;
+    grid-column: span 12;
+  }
 
-    .post-navbar-item{
-        @apply w-14 h-14 sm:w-16 sm:h-16  border-2 border-slate-200 rounded-lg
-        dark:border-slate-500 hover:bg-blue-100 flex justify-center items-center flex-col dark:hover:bg-primary
-        ;
-    }
+  .post-navbar-item {
+    @apply w-14 h-14 sm:w-16 sm:h-16  border-2 border-slate-200 rounded-lg
+        dark:border-slate-500 hover:bg-blue-100 flex justify-center items-center flex-col dark:hover:bg-primary;
+  }
 
-    .tab-select {
-        @apply bg-blue-100 dark:bg-primary;
-    }
-    
-    .post-navbar-item span {
-        @apply text-center text-[0.5rem] md:text-[0.6rem] text-mode-primary;
-    }
+  .tab-select {
+    @apply bg-blue-100 dark:bg-primary;
+  }
 
-    .app-description-post {
-        @apply w-full h-full text-start border-none focus:border-none
-        focus:outline-none relative h-72 
-        ;
-        white-space: normal;
-        word-wrap: break-word;
-        overflow-x: scroll;
-    }
-    .app-content-a-post {
-        @apply absolute top-0 left-0 w-full h-full;
-    }
+  .post-navbar-item span {
+    @apply text-center text-[0.5rem] md:text-[0.6rem] text-mode-primary;
+  }
+
+  .app-description-post {
+    @apply w-full h-full text-start border-none focus:border-none
+        focus:outline-none relative h-72;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-x: scroll;
+  }
+  .app-content-a-post {
+    @apply absolute top-0 left-0 w-full h-full;
+  }
+
+  .hidden-scroll {
+    overflow: scroll;
+    scrollbar-width: none;
+  }
+  .hidden-scroll::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-
 @media (max-width: 770px) {
-    .app-post-grid{
-        grid-template-areas:
-        "navbar navbar"
-        "content content"
-        "menu menu"
-    }
+  .app-post-grid {
+    grid-template-areas:
+      "navbar navbar"
+      "content content"
+      "menu menu";
+  }
 
-    .post-grid-content{
-        grid-area: content;
-        grid-column: span 12;
-    }
+  .post-grid-content {
+    grid-area: content;
+    grid-column: span 12;
+  }
 
-    .post-grid-navbar{
-        grid-area: navbar;
-        grid-column: span 12;
-    }
+  .post-grid-navbar {
+    grid-area: navbar;
+    grid-column: span 12;
+  }
 
-    .post-grid-menu{
-        grid-area: menu;
-        grid-column: span 12;
-    }
+  .post-grid-menu {
+    grid-area: menu;
+    grid-column: span 12;
+  }
 }

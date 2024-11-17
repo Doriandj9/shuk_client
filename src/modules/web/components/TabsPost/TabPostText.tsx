@@ -11,7 +11,10 @@ const TabPostText = () => {
 
   const handleKeyUp = (e: KeyboardEvent<HTMLParagraphElement>) => {
 
-    if (!e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey) {
+    if (!e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey
+        && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' 
+        && e.key !== 'ArrowUp' && e.key !== 'ArrowDown'
+    ) {
       const response = {
         type: content?.type || "PT",
         modifier: {
@@ -21,8 +24,11 @@ const TabPostText = () => {
         },
         value: { html: refContent.current?.innerHTML || '' },
       };
-      setValue('payloadPost', JSON.stringify(response));
-      setContent(response);
+      const selection = window.getSelection();
+      if(!selection || selection.toString().length <= 0){
+        setValue('payloadPost', JSON.stringify(response));
+        setContent(response);
+      };
     }
   };
 
@@ -55,7 +61,7 @@ const TabPostText = () => {
             ref={refContent}
             contentEditable
             onKeyUp={handleKeyUp}
-            className="app-description-post"
+            className="app-description-post hidden-scroll"
           ></p>
         </div>
       </div>
