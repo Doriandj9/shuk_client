@@ -1,7 +1,6 @@
-import { CreatePostContext } from "@/modules/core/components/AppNewPost";
 import { ColorAdjustment } from "@/modules/core/components/SVGComponents";
 import { IconButton } from "@mui/material";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import OptionsBackgrounds from "./Partials/OptionsBackgrounds";
@@ -9,22 +8,9 @@ import OptionsBackgrounds from "./Partials/OptionsBackgrounds";
 type TupleOp = 0 | 1;
 
 const TextMenuPost = () => {
-  const { content, setContent } = useContext(CreatePostContext);
   const [optionsText, setOptionsText] = useState<TupleOp>(0);
 
   const handleClick = () => {
-    // setContent({
-    //   type: content?.type || "PT",
-    //   modifier: {
-    //     style: {
-    //       ...content?.modifier.style,
-    //       backgroundColor: "black",
-    //       color: "white",
-    //       borderRadius: "1rem",
-    //     },
-    //   },
-    //   value: { html: content?.value.html || "" },
-    // });
     setOptionsText(1);
   };
 

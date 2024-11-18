@@ -21,6 +21,10 @@ const TabPostText = () => {
           style: {
             ...content?.modifier.style,
           },
+          isModifyBackground: false,
+          styleParagraph: {
+            ...content?.modifier.styleParagraph
+          }     
         },
         value: { html: refContent.current?.innerHTML || '' },
       };
@@ -61,6 +65,7 @@ const TabPostText = () => {
             ref={refContent}
             contentEditable
             onKeyUp={handleKeyUp}
+            style={content?.modifier.styleParagraph}
             className="app-description-post hidden-scroll"
           ></p>
         </div>

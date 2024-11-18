@@ -29,6 +29,8 @@ export type PostVideo = {
 
 export type ModifierType = {
     style: CSSProperties;
+    isModifyBackground: boolean;
+    styleParagraph: CSSProperties;
 }
 
 

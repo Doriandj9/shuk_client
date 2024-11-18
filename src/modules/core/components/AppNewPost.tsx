@@ -59,7 +59,7 @@ const AppNewPost = () => {
   const [defaultSchema, setDefaultSchema] = useState<PostTypeSchemaState>(schemaPosts[0]);
 
   const [hastContent, setHasContent] = useState<boolean>(false);
-  const [content, setContent] = useState<ContentFormPost>({type:'PT', modifier: {style: { fontSize: '1.5rem' }}, value: {html: ''}});
+  const [content, setContent] = useState<ContentFormPost>({type:'PT', modifier: {style: { fontSize: '1.5rem' }, styleParagraph: {}, isModifyBackground: false}, value: {html: ''}});
 
   const methods = useForm<FormPostSchema>({
     resolver: zodResolver(defaultSchema[1])
