@@ -75,7 +75,8 @@ interface Resources {
       "post-text": "Publicación de texto",
       "post-img": "Publicación de imagen",
       "post-video": "Publicación de video",
-      "exit-post": "Esta página le pide que confirme que desea salir; puede que la información que haya introducido no se guarde."
+      "exit-post": "Esta página le pide que confirme que desea salir; puede que la información que haya introducido no se guarde.",
+      "share-idea": "Comparte tus ideas..."
     }
   }
 }

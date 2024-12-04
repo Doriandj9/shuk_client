@@ -1,54 +1,46 @@
 import { IconButton } from "@mui/material";
 import ColorLens from "@mui/icons-material/ColorLens";
-import { CreatePostContext } from "@/modules/core/components/AppNewPost";
 import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
-import { useContext } from "react";
+import { usePostStore } from "@/store/postStore";
 
 
 const OptionsBackgrounds = () => {
-    const { content, setContent } = useContext(CreatePostContext);
+    const updateBackground = usePostStore((state) => state.updateModifierBg);
+    const updateStyle = usePostStore((state) => state.updateModifierStyle);
+    const updateSParagraph = usePostStore((state) => state.updateModifierStilePrg);
+    const isModifyBackground = usePostStore((state) => state.modifier.isModifyBackground);
 
     const handleCancelOp = () => {
-        setContent({
-            type: content?.type || "PT",
-            modifier: {
-                style: {
-                    ...content?.modifier.style,
-                    backgroundColor: 'transparent',
-                    color: 'rgba(0, 0, 0, 0.6)',
-                },
-                isModifyBackground: false,
-                styleParagraph: {}
-            },
-            
-            value: { html: content?.value.html || "" },
+        updateBackground(false);
+        updateStyle({
+            backgroundColor: 'transparent',
+            color: 'rgba(0, 0, 0, 0.6)'
+        });
+        updateSParagraph({
+            display: 'block',
+            justifyContent: 'none',
+            alignItems: 'none'
         });
     };
 
     const handleOneOp = () => {
-        setContent({
-            type: content?.type || "PT",
-            modifier: {
-                style: {
-                    ...content?.modifier.style,
-                    backgroundColor: "black",
-                    color: "white"
-                },
-                isModifyBackground: true,
-                styleParagraph: {
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }
-            },
-            value: { html: content?.value.html || "" },
+        updateBackground(true);
+        updateStyle({
+            backgroundColor: 'black',
+            color: 'white'
         });
+        updateSParagraph({
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        });
+
     };
     return (
         <>
-        <IconButton
-        disabled={!content?.modifier.isModifyBackground}
-        onClick={handleCancelOp}>
+            <IconButton
+                disabled={!isModifyBackground}
+                onClick={handleCancelOp}>
                 <DoNotDisturbIcon />
             </IconButton>
             <IconButton onClick={handleOneOp}>

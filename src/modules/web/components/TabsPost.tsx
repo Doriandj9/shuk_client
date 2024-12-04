@@ -1,25 +1,29 @@
 import AppItem from "@/modules/core/components/AppItem";
 import TextFieldsIcon from '@mui/icons-material/TextFields';
-import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
+// import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import ImageIcon from '@mui/icons-material/Image';
 import { useTranslation } from "react-i18next";
 import { Divider } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TabPostText from "./TabsPost/TabPostText";
 import { SchemasPostContext } from "@/modules/core/components/AppNewPost";
 import { useAuthStore } from "@/store/auth";
 import AppAvatar from "@/modules/core/components/AppAvatar";
 import TextMenuPost from "./TabsMenuPost/TextMenuPost";
+import TabPostImg from "./TabsPost/TabPostImg";
+import { PostTypesBack } from "@/modules/core/@types/post";
+import { usePostStore } from "@/store/postStore";
 
 type TabNum = 1 | 2 | 3;
 
 const TabsPost = () => {
   const [tWeb] = useTranslation("web");
   const {user} = useAuthStore((state) => state);
+  const updateType = usePostStore((state) => state.updateType);
   const [tab, setTab] = useState<TabNum>(1);
   const { changeSchema } = useContext(SchemasPostContext);
 
-  const handleTab = (value: TabNum) => {
+  const handleTab = (value: TabNum, type: PostTypesBack) => {
     let numSchema: 0 | 1 | 2 = 0;
 
     switch (value) {
@@ -36,11 +40,14 @@ const TabsPost = () => {
         numSchema = 1;
         break;
     };
-
+    updateType(type);
     changeSchema(numSchema);
     setTab(value);
   };
 
+  useEffect(() => {
+    updateType('PT');
+  },[]);
   return (<>
       <div className="flex gap-2 items-center">
         <AppAvatar  size="large" />
@@ -55,7 +62,7 @@ const TabsPost = () => {
 
           {
             tab === 2 &&
-            <p>2</p>
+            <TabPostImg />
           }
 
           {
@@ -68,7 +75,7 @@ const TabsPost = () => {
       <div className="post-grid-navbar">
         <AppItem>
           <div className="flex justify-center items-center flex-row md:flex-col">
-            <button onClick={() => handleTab(1)} type="button" className={`post-navbar-item ${tab == 1 ? 'tab-select' : ''}`}>
+            <button onClick={() => handleTab(1,'PT')} type="button" className={`post-navbar-item ${tab == 1 ? 'tab-select' : ''}`}>
               <TextFieldsIcon fontSize="large" color="secondary" />
               <span className="">
                 {tWeb('descriptions.post-text')}
@@ -77,21 +84,21 @@ const TabsPost = () => {
             <div className="my-2 w-4 md:w-full">
               <Divider />
             </div>
-            <button onClick={() => handleTab(2)} type="button" className={`post-navbar-item ${tab == 2 ? 'tab-select' : ''}`}>
+            <button onClick={() => handleTab(2,'PI')} type="button" className={`post-navbar-item ${tab == 2 ? 'tab-select' : ''}`}>
               <ImageIcon fontSize="large" color="success" />
               <span className="">
                 {tWeb('descriptions.post-img')}
               </span>
             </button>
-            <div className="my-2 w-4 md:w-full">
+            {/* <div className="my-2 w-4 md:w-full">
               <Divider />
-            </div>
-            <button onClick={() => handleTab(3)} type="button" className={`post-navbar-item ${tab == 3 ? 'tab-select' : ''}`}>
+            </div> */}
+            {/* <button onClick={() => handleTab(3)} type="button" className={`post-navbar-item ${tab == 3 ? 'tab-select' : ''}`}>
               <VideoCameraBackIcon fontSize="large" color="warning" />
               <span className="">
                 {tWeb('descriptions.post-video')}
               </span>
-            </button>
+            </button> */}
           </div>
         </AppItem>
       </div>
