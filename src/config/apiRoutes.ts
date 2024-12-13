@@ -7,5 +7,10 @@
         auth_provider: {
             path: 'security/login/provider'
         }
+    },
+    user: {
+        resource_post: {
+            path: 'post'
+        }
     }
  };

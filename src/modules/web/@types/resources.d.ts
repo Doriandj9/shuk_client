@@ -64,7 +64,10 @@ interface Resources {
         "full-name-required": "El campo de nombre y apellido es obligatorio",
         "full-name-min": "Ingrese un mínimo de 3 caracteres",
         "birthday-required": "El campo de cumpleaños es obligatorio",
-        "phone-required": "El campo numero de celular es obligatorio"
+        "phone-required": "El campo numero de celular es obligatorio",
+        "nan-type-post": "Error no se selecciono un tipo de publicación",
+        "nan-img-post": "No se selecciono una imagen para la publicación",
+        "nan-payload-post": "No se pude publicar un contenido vació"
       }
     },
     "titles": {

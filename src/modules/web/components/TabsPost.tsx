@@ -4,9 +4,8 @@ import TextFieldsIcon from '@mui/icons-material/TextFields';
 import ImageIcon from '@mui/icons-material/Image';
 import { useTranslation } from "react-i18next";
 import { Divider } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TabPostText from "./TabsPost/TabPostText";
-import { SchemasPostContext } from "@/modules/core/components/AppNewPost";
 import { useAuthStore } from "@/store/auth";
 import AppAvatar from "@/modules/core/components/AppAvatar";
 import TextMenuPost from "./TabsMenuPost/TextMenuPost";
@@ -21,27 +20,10 @@ const TabsPost = () => {
   const {user} = useAuthStore((state) => state);
   const updateType = usePostStore((state) => state.updateType);
   const [tab, setTab] = useState<TabNum>(1);
-  const { changeSchema } = useContext(SchemasPostContext);
+
 
   const handleTab = (value: TabNum, type: PostTypesBack) => {
-    let numSchema: 0 | 1 | 2 = 0;
-
-    switch (value) {
-      case 1:
-        numSchema = 0;
-        break;
-      case 2:
-        numSchema = 1;
-        break;
-      case 3:
-        numSchema = 2;
-        break;
-      default:
-        numSchema = 1;
-        break;
-    };
     updateType(type);
-    changeSchema(numSchema);
     setTab(value);
   };
 

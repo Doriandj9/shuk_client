@@ -63,7 +63,10 @@
             "full-name-required": "The first and last names field is required",
             "full-name-min": "Enter a minimum of 3 characters",
             "birthday-required": "The birthday field is required",
-            "phone-required": "The cell phone number field is required"
+            "phone-required": "The cell phone number field is required",
+            "nan-type-post": "Error no post type was selected",
+            "nan-img-post": "No image was selected for publication",
+            "nan-payload-post": "You cannot post empty content"
         }
     },
     "titles": {

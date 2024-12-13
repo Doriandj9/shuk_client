@@ -11,13 +11,13 @@ function App() {
     return response;
  },
 (error) => {
-  if (error.response) {
+  if (error.request?.status !== 401 && error.response) {
     // La solicitud fue hecha y el servidor respondió con un código de estado
     toast.custom((id) => <AppToast id={id} message={error.response?.data?.message} status="error"  />,{
       duration: 5000,
       position: 'top-center',
     });
-  } else if (error.request) {
+  } else if ( error.request?.status !== 401 && error.request) {
     // La solicitud fue hecha pero no se recibió respuesta
     if(!error.request.status){
       toast.custom((id) => <AppToast id={id} message={t('messages.errors.requests.off-server')} status="error"  />,{
@@ -35,10 +35,12 @@ function App() {
 
   } else {
     // Algo ocurrió al configurar la solicitud
-    toast.custom((id) => <AppToast id={id} message={error.message} status="error"  />,{
-      duration: 5000,
-      position: 'top-center',
-    }); 
+    if (error.request?.status !== 401 ) {
+      toast.custom((id) => <AppToast id={id} message={error.message} status="error"  />,{
+        duration: 5000,
+        position: 'top-center',
+      }); 
+    }
   }
   
   // Retornar una promesa rechazada para que el componente pueda manejar el error

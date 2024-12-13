@@ -1,25 +1,20 @@
 import imgPost from "@/assets/img/undraw_wall_post_re_y78d.svg";
 import { Box, Button } from "@mui/material";
 import { motion } from "framer-motion";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AppModal from "./AppModal";
 import AppFooterModal from "./AppFooterModal";
 import SendIcon from "@mui/icons-material/Send";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { FormPostSchema, usePostSchema } from "../validations/postSchema";
-import { ZodType, ZodTypeDef } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import TabsPost from "@/modules/web/components/TabsPost";
-import * as z from 'zod';
 import { useAuthStore } from "@/store/auth";
 import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
 import { ContentFormPost } from "../@types/post";
+import { usePostStore } from "@/store/postStore";
+import { useAppToast } from "../hooks/useAppToast";
+import { useCreatePost } from "@/modules/web/hooks/post/hooks";
 
-
-
-type PostTypeSchemaState = [string, ZodType<unknown, ZodTypeDef>];
 
 type ContextPostType = {
   hastContent: boolean;
@@ -28,21 +23,10 @@ type ContextPostType = {
   setContent: Dispatch<SetStateAction<ContentFormPost>>
 };
 
-type ContextPostSchema<T> = {
-  defaultSchema: T;
-  changeSchema: (schema: 0 | 1 | 2) => void;
-};
-
-type TypeWithScheme = [
-  [string, ZodType<unknown, ZodTypeDef>],
-  [string, ZodType<unknown, ZodTypeDef>],
-  [string, ZodType<unknown, ZodTypeDef>]
-];
 
 
 
-export const CreatePostContext = React.createContext<ContextPostType>({ hastContent: false, setHasContent: () => { }, content: null, setContent : () => { }});
-export const SchemasPostContext = React.createContext<ContextPostSchema<PostTypeSchemaState>>({ defaultSchema: ['PT', z.object({})], changeSchema: () => { } });
+export const CreatePostContext = React.createContext<ContextPostType>({ hastContent: false, setHasContent: () => { }, content: null, setContent: () => { } });
 
 
 
@@ -50,29 +34,21 @@ const AppNewPost = () => {
   const [t] = useTranslation("core");
   const [tWeb] = useTranslation("web");
   const navigate = useNavigate();
+  const { show } = useAppToast();
+  const user = useAuthStore((state) => state.user);
 
   const isLoginUser = useAuthStore((state) => state.isLogin);
 
-  const schema = usePostSchema();
-  const schemaPosts: TypeWithScheme = [['PT',schema.partial({ file: true, description: true })], ['PI', schema], ['PV', schema]];
-
-  const [defaultSchema, setDefaultSchema] = useState<PostTypeSchemaState>(schemaPosts[0]);
-
   const [hastContent, setHasContent] = useState<boolean>(false);
-  const [content, setContent] = useState<ContentFormPost>({type:'PT', modifier: {style: { fontSize: '1.5rem' }, styleParagraph: {}, isModifyBackground: false}, value: {html: ''}});
-
-  const methods = useForm<FormPostSchema>({
-    resolver: zodResolver(defaultSchema[1])
-  });
+  const [content, setContent] = useState<ContentFormPost>({ type: 'PT', modifier: { style: { fontSize: '1.5rem' }, styleParagraph: {}, isModifyBackground: false }, value: { html: '' } });
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const changeSchema = (schema: 0 | 1 | 2) => {
-    setDefaultSchema(schemaPosts[schema]);
-  };
+  const {create} = useCreatePost(user?.id || 0);
+
 
   const handleOpen = () => {
-    if(!isLoginUser){
+    if (!isLoginUser) {
       navigate(webRoutes.login.path);
     };
     setIsOpen(true);
@@ -82,11 +58,49 @@ const AppNewPost = () => {
     setIsOpen(false);
   };
 
-  const handleCreatePost: SubmitHandler<FormPostSchema> = (data) => {
-    console.log(data);
+  const handleCreatePost = (e: FormEvent) => {
+    e.preventDefault();
+    setIsOpen(false);
+    try {
+      const { type, modifier, value } = usePostStore.getState();
+
+      if (type !== 'PT' && type !== 'PI' && type !== 'PV') {
+        throw Error(tWeb('validations.messages.nan-type-post'));
+      }
+
+      if (type === 'PI' && !value.file) {
+        throw Error(tWeb('validations.messages.nan-img-post'));
+      }
+
+      if (type === 'PT' && value.file) {
+        value.file = null;
+      }
+
+      if (type === 'PT' && value.html === '' || type === 'PT' && value.html === '<br>') {
+        throw Error(tWeb('validations.messages.nan-payload-post'));
+      }
+      const data = { type, payload: { type, modifier, value } };
+      
+      create.mutate(data, {
+        onSuccess: (data) => {
+          console.log(data);
+        }
+      });
+
+    } catch (error: unknown) {
+
+      if (error instanceof Error) {
+        show({ message: error.message || '', status: 'error' });
+      } else {
+        show({ message: 'Error desconocido', status: 'error' });
+      }
+    }
+
+
+
+
   };
 
-  console.log(methods.formState.errors);
 
   return (
     <>
@@ -101,37 +115,30 @@ const AppNewPost = () => {
           title={tWeb("titles.create-post")}
         >
           <Box sx={{ flexGrow: 1 }}>
-            <SchemasPostContext.Provider value={{ defaultSchema, changeSchema }}>
 
-              <FormProvider {...methods}>
-
-                <form onSubmit={methods.handleSubmit(handleCreatePost)}>
-                  <TabsPost />
-                  <AppFooterModal
-                    msgBtnCancel="Regresar"
-                    msgBtnDone="Publicar"
-                    positionBtn="center"
-                    isCustomButtons
+            <form onSubmit={handleCreatePost}>
+              <TabsPost />
+              <AppFooterModal
+                msgBtnCancel="Regresar"
+                msgBtnDone="Publicar"
+                positionBtn="center"
+                isCustomButtons
+              >
+                <div className="w-10/12 m-auto">
+                  <Button
+                    type="submit"
+                    color="primary"
+                    variant="contained"
+                    fullWidth
+                    startIcon={<SendIcon />}
                   >
-                    <div className="w-10/12 m-auto">
-                      <Button
-                      type="submit"
-                        color="primary"
-                        variant="contained"
-                        fullWidth
-                        startIcon={<SendIcon />}
-                        disabled={hastContent}
-                      >
-                        <span className="text-sm md:text-lg">
-                          {tWeb("descriptions.post")}
-                        </span>
-                      </Button>
-                    </div>
-                  </AppFooterModal>
-                </form>
-
-              </FormProvider>
-            </SchemasPostContext.Provider>
+                    <span className="text-sm md:text-lg">
+                      {tWeb("descriptions.post")}
+                    </span>
+                  </Button>
+                </div>
+              </AppFooterModal>
+            </form>
           </Box>
         </AppModal>
         <div className="app-insert-post">

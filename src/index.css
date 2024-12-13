@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  --w-container-post: 38.9375rem;
+  --w-container-post-2: 33.25rem;
+  --h-container-min-post: 26.5rem;
+  --w-container-post-3: 52.25rem;
+}
+
 @layer components {
   .text-mode-primary {
     @apply text-primary dark:text-slate-400;
@@ -68,7 +75,7 @@
   }
 
   .app-navbar-right {
-    @apply w-[15rem] md:w-[12rem] lg:w-[16rem] xl:w-[18rem] 2xl:w-[20rem] fixed top-16 right-0 bg-slate-100 dark:bg-slate-800;
+    @apply w-[15rem] md:w-2/12 lg:w-[16rem] xl:w-[18rem] 2xl:w-[20rem] fixed top-16 right-0 bg-slate-100 dark:bg-slate-800;
     height: 100vh;
     z-index: 1;
   }
@@ -172,6 +179,11 @@
   }
   .hidden-scroll::-webkit-scrollbar {
     display: none;
+  }
+
+  .app-container-post {
+    max-width: 100%;
+    @apply w-full md:w-[--w-container-post-2] lg:w-[--w-container-post] 2xl:w-[--w-container-post-3] min-h-[--h-container-min-post] rounded-md;
   }
 }
 

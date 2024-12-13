@@ -1,11 +1,10 @@
 import { usePostStore } from "@/store/postStore";
 import { useMemo, useRef } from "react";
-import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 
 const TabPostText = () => {
-  const { register } = useFormContext();
+
   const {value, updateValueHtm, modifier, type} = usePostStore((state) => state);
   const [t] = useTranslation('web');
   const span = useRef(document.createElement('span'));
@@ -86,8 +85,6 @@ const TabPostText = () => {
   console.log(value);
   return (
     <>
-      <input type="hidden" {...register('payloadPost')} />
-      <input type="hidden" {...register('typePost', { value: 'PT' })} />
       <div className="flex items-center justify-center w-full h-full relative">
         <div
           data-placeholder={t('descriptions.share-idea')}

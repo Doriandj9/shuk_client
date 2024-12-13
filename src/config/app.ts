@@ -48,5 +48,8 @@ export const api = axios.create({
             }
         return data;
        }
-    }]
+    }],
+    headers: {
+        'Accept': 'application/json'
+    }
 });
