@@ -1,4 +1,6 @@
+import AppErrorFetchingPosts from "@/modules/core/components/AppErrorFetchingPosts";
 import AppLoadingPosts from "@/modules/core/components/AppLoadinPosts";
+import AppNotPosts from "@/modules/core/components/AppNotPosts";
 import InfinityScroll from "@/modules/core/components/InfinityScroll";
 import { useGetInfinityPosts } from "@web/hooks/post/hooks";
 
@@ -8,7 +10,7 @@ const ListPost = () => {
     data,
     error,
     fetchNextPage,
-    // hasNextPage,
+    hasNextPage,
     isFetching,
     isFetchingNextPage,
     status,
@@ -41,9 +43,10 @@ const ListPost = () => {
                   </div>
                 ));
               })}
-              {status == 'error' && (<p>{error.message}</p>)}
-              {status == 'pending'  && (<AppLoadingPosts />)}
-              {isFetchingNextPage && (<AppLoadingPosts />)}
+              {status == 'error' && (<AppErrorFetchingPosts error={error} />)}
+              {status != 'error' && status == 'pending'  && (<AppLoadingPosts />)}
+              {status != 'error' && isFetchingNextPage && (<AppLoadingPosts />)}
+              {status !== 'error' && !isFetching  && !hasNextPage && <AppNotPosts />}
             </div>
           );
         }}

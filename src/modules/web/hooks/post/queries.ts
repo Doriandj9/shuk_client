@@ -23,11 +23,11 @@ type getPostsFn = {
     (params:{pageParam: number}): Promise<PostDataInfinity>
 };
 export const getInfinityPosts: getPostsFn = async ({ pageParam }) => {
-
+    api.interceptors.response.clear();
     const response  = await api.get(`${routesApi.public.infinity_post.path}?per_page=2&page=${pageParam}`, {
         headers: {
             'Authorization': `Bearer ${(useAuthStore.getState()).token}`
-        }
+        },
     });
 
     return response.data?.data || [];

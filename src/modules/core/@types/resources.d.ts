@@ -21,7 +21,14 @@ interface Resources {
         "post": {
           "not-type": "No se ha introducido ningún tipo de publicación",
           "not-payload": "No se ingresó ningún contenido para ser publicado",
-          "not-file": "No se ingresó ninguna foto o video para publicar"
+          "not-file": "No se ingresó ninguna foto o video para publicar",
+          "server": "¡Ups! Algo salió mal. Intenta recargar la página."
+        }
+      },
+      "labels": {
+        "post": {
+          "click-here": "Haga clic aquí",
+          "end-posts": "¡Y eso es todo por ahora! Hemos llegado al final de las publicaciones, pero no te preocupes, ¡pronto llegarán más!"
         }
       }
     },

@@ -45,6 +45,11 @@ function App() {
   
   // Retornar una promesa rechazada para que el componente pueda manejar el error
   // return Promise.reject(error);
+},{
+  runWhen(config) {
+    console.log('interceptors',config);
+    return false;
+  },
 }
 );
   return (
