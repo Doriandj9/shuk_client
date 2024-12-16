@@ -17,6 +17,7 @@ const ListPost = () => {
     
   } = useGetInfinityPosts();
 
+  console.log('render p', data?.pages);
   return (
     <>
       <InfinityScroll

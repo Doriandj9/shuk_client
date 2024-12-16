@@ -93,8 +93,9 @@ const AppNewPost = () => {
       const data = { type, payload: { type, modifier, value } };
 
       create.mutate(data, {
-        onSuccess: (data) => {
-          console.log(data);
+        onSuccess: () => {
+          show({message: tWeb('register.labels.save-post'), status: 'success', position: 'top-center'});
+          usePostStore.getState().reset();
         },
       });
     } catch (error: unknown) {
@@ -152,6 +153,7 @@ const AppNewPost = () => {
             onClick={() => handleOpen()}
             dragConstraints={{ left: -100, right: 100 }}
             className="flex flex-col justify-center text-center items-center"
+            disabled={create.isPending}
           >
             <img src={imgPost} className="w-12 h-12" />
             <span className="text-mode-secondary text-[0.50rem] md:text-[0.75rem] font-black text-center">

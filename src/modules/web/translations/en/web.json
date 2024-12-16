@@ -52,7 +52,8 @@
         },
         "labels": {
             "whit-account": "Do you have an account?",
-            "login": "Sign in"
+            "login": "Sign in",
+            "save-post": "Congratulations on your post."
         }
     },
     "validations": {

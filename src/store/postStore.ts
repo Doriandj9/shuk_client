@@ -17,28 +17,28 @@ export const usePostStore = create<ContentFormPostHook>()((set) => ({
     },
     updateModifierBg: (payload) => set((state) => ({
         modifier: {
-            style: {...state.modifier.style},
-            styleParagraph: {...state.modifier.styleParagraph},
+            style: { ...state.modifier.style },
+            styleParagraph: { ...state.modifier.styleParagraph },
             isModifyBackground: payload
         }
     })),
     updateModifierStilePrg: (payload) => set((state) => ({
         modifier: {
-            style: {...state.modifier.style},
+            style: { ...state.modifier.style },
             styleParagraph: payload,
             isModifyBackground: state.modifier.isModifyBackground
         }
     })),
-    updateModifierStyle:  (payload) => set((state) => ({
+    updateModifierStyle: (payload) => set((state) => ({
         modifier: {
             style: payload,
-            styleParagraph: {...state.modifier.styleParagraph},
+            styleParagraph: { ...state.modifier.styleParagraph },
             isModifyBackground: state.modifier.isModifyBackground
         }
     })),
-    
+
     updateType: (payload) => set(() => ({
-        type: payload 
+        type: payload
     })),
 
     updateValueHtm: (payload) => set((state) => ({
@@ -53,6 +53,19 @@ export const usePostStore = create<ContentFormPostHook>()((set) => ({
             ...state.value,
             file: payload
         }
-    }))
+    })),
+
+    reset: () => set(() => ({
+        type: 'PT',
+        modifier: {
+            style: {},
+            isModifyBackground: false,
+            styleParagraph: {}
+        },
+        value: {
+            html: '',
+            file: null
+        },
+    })),
 }
 ));

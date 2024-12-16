@@ -1,5 +1,5 @@
 import { usePostStore } from "@/store/postStore";
-import { useMemo, useRef } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 
@@ -7,9 +7,8 @@ const TabPostText = () => {
 
   const {value, updateValueHtm, modifier, type} = usePostStore((state) => state);
   const [t] = useTranslation('web');
-  const span = useRef(document.createElement('span'));
-  span.current.id = 'span-placeholder-post';
-  span.current.className = 'span-placeholder';
+  const [message, setMessage] = useState('');
+  const span = <span className="span-placeholder">{message}</span>;
 
 
   const writeComponenText = (element: HTMLElement) => {
@@ -33,15 +32,14 @@ const TabPostText = () => {
   };
 
   const removePlaceholder = () => {
-    document.querySelectorAll('#span-placeholder-post').forEach((element) => element.remove());
+    setMessage('');
   };
 
   const onRenderPlaceholder = (element: HTMLElement) => {
     const parent = element.parentElement || document.createElement('div');
     const placeholder = parent.dataset.placeholder;
     
-    span.current.textContent = placeholder || '';
-    element.append(span.current);
+    setMessage(placeholder || '');
 
   };
   const onRenderPost = (element: HTMLElement) => {
@@ -94,7 +92,9 @@ const TabPostText = () => {
           <p className="app-description-post hidden-scroll text-xl"
           id="post-content-new"
             contentEditable
-          ></p>
+          >
+          </p>
+          {span}
         </div>
       </div>
     </>

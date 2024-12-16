@@ -53,7 +53,8 @@ interface Resources {
       },
       "labels": {
         "whit-account": "¿Tienes una cuenta?",
-        "login": "Inicia sesión"
+        "login": "Inicia sesión",
+        "save-post": "Felicidades por tu publicación."
       }
     },
     "validations": {

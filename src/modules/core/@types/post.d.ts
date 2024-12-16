@@ -39,6 +39,7 @@ export type ContentFormPost = {
     modifier: ModifierType;
     value: {
         html: string;
+        file?: Blob | null
     };
   };
 
@@ -57,4 +58,5 @@ export type ContentFormPost = {
     updateModifierStilePrg: (payload: CSSProperties) => unknown,
     updateValueHtm: (payload: string) => unknown,
     updateValueFile: (payload: Blob | null) => unknown
+    reset: () => void
   };

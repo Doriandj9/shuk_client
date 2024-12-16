@@ -23,7 +23,8 @@ export interface PostData {
     is_multiple: boolean;                    
     user_id?: number;                        
     created_by?: number;                     
-    updated_by?: number;                    
+    updated_by?: number;
+    is_temp?:boolean;                    
   }
 
 
