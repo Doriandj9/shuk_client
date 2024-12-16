@@ -15,20 +15,19 @@ import { usePostStore } from "@/store/postStore";
 import { useAppToast } from "../hooks/useAppToast";
 import { useCreatePost } from "@/modules/web/hooks/post/hooks";
 
-
 type ContextPostType = {
   hastContent: boolean;
   setHasContent: Dispatch<SetStateAction<boolean>>;
   content: ContentFormPost | null;
-  setContent: Dispatch<SetStateAction<ContentFormPost>>
+  setContent: Dispatch<SetStateAction<ContentFormPost>>;
 };
 
-
-
-
-export const CreatePostContext = React.createContext<ContextPostType>({ hastContent: false, setHasContent: () => { }, content: null, setContent: () => { } });
-
-
+export const CreatePostContext = React.createContext<ContextPostType>({
+  hastContent: false,
+  setHasContent: () => {},
+  content: null,
+  setContent: () => {},
+});
 
 const AppNewPost = () => {
   const [t] = useTranslation("core");
@@ -40,17 +39,24 @@ const AppNewPost = () => {
   const isLoginUser = useAuthStore((state) => state.isLogin);
 
   const [hastContent, setHasContent] = useState<boolean>(false);
-  const [content, setContent] = useState<ContentFormPost>({ type: 'PT', modifier: { style: { fontSize: '1.5rem' }, styleParagraph: {}, isModifyBackground: false }, value: { html: '' } });
+  const [content, setContent] = useState<ContentFormPost>({
+    type: "PT",
+    modifier: {
+      style: { fontSize: "1.5rem" },
+      styleParagraph: {},
+      isModifyBackground: false,
+    },
+    value: { html: "" },
+  });
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const {create} = useCreatePost(user?.id || 0);
-
+  const { create } = useCreatePost(user?.id || 0);
 
   const handleOpen = () => {
     if (!isLoginUser) {
       navigate(webRoutes.login.path);
-    };
+    }
     setIsOpen(true);
   };
 
@@ -60,47 +66,45 @@ const AppNewPost = () => {
 
   const handleCreatePost = (e: FormEvent) => {
     e.preventDefault();
-    setIsOpen(false);
     try {
       const { type, modifier, value } = usePostStore.getState();
 
-      if (type !== 'PT' && type !== 'PI' && type !== 'PV') {
-        throw Error(tWeb('validations.messages.nan-type-post'));
+      if (type !== "PT" && type !== "PI" && type !== "PV") {
+        throw Error(tWeb("validations.messages.nan-type-post"));
       }
 
-      if (type === 'PI' && !value.file) {
-        throw Error(tWeb('validations.messages.nan-img-post'));
+      if (type === "PI" && !value.file) {
+        throw Error(tWeb("validations.messages.nan-img-post"));
       }
 
-      if (type === 'PT' && value.file) {
+      if (type === "PT" && value.file) {
         value.file = null;
       }
 
-      if (type === 'PT' && value.html === '' || type === 'PT' && value.html === '<br>') {
-        throw Error(tWeb('validations.messages.nan-payload-post'));
+      if (
+        (type === "PT" && value.html === "") ||
+        (type === "PT" && value.html === "<br>")
+      ) {
+        throw Error(tWeb("validations.messages.nan-payload-post"));
       }
+
+      setIsOpen(false);
+
       const data = { type, payload: { type, modifier, value } };
-      
+
       create.mutate(data, {
         onSuccess: (data) => {
           console.log(data);
-        }
+        },
       });
-
     } catch (error: unknown) {
-
       if (error instanceof Error) {
-        show({ message: error.message || '', status: 'error' });
+        show({ message: error.message || "", status: "error" });
       } else {
-        show({ message: 'Error desconocido', status: 'error' });
+        show({ message: "Error desconocido", status: "error" });
       }
     }
-
-
-
-
   };
-
 
   return (
     <>
@@ -115,7 +119,6 @@ const AppNewPost = () => {
           title={tWeb("titles.create-post")}
         >
           <Box sx={{ flexGrow: 1 }}>
-
             <form onSubmit={handleCreatePost}>
               <TabsPost />
               <AppFooterModal
@@ -156,7 +159,6 @@ const AppNewPost = () => {
             </span>
           </motion.button>
         </div>
-
       </CreatePostContext.Provider>
     </>
   );

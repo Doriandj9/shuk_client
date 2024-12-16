@@ -2,7 +2,7 @@ import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
 import { ContentFormPost, PostTypesBack } from "@/modules/core/@types/post";
 import { useAuthStore } from "@/store/auth";
-import { PostData } from "./PostI";
+import { PostDataInfinity } from "./PostI";
 
 export type DataPostSend = {type: PostTypesBack; payload: ContentFormPost;};
 
@@ -20,11 +20,11 @@ export const createPost = async (data: DataPostSend) => {
 
 
 type getPostsFn = {
-    (): Promise<PostData[]>
+    (params:{pageParam: number}): Promise<PostDataInfinity>
 };
-export const getPosts: getPostsFn = async () => {
+export const getInfinityPosts: getPostsFn = async ({ pageParam }) => {
 
-    const response  = await api.get(routesApi.user.resource_post.path, {
+    const response  = await api.get(`${routesApi.public.infinity_post.path}?per_page=2&page=${pageParam}`, {
         headers: {
             'Authorization': `Bearer ${(useAuthStore.getState()).token}`
         }

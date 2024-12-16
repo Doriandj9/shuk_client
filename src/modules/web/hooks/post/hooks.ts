@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { createPost, DataPostSend, getPosts } from "./queries";
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
+import { createPost, DataPostSend, getInfinityPosts } from "./queries";
 
 
 export const useCreatePost = (userId: number | string) => {
@@ -12,12 +12,21 @@ export const useCreatePost = (userId: number | string) => {
     return {create};
 };
 
-export const useGetPosts = () => {
-    const hook = useQuery({
+export const useGetInfinityPosts = () => {
+    let currentPage= 1;
+    const hook = useInfiniteQuery({
         queryKey: ['posts'],
-        queryFn: getPosts,
-        initialData: []
+        queryFn: getInfinityPosts,
+        initialPageParam: 1,
+        getNextPageParam: (lastPage) => {
+            if(lastPage.next_page_url){
+                currentPage = lastPage.current_page + 1;
+                return lastPage.current_page + 1;
+            }
+
+            return null;
+        },
     });
 
-    return {...hook};
+    return {...hook, page: currentPage};
 };

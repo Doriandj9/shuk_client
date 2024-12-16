@@ -1196,8 +1196,20 @@ video {
   margin-top: 2rem;
 }
 
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
 }
 
 .flex {
@@ -1240,10 +1252,6 @@ video {
   height: 10rem;
 }
 
-.h-60 {
-  height: 15rem;
-}
-
 .h-8 {
   height: 2rem;
 }
@@ -1254,6 +1262,10 @@ video {
 
 .h-\[15vh\] {
   height: 15vh;
+}
+
+.h-\[18rem\] {
+  height: 18rem;
 }
 
 .h-\[1px\] {
@@ -1268,8 +1280,36 @@ video {
   height: 100%;
 }
 
+.h-60 {
+  height: 15rem;
+}
+
 .min-h-40 {
   min-height: 10rem;
+}
+
+.min-h-12 {
+  min-height: 3rem;
+}
+
+.min-h-44 {
+  min-height: 11rem;
+}
+
+.min-h-48 {
+  min-height: 12rem;
+}
+
+.min-h-52 {
+  min-height: 13rem;
+}
+
+.min-h-56 {
+  min-height: 14rem;
+}
+
+.min-h-60 {
+  min-height: 15rem;
 }
 
 .w-0 {
@@ -1426,6 +1466,10 @@ video {
 
 .rounded-xl {
   border-radius: 0.75rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
 }
 
 .border {

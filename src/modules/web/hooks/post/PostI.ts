@@ -1,6 +1,12 @@
 
 export type DocStatusData = 'CO' | 'DR' | 'AC' | 'DL' | 'ED';
 
+type LinksObj = {
+  url: string;
+  label: string;
+  active: boolean;
+};
+
 export interface PostData {
     id: number
     title?: string;                         
@@ -19,3 +25,20 @@ export interface PostData {
     created_by?: number;                     
     updated_by?: number;                    
   }
+
+
+export interface PostDataInfinity {
+  current_page: number;
+  data: PostData[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  links: LinksObj[];
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
+}
