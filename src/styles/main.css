@@ -1138,6 +1138,12 @@ video {
   }
 }
 
+.card-post-img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
@@ -1168,14 +1174,6 @@ video {
 
 .top-0 {
   top: 0px;
-}
-
-.top-5 {
-  top: 1.25rem;
-}
-
-.top-12 {
-  top: 3rem;
 }
 
 .top-10 {

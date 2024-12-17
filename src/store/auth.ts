@@ -1,6 +1,6 @@
 import { app } from '@/config/app';
-import { facebookUser, googleUser } from '@/modules/core/@types/gUser';
 import { deleteCookie, getCookie, setCookie } from '@/modules/core/utilities/cookies';
+import { mergeUserProvider } from '@/modules/core/utilities/mergeUserProvider';
 import { User } from '@/modules/web/@types/web';
 import { jwtDecode } from 'jwt-decode';
 import { create } from 'zustand';
@@ -17,7 +17,7 @@ type AuthProps = {
 let jwt: string = '';
 let token: null | string = getCookie('token');
 
-if(token){
+if (token) {
     token = atob(token);
 };
 
@@ -34,23 +34,10 @@ if (!localStorage.jwt) {
 
 
 export const useAuthStore = create<AuthProps>()((set) => {
-    const user: User | null = jwt !== '' ? jwtDecode(jwt || '') : null;
-    let googleUser: googleUser | null = null;
-    let facebookUser: facebookUser | null = null;
+    let user: User | null = jwt !== '' ? jwtDecode(jwt || '') : null;
     let isUserProviderDefault = false;
     if (user && user.is_user_provider) {
-        switch (user.id_provider) {
-            case app.socialProviders.google:
-                googleUser = JSON.parse(typeof user.data_login_social_media !== 'string' ? '' : user.data_login_social_media);
-                user.full_name = googleUser?.name;
-                user.photo = googleUser?.picture;
-                break;
-            case app.socialProviders.facebook:
-                facebookUser = JSON.parse(typeof user.data_login_social_media !== 'string' ? '' : user.data_login_social_media);
-                user.full_name = facebookUser?.name;
-                user.photo = facebookUser?.picture?.data.url;
-                break;
-        }
+        user = mergeUserProvider(user);
         isUserProviderDefault = true;
     }
 
@@ -58,8 +45,8 @@ export const useAuthStore = create<AuthProps>()((set) => {
         user.photo = app.server + user.photo;
     }
 
-    if(!tokenExist){
-       localStorage.removeItem('jwt'); 
+    if (!tokenExist) {
+        localStorage.removeItem('jwt');
     }
 
     return {
@@ -76,24 +63,11 @@ export const useAuthStore = create<AuthProps>()((set) => {
         }),
         updateUser: (payload: string) => set((state) => {
             localStorage.setItem('jwt', payload);
-            const user: User | null = payload !== '' ? jwtDecode(payload) : null;
-            googleUser = null;
-            facebookUser = null;
+            let user: User | null = payload !== '' ? jwtDecode(payload) : null;
             isUserProviderDefault = false;
 
             if (user && user.is_user_provider) {
-                switch (user.id_provider) {
-                    case app.socialProviders.google:
-                        googleUser = JSON.parse(typeof user.data_login_social_media !== 'string' ? '' : user.data_login_social_media);
-                        user.full_name = googleUser?.name;
-                        user.photo = googleUser?.picture;
-                        break;
-                    case app.socialProviders.facebook:
-                        facebookUser = JSON.parse(typeof user.data_login_social_media !== 'string' ? '' : user.data_login_social_media);
-                        user.full_name = facebookUser?.name;
-                        user.photo = facebookUser?.picture?.data.url;
-                        break;
-                }
+                user = mergeUserProvider(user);
 
                 isUserProviderDefault = true;
             };

@@ -1,3 +1,4 @@
+import { User } from "@web/@types/web";
 
 export type DocStatusData = 'CO' | 'DR' | 'AC' | 'DL' | 'ED';
 
@@ -21,10 +22,13 @@ export interface PostData {
     shared: number;                           
     payload_post?: string;                   
     is_multiple: boolean;                    
-    user_id?: number;                        
+    user_id?: number; 
+    created_at?: string;                        
+    updated_at?: string;                        
     created_by?: number;                     
     updated_by?: number;
-    is_temp?:boolean;                    
+    is_temp?:boolean;
+    user: User                    
   }
 
 

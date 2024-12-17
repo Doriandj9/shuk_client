@@ -1,3 +1,4 @@
+import AppDisplayPost from "@/modules/core/components/AppDisplayPost";
 import AppErrorFetchingPosts from "@/modules/core/components/AppErrorFetchingPosts";
 import AppLoadingPosts from "@/modules/core/components/AppLoadinPosts";
 import AppNotPosts from "@/modules/core/components/AppNotPosts";
@@ -32,14 +33,10 @@ const ListPost = () => {
               {data?.pages.map(({ data: posts }) => {
                 return posts.map((post) => (
                   <div
-                    className="app-container-fade text-sm app-container-post p-2 h-[18rem] mt-2"
+                    className="app-container-fade text-sm app-container-post h-[18rem] mt-2"
                     key={post.id}
                   >
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: post.description || "N/A",
-                      }}
-                    ></div>
+                    <AppDisplayPost post={post}  />
                     Post={post.id}
                   </div>
                 ));

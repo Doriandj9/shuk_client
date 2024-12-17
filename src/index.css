@@ -197,6 +197,9 @@
     max-width: 100%;
     @apply w-full md:w-[--w-container-post-2] lg:w-[--w-container-post] 2xl:w-[--w-container-post-3] min-h-[--h-container-min-post] rounded-md;
   }
+  .card-post-img{
+    @apply w-full object-cover;
+  }
 }
 
 @media (max-width: 770px) {

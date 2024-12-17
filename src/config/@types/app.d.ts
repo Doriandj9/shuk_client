@@ -7,6 +7,10 @@ export type AppConfig = {
      */
     server: string;
     /**
+     * @param {string} url base for server
+     */
+    base_server: string;
+    /**
      * @param {object} colors full colors for webapp
      */
     colors: {
@@ -56,7 +60,7 @@ export type SocialProvidersValues = {
 };
 
 export type LanguageAppHook = {
-    language: string;
+    language: LanguageApp;
     update: (payload: LanguageApp) => void;
 }
 
