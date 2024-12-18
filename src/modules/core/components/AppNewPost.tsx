@@ -51,7 +51,7 @@ const AppNewPost = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { create } = useCreatePost(user?.id || 0);
+  const { create } = useCreatePost(user);
 
   const handleOpen = () => {
     if (!isLoginUser) {

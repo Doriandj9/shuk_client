@@ -1,3 +1,4 @@
+import { MetaInfoImg } from "@/modules/web/hooks/post/PostI";
 import { CSSProperties } from "react";
 
 export type TypesPost = {
@@ -60,3 +61,17 @@ export type ContentFormPost = {
     updateValueFile: (payload: Blob | null) => unknown
     reset: () => void
   };
+
+
+export interface FileRecord {
+    id: number; 
+    fileable_id: number; 
+    action: string | null; 
+    docStatus: string; 
+    fileable_type: string; 
+    type: string; 
+    meta_info: MetaInfoImg | null; 
+    path: string;
+    is_multiple:boolean;
+  }
+  

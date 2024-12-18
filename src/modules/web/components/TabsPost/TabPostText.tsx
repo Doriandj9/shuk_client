@@ -80,7 +80,7 @@ const TabPostText = () => {
     }
   },[modifier.style, modifier.styleParagraph,modifier.isModifyBackground, type]);
 
-  console.log(value);
+  // console.log(value);
   return (
     <>
       <div className="flex items-center justify-center w-full h-full relative">

@@ -5,7 +5,7 @@ import { PostData } from "@/modules/web/hooks/post/PostI";
 import React from "react";
 import { mergeUserProvider } from "../utilities/mergeUserProvider";
 import { TimePostFormat } from "./AppTimePostFomats";
-import { app } from "@/config/app";
+import AppCardMediaDisplay from "./AppCardMediaDisplay";
 
 type AppDisplayPostProps = {
     post: PostData
@@ -32,7 +32,7 @@ const AppDisplayPost: React.FC<AppDisplayPostProps> = ({post}) => {
 
                     />
                     <CardMedia> 
-                      <img className="card-post-img" src={`${app.base_server}${post?.path_resource}`} data-src={''} alt="" />
+                        <AppCardMediaDisplay post={post} />
                     </CardMedia>
                 </Card>
             </div>

@@ -1,13 +1,23 @@
+type ConvertImgFn = {
+    (img: Blob, objResult?: object | null , key?: string | null ): void;
+    (img: Blob, setValue?: (value: string | ArrayBuffer | null) => void): void;
+};
 
 
-export const convertImg = (img: Blob, objResult: object | null =null, key: string | null =null) =>{
+export const convertImg: ConvertImgFn = (img, setValueOrObjResult, key=null) =>{
     const reader = new FileReader();
 
     reader.onload = () => {
         const urlImg = reader.result;
-        if(objResult && key){
-            Reflect.set(objResult,key,urlImg);
+        if(setValueOrObjResult && typeof setValueOrObjResult === 'function'){
+            setValueOrObjResult(urlImg);
+            return;
         }
+
+        if(setValueOrObjResult && typeof setValueOrObjResult === 'object' && typeof key === 'string'){
+            Reflect.set(setValueOrObjResult,key,urlImg);
+        }
+        
     };
 
     reader.readAsDataURL(img);

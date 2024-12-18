@@ -1,46 +1,82 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPost, DataPostSend, getInfinityPosts } from "./queries";
 import moment from "moment";
-import { convertImg } from "@/modules/core/utilities/img/convert";
+import { PathResourcesType, PostData } from "./PostI";
+import { User } from "../../@types/web";
 
 type OnMutateProp = {
     pageParams?: number[];
     pages: object[];
 };
 
-export const useCreatePost = (userId: number | string) => {
+const userTemp: User = {
+    id: 0,
+    full_name: 'User Temporal',
+    email:'',
+};
+
+export const useCreatePost = (user: User | null) => {
     const client = useQueryClient();
 
     const create = useMutation({
-        mutationKey: [`${userId}-temp`],
+        mutationKey: [`${user?.id}-temp`],
         mutationFn: (data: DataPostSend) => createPost(data),
         onMutate: (data) => {
-            const tempPost = {
-                id: `${userId}-temp`,
+            const previosData = client.getQueryData(['posts']);
+            let prevData: object | unknown = {};
+            if (typeof structuredClone === 'function') {
+                prevData = structuredClone(previosData);
+            } else {
+                prevData = JSON.parse(JSON.stringify(previosData));
+            }
+
+            const tempPost: PostData = {
+                id: `${user?.id}-temp`,
                 description: data.payload.value.html,
                 date: moment().format('YYYY-MM-DD'),
                 doc_status: 'TM',
                 is_active: true,
                 type_post: data.type,
-                path_resource: '',
+                path_resource: null,
                 likes: 0,
                 comments: 0,
                 shared: 0,
                 payload_post: data.payload,
                 is_multiple: false,
-                user_id: userId,
-                is_temp: true
+                user_id: user?.id,
+                is_temp: true,
+                user: user || userTemp,
+                files: null,
+                img: null,
+                file_temp: data.payload.value.file || undefined
             };
 
-            if(data.type == 'PI'){
-                convertImg(data.payload.value.file || new Blob(),tempPost,'path_resource');
+            if (data.type == 'PI') {
+                const pathResource: PathResourcesType = {
+                    path: '',
+                    meta: {
+                        aspectRadio: null,
+                        typeAspectRadio: null,
+                        width: 0,
+                        height: 0,
+                        needContainer: false,
+                        metaColors: {
+                            max: null,
+                            middle: null,
+                            min: null,
+                        },
+                        isResize: false
+                    }
+                };
+
+                Reflect.set(tempPost, 'path_resource', pathResource);
             }
 
 
-            const previosData = client.getQueryData(['posts']);
+            
 
             client.setQueryData(['posts'], (old: OnMutateProp) => {
-                const oldValues = {...old};
+                const oldValues = { ...old };
 
                 oldValues.pages.unshift({
                     current_page: 0,
@@ -56,35 +92,35 @@ export const useCreatePost = (userId: number | string) => {
                     prev_page_url: null,
                     to: 0,
                     total: 0,
-                }); 
+                });
                 oldValues.pageParams?.unshift(0);
 
                 return oldValues;
             });
-         
-            return () => client.setQueryData(['posts'],previosData);
+
+            return () => client.setQueryData(['posts'], prevData);
         },
-        onError: (error, values,rollback) =>{
-           if(rollback){
-            rollback();
-           } 
+        onError: (error, values, rollback) => {
+            if (rollback) {
+                rollback();
+            }
         },
         onSuccess: () => {
-           client.invalidateQueries({queryKey: ['posts']});
+            client.invalidateQueries({ queryKey: ['posts'] });
         }
     });
 
-    return {create};
+    return { create };
 };
 
 export const useGetInfinityPosts = () => {
-    let currentPage= 1;
+    let currentPage = 1;
     const hook = useInfiniteQuery({
         queryKey: ['posts'],
         queryFn: getInfinityPosts,
         initialPageParam: 1,
         getNextPageParam: (lastPage) => {
-            if(lastPage.next_page_url){
+            if (lastPage.next_page_url) {
                 currentPage = lastPage.current_page + 1;
                 return lastPage.current_page + 1;
             }
@@ -93,5 +129,5 @@ export const useGetInfinityPosts = () => {
         },
     });
 
-    return {...hook, page: currentPage};
+    return { ...hook, page: currentPage };
 };

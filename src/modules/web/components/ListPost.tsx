@@ -15,16 +15,14 @@ const ListPost = () => {
     isFetching,
     isFetchingNextPage,
     status,
-    
   } = useGetInfinityPosts();
 
-  console.log('render p', data?.pages);
   return (
     <>
       <InfinityScroll
         render={(scroll) => {
-          if(scroll.action && !isFetching && status !== 'pending' && !isFetchingNextPage){
-            scroll.changeStatus({action: false});
+          if (scroll.action && !isFetching && status !== 'pending' && !isFetchingNextPage) {
+            scroll.changeStatus({ action: false });
             fetchNextPage();
           }
 
@@ -33,18 +31,22 @@ const ListPost = () => {
               {data?.pages.map(({ data: posts }) => {
                 return posts.map((post) => (
                   <div
-                    className="app-container-fade text-sm app-container-post h-[18rem] mt-2"
+                    className="app-container-fade text-sm app-container-post mt-2"
                     key={post.id}
                   >
-                    <AppDisplayPost post={post}  />
+                    <AppDisplayPost post={post} />
                     Post={post.id}
                   </div>
                 ));
               })}
               {status == 'error' && (<AppErrorFetchingPosts error={error} />)}
-              {status != 'error' && status == 'pending'  && (<AppLoadingPosts />)}
+              {status != 'error' && status == 'pending' && (<AppLoadingPosts />)}
               {status != 'error' && isFetchingNextPage && (<AppLoadingPosts />)}
-              {status !== 'error' && !isFetching  && !hasNextPage && <AppNotPosts />}
+              {status !== 'error' && !isFetching && !hasNextPage && (
+                <div className="mt-4">
+                  <AppNotPosts />
+                </div>
+              )}
             </div>
           );
         }}

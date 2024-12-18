@@ -1,6 +1,7 @@
+import { ContentFormPost, FileRecord, PostTypesBack } from "@/modules/core/@types/post";
 import { User } from "@web/@types/web";
 
-export type DocStatusData = 'CO' | 'DR' | 'AC' | 'DL' | 'ED';
+export type DocStatusData = 'CO' | 'DR' | 'AC' | 'DL' | 'ED' | 'TM';
 
 type LinksObj = {
   url: string;
@@ -8,19 +9,54 @@ type LinksObj = {
   active: boolean;
 };
 
+type MetaColorsType = {
+  max: string | null;
+  middle: string | null;
+  min: string | null;
+}
+
+export type RadioBackType = {
+  value: string;
+  width: number;
+  height: number;
+  formule: null;
+  not_standard?: boolean;
+};
+
+
+
+type TypeAspectRadioType = {
+  [key : string] : RadioBackType;
+};
+
+export interface MetaInfoImg {
+  aspectRadio: string | null;
+  typeAspectRadio: TypeAspectRadioType | null;
+  width: number;
+  height: number;
+  needContainer: boolean;
+  metaColors: MetaColorsType;
+  isResize: boolean;
+}
+
+export type PathResourcesType = {
+  path: string;
+  meta: MetaInfoImg
+}
+
 export interface PostData {
-    id: number
+    id: number | string;
     title?: string;                         
     description?: string;                  
     date: string;                             
     doc_status: DocStatusData          
     is_active: boolean;                       
-    type_post: string;                       
-    path_resource?: string;                   
+    type_post: PostTypesBack;                       
+    path_resource?: PathResourcesType | null;                   
     likes: number;                            
     comments: number;                       
     shared: number;                           
-    payload_post?: string;                   
+    payload_post?: ContentFormPost | null;                   
     is_multiple: boolean;                    
     user_id?: number; 
     created_at?: string;                        
@@ -28,7 +64,10 @@ export interface PostData {
     created_by?: number;                     
     updated_by?: number;
     is_temp?:boolean;
-    user: User                    
+    user: User;
+    files: FileRecord[] | null;
+    img: FileRecord | null;        
+    file_temp?: Blob;           
   }
 
 
