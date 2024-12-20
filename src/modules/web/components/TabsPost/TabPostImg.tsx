@@ -83,23 +83,23 @@ const TabPostImg = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center w-full h-full relative">
+      <div className="flex flex-col app-container-grid-media-post">
         <div
           data-placeholder={t('descriptions.share-idea')}
-          className="app-description-post flex flex-col"
+          className="flex flex-col relative  h-20"
         >
-          <p className="app-description-post hidden-scroll h-20"
+          <p className="app-description-input hidden-scroll h-20"
             id="post-content-new-video"
             contentEditable
           ></p>
+          {span}
           <div className="my-2">
             <Divider />
           </div>
-          <div className="flex-grow shadow-lg">
-            <DropPost />
-          </div>
         </div>
-        {span}
+        <div className="flex-grow shadow-lg place-self-stretch">
+          <DropPost />
+        </div>
       </div>
     </>
   );

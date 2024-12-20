@@ -1,18 +1,18 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPost, DataPostSend, getInfinityPosts } from "./queries";
 import moment from "moment";
-import { PathResourcesType, PostData } from "./PostI";
+import { PathResourcesType, PostData, PostDataInfinity } from "./PostI";
 import { User } from "../../@types/web";
 
 type OnMutateProp = {
     pageParams?: number[];
-    pages: object[];
+    pages: PostDataInfinity[];
 };
 
 const userTemp: User = {
     id: 0,
     full_name: 'User Temporal',
-    email:'',
+    email: '',
 };
 
 export const useCreatePost = (user: User | null) => {
@@ -73,7 +73,7 @@ export const useCreatePost = (user: User | null) => {
             }
 
 
-            
+
 
             client.setQueryData(['posts'], (old: OnMutateProp) => {
                 const oldValues = { ...old };
@@ -106,6 +106,17 @@ export const useCreatePost = (user: User | null) => {
             }
         },
         onSuccess: () => {
+            let previosData = client.getQueryData(['posts']);
+            if (previosData && typeof previosData == 'object') {
+                let pageParams: OnMutateProp['pageParams'] = Reflect.get(previosData, 'pageParams');
+                let pages: OnMutateProp['pages'] = Reflect.get(previosData, 'pages');
+
+                pageParams = pageParams?.filter((value) => value == 1 || value === 0);
+                pages = pages?.filter((value) => value.current_page == 1 || value.current_page == 0);
+
+                previosData = { pageParams, pages };
+            }
+            client.setQueryData(['posts'], previosData);
             client.invalidateQueries({ queryKey: ['posts'] });
         }
     });

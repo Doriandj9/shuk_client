@@ -31,11 +31,12 @@ const ListPost = () => {
               {data?.pages.map(({ data: posts }) => {
                 return posts.map((post) => (
                   <div
-                    className="app-container-fade text-sm app-container-post mt-2"
+                    className={`app-container-fade text-sm mt-2 
+                      ${post?.path_resource?.meta?.typeAspectRadio?.neutral?.value == 'vertical' && post?.path_resource?.meta?.typeAspectRadio?.neutral?.height > 500
+                         ? 'app-container-post-vertical' : 'app-container-post'}`}
                     key={post.id}
                   >
                     <AppDisplayPost post={post} />
-                    Post={post.id}
                   </div>
                 ));
               })}

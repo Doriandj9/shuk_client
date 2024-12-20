@@ -8,6 +8,7 @@ type AppModalProps = ModalProps & {
     onClose: ((event: object, reason: "backdropClick" | "escapeKeyDown") => void) & CallableFunction;
     sizeModal?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full" | "auto";
     title?: string;
+    isFull?: boolean;
 };
 
 const sizeWidth = {
@@ -25,7 +26,7 @@ const sizeWidth = {
     "auto": 'sm:w-auto'
 };
 
-const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isNotCloseClick = true, open, onClose, sizeModal = 'md', ...props }) => {
+const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isNotCloseClick = true, open, onClose, sizeModal = 'md', isFull = false, ...props }) => {
 
     const sizeModalWidth = sizeWidth[sizeModal] || sizeWidth['md'];
 
@@ -37,41 +38,64 @@ const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isN
             {...props}
         >
             <>
-                <div className={`flex justify-center relative app-container-fade min-h-40 ${sizeModalWidth} w-11/12`}>
-                    <div className="w-full">
-                        <header className={`relative flex items-center w-full ${title != '' ? 'py-2' : 'py-4'}`}>
-                            <div className="flex-grow">
-                                <h2 className="text-center font-semibold text-md md:text-xl px-4">{title}</h2>
-                            </div>
-                            <div>
+                {
+                    !isFull ?
+                        <div className={`flex justify-center relative app-container-fade min-h-40 ${sizeModalWidth} w-11/12`}>
+                            <div className="w-full">
+                                <header className={`relative flex items-center w-full ${title != '' ? 'py-2' : 'py-4'}`}>
+                                    <div className="flex-grow">
+                                        <h2 className="text-center font-semibold text-md md:text-xl px-4">{title}</h2>
+                                    </div>
+                                    <div>
+                                        {
+                                            buttonClose &&
+                                            <IconButton
+                                                sx={{ position: 'absolute', top: 5, right: 0 }}
+                                                onClick={(e) => onClose ? onClose(e, 'backdropClick') : () => { }}
+                                                size="small"
+                                            >
+                                                <CloseIcon
+                                                />
+                                            </IconButton>
+                                        }
+                                    </div>
+
+                                </header>
                                 {
-                                    buttonClose &&
-                                    <IconButton
-                                        sx={{ position: 'absolute', top: 5, right: 0 }}
-                                        onClick={(e) => onClose ? onClose(e, 'backdropClick') : () => { }}
-                                        size="small"
-                                    >
-                                        <CloseIcon
-                                        />
-                                    </IconButton>
+                                    title != '' &&
+                                    <div className="mb-4">
+                                        <Divider />
+
+                                    </div>
                                 }
+                                <div className="p-4">
+                                    <>
+                                        {props.children}
+                                    </>
+                                </div>
                             </div>
-
-                        </header>
-                        {
-                            title != '' &&
-                            <div className="mb-4">
-                                <Divider />
-
-                            </div>
-                        }
-                        <div className="p-4">
+                        </div>
+                        :
+                        <div className="w-auto bg-transparent flex justify-center">
+                            {
+                                buttonClose &&
+                                <IconButton
+                                    sx={{ position: 'absolute', top: 5, right: 0 }}
+                                    onClick={(e) => onClose ? onClose(e, 'backdropClick') : () => { }}
+                                    size="small"
+                                >
+                                    <CloseIcon
+                                    />
+                                </IconButton>
+                            }
                             <>
                                 {props.children}
                             </>
                         </div>
-                    </div>
-                </div>
+                }
+
+
+
             </>
         </Modal>
     </>);

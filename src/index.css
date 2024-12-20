@@ -3,15 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --w-container-post: 38.9375rem;
-  --w-container-post-2: 33.25rem;
-  --w-container-post-3: 52.25rem;
+  --w-container-post: 36.9375rem;
+  --w-container-post-2: 32.25rem;
+  --w-container-post-3: 56.25rem;
 
   --h-container-min-post: 26.5rem;
 
-  --h-container-post: calc(var(--w-container-post) / 1.91);
-  --h-container-post-2: calc(var(--w-container-post-2) / 1.91);
-  --h-container-post-3: calc(var(--w-container-post-3) / 1.91);
+  --h-container-post: var(--w-container-post);
+  --h-container-post-2: var(--w-container-post-2);
+  --h-container-post-3: var(--w-container-post-3);
+
+  --h-container-v-post: calc(var(--w-container-post) + 8.75rem);
+  --h-container-v-post-2: calc(var(--w-container-post-2) + 8.75rem);
+  --h-container-v-post-3: calc(var(--w-container-post-3) + 8.75rem);
+
+  --h-container-img-post: calc(var(--h-container-post) - 6.75rem);
+  --h-container-img-post-2: calc(var(--h-container-post-2) - 6.75rem);
+  --h-container-img-post-3: calc(var(--h-container-post-3) - 6.75rem);
+
+  --h-container-img-v-post: calc(var(--h-container-img-post) + 8.75rem);
+  --h-container-img-v-post-2: calc(var(--h-container-img-post-2) + 8.75rem);
+  --h-container-img-v-post-3: calc(var(--h-container-img-post-3) + 8.75rem);
 }
 
 @layer components {
@@ -185,6 +197,20 @@
     overflow-x: scroll;
   }
 
+  .app-container-grid-media-post {
+    @apply w-full text-start border-none focus:border-none focus:outline-none relative h-72;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-x: hidden;
+  }
+
+  .app-description-input {
+    @apply w-full text-start border-none focus:border-none focus:outline-none;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-x: hidden;
+  }
+
   .app-content-a-post {
     @apply absolute top-0 left-0 w-full h-full;
   }
@@ -223,21 +249,28 @@
 
   .app-container-post {
     max-width: 100%;
-    @apply w-full 
-    md:w-[--w-container-post-2]  md:min-h-[--h-container-post-2] 
-    lg:w-[--w-container-post]    lg:min-h-[--h-container-post] 
-    2xl:w-[--w-container-post-3] 2xl:min-h-[--h-container-post-3]
-    rounded-md overflow-hidden;
+    @apply w-full md:w-[--w-container-post-2] md:min-h-[--h-container-post-2] 2xl:w-[--w-container-post] 2xl:min-h-[--h-container-post] rounded-md overflow-hidden;
   }
 
   .card-post-img {
-    @apply w-full object-cover h-full;
+    @apply object-cover block;
   }
 
   .content-img-post {
-    @apply md:h-[--h-container-post-2]
-    lg:h-[--h-container-post] 
-    2xl:h-[--h-container-post-3] overflow-hidden;
+    @apply md:h-[--h-container-img-post-2] 2xl:h-[--h-container-img-post] overflow-hidden;
+  }
+
+  .content-img-post-vertical {
+    @apply w-full md:h-[--h-container-img-v-post-2] 2xl:h-[--h-container-img-v-post] overflow-hidden rounded-md;
+  }
+
+  .app-container-post-vertical {
+    max-width: 100%;
+    @apply w-full md:w-[--w-container-post-2] md:min-h-[--h-container-v-post-2] 2xl:w-[--w-container-post] 2xl:min-h-[--h-container-v-post] rounded-md overflow-hidden;
+  }
+
+  .text-title-post {
+    @apply text-sm;
   }
 }
 

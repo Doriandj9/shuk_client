@@ -27,7 +27,10 @@
         "labels": {
             "post": {
                 "click-here": "Click here",
-                "end-posts": "And that's all for now! We've reached the end of the posts, but don't worry, more will be coming soon!"
+                "end-posts": "And that's all for now! We've reached the end of the posts, but don't worry, more will be coming soon!",
+                "see-more": "See more",
+                "see-less": "See less"
+
             }
         }
     },
