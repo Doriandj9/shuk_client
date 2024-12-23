@@ -2,11 +2,13 @@ import {AppConfig} from '@/config/@types/app';
 import { ThemeOptions } from "@mui/material";
 import axios from 'axios';
 
-const host = 'http://192.168.100.14:8000';
-const versionApp = 'v1';
+const host = import.meta.env.VITE_API_URL;
+const versionApp = import.meta.env.VITE_APP_VERSION;
+const endPointApi = import.meta.env.VITE_ENDPOINT_API;
 
+console.log(host);
 export const app: AppConfig = {
-    server: `${host}/api/`,
+    server: `${host}${endPointApi}/`,
     base_server: host,
     colors: {
         primary: '#232C56',

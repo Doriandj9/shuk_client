@@ -11,6 +11,5 @@ export default defineConfig({
       '@core'  : path.resolve(__dirname, './src/modules/core'),
       '@web'   : path.resolve(__dirname, './src/modules/web')
     },
-
-  }
+  },
 });
