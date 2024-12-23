@@ -26,13 +26,13 @@ const sizeWidth = {
     "auto": 'sm:w-auto'
 };
 
-const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isNotCloseClick = true, open, onClose, sizeModal = 'md', isFull = false, ...props }) => {
+const AppModalV2: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isNotCloseClick = true, open, onClose, sizeModal = 'md', isFull = false, ...props }) => {
 
     const sizeModalWidth = sizeWidth[sizeModal] || sizeWidth['md'];
 
     return (<>
         <Modal
-            sx={{ position: 'fixed', top: 0, left: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            sx={{ position: 'fixed', top: 0, left: 0, display: 'flex', justifyContent: 'center', alignItems: 'center'}}
             open={open}
             onClose={props.disableEscapeKeyDown || isNotCloseClick ? onClose : () => { }}
             {...props}
@@ -76,7 +76,9 @@ const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isN
                             </div>
                         </div>
                         :
-                        <div className="w-auto bg-transparent flex justify-center overflow-auto">
+                        <div 
+                        onClick={() => props.disableEscapeKeyDown || isNotCloseClick ? onClose({},'escapeKeyDown') : () => { }}
+                        className="w-auto bg-transparent flex justify-center  max-w-full max-h-full w-full h-full overflow-auto">
                             {
                                 buttonClose &&
                                 <IconButton
@@ -89,7 +91,9 @@ const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isN
                                 </IconButton>
                             }
                             <>
+                            <div className="pointer-events-none">
                                 {props.children}
+                            </div>
                             </>
                         </div>
                 }
@@ -102,4 +106,4 @@ const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isN
 };
 
 
-export default AppModal;
+export default AppModalV2;

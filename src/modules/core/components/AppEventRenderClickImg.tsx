@@ -1,5 +1,5 @@
 import React, { MouseEventHandler, useState } from "react";
-import AppModal from "./AppModal";
+import AppModalV2 from "./AppModalV2";
 
 type AppEventRenderClickImgProps = {
     render: (open: MouseEventHandler<HTMLImageElement>) => React.ReactElement,
@@ -18,7 +18,7 @@ const AppEventRenderClickImg: React.FC<AppEventRenderClickImgProps> = ({ render,
 
     return (
         <>
-            <AppModal
+            <AppModalV2
                 open={open}
                 onClose={closeImg}
                 sizeModal="auto"
@@ -28,7 +28,7 @@ const AppEventRenderClickImg: React.FC<AppEventRenderClickImgProps> = ({ render,
                  <img src={pathImg} alt="" />
                 </div>
 
-            </AppModal>
+            </AppModalV2>
 
             {render(openImg)}
         </>

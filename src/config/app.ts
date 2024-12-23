@@ -2,10 +2,12 @@ import {AppConfig} from '@/config/@types/app';
 import { ThemeOptions } from "@mui/material";
 import axios from 'axios';
 
+const host = 'http://192.168.100.14:8000';
+const versionApp = 'v1';
 
 export const app: AppConfig = {
-    server: 'http://127.0.0.1:8000/api/',
-    base_server: 'http://127.0.0.1:8000',
+    server: `${host}/api/`,
+    base_server: host,
     colors: {
         primary: '#232C56',
         secondary: '#F6A605',
@@ -14,7 +16,7 @@ export const app: AppConfig = {
     environment: 'local',
     oAuthIdGoogle: '913311559669-4lp0mh31a80mdd9favrsvoch3ks0skqr.apps.googleusercontent.com',
     oAuthIdFacebook: '1179066826681637',
-    apiV: 'v1',
+    apiV: versionApp,
     socialProviders: {
         google: 1,
         facebook: 2
