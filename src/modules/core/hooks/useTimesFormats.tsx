@@ -7,9 +7,9 @@ import { moment_locale_es } from "@/config/app";
 export const useTimeFormatPost = () => {
     const locale = useLanguageApp((state) => state.language);
     if(locale == 'es'){
-        moment.locale(locale, moment_locale_es);
+        moment.updateLocale('es',moment_locale_es);
     } else {
-        moment.locale(locale);
+        moment.updateLocale(locale,null);
     }
 
     const format: formatTimePostFn  = (date) => {

@@ -6,7 +6,6 @@ const host = import.meta.env.VITE_API_URL;
 const versionApp = import.meta.env.VITE_APP_VERSION;
 const endPointApi = import.meta.env.VITE_ENDPOINT_API;
 
-console.log(host);
 export const app: AppConfig = {
     server: `${host}${endPointApi}/`,
     base_server: host,

@@ -22,6 +22,7 @@ export const createPost = async (data: DataPostSend) => {
 type getPostsFn = {
     (params:{pageParam: number}): Promise<PostDataInfinity>
 };
+
 export const getInfinityPosts: getPostsFn = async ({ pageParam }) => {
     api.interceptors.response.clear();
     const response  = await api.get(`${routesApi.public.infinity_post.path}?per_page=2&page=${pageParam}`, {
@@ -31,4 +32,12 @@ export const getInfinityPosts: getPostsFn = async ({ pageParam }) => {
     });
 
     return response.data?.data || [];
+};
+
+export const putPost =  async (id: number | string,data: unknown) => {
+    const response = await api.put(`${routesApi.user.resource_post.path}/${id}`, data, {headers: {
+        'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+    }});
+
+    return response.data?.data || null;
 };

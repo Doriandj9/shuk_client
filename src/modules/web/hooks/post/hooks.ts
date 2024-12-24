@@ -1,8 +1,11 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPost, DataPostSend, getInfinityPosts } from "./queries";
+import { createPost, DataPostSend, getInfinityPosts, putPost } from "./queries";
 import moment from "moment";
 import { PathResourcesType, PostData, PostDataInfinity } from "./PostI";
 import { User } from "../../@types/web";
+import {  DataUpdatePost } from "@/modules/core/components/AppEventClickPost";
+import { cloneObject } from "@/modules/core/utilities/objects";
+
 
 type OnMutateProp = {
     pageParams?: number[];
@@ -23,12 +26,7 @@ export const useCreatePost = (user: User | null) => {
         mutationFn: (data: DataPostSend) => createPost(data),
         onMutate: (data) => {
             const previosData = client.getQueryData(['posts']);
-            let prevData: object | unknown = {};
-            if (typeof structuredClone === 'function') {
-                prevData = structuredClone(previosData);
-            } else {
-                prevData = JSON.parse(JSON.stringify(previosData));
-            }
+            const prevData: object | unknown = cloneObject(previosData);
 
             const tempPost: PostData = {
                 id: `${user?.id}-temp`,
@@ -141,4 +139,48 @@ export const useGetInfinityPosts = () => {
     });
 
     return { ...hook, page: currentPage };
+};
+
+export const useUpdatePost = (id: number | string) => {
+    const client = useQueryClient();
+
+    const put = useMutation({
+        mutationKey: ['posts'],
+        mutationFn: (data: unknown) => putPost(id,data),
+        onMutate: (data: DataUpdatePost) => {
+            const previosData = client.getQueryData(['posts']);
+            const prevData: object | unknown = cloneObject(previosData);
+
+            client.setQueryData(['posts'], (old: OnMutateProp) => {
+
+                const tempValues = { ...old };
+
+                tempValues.pages = tempValues.pages.map((page) => {
+                    page.data = page.data.map((post) => {
+                        if (post.id == id) {
+                            const postUpdate = { ...post, ...data };
+                            return postUpdate;
+                        }
+
+                        return post;
+                    });
+
+                    return page;
+                });
+                
+
+                return tempValues;
+
+            });
+
+            return () => client.setQueryData(['posts'], prevData);
+        },
+        onError: (error, values, rollback) => {
+            if (rollback) {
+                rollback();
+            }
+        },
+    });
+
+    return {put};
 };

@@ -39,7 +39,7 @@ const AppDisplayPost: React.FC<AppDisplayPostProps> = ({post}) => {
                         <Divider sx={{marginTop: 1}}/>
                     </CardMedia>
                     <CardActions>
-                        <AppActionLikePost />
+                        <AppActionLikePost post={post} />
                         <AppActionCommentsPost />
                         <AppActionSharePost />
                     </CardActions>
