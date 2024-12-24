@@ -23,6 +23,11 @@ interface Resources {
           "not-payload": "No se ingresó ningún contenido para ser publicado",
           "not-file": "No se ingresó ninguna foto o video para publicar",
           "server": "¡Ups! Algo salió mal. Intenta recargar la página."
+        },
+        "comment": {
+          "not-payload": "No se ingresó ningún contenido para ser publicado",
+          "server": "¡Ups! Algo salió mal. Intenta recargar la página.",
+          "min-length": "El comentario debe tener al menos 3 caracteres"
         }
       },
       "labels": {
@@ -31,6 +36,11 @@ interface Resources {
           "end-posts": "¡Y eso es todo por ahora! Hemos llegado al final de las publicaciones, pero no te preocupes, ¡pronto llegarán más!",
           "see-more": "Ver más",
           "see-less": "Ver menos"
+        },
+        "comment": {
+          "write": "Escribe un comentario...",
+          "send": "Enviar",
+          "comments": "Comentarios"
         }
       }
     },

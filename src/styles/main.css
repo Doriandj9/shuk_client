@@ -1566,6 +1566,14 @@ video {
   place-self: stretch;
 }
 
+.self-start {
+  align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
 .overflow-auto {
   overflow: auto;
 }
@@ -1762,8 +1770,16 @@ video {
   text-transform: none;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .leading-3 {
   line-height: .75rem;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
 }
 
 .text-blue-500 {

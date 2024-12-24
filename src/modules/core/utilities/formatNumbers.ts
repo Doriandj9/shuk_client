@@ -14,5 +14,4 @@ export const formatNumberInteraction = (count: number): string => {
     const countValue = String(count);
     
     return numberOrigin > 999 ? countValue.substring(0,3) + suffixes[suffixIndex] : countValue;
-    console.log(count);
 };

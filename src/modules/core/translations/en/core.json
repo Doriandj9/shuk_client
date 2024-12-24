@@ -22,6 +22,11 @@
                 "not-payload": "No content was entered to be published",
                 "not-file": "No photo or video was entered for posting",
                 "server": "Oops! Something went wrong. Try reloading the page."
+            },
+            "comment": {
+                "not-payload": "No content was entered to be published",
+                "server": "Oops! Something went wrong. Try reloading the page.",
+                "min-length": "The comment must have at least 3 characters"
             }
         },
         "labels": {
@@ -31,6 +36,11 @@
                 "see-more": "See more",
                 "see-less": "See less"
 
+            },
+            "comment": {
+                "write": "Write a comment...",
+                "send": "Send",
+                "comments": "Comments"
             }
         }
     },

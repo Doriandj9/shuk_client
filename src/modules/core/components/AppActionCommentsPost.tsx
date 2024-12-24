@@ -1,12 +1,19 @@
 import { IconButton } from "@mui/material";
 import CommentIcon from '@mui/icons-material/Comment';
+import { PostData } from "@/modules/web/hooks/post/PostI";
+import React from "react";
+import { formatNumberInteraction } from "../utilities/formatNumbers";
 
-const AppActionCommentsPost = () => {
+type AppActionCommentsPostProps = {
+    post: PostData;
+    onClick: (e?:React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+};
+const AppActionCommentsPost: React.FC<AppActionCommentsPostProps> = ({post, onClick}) => {
 
     return (
         <>
-            <IconButton>
-                <span className="text-xs">1</span>
+            <IconButton onClick={onClick}>
+                <span className="text-xs">{formatNumberInteraction(post.comments)}</span>
                 <CommentIcon color="primary" />
             </IconButton>
         </>

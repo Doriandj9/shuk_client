@@ -1,4 +1,4 @@
-import { Card, CardActions, CardHeader, CardMedia, Divider, IconButton } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, CardMedia, Divider, IconButton } from "@mui/material";
 import AppAvatar from "./AppAvatar";
 import MoreVertIcon from '@mui/icons-material/MoreHoriz';
 import { PostData } from "@/modules/web/hooks/post/PostI";
@@ -9,14 +9,16 @@ import AppCardMediaDisplay from "./AppCardMediaDisplay";
 import AppActionLikePost from "./AppActionLikePost";
 import AppActionCommentsPost from "./AppActionCommentsPost";
 import AppActionSharePost from "./AppActionSharePost";
+import AppCommentsPost from "./AppCommentsPost";
 
 type AppDisplayPostProps = {
     post: PostData
 };
 
-const AppDisplayPost: React.FC<AppDisplayPostProps> = ({post}) => {
+const AppDisplayPost: React.FC<AppDisplayPostProps> = ({ post }) => {
     const user = mergeUserProvider(post.user);
-   
+    const [showComments, setShowComments] = React.useState(false);
+
     return (
         <>
             <div className="w-full overflow-hidden">
@@ -34,16 +36,26 @@ const AppDisplayPost: React.FC<AppDisplayPostProps> = ({post}) => {
                         subheader={<TimePostFormat date={post.created_at || null} />}
 
                     />
-                    <CardMedia> 
+                    <CardMedia>
                         <AppCardMediaDisplay post={post} />
-                        <Divider sx={{marginTop: 1}}/>
+                        <Divider sx={{ marginTop: 1 }} />
                     </CardMedia>
                     <CardActions>
                         <AppActionLikePost post={post} />
-                        <AppActionCommentsPost />
+                        <AppActionCommentsPost post={post} onClick={() => setShowComments(state => !state)} />
                         <AppActionSharePost />
                     </CardActions>
+                    {
+                        showComments && (
+                            <>
+                                <Divider />
 
+                                <CardContent sx={{ paddingY: 1 }}>
+                                    <AppCommentsPost post={post} />
+                                </CardContent>
+                            </>
+                        )
+                    }
                 </Card>
             </div>
         </>
