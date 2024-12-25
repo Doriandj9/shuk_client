@@ -1,12 +1,4 @@
-//  type RoutesApiType = {
-//     [key: string]: {
-//         [key: string]: {
-//             path: string;
-//         } 
-//     }
-//  }
- 
- export const routesApi = {
+export const routesApi = {
     public: {
         auth: {
             path: 'security/login'
@@ -16,11 +8,17 @@
         },
         infinity_post: {
             path: 'infinity-posts'
+        },
+        infinity_comment_post: {
+            path: 'infinity-comment-posts/{post_id}'
         }
     },
     user: {
         resource_post: {
             path: 'post'
         },
+        resource_comment: {
+            path: 'comment/post'
+        }
     }
  };

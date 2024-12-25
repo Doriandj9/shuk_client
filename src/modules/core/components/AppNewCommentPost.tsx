@@ -4,6 +4,7 @@ import { Button, TextField } from "@mui/material";
 import { useAuthStore } from "@/store/auth";
 import { useTranslation } from "react-i18next";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useCreateComment } from "@/modules/web/hooks/comment/hook";
 
 type AppNewCommentPostProps = {
     postId: number | string;
@@ -18,10 +19,10 @@ const AppNewCommentPost: React.FC<AppNewCommentPostProps> = ({ postId }) => {
     const user = useAuthStore((state) => state.user);
     const [t] = useTranslation('core');
     const {handleSubmit, control, formState: {errors}} = useForm<Inputs>();
-
+    const {comment} = useCreateComment(postId);
     const handleSaveComment: SubmitHandler<Inputs> = (data) => {
-        const dataSend = {post_id: postId, description: data.comment};
-        console.log(dataSend);
+        const dataSend = {post_id: postId, description: data.comment, likes: 0, replies: 0};
+        comment.mutate(dataSend);
     };
 
     return (
