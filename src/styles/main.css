@@ -1248,6 +1248,28 @@ video {
   line-height: 1.25rem;
 }
 
+.scrollable-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable-container {
+  scrollbar-color: #ccc transparent;
+  scrollbar-width: thin;
+}
+
+.scrollable-container:target {
+  overflow: auto;
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
@@ -1300,6 +1322,10 @@ video {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mb-4 {
@@ -1402,12 +1428,24 @@ video {
   height: 85vh;
 }
 
+.h-auto {
+  height: auto;
+}
+
 .h-full {
   height: 100%;
 }
 
+.max-h-\[35rem\] {
+  max-height: 35rem;
+}
+
 .max-h-full {
   max-height: 100%;
+}
+
+.min-h-20 {
+  min-height: 5rem;
 }
 
 .min-h-40 {
@@ -1566,14 +1604,6 @@ video {
   place-self: stretch;
 }
 
-.self-start {
-  align-self: flex-start;
-}
-
-.self-end {
-  align-self: flex-end;
-}
-
 .overflow-auto {
   overflow: auto;
 }
@@ -1596,6 +1626,10 @@ video {
 
 .rounded-full {
   border-radius: 9999px;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
 }
 
 .rounded-md {
@@ -1768,10 +1802,6 @@ video {
 
 .normal-case {
   text-transform: none;
-}
-
-.italic {
-  font-style: italic;
 }
 
 .leading-3 {

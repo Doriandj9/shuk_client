@@ -56,6 +56,7 @@ export const useCreateComment = (postId: number | string) => {
         },
         onSuccess: () => {
             let previosData = queryClient.getQueryData(['comment','list',postId]);
+
             if (previosData && typeof previosData == 'object') {
                 let pageParams: OnMutateProp['pageParams'] = Reflect.get(previosData, 'pageParams');
                 let pages: OnMutateProp['pages'] = Reflect.get(previosData, 'pages');
@@ -67,6 +68,7 @@ export const useCreateComment = (postId: number | string) => {
             }
             queryClient.setQueryData(['comment','list',postId], previosData);
             queryClient.invalidateQueries({ queryKey: ['comment','list',postId] });
+            queryClient.invalidateQueries({ queryKey: ['posts'] });
         }
     });
 

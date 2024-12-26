@@ -39,6 +39,11 @@ export type AppConfig = {
      * @param {string} apiV version the api server
      */
     socialProviders: SocialProvidersValues;
+
+    /**
+     * @param {string} apiWhatsAppHost host for api whatsapp
+     */
+    apiWhatsAppHost: string;
 };
 
 

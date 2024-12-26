@@ -26,6 +26,7 @@
   --h-container-img-v-post-3: calc(var(--h-container-img-post-3) + 8.75rem);
 }
 
+
 @layer components {
   .text-mode-primary {
     @apply text-primary dark:text-slate-400;
@@ -272,6 +273,29 @@
   .text-title-post {
     @apply text-sm;
   }
+
+  
+.scrollable-container::-webkit-scrollbar {
+  width: 12px;  
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: transparent;  
+}
+
+.scrollable-container {
+  scrollbar-color: #ccc transparent; 
+  scrollbar-width: thin;  
+}
+
+.scrollable-container:target {
+  overflow: auto;  
+}
 }
 
 @media (max-width: 770px) {

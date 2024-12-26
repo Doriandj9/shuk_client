@@ -40,7 +40,20 @@ interface Resources {
         "comment": {
           "write": "Escribe un comentario...",
           "send": "Enviar",
-          "comments": "Comentarios"
+          "comments": "Comentarios",
+          "end-comments": "¡Y eso es todo por ahora! Hemos llegado al final de los comentarios de este post, pero no te preocupes, ¡pronto llegarán más!"
+        }
+      },
+      "success": {
+        "post": {
+          "created": "Publicación creada con éxito",
+          "updated": "Publicación actualizada con éxito",
+          "deleted": "Publicación eliminada con éxito"
+        },
+        "comment": {
+          "created": "Comentario creado con éxito",
+          "updated": "Comentario actualizado con éxito",
+          "deleted": "Comentario eliminado con éxito"
         }
       }
     },

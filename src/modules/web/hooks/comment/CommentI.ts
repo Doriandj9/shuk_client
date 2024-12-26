@@ -16,4 +16,5 @@ export interface CommentData {
     post?: PostData;
     user?: User;
     replyComment?: CommentData;
+    created_at?: string;
 }

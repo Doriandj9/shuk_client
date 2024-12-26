@@ -18,6 +18,7 @@ type AppDisplayPostProps = {
 const AppDisplayPost: React.FC<AppDisplayPostProps> = ({ post }) => {
     const user = mergeUserProvider(post.user);
     const [showComments, setShowComments] = React.useState(false);
+    const refElement = React.useRef<HTMLDivElement>(null);
 
     return (
         <>
@@ -49,10 +50,11 @@ const AppDisplayPost: React.FC<AppDisplayPostProps> = ({ post }) => {
                         showComments && (
                             <>
                                 <Divider />
-
-                                <CardContent sx={{ paddingY: 1 }}>
-                                    <AppCommentsPost post={post} />
-                                </CardContent>
+                                <div ref={refElement} className="scrollable-container max-h-[35rem] overflow-y-auto"> 
+                                    <CardContent  sx={{ paddingY: 1}}>
+                                        <AppCommentsPost post={post} refElement={refElement} />
+                                    </CardContent>
+                                </div>
                             </>
                         )
                     }
