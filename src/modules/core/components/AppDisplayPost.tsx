@@ -44,7 +44,7 @@ const AppDisplayPost: React.FC<AppDisplayPostProps> = ({ post }) => {
                     <CardActions>
                         <AppActionLikePost post={post} />
                         <AppActionCommentsPost post={post} onClick={() => setShowComments(state => !state)} />
-                        <AppActionSharePost />
+                        <AppActionSharePost post={post} />
                     </CardActions>
                     {
                         showComments && (

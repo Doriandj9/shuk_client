@@ -54,6 +54,9 @@ interface Resources {
           "created": "Comentario creado con éxito",
           "updated": "Comentario actualizado con éxito",
           "deleted": "Comentario eliminado con éxito"
+        },
+        "shared": {
+          "share": "Compartir esta publicación"
         }
       }
     },
