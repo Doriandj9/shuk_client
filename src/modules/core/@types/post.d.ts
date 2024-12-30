@@ -74,4 +74,5 @@ export interface FileRecord {
     path: string;
     is_multiple:boolean;
   }
-  
+
+export type  FBI = typeof FB;

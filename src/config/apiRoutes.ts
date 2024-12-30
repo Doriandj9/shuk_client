@@ -11,7 +11,10 @@ export const routesApi = {
         },
         infinity_comment_post: {
             path: 'infinity-comment-posts/{post_id}'
-        }
+        },
+        shared_post: {
+            path: 'shared/post/{id}'
+        },
     },
     user: {
         resource_post: {

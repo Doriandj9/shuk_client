@@ -41,3 +41,11 @@ export const putPost =  async (id: number | string,data: unknown) => {
 
     return response.data?.data || null;
 };
+
+export const putPostShared =  async (id: number | string,data: unknown) => {
+    const response = await api.put(`${routesApi.public.shared_post.path.replace(`{id}`, String(id))}`, data, {headers: {
+        'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+    }});
+
+    return response.data?.data || null;
+};

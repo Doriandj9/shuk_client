@@ -26,13 +26,17 @@ const OptionsBackgrounds = () => {
     const handleOneOp = () => {
         updateBackground(true);
         updateStyle({
-            backgroundColor: 'black',
-            color: 'white'
+            backgroundColor: '#ccc',
+            color: 'black'
         });
         updateSParagraph({
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            maxWidth: '100%',
+            whiteSpace: 'normal',
+            wordWrap: 'break-word'
         });
 
     };

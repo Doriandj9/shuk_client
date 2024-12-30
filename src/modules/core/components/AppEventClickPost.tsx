@@ -9,9 +9,11 @@ export type ActionType = 'likes' | 'comments' | 'shares';
 export type DataUpdatePost = {
     likes?: number;
     comments?: number;
-    shares?: number;
+    shared?: number;
     type: PostTypesBack;
     total_likes?: number;
+    total_shared?: number;
+    social_provider_id?: number | string;
 };
 
 type AppEventClickPostProps = {

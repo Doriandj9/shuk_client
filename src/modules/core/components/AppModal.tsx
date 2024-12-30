@@ -12,18 +12,18 @@ type AppModalProps = ModalProps & {
 };
 
 const sizeWidth = {
-    "xs": 'sm:w-1/12',
-    "sm": 'sm:w-2/12',
-    "md": 'sm:w-3/12',
-    "lg": 'sm:w-4/12',
-    "xl": 'sm:w-5/12',
-    "2xl": 'sm:w-6/12',
-    "3xl": 'sm:w-7/12',
-    "4xl": 'sm:w-8/12',
-    "5xl": 'sm:w-9/12',
-    "6xl": 'sm:w-10/12',
-    "full": 'sm:w-full',
-    "auto": 'sm:w-auto'
+    "xs": 'md:w-2/12',
+    "sm": 'md:w-3/12',
+    "md": 'md:w-4/12',
+    "lg": 'md:w-5/12',
+    "xl": 'md:w-6/12',
+    "2xl": 'md:w-7/12',
+    "3xl": 'md:w-8/12',
+    "4xl": 'md:w-9/12',
+    "5xl": 'md:w-10/12',
+    "6xl": 'md:w-11/12',
+    "full": 'md:w-full',
+    "auto": 'md:w-auto'
 };
 
 const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isNotCloseClick = true, open, onClose, sizeModal = 'md', isFull = false, ...props }) => {

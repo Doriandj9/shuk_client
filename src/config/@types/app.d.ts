@@ -46,6 +46,11 @@ export type AppConfig = {
     apiWhatsAppHost: string;
 
     /**
+     * @param {string} shareFacebookHost host for api facebook
+     */
+    shareFacebookHost: string;
+
+    /**
      * @param {string} host host for me app public app
      */
 
@@ -68,6 +73,7 @@ export type ModulesApp = 'web' | 'core';
 export type SocialProvidersValues = {
     google: 1;
     facebook: 2;
+    whatsapp: 3;
 };
 
 export type LanguageAppHook = {

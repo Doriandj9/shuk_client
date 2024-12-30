@@ -27,6 +27,9 @@
                 "not-payload": "No content was entered to be published",
                 "server": "Oops! Something went wrong. Try reloading the page.",
                 "min-length": "The comment must have at least 3 characters"
+            },
+            "shared": {
+                "copy-link": "Error copying link"
             }
         },
         "labels": {
@@ -43,9 +46,6 @@
                 "comments": "Comments",
                 "end-comments": "And that's all for now! We've reached the end of the comments for this post, but don't worry, more will be coming soon!"
 
-            },
-            "shared": { 
-                "share": "Share this post"
             }
         },
         "success": {
@@ -58,6 +58,11 @@
                 "created": "Comment created successfully",
                 "updated": "Comment updated successfully",
                 "deleted": "Comment deleted successfully"
+            },
+            "shared": {
+                "share": "Share this post",
+                "copy-link": "Copy link",
+                "link-copied": "Link copied"
             }
         }
     },

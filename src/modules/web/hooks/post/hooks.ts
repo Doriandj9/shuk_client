@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPost, DataPostSend, getInfinityPosts, putPost } from "./queries";
+import { createPost, DataPostSend, getInfinityPosts, putPost, putPostShared } from "./queries";
 import moment from "moment";
 import { PathResourcesType, PostData, PostDataInfinity } from "./PostI";
 import { User } from "../../@types/web";
@@ -147,6 +147,51 @@ export const useUpdatePost = (id: number | string) => {
     const put = useMutation({
         mutationKey: ['posts'],
         mutationFn: (data: unknown) => putPost(id,data),
+        onMutate: (data: DataUpdatePost) => {
+            const previosData = client.getQueryData(['posts']);
+            const prevData: object | unknown = cloneObject(previosData);
+
+            client.setQueryData(['posts'], (old: OnMutateProp) => {
+
+                const tempValues = { ...old };
+
+                tempValues.pages = tempValues.pages.map((page) => {
+                    page.data = page.data.map((post) => {
+                        if (post.id == id) {
+                            const postUpdate = { ...post, ...data };
+                            return postUpdate;
+                        }
+
+                        return post;
+                    });
+
+                    return page;
+                });
+                
+
+                return tempValues;
+
+            });
+
+            return () => client.setQueryData(['posts'], prevData);
+        },
+        onError: (error, values, rollback) => {
+            if (rollback) {
+                rollback();
+            }
+        },
+    });
+
+    return {put};
+};
+
+
+export const useUpdateSharedPost = (id: number | string) => {
+    const client = useQueryClient();
+
+    const put = useMutation({
+        mutationKey: ['posts-shared'],
+        mutationFn: (data: unknown) => putPostShared(id,data),
         onMutate: (data: DataUpdatePost) => {
             const previosData = client.getQueryData(['posts']);
             const prevData: object | unknown = cloneObject(previosData);

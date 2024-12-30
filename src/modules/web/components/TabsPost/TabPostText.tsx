@@ -89,7 +89,7 @@ const TabPostText = () => {
           className="app-description-post relative"
           
         >
-          <p className="app-description-post hidden-scroll text-xl"
+          <p className="app-description-post overflow-auto scrollable-container text-xl"
           id="post-content-new"
             contentEditable
           >

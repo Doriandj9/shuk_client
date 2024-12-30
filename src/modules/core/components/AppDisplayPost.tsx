@@ -22,7 +22,7 @@ const AppDisplayPost: React.FC<AppDisplayPostProps> = ({ post }) => {
 
     return (
         <>
-            <div className="w-full overflow-hidden">
+            <div className={`w-full overflow-hidden`}>
                 <Card sx={{ maxWidth: '100%' }}>
                     <CardHeader
                         avatar={

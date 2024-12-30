@@ -28,6 +28,9 @@ interface Resources {
           "not-payload": "No se ingresó ningún contenido para ser publicado",
           "server": "¡Ups! Algo salió mal. Intenta recargar la página.",
           "min-length": "El comentario debe tener al menos 3 caracteres"
+        },
+        "shared": {
+          "copy-link": "Error al copiar el enlace"
         }
       },
       "labels": {
@@ -56,7 +59,9 @@ interface Resources {
           "deleted": "Comentario eliminado con éxito"
         },
         "shared": {
-          "share": "Compartir esta publicación"
+          "share": "Compartir esta publicación",
+          "copy-link": "Copiar enlace",
+          "link-copied": "Enlace copiado"
         }
       }
     },
