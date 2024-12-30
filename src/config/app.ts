@@ -5,7 +5,9 @@ import axios from 'axios';
 const host = import.meta.env.VITE_API_URL;
 const versionApp = import.meta.env.VITE_APP_VERSION;
 const endPointApi = import.meta.env.VITE_ENDPOINT_API;
-const apiWhatsAppHost = import.meta.env.VITE_API_WHATSAPP_HOST;
+const apiWhatsAppHost = import.meta.env.VITE_API_WHATSAPP_URL;
+const hostApp = import.meta.env.VITE_APP_HOST || (new URL(location.href)).origin;
+
 
 export const app: AppConfig = {
     server: `${host}${endPointApi}/`,
@@ -23,7 +25,8 @@ export const app: AppConfig = {
         google: 1,
         facebook: 2
     },
-    apiWhatsAppHost: apiWhatsAppHost
+    apiWhatsAppHost: apiWhatsAppHost,
+    host: hostApp
 };
 
 

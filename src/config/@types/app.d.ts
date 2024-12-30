@@ -44,6 +44,12 @@ export type AppConfig = {
      * @param {string} apiWhatsAppHost host for api whatsapp
      */
     apiWhatsAppHost: string;
+
+    /**
+     * @param {string} host host for me app public app
+     */
+
+    host: string;
 };
 
 

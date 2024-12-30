@@ -13,7 +13,7 @@ const AppActionSharePost: React.FC<AppActionSharePostProps> = ({post}) => {
 
     return (
         <>
-            <AppEventClickShared
+            <AppEventClickShared post={post}
                 render={({open}) => (
                     <IconButton onClick={() => open()}>
                         <span className="text-xs">{formatNumberInteraction(post.shared)}</span>

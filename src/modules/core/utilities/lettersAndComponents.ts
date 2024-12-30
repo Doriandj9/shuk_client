@@ -18,3 +18,20 @@ export const lettersAndComponents: LettersAndComponentsType = (html, onlyCount =
 
     return [letterCount, componentCount, modifiedHtml]; // Devolvemos [number, number, string]
 };
+
+
+export const serializeText = (text: string): string  => {
+    const result = decodeHTMLEntities(
+        text.replaceAll(/<br>/g, '\n\r')
+        .replaceAll(/(<)(\w+)(>)/g,'')
+        .replaceAll(/(<\/)(\w+)(>)/g,'')
+    );
+    return result;
+};
+
+
+export const decodeHTMLEntities = (text: string) => {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = text;
+    return txt.value;
+};
