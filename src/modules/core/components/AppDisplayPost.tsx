@@ -1,6 +1,5 @@
-import { Card, CardActions, CardContent, CardHeader, CardMedia, Divider, IconButton } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, CardMedia, Divider } from "@mui/material";
 import AppAvatar from "./AppAvatar";
-import MoreVertIcon from '@mui/icons-material/MoreHoriz';
 import { PostData } from "@/modules/web/hooks/post/PostI";
 import React from "react";
 import { mergeUserProvider } from "../utilities/mergeUserProvider";
@@ -10,6 +9,7 @@ import AppActionLikePost from "./AppActionLikePost";
 import AppActionCommentsPost from "./AppActionCommentsPost";
 import AppActionSharePost from "./AppActionSharePost";
 import AppCommentsPost from "./AppCommentsPost";
+import AppMenuOpPosts from "./AppMenuOpPosts";
 
 type AppDisplayPostProps = {
     post: PostData
@@ -29,9 +29,7 @@ const AppDisplayPost: React.FC<AppDisplayPostProps> = ({ post }) => {
                             <AppAvatar user={user} />
                         }
                         action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon />
-                            </IconButton>
+                            <AppMenuOpPosts post={post} />
                         }
                         title={user.full_name}
                         subheader={<TimePostFormat date={post.created_at || null} />}

@@ -38,7 +38,12 @@ interface Resources {
           "click-here": "Haga clic aquí",
           "end-posts": "¡Y eso es todo por ahora! Hemos llegado al final de las publicaciones, pero no te preocupes, ¡pronto llegarán más!",
           "see-more": "Ver más",
-          "see-less": "Ver menos"
+          "see-less": "Ver menos",
+          "view-post": "Ver publicación",
+          "shared": "Compartir",
+          "hidden": "Ocultar",
+          "delete": "Eliminar",
+          "edit": "Editar"
         },
         "comment": {
           "write": "Escribe un comentario...",

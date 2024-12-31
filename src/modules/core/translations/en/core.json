@@ -37,8 +37,12 @@
                 "click-here": "Click here",
                 "end-posts": "And that's all for now! We've reached the end of the posts, but don't worry, more will be coming soon!",
                 "see-more": "See more",
-                "see-less": "See less"
-
+                "see-less": "See less",
+                "view-post": "View post",
+                "shared": "Share",
+                "hidden": "Disguise",
+                "delete": "Delete",
+                "edit": "Edit"
             },
             "comment": {
                 "write": "Write a comment...",
