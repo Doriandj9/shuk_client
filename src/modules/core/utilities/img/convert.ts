@@ -1,3 +1,5 @@
+import { app } from "@/config/app";
+
 type ConvertImgFn = {
     (img: Blob, objResult?: object | null , key?: string | null ): void;
     (img: Blob, setValue?: (value: string | ArrayBuffer | null) => void): void;
@@ -22,3 +24,8 @@ export const convertImg: ConvertImgFn = (img, setValueOrObjResult, key=null) =>{
 
     reader.readAsDataURL(img);
 };
+
+export const appLoadImage = (pathImage: string): string => {
+    const path = `${app.base_server}${pathImage}`;
+    return path;
+}; 

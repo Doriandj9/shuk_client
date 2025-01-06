@@ -11,7 +11,7 @@ type AppMenuOpPostsProps = {
     post: PostData;
 };
 
-const AppMenuOpPosts: React.FC<AppMenuOpPostsProps> = ({post}) => {
+const AppMenuOpPosts: React.FC<AppMenuOpPostsProps> = ({ post }) => {
     const [t] = useTranslation('core');
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const navigate = useNavigate();
@@ -42,35 +42,39 @@ const AppMenuOpPosts: React.FC<AppMenuOpPostsProps> = ({post}) => {
                 }}
                 disableScrollLock
             >
-                <MenuItem sx={{borderBottom: '0.5px solid #ccc'}} onClick={handleViewPost} disabled={post.is_temp}>
+                <MenuItem sx={{ borderBottom: '0.5px solid #ccc' }} onClick={handleViewPost} disabled={post.is_temp}>
                     <Typography variant="subtitle2">
                         {t('messages.labels.post.view-post')}
                     </Typography>
                 </MenuItem>
-                <MenuItem sx={{borderBottom: '0.5px solid #ccc'}} onClick={handleClose}  disabled={post.is_temp}>
-                    <Typography variant="subtitle2">
-                        {t('messages.labels.post.edit')}
-                    </Typography>
-                </MenuItem>
-                <AppEventClickShared post={post} 
-                    render={({open}) => (
-                        <MenuItem sx={{borderBottom: '0.5px solid #ccc'}} onClick={() => {
+                {
+                    post.your_post &&
+
+                    <MenuItem sx={{ borderBottom: '0.5px solid #ccc' }} onClick={handleClose} disabled={post.is_temp}>
+                        <Typography variant="subtitle2">
+                            {t('messages.labels.post.edit')}
+                        </Typography>
+                    </MenuItem>
+
+                }
+                <AppEventClickShared post={post}
+                    render={({ open }) => (
+                        <MenuItem sx={{ borderBottom: '0.5px solid #ccc' }} onClick={() => {
                             open();
-                        }}  disabled={post.is_temp}>
+                        }} disabled={post.is_temp}>
                             <Typography variant="subtitle2">
                                 {t('messages.labels.post.shared')}
                             </Typography>
                         </MenuItem>
                     )}
-                
-                />
-                
-                <MenuItem sx={{borderBottom: '0.5px solid #ccc'}} onClick={handleClose}  disabled={post.is_temp}>
+
+                />  
+                <MenuItem sx={{ borderBottom: '0.5px solid #ccc' }} onClick={handleClose} disabled={post.is_temp}>
                     <Typography variant="subtitle2">
                         {t('messages.labels.post.hidden')}
                     </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleClose}  disabled={post.is_temp}>
+                <MenuItem onClick={handleClose} disabled={post.is_temp}>
                     <Typography variant="subtitle2" color="error">
                         {t('messages.labels.post.delete')}
                     </Typography>

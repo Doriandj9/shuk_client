@@ -2,7 +2,7 @@ import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
 import { ContentFormPost, PostTypesBack } from "@/modules/core/@types/post";
 import { useAuthStore } from "@/store/auth";
-import { PostDataInfinity } from "./PostI";
+import { PostData, PostDataInfinity } from "./PostI";
 
 export type DataPostSend = {type: PostTypesBack; payload: ContentFormPost;};
 
@@ -48,4 +48,19 @@ export const putPostShared =  async (id: number | string,data: unknown) => {
     }});
 
     return response.data?.data || null;
+};
+
+
+type getPostFn = {
+    (id: number | string): Promise<PostData | null>;
+};
+
+export const getPost: getPostFn = async (id) => {
+    const response = await api.get(`${routesApi.user.resource_post.path}/${id}`,{
+        headers: {
+        'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+        }
+    });
+
+    return response.data?.data ?? null;
 };

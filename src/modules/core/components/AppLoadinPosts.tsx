@@ -1,9 +1,21 @@
 import { Skeleton } from "@mui/material";
+import React from "react";
 
-const AppLoadingPosts = () => {
+type AppLoadingPostsProps = {
+  count?: number;
+  children?: React.ReactNode;
+}
+
+const AppLoadingPosts: React.FC<AppLoadingPostsProps> = ({count= 3, children=<></>}) => {
+  const range = [];
+
+  for(let i = 0; i < count; i++){
+    range.push(i);
+  };
+
   return (
     <>
-     {[1,2,3].map((item) => (
+     {range.map((item) => (
          <div key={item} className="app-container-fade text-sm app-container-post min-h-60 p-2 mt-2">
          <div className="h-60 flex flex-col justify-between">
            <div className="flex gap-2">
@@ -39,6 +51,7 @@ const AppLoadingPosts = () => {
              </div>
            </div>
          </div>
+         {children}
        </div>
      ))}
     </>

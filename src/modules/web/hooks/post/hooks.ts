@@ -1,5 +1,5 @@
-import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPost, DataPostSend, getInfinityPosts, putPost, putPostShared } from "./queries";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createPost, DataPostSend, getInfinityPosts, getPost, putPost, putPostShared } from "./queries";
 import moment from "moment";
 import { PathResourcesType, PostData, PostDataInfinity } from "./PostI";
 import { User } from "../../@types/web";
@@ -228,4 +228,14 @@ export const useUpdateSharedPost = (id: number | string) => {
     });
 
     return {put};
+};
+
+export const useGetPost = (id: number | string | null) => {
+    const hook = useQuery({
+        queryKey: ['posts', id],
+        queryFn: () => getPost(id ?? ''),
+        enabled: !!id
+    });
+
+    return {...hook};
 };

@@ -69,7 +69,8 @@ export interface PostData {
     img: FileRecord | null;        
     file_temp?: Blob;
     your_liked?: boolean;         
-    total_likes?: number; 
+    total_likes?: number;
+    your_post?: boolean;
   }
 
 
