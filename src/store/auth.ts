@@ -12,6 +12,7 @@ type AuthProps = {
     updateUser: (payload: string) => unknown;
     isLogin: boolean;
     isProvider: boolean;
+    logout: () => unknown;
 };
 
 let jwt: string = '';

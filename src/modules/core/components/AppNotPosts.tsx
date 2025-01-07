@@ -17,7 +17,7 @@ const AppNotPosts = () => {
 
     return (
         <>
-            <div className="app-container-fade text-sm app-container-post min-h-40 p-2 mt-2">
+            <div className="app-container-fade text-sm max-w-full min-h-40 p-2 mt-2">
                 <div className="h-40 flex justify-center items-center flex-col gap-4">
                     <p className="text-mode-primary text-center">
                         {

@@ -22,6 +22,15 @@ export const routesApi = {
         },
         resource_comment: {
             path: 'comment/post'
+        },
+        logout:{
+            path: 'security/logout'
+        },
+        infinity_posts: {
+            path: 'infinity-posts/user/{username}'
+        },
+        user_info: {
+            path: 'user-info/{username}'
         }
     }
  };

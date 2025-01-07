@@ -29,7 +29,7 @@ const AppLoading: React.FC<AppLoadingProps> = ({ isOpen }) => {
           })}
           open={isOpen}
         >
-          <CircularProgress color="inherit" />
+          <CircularProgress color="primary" />
         </Backdrop>
     </>
   );

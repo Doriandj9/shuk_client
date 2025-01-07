@@ -1,5 +1,5 @@
 import { useMutation, useQuery, } from "@tanstack/react-query";
-import { authFn, authProviderFn, infoUserGoogle } from "./requestsAuth";
+import { authFn, authLogOut, authProviderFn, infoUserGoogle } from "./requestsAuth";
 import { api } from "@/config/app";
 
 
@@ -34,6 +34,20 @@ export const useAuth = (handleSuccessLogin?:CallableFunction | null, handleSucce
         useGetInfoGoogle
     };
 };
+
+export const useAuthLogout = (handleFn: CallableFunction) => {
+
+    const logout = useMutation({
+        mutationKey: ['user-logout'],
+        mutationFn: authLogOut,
+        onSuccess: () => {
+            handleFn();
+        }
+    });
+
+    return {logout};
+};
+
 
 export const useTest = () => {
     return useQuery({

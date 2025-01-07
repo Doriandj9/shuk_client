@@ -7,7 +7,7 @@ const versionApp = import.meta.env.VITE_APP_VERSION;
 const endPointApi = import.meta.env.VITE_ENDPOINT_API;
 const apiWhatsAppHost = import.meta.env.VITE_API_WHATSAPP_URL;
 const shareFacebookHost = import.meta.env.VITE_API_FACEBOOK_URL || 'https://www.facebook.com/sharer/sharer.php';
-const hostApp = import.meta.env.VITE_APP_HOST || (new URL(window.location.href)).origin;
+const hostApp = import.meta.env.VITE_APP_HOST || ''; //(new URL(window.location.href)).origin;
 
 
 export const app: AppConfig = {

@@ -1,5 +1,6 @@
 import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
+import { useAuthStore } from "@/store/auth";
 import axios from "axios";
 
 const {path: login} = routesApi.public.auth;
@@ -13,9 +14,20 @@ export const authFn = async (data: object) => {
     return response.data?.data;
 };
 
+
 export const authProviderFn = async (data: object) => {
     Reflect.set(data, 'is_authenticate_provider_shuk',true);
     const response = await api.post(loginProvider,data);
+    
+    return response.data?.data;
+};
+
+export const authLogOut = async () => {
+    const response  = await api.post(routesApi.user.logout.path,undefined, {
+        headers: {
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+        }
+    });
 
     return response.data?.data;
 };

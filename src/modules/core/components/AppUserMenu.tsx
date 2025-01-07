@@ -7,17 +7,24 @@ import { useTranslation } from "react-i18next";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SettingsIcon from '@mui/icons-material/Settings';
 import AppAvatar from "./AppAvatar";
+import { useNavigate } from "react-router-dom";
+import { webRoutes } from "@/config/webRoutes";
+import { useAuthLogout } from "@/modules/web/hooks/auth/hooksAuth";
+import AppLoading from "./AppLoading";
 
 
 const AppUserMenu = () => {
     const { user, isLogin } = useAuthStore((state) => state);
     const [t] = useTranslation('core');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const { logout } = useAuthLogout(logOutFn);
+    const navigate = useNavigate();
+    const logoutStore = useAuthStore((state) => state.logout);
 
     const open = Boolean(anchorEl);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        if(isLogin){
+        if (isLogin) {
             setAnchorEl(event.currentTarget);
         }
     };
@@ -25,11 +32,31 @@ const AppUserMenu = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    
+
+    const handleProfile = () => {
+        navigate(webRoutes.dashboard_user.path.replace(':username', user?.username ?? '___'));
+    };
+
+    const handleLogOut = () => {
+        logout.mutate();
+    };
+
+    const handleConfig = () => {
+        handleClose();
+        navigate(webRoutes.config_user.path.replace(':username',user?.username ?? ''));
+    };
+
+    function logOutFn() {
+        logoutStore();
+        navigate(webRoutes.home.path);
+    };
+
+
     return (
         <>
+        <AppLoading isOpen={logout.isPending} />
             <Tooltip title={t('mobile.menu.account-settings')}
-            
+
             >
                 <IconButton sx={{ margin: 0, padding: 0.5 }}
                     onClick={handleClick}
@@ -86,17 +113,17 @@ const AppUserMenu = () => {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
 
-                <MenuItem onClick={handleClose}>
-                    <Avatar 
-                     src={user?.photo || profileImg}
+                <MenuItem onClick={handleProfile}>
+                    <Avatar
+                        src={user?.photo || profileImg}
                     /> {t('menu.profile')}
                 </MenuItem>
-                <MenuItem onClick={handleClose} className="flex gap-3 items-center">
-                    <SettingsIcon /> 
+                <MenuItem onClick={handleConfig} className="flex gap-3 items-center">
+                    <SettingsIcon />
                     {t('mobile.menu.configuration')}
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleLogOut}>
                     <ListItemIcon>
                         <LogoutIcon fontSize="small" />
                     </ListItemIcon>

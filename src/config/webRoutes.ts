@@ -9,4 +9,21 @@ export const webRoutes = {
     view_posts: {
         path: '/view/posts/:id'
     },
+    dashboard_user:{
+        path: '/profile/:username'
+    },
+    config_user: {
+        path: '/config/:username',
+        children: {
+            profile: {
+                path: 'profile'
+            },
+            account: {
+                path: 'account'
+            },
+            privacy_security:{
+                path: 'privacy'
+            } 
+        }
+    }
 };

@@ -75,7 +75,7 @@
   }
 
   .app-body {
-    @apply bg-slate-100 dark:bg-slate-800 min-h-screen flex flex-col;
+    @apply bg-slate-100 dark:bg-slate-800 min-h-screen flex flex-col max-w-full;
   }
 
   .app-banner {
@@ -83,7 +83,7 @@
   }
 
   .app-main {
-    @apply flex-grow flex;
+    @apply flex-grow flex max-w-full;
   }
 
   .app-search-home {

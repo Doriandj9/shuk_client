@@ -3,6 +3,7 @@ import { api } from "@/config/app";
 import { ContentFormPost, PostTypesBack } from "@/modules/core/@types/post";
 import { useAuthStore } from "@/store/auth";
 import { PostData, PostDataInfinity } from "./PostI";
+import { InfinityData } from "../../@types/web";
 
 export type DataPostSend = {type: PostTypesBack; payload: ContentFormPost;};
 
@@ -63,4 +64,20 @@ export const getPost: getPostFn = async (id) => {
     });
 
     return response.data?.data ?? null;
+};
+
+type getInfinityPostUserFn = {
+    (args: {pageParam: number}, username: string): Promise<InfinityData<PostData>>;
+};
+
+export const getInfinityPostUser: getInfinityPostUserFn = async ({pageParam}, username) => {
+    const path = routesApi.user.infinity_posts.path.replace('{username}', username);
+    const response = await api.get(`${path}?per_page=2&page=${pageParam}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+        },
+    });
+
+    return response.data?.data || [];
 };

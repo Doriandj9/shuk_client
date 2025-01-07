@@ -79,6 +79,10 @@
         "post-img": "Image post",
         "post-video": "Video post",
         "exit-post": "This page asks you to confirm that you want to log out; the information you have entered may not be saved.",
-        "share-idea": "Share your idea..."
+        "share-idea": "Share your idea...",
+        "posts": "Publications",
+        "details": "Details",
+        "statistics": "Statistics",
+        "your-post": "Your publications"
     }
 }

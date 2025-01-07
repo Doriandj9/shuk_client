@@ -18,14 +18,16 @@ export type User = {
     password?: string | null;
     email_verified_at?: Date | null;
     phone?: string | null;
-    birthday?: Date | null;
+    birthday?: Date | null | string;
     nationality?: string | null;
     photo?: string | null;
     is_active?: boolean;
     doc_status?: DocStatus;
     abilities?: string | null;
     data_login_social_media?: string | null | googleUser | facebookUser;
-    is_user_provider?: boolean
+    is_user_provider?: boolean,
+    username?: string;
+    total_posts?: number;
 }
 
 export interface InfinityData<T>{

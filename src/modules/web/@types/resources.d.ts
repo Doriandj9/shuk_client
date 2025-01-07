@@ -80,7 +80,11 @@ interface Resources {
       "post-img": "Publicación de imagen",
       "post-video": "Publicación de video",
       "exit-post": "Esta página le pide que confirme que desea salir; puede que la información que haya introducido no se guarde.",
-      "share-idea": "Comparte tus ideas..."
+      "share-idea": "Comparte tus ideas...",
+      "posts": "Publicaciones",
+      "details": "Detalles",
+      "statistics": "Estadística",
+      "your-post": "Tus publicaciones"
     }
   }
 }

@@ -6,6 +6,8 @@ import Login from "@web/pages/Login/Login";
 import AuthPages from "./AuthPages";
 import MiddlewareLogin from "./MiddlewareLogin";
 import ViewPosts from "@/modules/web/pages/Posts/ViewPosts";
+import DashboardUser from "@/modules/web/pages/User/Dasboard";
+import Configuration from "@/modules/web/pages/User/Configuration";
 
 const RootRoutes = () => {
   return (
@@ -15,9 +17,10 @@ const RootRoutes = () => {
         <Route element={<MiddlewareLogin />}>
           <Route path={webRoutes.login.path} element={<Login />} />
         </Route>
-        <Route path={webRoutes.view_posts.path} element= {<ViewPosts />} />
+        <Route path={webRoutes.view_posts.path} element={<ViewPosts />} />
+        <Route path={webRoutes.dashboard_user.path} element={<DashboardUser />} />
         <Route element={<AuthPages />}>
-          <Route path="/test-login" element={<>paso login</>} />
+        <Route path={webRoutes.config_user.path} element={<Configuration />} />
         </Route>
       </CustomRoutes>
     </>

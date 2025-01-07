@@ -3,7 +3,6 @@ import { Children } from "../@types/core";
 import { useEffect, useMemo } from "react";
 import { useThemeMode } from "@/store/themeMode";
 import {
-  Avatar,
   Badge,
   createTheme,
   CssBaseline,
@@ -28,16 +27,13 @@ import { ThemeOptions } from "@/config/@types/app";
 import AppMenuContent from "@core/components/AppMenuContent";
 import { motion, AnimatePresence } from "framer-motion";
 import AppNavbar from "@core/components/AppNavbar";
-import HomeIcon from "@mui/icons-material/Home";
-import profileImg from "@/assets/img/profile.png";
 import { webRoutes } from "@/config/webRoutes";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuthStore } from "@/store/auth";
 import AppUserMenu from "../components/AppUserMenu";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useAppLoading } from "@/store/loadingStore";
 import AppLoading from "../components/AppLoading";
+import MenuMobile from "./partials/MenuMobile";
 
 
 const { path: pathLogin } = webRoutes.login;
@@ -48,7 +44,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
   const {loading} = useAppLoading((state) => state);
   const [showMovil, setShowMovil] = useState<boolean>(true);
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
-  const { isLogin, user } = useAuthStore((state) => state);
+  const { isLogin } = useAuthStore((state) => state);
   const navigate = useNavigate();
 
   const { theme: themeMode, update: updateThemeMode } = useThemeMode(
@@ -101,6 +97,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
   };
 
   const mobileLogin = () => {
+    handleShowMovil();
     navigate(webRoutes.login.path);
   };
 
@@ -272,122 +269,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
             {/* Movil menu drag */}
             <AnimatePresence>
               {!showMovil && (
-                <div className="menu-mobile">
-                  <motion.div
-                    className="option-menu"
-                    initial={{ x: "100vw", y: "100vh" }}
-                    animate={{ x: 0, y: 0 }}
-                    exit={{ x: "100vw", y: "100vh" }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  >
-                    <div className="w-100 h-100 flex flex-col">
-                      {/* Header */}
-                      <div className="flex py-2">
-                        <div className="w-20 flex items-center justify-center">
-                          <h2 className="text text-mode-primary text-2xl font-black">
-                            {t("menu.menu")}
-                          </h2>
-                        </div>
-                        <div className="flex-grow">
-                          <div className="w-full h-full flex justify-center">
-                            <AppSearchHome mobile />
-                          </div>
-                        </div>
-
-                        <div className="w-32 flex items-center">
-                          <div className="">
-                            <ul className="flex justify-around items-center">
-                              <li>
-                                {themeMode === "dark" ? (
-                                  <button
-                                    onClick={() => handleModeDark("light")}
-                                  >
-                                    <DarkModeIcon className="text-mode-secondary pointer-events-none" />
-                                  </button>
-                                ) : (
-                                  <button
-                                    onClick={() => handleModeDark("dark")}
-                                  >
-                                    <Brightness7Icon className="text-mode-secondary pointer-events-none" />
-                                  </button>
-                                )}
-                              </li>
-                              <li className="">
-                                <AppMenuContent
-                                  i18n={i18n.changeLanguage}
-                                  mobile
-                                />
-                              </li>
-                              <li>
-                                <IconButton onClick={() => handleShowMovil()}>
-                                  <HomeIcon className="text-mode-secondary" />
-                                </IconButton>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      {/* Options */}
-
-                      <div>
-                        <div className="px-2">
-                          <div className="app-container-fade w-full h-28">
-                            <h3 className="text-mode-slate text-center text-sm pt-1">
-                              {t("menu.profile")}
-                            </h3>
-                            <div className="flex justify-center gap-2 items-center">
-                              <IconButton sx={{ padding: 0, margin: 0 }}>
-                                <Avatar
-                                  alt="Remy Sharp"
-                                  src={user?.photo || profileImg}
-                                  sx={{ width: 32, height: 32 }}
-                                />
-                              </IconButton>
-                              {isLogin && (
-                                <p className="text-mode-white">
-                                  {user?.full_name}
-                                </p>
-                              )}
-                            </div>
-                            <div className="mt-1 flex justify-center items-center">
-                              {isLogin ? (
-                                <>
-                                  <div>
-                                    <IconButton color="secondary">
-                                      <ManageAccountsIcon />
-                                      <span className="text-xs text-mode-primary">
-                                        {t("mobile.menu.configuration")}
-                                      </span>
-                                    </IconButton>
-                                  </div>
-                                  <div>
-                                    <IconButton color="error">
-                                      <LogoutIcon />
-                                      <span className="text-mode-primary text-xs">
-                                        {t("mobile.menu.logout")}
-                                      </span>
-                                    </IconButton>
-                                  </div>
-                                </>
-                              ) : (
-                                <>
-                                  <div>
-                                    <IconButton color="secondary" onClick={() => mobileLogin()}>
-                                      <span className="text-sm text-mode-primary">
-                                        {t("mobile.menu.login")}
-                                      </span>
-                                      <LoginIcon />
-                                    </IconButton>
-                                  </div>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
+                <MenuMobile handleShowMovil={handleShowMovil} mobileLogin={mobileLogin} />
               )}
             </AnimatePresence>
           </header>
@@ -415,7 +297,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
               )}
             </AnimatePresence>
 
-            <div className="flex-grow p-2 xl:p-4">{children}</div>
+            <div className="flex-grow p-2 xl:p-4 max-w-full">{children}</div>
             <div className="w-1/4 hidden md:block" />
             <div className="app-navbar-right hidden md:block"></div>
           </main>

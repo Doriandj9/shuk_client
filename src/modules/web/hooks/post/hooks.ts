@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createPost, DataPostSend, getInfinityPosts, getPost, putPost, putPostShared } from "./queries";
+import { createPost, DataPostSend, getInfinityPosts, getInfinityPostUser, getPost, putPost, putPostShared } from "./queries";
 import moment from "moment";
 import { PathResourcesType, PostData, PostDataInfinity } from "./PostI";
 import { User } from "../../@types/web";
@@ -235,6 +235,25 @@ export const useGetPost = (id: number | string | null) => {
         queryKey: ['posts', id],
         queryFn: () => getPost(id ?? ''),
         enabled: !!id
+    });
+
+    return {...hook};
+};
+
+
+export const useGetInfinityPostsUser = (username: string | undefined | null) => {
+
+    const hook = useInfiniteQuery({
+        queryKey: [username,'posts'],
+        queryFn: (arg) => getInfinityPostUser(arg,username ?? ''),
+        initialPageParam: 1,
+        getNextPageParam: (lastPage) => {
+            if (lastPage.next_page_url) {
+                return lastPage.current_page + 1;
+            }
+            return null;
+        },
+        enabled: !!username
     });
 
     return {...hook};
