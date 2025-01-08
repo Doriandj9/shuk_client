@@ -283,6 +283,10 @@
     @apply text-sm;
   }
 
+  .app-link-menu{
+    @apply flex gap-1 text-sm items-center hover:bg-black/5 p-2 dark:hover:bg-black/25;
+  }
+
   
 .scrollable-container::-webkit-scrollbar {
   width: 12px;  

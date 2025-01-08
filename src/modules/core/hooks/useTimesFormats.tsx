@@ -9,7 +9,7 @@ export const useTimeFormatPost = (formatTime: 'date' | 'full' | 'post' = 'full')
     if (locale == 'es') {
         moment.updateLocale('es', moment_locale_es);
     } else {
-        moment.updateLocale(locale, null);
+        moment.updateLocale(locale,moment.locale);
     }
 
     const format: formatTimePostFn = (date) => {

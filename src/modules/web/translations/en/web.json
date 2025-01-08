@@ -45,6 +45,10 @@
             "phone": {
                 "label": "Cell phone number",
                 "placeholder": "Ex: +1 (555) 123-4567"
+            },
+            "username": {
+                "label": "Username",
+                "placeholder": "Ex: tito123" 
             }
         },
         "buttons": {
@@ -67,7 +71,8 @@
             "phone-required": "The cell phone number field is required",
             "nan-type-post": "Error no post type was selected",
             "nan-img-post": "No image was selected for publication",
-            "nan-payload-post": "You cannot post empty content"
+            "nan-payload-post": "You cannot post empty content",
+            "min-length": "Enter a minimum of {count} characters"
         }
     },
     "titles": {
@@ -83,6 +88,15 @@
         "posts": "Publications",
         "details": "Details",
         "statistics": "Statistics",
-        "your-post": "Your publications"
+        "your-post": "Publications",
+        "account": "Account",
+        "profile": "Profile",
+        "privacy-safety": "Privacy & safety",
+        "password": "Password",
+        "save-changes": "Save changes"
+    },
+    "helpers": {
+        "email-not-show": "Email will not be displayed publicly.",
+        "username-unique": "It must be a unique name"
     }
 }

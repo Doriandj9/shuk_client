@@ -46,6 +46,10 @@ interface Resources {
         "phone": {
           "label": "Numero de celular",
           "placeholder": "+593 912345678"
+        },
+        "username": {
+          "label": "Username",
+          "placeholder": "Ex: tito123"
         }
       },
       "buttons": {
@@ -68,7 +72,8 @@ interface Resources {
         "phone-required": "El campo numero de celular es obligatorio",
         "nan-type-post": "Error no se selecciono un tipo de publicación",
         "nan-img-post": "No se selecciono una imagen para la publicación",
-        "nan-payload-post": "No se pude publicar un contenido vació"
+        "nan-payload-post": "No se pude publicar un contenido vació",
+        "min-length": "Ingresar un mínimo de {count} caracteres"
       }
     },
     "titles": {
@@ -84,7 +89,16 @@ interface Resources {
       "posts": "Publicaciones",
       "details": "Detalles",
       "statistics": "Estadística",
-      "your-post": "Tus publicaciones"
+      "your-post": "Publicaciones",
+      "account": "Cuenta",
+      "profile": "Perfil",
+      "privacy-safety": "Privacidad y seguridad",
+      "password": "Contraseña",
+      "save-changes": "Guardar cambios"
+    },
+    "helpers": {
+      "email-not-show": "El correo electrónico no se mostrará públicamente.",
+      "username-unique": "Debe ser un nombre único"
     }
   }
 }

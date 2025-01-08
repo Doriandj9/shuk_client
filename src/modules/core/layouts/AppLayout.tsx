@@ -34,6 +34,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useAppLoading } from "@/store/loadingStore";
 import AppLoading from "../components/AppLoading";
 import MenuMobile from "./partials/MenuMobile";
+import { inputsCustomizations } from "@/config/theme/customizations/inputs";
 
 
 const { path: pathLogin } = webRoutes.login;
@@ -72,6 +73,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
           //         }
           //     }
           // },
+          ...inputsCustomizations,
          MuiMenu: {
           styleOverrides:{
               root: {

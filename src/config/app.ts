@@ -40,8 +40,8 @@ export const appTheme: ThemeOptions = {
         },
         secondary: {
             main: app.colors.secondary
-        }
-    }
+        },
+    },
 };
 
 export const api = axios.create({

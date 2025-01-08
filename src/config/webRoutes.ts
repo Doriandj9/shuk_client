@@ -21,6 +21,9 @@ export const webRoutes = {
             account: {
                 path: 'account'
             },
+            password: {
+                path: 'password'
+            },
             privacy_security:{
                 path: 'privacy'
             } 
