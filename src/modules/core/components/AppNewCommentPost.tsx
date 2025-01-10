@@ -54,6 +54,7 @@ const AppNewCommentPost: React.FC<AppNewCommentPostProps> = ({ postId }) => {
                                     autoFocus
                                     disabled={!user || comment.isPending}
                                     maxRows={4}
+                                    minRows={2}
                                     placeholder={t('messages.labels.comment.write')}
                                 />
                             )}

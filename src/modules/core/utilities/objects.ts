@@ -1,6 +1,6 @@
 
 
-export const cloneObject = (obj: object | unknown): object | unknown => {
+export const cloneObject = <T>(obj: object | unknown | T): object | unknown | T => {
     let clone: object | unknown = obj;
     if (typeof structuredClone === 'function') {
         clone = structuredClone(obj);

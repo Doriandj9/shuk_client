@@ -126,3 +126,26 @@ export const moment_locale_es = {
         doy: 4  // Se usa para determinar la primera semana del año.
     }
 };
+
+export const genderValues = {
+    'es': [{
+        value: 'M',
+        label: 'Masculino'
+    },{
+        value: 'F',
+        label: 'Femenino'
+    },{
+        value: 'PND',
+        label: 'Prefiero no decirlo'
+    }],
+    'en': [{
+        value: 'M',
+        label: 'Male'
+    },{
+        value: 'F',
+        label: 'Female'
+    },{
+        value: 'PND',
+        label: 'I prefer not to say it'
+    }]
+};

@@ -5,11 +5,17 @@ import { User } from '@/modules/web/@types/web';
 import { jwtDecode } from 'jwt-decode';
 import { create } from 'zustand';
 
+type uploadPhotoFn = {
+    (payload: string): unknown;
+    (file: Blob): unknown;
+};
+
 type AuthProps = {
     token: string | null;
     user: User | null;
     updateToken: (payload: string, timeExpired: string) => unknown;
     updateUser: (payload: string) => unknown;
+    updatePhoto: uploadPhotoFn;
     isLogin: boolean;
     isProvider: boolean;
     logout: () => unknown;
@@ -91,6 +97,37 @@ export const useAuthStore = create<AuthProps>()((set) => {
                 isLogin: false,
                 token: null,
                 isProvider: false
+            };
+        }),
+        updatePhoto: (payloadOrFile) => set((state) => {
+           
+            if(payloadOrFile instanceof Blob){
+                const file = new FileReader();
+                file.readAsDataURL(payloadOrFile);
+
+               file.onload = () => {
+                    const path = file.result;
+                    if(typeof path === 'string' && user){
+                        user.photo = path;
+                    }
+                };
+                    return {
+                        ...state,
+                        user: user
+                    };
+            }
+
+            if(user){
+                user.photo = payloadOrFile;
+                return {
+                    ...state,
+                    user: user,
+                };
+            }
+
+            return {
+                ...state,
+                user: user,
             };
         }),
         isProvider: isUserProviderDefault

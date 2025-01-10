@@ -48,8 +48,32 @@ interface Resources {
           "placeholder": "+593 912345678"
         },
         "username": {
-          "label": "Username",
-          "placeholder": "Ex: tito123"
+          "label": "Nombre de usuario",
+          "placeholder": "Ejm: tito123"
+        },
+        "nationality": {
+          "label": "Nacionalidad",
+          "placeholder": "Ejm: Ecuador"
+        },
+        "gender": {
+          "label": "Genero",
+          "placeholder": "Ejm: Hombre"
+        },
+        "about-me": {
+          "label": "Acerca de mi",
+          "placeholder": "Ejm: Soy una persona tranquila"
+        },
+        "new-password": {
+          "label": "Nueva contraseña",
+          "placeholder": "Ex: ******"
+        },
+        "odl-password": {
+          "label": "Contraseña anterior",
+          "placeholder": "Ex: ******"
+        },
+        "repeat-password": {
+          "label": "Vuelva a escribir la nueva contraseña",
+          "placeholder": "Ex: ******"
         }
       },
       "buttons": {
@@ -73,7 +97,11 @@ interface Resources {
         "nan-type-post": "Error no se selecciono un tipo de publicación",
         "nan-img-post": "No se selecciono una imagen para la publicación",
         "nan-payload-post": "No se pude publicar un contenido vació",
-        "min-length": "Ingresar un mínimo de {count} caracteres"
+        "min-length": "Ingresar un mínimo de {count} caracteres",
+        "max-length": "Ingresar un máximo de {count} caracteres",
+        "special-characters": "Introduzca al menos {count} caracteres especiales",
+        "letters-uppercase": "Ingrese al menos {count} letras mayúsculas",
+        "number-count": "Introduzca al menos {count} números"
       }
     },
     "titles": {
@@ -94,7 +122,10 @@ interface Resources {
       "profile": "Perfil",
       "privacy-safety": "Privacidad y seguridad",
       "password": "Contraseña",
-      "save-changes": "Guardar cambios"
+      "save-changes": "Guardar cambios",
+      "upload-image": "Cargar imagen",
+      "avatar": "Avatar",
+      "none": "Ninguno"
     },
     "helpers": {
       "email-not-show": "El correo electrónico no se mostrará públicamente.",

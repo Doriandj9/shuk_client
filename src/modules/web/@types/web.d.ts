@@ -28,6 +28,7 @@ export type User = {
     is_user_provider?: boolean,
     username?: string;
     total_posts?: number;
+    has_password?: boolean;
 }
 
 export interface InfinityData<T>{

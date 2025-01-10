@@ -29,7 +29,6 @@ const AlternativeLogin = () => {
 
   const loginGoogle = useGoogleLogin({
     onSuccess: (response) => {
-      console.log(response);
       setGoogleUserToken(response.access_token);
     },
     onError: (error) =>

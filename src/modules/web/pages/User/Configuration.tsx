@@ -1,18 +1,13 @@
 import AppLayout from "@/modules/core/layouts/AppLayout";
-import { Outlet, useParams } from "react-router-dom";
-import { useGetInfoForUsername } from "../../hooks/user/hook";
-import AppLoading from "@/modules/core/components/AppLoading";
+import { Outlet } from "react-router-dom";
 import NavbarConfig from "../../components/NavbarConfig";
 
 
 const Configuration = () => {
-    const params = useParams();
-    const { data, isLoading } = useGetInfoForUsername(params.username || '');
-    console.log(data);
+
     return (
         <>
             <AppLayout>
-                <AppLoading isOpen={isLoading} />
                 <div className="w-full gap-2 flex flex-col md:flex-row h-full">
                     <div className="w-full md:w-72">
                         <NavbarConfig />

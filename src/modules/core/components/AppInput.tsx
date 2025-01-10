@@ -30,7 +30,7 @@ const AppInput: React.FC<AppInputProps> = ({ label, inputProps, control, labelSt
                             error={fieldState?.error ? true : false}
                             helperText={fieldState?.error?.message || inputProps.helperText}
                             color={fieldState?.error ? 'primary' : 'error'}
-                            value={field.value}
+                            value={field.value ?? ''}
                         />
                     ))}
                 />

@@ -49,6 +49,30 @@
             "username": {
                 "label": "Username",
                 "placeholder": "Ex: tito123" 
+            },
+            "nationality": {
+                "label": "Nationality",
+                "placeholder": "Ex: United States" 
+            },
+            "gender": {
+                "label": "Gender",
+                "placeholder": "Ex: Men" 
+            },
+            "about-me": {
+                "label": "About me",
+                "placeholder": "Ex: I am a calm person" 
+            },
+            "new-password": {
+                "label": "New password",
+                "placeholder": "Ex: ******" 
+            },
+            "odl-password": {
+                "label": "Old password",
+                "placeholder": "Ex: ******" 
+            },
+            "repeat-password": {
+                "label": "Re-type new password",
+                "placeholder": "Ex: ******" 
             }
         },
         "buttons": {
@@ -72,7 +96,11 @@
             "nan-type-post": "Error no post type was selected",
             "nan-img-post": "No image was selected for publication",
             "nan-payload-post": "You cannot post empty content",
-            "min-length": "Enter a minimum of {count} characters"
+            "min-length": "Enter a minimum of {count} characters",
+            "max-length": "Enter a maximum of {count} characters",
+            "special-characters": "Enter at least {count} special characters",
+            "letters-uppercase": "Enter at least {count} uppercase letters",
+            "number-count": "Enter at least {count} numbers"
         }
     },
     "titles": {
@@ -93,7 +121,10 @@
         "profile": "Profile",
         "privacy-safety": "Privacy & safety",
         "password": "Password",
-        "save-changes": "Save changes"
+        "save-changes": "Save changes",
+        "upload-image": "Upload image",
+        "avatar": "Avatar",
+        "none": "None"
     },
     "helpers": {
         "email-not-show": "Email will not be displayed publicly.",

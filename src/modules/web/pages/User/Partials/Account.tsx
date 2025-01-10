@@ -36,7 +36,6 @@ const Account = () => {
                         className="mt-8"
                         label={t('register.inputs.username.label')}
                         labelStrong
-                        // fullWidth
                         inputProps={{
                             placeholder: t('register.inputs.username.placeholder'),
                             name: 'username',

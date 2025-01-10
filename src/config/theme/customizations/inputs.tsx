@@ -33,8 +33,8 @@ export const inputsCustomizations: Components<Theme> = {
       },
       input: {
         '&::placeholder': {
-            opacity: 0.7,
-            color: alpha(app.colors.primary,0.5),
+          opacity: 0.7,
+          color: alpha(app.colors.primary, 0.5),
         }
       }
     },
@@ -52,30 +52,43 @@ export const inputsCustomizations: Components<Theme> = {
         backgroundColor: (theme).palette.background.default,
         transition: 'border 150ms ease-in',
         [`&.${outlinedInputClasses.focused}`]: {
-            outline: `2px solid #2b6cb0`,
-          },
+          outline: `2px solid #2b6cb0`,
+        },
         ...theme.applyStyles('dark', {
-            backgroundColor: '#ccc',
-            color: 'black',
-            [`&.${outlinedInputClasses.focused}`]: {
-                outlineColor: `#ccc`,
-              },
+          backgroundColor: '#ccc',
+          color: 'black',
+          [`&.${outlinedInputClasses.focused}`]: {
+            outlineColor: `#ccc`,
+          },
         }),
         variants: [
           {
             props: {
               size: 'small',
             },
-            style: {
-              height: '2.25rem',
+            style(args) {
+              if (Reflect.has(args, 'multiline') && Reflect.get(args, 'multiline') === true) {
+                return {};
+              }
+
+              return {
+                height: '2.25rem',
+                width: '60%'
+              };
             },
           },
           {
             props: {
               size: 'medium',
             },
-            style: {
-              height: '2.5rem',
+            style(args) {
+              if (Reflect.has(args, 'multiline') && Reflect.get(args, 'multiline') === true) {
+                return {};
+              }
+
+              return {
+                height: '2.5rem',
+              };
             },
           },
         ],
