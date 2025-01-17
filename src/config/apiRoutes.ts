@@ -31,6 +31,12 @@ export const routesApi = {
         },
         user_info: {
             path: 'user-info/{username}'
+        },
+        config: {
+            path: 'user-config'
+        },
+        update_settings: {
+            path: 'settings-update-user'
         }
     }
  };

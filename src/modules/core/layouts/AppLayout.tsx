@@ -126,6 +126,12 @@ const AppLayout: React.FC<Children> = ({ children }) => {
       document.body.classList.add(themeMode);
     };
 
+    if(themeMode == 'system'){
+      document.body.classList.remove('dark');
+      document.body.classList.remove('system');
+      document.body.classList.add('light');
+    };
+
   }, [themeMode]);
 
   return (

@@ -6,6 +6,8 @@ import { useTimeFormatPost } from '@/modules/core/hooks/useTimesFormats';
 import { PostIconSvg } from '@/modules/core/components/SVGComponents';
 import { useTranslation } from 'react-i18next';
 import { User } from '../@types/web';
+import { useDataCountries } from '@/store/countries';
+import { useLanguageApp } from '@/store/language';
 
 type ContentInfoProps = {
     countPosts: number;
@@ -15,7 +17,12 @@ type ContentInfoProps = {
 const ContentInfo: React.FC<ContentInfoProps> = ({countPosts, user}) => {
 
     const { format } = useTimeFormatPost('date');
+    const appLanguage = useLanguageApp((state) => state.language); 
     const [tWeb] = useTranslation('web');
+    const countries = useDataCountries((state) => state.countries);
+    const selectCountry = countries.find((country) => country.alpha2Code === user?.nationality);
+    const nameCountry = appLanguage === 'en' ? selectCountry?.name : selectCountry?.translations[appLanguage];
+
 
     return (
         <>
@@ -35,7 +42,7 @@ const ContentInfo: React.FC<ContentInfoProps> = ({countPosts, user}) => {
                                 <ListItemIcon>
                                     <Diversity3Icon color='success'  />
                                 </ListItemIcon>
-                                <ListItemText primary={user?.nationality ?? '___ ___ ___'}/>
+                                <ListItemText primary={ nameCountry ?? '___ ___ ___'}/>
                             </ListItem>
                             <ListItem>
                                 <ListItemIcon>

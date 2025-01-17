@@ -124,7 +124,13 @@
         "save-changes": "Save changes",
         "upload-image": "Upload image",
         "avatar": "Avatar",
-        "none": "None"
+        "none": "None",
+        "language": "Language",
+        "has-notify-mail": "Allow email notifications",
+        "has-notify-app": "Allow app notifications",
+        "hidden-mail": "Allow app notifications",
+        "hidden-phone": "Hide cell phone number",
+        "theme-app": "Select the application theme"
     },
     "helpers": {
         "email-not-show": "Email will not be displayed publicly.",

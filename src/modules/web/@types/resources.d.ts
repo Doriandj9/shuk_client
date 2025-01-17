@@ -125,7 +125,13 @@ interface Resources {
       "save-changes": "Guardar cambios",
       "upload-image": "Cargar imagen",
       "avatar": "Avatar",
-      "none": "Ninguno"
+      "none": "Ninguno",
+      "language": "Idioma",
+      "has-notify-mail": "Permitir notificaciones por correo electrónico",
+      "has-notify-app": "Permitir notificaciones de aplicación",
+      "hidden-mail": "Ocultar correo electrónico",
+      "hidden-phone": "Ocultar numero de celular",
+      "theme-app": "Seleccione el tema de la aplicación"
     },
     "helpers": {
       "email-not-show": "El correo electrónico no se mostrará públicamente.",

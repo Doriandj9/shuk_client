@@ -1,4 +1,3 @@
-import { app } from '@/config/app';
 import { deleteCookie, getCookie, setCookie } from '@/modules/core/utilities/cookies';
 import { mergeUserProvider } from '@/modules/core/utilities/mergeUserProvider';
 import { User } from '@/modules/web/@types/web';
@@ -41,21 +40,22 @@ if (!localStorage.jwt) {
 
 
 export const useAuthStore = create<AuthProps>()((set) => {
-    let user: User | null = jwt !== '' ? jwtDecode(jwt || '') : null;
-    let isUserProviderDefault = false;
-    if (user && user.is_user_provider) {
+    let user: User | null = null;
+    try {
+      user =  jwt !== '' ? jwtDecode(jwt || '') : null;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e) {
+        user = null;
+    }
+
+    if (user) {
         user = mergeUserProvider(user);
-        isUserProviderDefault = true;
     }
-
-    if (user && user.photo && !user.is_user_provider) {
-        user.photo = app.server + user.photo;
-    }
-
+    
     if (!tokenExist) {
         localStorage.removeItem('jwt');
     }
-
+    
     return {
         token: token,
         user: tokenExist ? user : null,
@@ -70,18 +70,11 @@ export const useAuthStore = create<AuthProps>()((set) => {
         }),
         updateUser: (payload: string) => set((state) => {
             localStorage.setItem('jwt', payload);
-            let user: User | null = payload !== '' ? jwtDecode(payload) : null;
-            isUserProviderDefault = false;
+            let user: User | null = payload !== '' ? jwtDecode(payload,) : null;
 
             if (user && user.is_user_provider) {
                 user = mergeUserProvider(user);
-
-                isUserProviderDefault = true;
             };
-
-            if (user && user.photo && !user.is_user_provider) {
-                user.photo = app.server + user.photo;
-            }
 
             return {
                 ...state,
@@ -130,6 +123,6 @@ export const useAuthStore = create<AuthProps>()((set) => {
                 user: user,
             };
         }),
-        isProvider: isUserProviderDefault
+        isProvider: user?.is_user_provider ? true : false
     };
 });

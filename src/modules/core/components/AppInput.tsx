@@ -9,9 +9,8 @@ type AppInputProps = {
     control: unknown,
     className?: string;
 };
-let render = 0;
+
 const AppInput: React.FC<AppInputProps> = ({ label, inputProps, control, labelStrong, className, fullWidth }) => {
-    console.log('render', ++render);
     return (
         <>
         <div className={className}>

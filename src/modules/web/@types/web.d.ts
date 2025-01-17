@@ -1,3 +1,4 @@
+import { LanguageApp, ThemeOptions } from "@/config/@types/app";
 import { DocStatus } from "@/modules/core/@types/core";
 import { facebookUser, googleUser } from "@/modules/core/@types/gUser";
 
@@ -29,7 +30,20 @@ export type User = {
     username?: string;
     total_posts?: number;
     has_password?: boolean;
+    config?: UserSettings;
+    is_merge?: boolean;
+    about_me?: string;
+    gender?: 'M' | 'F';
 }
+
+export type UserSettings = {
+    language: LanguageApp;
+    notifications_by_mail: boolean;
+    notifications_by_app: boolean;
+    hidden_mail: boolean;
+    hidden_phone_number: boolean;
+    theme: ThemeOptions;
+};
 
 export interface InfinityData<T>{
       current_page: number;

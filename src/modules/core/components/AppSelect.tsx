@@ -40,6 +40,7 @@ const AppSelect: React.FC<AppSelectProps> = ({ name, label, control, fullWidth, 
                                 onChange={field.onChange}
                                 onBlur={field.onBlur}
                                 MenuProps={MenuProps}
+                                sx={{minWidth: '7rem', maxWidth: '100%'}}
                             >
                                 {options.map((item, index) => (
                                     <MenuItem key={index} id={String(index)} value={item.value}>

@@ -49,6 +49,13 @@
                 "send": "Enviar",
                 "comments": "Comentarios",
                 "end-comments":"¡Y eso es todo por ahora! Hemos llegado al final de los comentarios de este post, pero no te preocupes, ¡pronto llegarán más!"
+            },
+            "app": {
+                "dark": "Oscuro",
+                "light": "Claro",
+                "system": "Sistema",
+                "update-success": "Actualización exitosa",
+                "loading": "Cargando..."
             }
         },
         "success": {

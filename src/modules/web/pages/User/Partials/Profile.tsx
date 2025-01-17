@@ -7,57 +7,85 @@ import { useTranslation } from "react-i18next";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { ProfileFormTYpe, useProfileSchema } from "@/modules/web/validations/profileSchema";
 import { ChangeEventHandler, useMemo, useState } from "react";
-import { useGetCountries } from "@/modules/web/hooks/countries/hook";
 import AppSelect from "@/modules/core/components/AppSelect";
 import { genderValues } from "@/config/app";
 import { useLanguageApp } from "@/store/language";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { convertImg } from "@/modules/core/utilities/img/convert";
+import { useUpdateConfig } from "@/modules/web/hooks/user/hook";
+import { useDataCountries } from "@/store/countries";
+import moment from "moment";
+import { toast } from "sonner";
+import AppToast from "@/modules/core/components/AppToast";
 
 
 
 
 const Profile = () => {
     const user = useAuthStore((state) => state.user);
+    const reloadUser = useAuthStore((state) => state.updateUser);
     const [userClone, setUserClone] = useState(user);
     const language = useLanguageApp((state) => state.language);
+    const { config } = useUpdateConfig();
+
     const [t] = useTranslation('web');
-    const { data } = useGetCountries();
+    const [tCore] = useTranslation('core');
+    
+    const dataCountries = useDataCountries((state) => state.countries);
     const schema = useProfileSchema();
     const { control, register, handleSubmit } = useForm<ProfileFormTYpe>({
         defaultValues: {
-            full_name: user?.full_name ?? 'error'
+            full_name: user?.full_name ?? 'error',
+            about_me: user?.about_me,
+            gender: user?.gender,
+            birthday: typeof user?.birthday === 'object' ? user.birthday?.toDateString() : user?.birthday,
+            nationality: user?.nationality ?? undefined,
         },
         resolver: zodResolver(schema)
     });
     const countries = useMemo(() => {
-        return data?.map((country => ({
+        return dataCountries.map((country => ({
             value: country.alpha2Code,
             label: country.name
         })));
-    }, [data]);
+    }, [dataCountries]);
 
     const genders = useMemo(() => {
         return genderValues[language];
-    }, [data, language]);
+    }, [dataCountries, language]);
 
 
     const saveChanges: SubmitHandler<ProfileFormTYpe> = (data) => {
         if (data.photo instanceof FileList && data.photo.length > 0) {
             data.photo = data.photo[0];
+        } else {
+            data.photo = null;
         }
 
-        console.log(data);
+        const idToast =  moment().unix();
+        toast.promise(config.mutateAsync(data,{
+            onSuccess(response) {
+                reloadUser(response.jwt);
+            },
+        }),{
+            id: idToast,
+            loading: tCore('messages.labels.app.loading'),
+            success() {
+                return <AppToast id={idToast} message={tCore('messages.labels.app.update-success')}  status="success" fullWidth />;
+            },
+            error: <AppToast id={idToast} message={tCore('messages.errors.requests.unknown')}  status="error" fullWidth />,
+            position: "top-center"
+        });
     };
 
-    const {onChange,...methods} = {...register('photo')};
+    const { onChange, ...methods } = { ...register('photo') };
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         if (e.currentTarget.files instanceof FileList && e.currentTarget.files.length > 0) {
-            convertImg(e.currentTarget.files[0],(result: string) => {
+            convertImg(e.currentTarget.files[0], (result: string) => {
                 setUserClone((state) => {
-                    if(user){
-                        return {...state,id: state?.id ?? -1, photo: result};
+                    if (user) {
+                        return { ...state, id: state?.id ?? -1, photo: result };
                     }
                     return state;
                 });
@@ -65,7 +93,7 @@ const Profile = () => {
         }
         onChange(e);
     };
-   
+
 
     return (
         <>
@@ -146,7 +174,7 @@ const Profile = () => {
                         control={control}
                     />
 
-                    <Button sx={{ textTransform: 'none' }} variant="contained" color="secondary" type="submit">
+                    <Button sx={{ textTransform: 'none' }} variant="contained" color="secondary" type="submit" disabled={config.isPending}>
                         {t('descriptions.save-changes')}
                     </Button>
                 </form>

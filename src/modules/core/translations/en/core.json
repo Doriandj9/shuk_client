@@ -50,6 +50,13 @@
                 "comments": "Comments",
                 "end-comments": "And that's all for now! We've reached the end of the comments for this post, but don't worry, more will be coming soon!"
 
+            },
+            "app": {
+                "dark": "Dark",
+                "light": "Light",
+                "system": "System",
+                "update-success": "Update successful",
+                "loading": "Loading..."
             }
         },
         "success": {
