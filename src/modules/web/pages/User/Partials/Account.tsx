@@ -1,24 +1,25 @@
 import AppInput from "@/modules/core/components/AppInput";
-import AppToast from "@/modules/core/components/AppToast";
+import { useAppToast } from "@/modules/core/hooks/useAppToast";
 import { useUpdateConfig } from "@/modules/web/hooks/user/hook";
 import { useAccountSchema } from "@/modules/web/validations/accountSchema";
 import { useAuthStore } from "@/store/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@mui/material";
-import moment from "moment";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
 type AccountFormType = {
     username: string;
     email: string;
 };
 
+
+
 const Account = () => {
     const user = useAuthStore((state) => state.user);
     const [t] = useTranslation('web');
-    const {config} = useUpdateConfig();
+    const { toastPromise } = useAppToast();
+    const { config } = useUpdateConfig();
     const schema = useAccountSchema();
     const [tCore] = useTranslation('core');
     const reloadUser = useAuthStore((state) => state.updateUser);
@@ -34,21 +35,26 @@ const Account = () => {
         resolver: zodResolver(schema)
     });
 
+
+
     const saveChanges: SubmitHandler<AccountFormType> = (data) => {
-        const idToast =  moment().unix();
-        toast.promise(config.mutateAsync(data,{
-            onSuccess(response) {
-                reloadUser(response.jwt);
-            },
-        }),{
-            id: idToast,
-            loading: tCore('messages.labels.app.loading'),
-            success() {
-                return <AppToast id={idToast} message={tCore('messages.labels.app.update-success')}  status="success" fullWidth />;
-            },
-            error: <AppToast id={idToast} message={tCore('messages.errors.requests.unknown')}  status="error" fullWidth />,
-            position: "top-center"
+        const prom = new Promise((resolve, reject) => {
+            config.mutateAsync(data)
+                .then(resolve)
+                .catch(reject);
         });
+
+        toastPromise(
+            prom,
+            tCore('messages.labels.app.update-success'),
+            undefined,
+            (response) => {
+                if(response && 'jwt' in response && typeof response.jwt === 'string' ){
+                    reloadUser(response.jwt);
+                }
+            },
+        );
+
     };
 
     return (
@@ -67,7 +73,7 @@ const Account = () => {
                         }}
                         control={control}
                     />
-                    
+
                     <AppInput
                         className="mt-4"
                         label={t('register.inputs.email.label')}
@@ -83,10 +89,10 @@ const Account = () => {
                     />
 
                     <div className="mt-6 mb-2">
-                    <Button type="submit" variant="contained" color="secondary" disabled={config.isPending}>
-                        {t('descriptions.save-changes')}
-                    </Button>
-                        
+                        <Button type="submit" variant="contained" color="secondary" disabled={config.isPending}>
+                            {t('descriptions.save-changes')}
+                        </Button>
+
                     </div>
                 </form>
             </div>

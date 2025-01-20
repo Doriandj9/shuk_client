@@ -14,9 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { convertImg } from "@/modules/core/utilities/img/convert";
 import { useUpdateConfig } from "@/modules/web/hooks/user/hook";
 import { useDataCountries } from "@/store/countries";
-import moment from "moment";
-import { toast } from "sonner";
-import AppToast from "@/modules/core/components/AppToast";
+import { useAppToast } from "@/modules/core/hooks/useAppToast";
 
 
 
@@ -27,10 +25,12 @@ const Profile = () => {
     const [userClone, setUserClone] = useState(user);
     const language = useLanguageApp((state) => state.language);
     const { config } = useUpdateConfig();
+    const { toastPromise } = useAppToast();
+
 
     const [t] = useTranslation('web');
     const [tCore] = useTranslation('core');
-    
+
     const dataCountries = useDataCountries((state) => state.countries);
     const schema = useProfileSchema();
     const { control, register, handleSubmit } = useForm<ProfileFormTYpe>({
@@ -62,20 +62,22 @@ const Profile = () => {
             data.photo = null;
         }
 
-        const idToast =  moment().unix();
-        toast.promise(config.mutateAsync(data,{
-            onSuccess(response) {
-                reloadUser(response.jwt);
-            },
-        }),{
-            id: idToast,
-            loading: tCore('messages.labels.app.loading'),
-            success() {
-                return <AppToast id={idToast} message={tCore('messages.labels.app.update-success')}  status="success" fullWidth />;
-            },
-            error: <AppToast id={idToast} message={tCore('messages.errors.requests.unknown')}  status="error" fullWidth />,
-            position: "top-center"
+        const prom = new Promise((resolve, reject) => {
+            config.mutateAsync(data)
+                .then(resolve)
+                .catch(reject);
         });
+
+        toastPromise(
+            prom,
+            tCore('messages.labels.app.update-success'),
+            undefined,
+            (response) => {
+                if (response && 'jwt' in response && typeof response.jwt === 'string') {
+                    reloadUser(response.jwt);
+                }
+            },
+        );
     };
 
     const { onChange, ...methods } = { ...register('photo') };
