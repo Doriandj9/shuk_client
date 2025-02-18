@@ -35,6 +35,10 @@
     @apply text-primary dark:text-slate-400;
   }
 
+  .border-mode-primary{
+    @apply border-primary dark:border-slate-400;
+  }
+
   .text-mode-secondary {
     @apply text-secondary dark:text-slate-400;
   }
@@ -117,13 +121,13 @@
   }
 
   .app-navbar {
-    @apply w-[20rem] fixed top-0 left-0 bg-slate-100 dark:bg-slate-800 md:w-[20rem] lg:w-[20rem] xl:w-[18rem] 2xl:w-[20rem];
+    @apply w-64 fixed top-0 left-0 bg-slate-100 dark:bg-slate-800;
     height: 100vh;
     z-index: 1;
   }
 
   .app-navbar-right {
-    @apply w-[15rem] md:w-2/12 lg:w-[16rem] xl:w-[18rem] 2xl:w-[20rem] fixed top-16 right-0 bg-slate-100 dark:bg-slate-800;
+    @apply w-64 fixed top-16 right-0 bg-slate-100 dark:bg-slate-800;
     height: 100vh;
     z-index: 1;
   }
@@ -287,6 +291,11 @@
     @apply flex gap-1 text-sm items-center hover:bg-black/5 p-2 dark:hover:bg-black/25;
   }
 
+  .text-container-overflow{
+    white-space: nowrap;  
+    overflow: hidden;     
+    text-overflow: ellipsis;
+  }
   
 .scrollable-container::-webkit-scrollbar {
   width: 12px;  

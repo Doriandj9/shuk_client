@@ -15,7 +15,7 @@ import { convertImg } from "@/modules/core/utilities/img/convert";
 import { useUpdateConfig } from "@/modules/web/hooks/user/hook";
 import { useDataCountries } from "@/store/countries";
 import { useAppToast } from "@/modules/core/hooks/useAppToast";
-
+import { AppPhoneNumberInput } from "@/modules/core/components/AppPhoneNumberInput";
 
 
 
@@ -40,6 +40,7 @@ const Profile = () => {
             gender: user?.gender,
             birthday: typeof user?.birthday === 'object' ? user.birthday?.toDateString() : user?.birthday,
             nationality: user?.nationality ?? undefined,
+            phone: user?.phone ?? undefined
         },
         resolver: zodResolver(schema)
     });
@@ -95,7 +96,6 @@ const Profile = () => {
         }
         onChange(e);
     };
-
 
     return (
         <>
@@ -159,6 +159,15 @@ const Profile = () => {
                         control={control}
                         labelStrong
                         placeholder={t('descriptions.none')}
+                    />
+
+                    <AppPhoneNumberInput
+                        name="phone"
+                        control={control}
+                        labelStrong
+                        label={t('register.inputs.phone.label')}
+                        className="mt-4"
+                        fullWidth
                     />
 
                     <AppInput

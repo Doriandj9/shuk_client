@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, TextField, TextFieldProps } from "@mui/material";
+import { CircularProgress, FormControl, FormLabel, TextField, TextFieldProps } from "@mui/material";
 import { Controller } from "react-hook-form";
 
 type AppInputProps = {
@@ -6,11 +6,13 @@ type AppInputProps = {
     label: string;
     fullWidth?: boolean;
     labelStrong?: boolean;
-    control: unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    control: any,
     className?: string;
+    loading?: boolean;
 };
 
-const AppInput: React.FC<AppInputProps> = ({ label, inputProps, control, labelStrong, className, fullWidth }) => {
+const AppInput: React.FC<AppInputProps> = ({ label, inputProps, control, labelStrong, className, fullWidth, loading }) => {
     return (
         <>
         <div className={className}>
@@ -30,6 +32,16 @@ const AppInput: React.FC<AppInputProps> = ({ label, inputProps, control, labelSt
                             helperText={fieldState?.error?.message || inputProps.helperText}
                             color={fieldState?.error ? 'primary' : 'error'}
                             value={field.value ?? ''}
+                            disabled={loading}
+                            slotProps={{
+                                input: {
+                                    endAdornment: (
+                                        <>
+                                        {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                      </>
+                                    )
+                                }
+                            }}
                         />
                     ))}
                 />

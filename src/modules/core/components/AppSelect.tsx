@@ -6,7 +6,8 @@ type AppSelectProps = {
     label: string;
     fullWidth?: boolean;
     labelStrong?: boolean;
-    control: unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    control: any,
     className?: string;
     id?: string;
     options: { value: string | number; label: string }[];
@@ -41,6 +42,7 @@ const AppSelect: React.FC<AppSelectProps> = ({ name, label, control, fullWidth, 
                                 onBlur={field.onBlur}
                                 MenuProps={MenuProps}
                                 sx={{minWidth: '7rem', maxWidth: '100%'}}
+                                placeholder={placeholder}
                             >
                                 {options.map((item, index) => (
                                     <MenuItem key={index} id={String(index)} value={item.value}>

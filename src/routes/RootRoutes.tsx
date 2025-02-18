@@ -12,6 +12,10 @@ import Account from "@/modules/web/pages/User/Partials/Account";
 import Profile from "@/modules/web/pages/User/Partials/Profile";
 import Security from "@/modules/web/pages/User/Partials/Security";
 import Password from "@/modules/web/pages/User/Partials/Password";
+import AuthAdmin from "./AuthAdmin";
+import { StatisticsAdmin } from "@/modules/admin/pages/StatisticsAdmin";
+import { DashboardAdmin } from "@/modules/admin/pages/DashboardAdmin";
+import { Categories } from "@/modules/admin/pages/Categories/Categories";
 
 const RootRoutes = () => {
   return (
@@ -32,6 +36,19 @@ const RootRoutes = () => {
             <Route path={webRoutes.config_user.children.privacy_security.path} element={<Security />} />
           </Route>
         </Route>
+
+        {/* routes for admin */}
+
+        <Route element={<AuthAdmin />}>
+          <Route path={webRoutes.dashboard_admin.path} element={<DashboardAdmin />}>
+            <Route element={<StatisticsAdmin />} index/>
+            <Route element={<StatisticsAdmin />} path={webRoutes.dashboard_admin.children.statistics.path} />
+            <Route element={<Categories />} path={webRoutes.dashboard_admin.children.categories.path} />
+          </Route>
+        </Route>
+
+        <Route path="*" element={<>404</>} />
+
       </CustomRoutes>
     </>
   );

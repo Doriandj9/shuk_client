@@ -1,5 +1,5 @@
 import { deleteCookie, getCookie, setCookie } from '@/modules/core/utilities/cookies';
-import { mergeUserProvider } from '@/modules/core/utilities/mergeUserProvider';
+import { mergeUserProvider, verifyAdminUser } from '@/modules/core/utilities/mergeUserProvider';
 import { User } from '@/modules/web/@types/web';
 import { jwtDecode } from 'jwt-decode';
 import { create } from 'zustand';
@@ -17,6 +17,7 @@ type AuthProps = {
     updatePhoto: uploadPhotoFn;
     isLogin: boolean;
     isProvider: boolean;
+    isAdmin: boolean;
     logout: () => unknown;
 };
 
@@ -42,8 +43,8 @@ if (!localStorage.jwt) {
 export const useAuthStore = create<AuthProps>()((set) => {
     let user: User | null = null;
     try {
-      user =  jwt !== '' ? jwtDecode(jwt || '') : null;
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        user = jwt !== '' ? jwtDecode(jwt || '') : null;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
         user = null;
     }
@@ -51,11 +52,11 @@ export const useAuthStore = create<AuthProps>()((set) => {
     if (user) {
         user = mergeUserProvider(user);
     }
-    
+
     if (!tokenExist) {
         localStorage.removeItem('jwt');
     }
-    
+
     return {
         token: token,
         user: tokenExist ? user : null,
@@ -79,7 +80,11 @@ export const useAuthStore = create<AuthProps>()((set) => {
             return {
                 ...state,
                 user: user,
-                isProvider: true
+                isProvider: true,
+                isAdmin: user?.data_login_social_media ?
+                    verifyAdminUser(typeof user.data_login_social_media === 'string' ?
+                        user.data_login_social_media : '')
+                    : false
             };
         }),
         logout: () => set(() => {
@@ -93,24 +98,24 @@ export const useAuthStore = create<AuthProps>()((set) => {
             };
         }),
         updatePhoto: (payloadOrFile) => set((state) => {
-           
-            if(payloadOrFile instanceof Blob){
+
+            if (payloadOrFile instanceof Blob) {
                 const file = new FileReader();
                 file.readAsDataURL(payloadOrFile);
 
-               file.onload = () => {
+                file.onload = () => {
                     const path = file.result;
-                    if(typeof path === 'string' && user){
+                    if (typeof path === 'string' && user) {
                         user.photo = path;
                     }
                 };
-                    return {
-                        ...state,
-                        user: user
-                    };
+                return {
+                    ...state,
+                    user: user
+                };
             }
 
-            if(user){
+            if (user) {
                 user.photo = payloadOrFile;
                 return {
                     ...state,
@@ -123,6 +128,7 @@ export const useAuthStore = create<AuthProps>()((set) => {
                 user: user,
             };
         }),
-        isProvider: user?.is_user_provider ? true : false
+        isProvider: user?.is_user_provider ? true : false,
+        isAdmin: user?.data_login_social_media ? verifyAdminUser(typeof user.data_login_social_media === 'string' ? user.data_login_social_media : '') : false
     };
 });

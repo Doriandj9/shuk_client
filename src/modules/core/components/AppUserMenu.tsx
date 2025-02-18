@@ -11,10 +11,10 @@ import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
 import { useAuthLogout } from "@/modules/web/hooks/auth/hooksAuth";
 import AppLoading from "./AppLoading";
-
+import AppsIcon from '@mui/icons-material/Apps';
 
 const AppUserMenu = () => {
-    const { user, isLogin } = useAuthStore((state) => state);
+    const { user, isLogin, isAdmin } = useAuthStore((state) => state);
     const [t] = useTranslation('core');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const { logout } = useAuthLogout(logOutFn);
@@ -43,7 +43,12 @@ const AppUserMenu = () => {
 
     const handleConfig = () => {
         handleClose();
-        navigate(webRoutes.config_user.path.replace(':username',user?.username ?? ''));
+        navigate(webRoutes.config_user.path.replace(':username', user?.username ?? ''));
+    };
+
+    const handleAdministration = () => {
+        handleClose();
+        navigate(webRoutes.dashboard_admin.children.statistics.uri());
     };
 
     function logOutFn() {
@@ -54,7 +59,7 @@ const AppUserMenu = () => {
 
     return (
         <>
-        <AppLoading isOpen={logout.isPending} />
+            <AppLoading isOpen={logout.isPending} />
             <Tooltip title={t('mobile.menu.account-settings')}
 
             >
@@ -122,6 +127,13 @@ const AppUserMenu = () => {
                     <SettingsIcon />
                     {t('mobile.menu.configuration')}
                 </MenuItem>
+                {
+                    isAdmin &&
+                    <MenuItem onClick={handleAdministration} className="flex gap-3 items-center">
+                        <AppsIcon />
+                        {t('mobile.menu.administration')}
+                    </MenuItem>
+                }
                 <Divider />
                 <MenuItem onClick={handleLogOut}>
                     <ListItemIcon>

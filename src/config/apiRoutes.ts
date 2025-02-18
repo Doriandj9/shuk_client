@@ -38,5 +38,10 @@ export const routesApi = {
         update_settings: {
             path: 'settings-update-user'
         }
+    },
+    admin: {
+        resource_categories: {
+            path: 'admin/categories'
+        }
     }
  };

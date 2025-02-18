@@ -26,7 +26,7 @@ import { MenuOutlined } from "@mui/icons-material";
 import { ThemeOptions } from "@/config/@types/app";
 import AppMenuContent from "@core/components/AppMenuContent";
 import { motion, AnimatePresence } from "framer-motion";
-import AppNavbar from "@core/components/AppNavbar";
+import AppNavbar, { AppNavbarProps } from "@core/components/AppNavbar";
 import { webRoutes } from "@/config/webRoutes";
 import { useAuthStore } from "@/store/auth";
 import AppUserMenu from "../components/AppUserMenu";
@@ -40,7 +40,9 @@ import { inputsCustomizations } from "@/config/theme/customizations/inputs";
 const { path: pathLogin } = webRoutes.login;
 const { path: pathHome } = webRoutes.home;
 
-const AppLayout: React.FC<Children> = ({ children }) => {
+type AppLayoutProps = AppNavbarProps & Children & {}
+
+const AppLayout: React.FC< AppLayoutProps > = ({ children, isAdmin }) => {
   const [t, i18n] = useTranslation("core");
   const {loading} = useAppLoading((state) => state);
   const [showMovil, setShowMovil] = useState<boolean>(true);
@@ -283,9 +285,9 @@ const AppLayout: React.FC<Children> = ({ children }) => {
           </header>
 
           <main role="content" className="app-main">
-            <div className="w-1/4 hidden xl:block" />
+            <div className="w-64 hidden xl:block flex-shrink-0" />
             <div className="app-navbar hidden xl:block overflow-y-auto">
-              <AppNavbar />
+              <AppNavbar isAdmin={isAdmin} onClose={() => setShowNavbar(false)} />
             </div>
             <AnimatePresence>
               {showNavbar && (
@@ -298,7 +300,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
                     transition={{ type: "spring", stiffness: 400, damping: 50 }}
                   >
                     <div>
-                      <AppNavbar />
+                      <AppNavbar isAdmin={isAdmin} onClose={() => setShowNavbar(false)} />
                     </div>
                   </motion.div>
                 </React.Fragment>
@@ -306,7 +308,7 @@ const AppLayout: React.FC<Children> = ({ children }) => {
             </AnimatePresence>
 
             <div className="flex-grow p-2 xl:p-4 max-w-full">{children}</div>
-            <div className="w-1/4 hidden md:block" />
+            <div className="w-64 hidden md:block flex-shrink-0" />
             <div className="app-navbar-right hidden md:block"></div>
           </main>
         </div>

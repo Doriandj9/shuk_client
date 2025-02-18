@@ -7,7 +7,7 @@
         "inputs": {
             "email": {
                 "placeholder": "Ingresa tu correo electrónico"
-            },  
+            },
             "password": {
                 "placeholder": "Ingresa tu contraseña"
             }
@@ -48,40 +48,50 @@
             },
             "username": {
                 "label": "Nombre de usuario",
-                "placeholder": "Ejm: tito123" 
+                "placeholder": "Ejm: tito123"
             },
             "nationality": {
                 "label": "Nacionalidad",
-                "placeholder": "Ejm: Ecuador" 
+                "placeholder": "Ejm: Ecuador"
             },
             "gender": {
                 "label": "Genero",
-                "placeholder": "Ejm: Hombre" 
+                "placeholder": "Ejm: Hombre"
             },
             "about-me": {
                 "label": "Acerca de mi",
-                "placeholder": "Ejm: Soy una persona tranquila" 
+                "placeholder": "Ejm: Soy una persona tranquila"
             },
             "new-password": {
                 "label": "Nueva contraseña",
-                "placeholder": "Ex: ******" 
+                "placeholder": "Ex: ******"
             },
             "odl-password": {
                 "label": "Contraseña anterior",
-                "placeholder": "Ex: ******" 
+                "placeholder": "Ex: ******"
             },
             "repeat-password": {
                 "label": "Vuelva a escribir la nueva contraseña",
-                "placeholder": "Ex: ******" 
+                "placeholder": "Ex: ******"
+            },
+            "category-name": {
+                "label": "Nombre",
+                "placeholder": "Ejm: Familia"
+            },
+            "category-icon": {
+                "label": "Icono SVG",
+                "placeholder": "Ejm: <svg>...."
             }
         },
         "buttons": {
-            "save": "Continuar con el registro"
+            "save": "Continuar con el registro",
+            "new-category": "Crear categoría"
         },
         "labels": {
             "whit-account": "¿Tienes una cuenta?",
             "login": "Inicia sesión",
-            "save-post": "Felicidades por tu publicación."
+            "save-post": "Felicidades por tu publicación.",
+            "preview": "Previsualización"
         }
     },
     "validations": {
@@ -100,12 +110,22 @@
             "max-length": "Ingresar un máximo de {count} caracteres",
             "special-characters": "Introduzca al menos {count} caracteres especiales",
             "letters-uppercase": "Ingrese al menos {count} letras mayúsculas",
-            "number-count": "Introduzca al menos {count} números"
+            "number-count": "Introduzca al menos {count} números",
+            "one-img-post": "No puede arrastrar mas de una imagen por publicación",
+            "empty-img-post": "No arrastro una imagen",
+            "not-img-post": "El archivo arrastrado no es una imagen",
+            "unknown-img-post": "Existe un error al intentar subir el archivo",
+            "not-selected-img": "No selecciono una imagen"
         }
-        
     },
     "titles": {
-        "create-post": "Crear nueva publicación"
+        "create-post": "Crear nueva publicación",
+        "new-category": "Nueva categoría",
+        "edit-category": "Editar categoría",
+        "categories": "Categorías",
+        "drop-file": "Arrastre un archivo.",
+        "file-search": "Buscar archivo.",
+        "drag-file": "Suelte la imagen"
     },
     "descriptions": {
         "post": "Publicar",
@@ -136,5 +156,14 @@
     "helpers": {
         "email-not-show": "El correo electrónico no se mostrará públicamente.",
         "username-unique": "Debe ser un nombre único"
+    },
+    "columns": {
+        "created_at": "Fecha de creación",
+        "updated_at": "Fecha de actualización",
+        "actions": "Acciones",
+        "category": {
+            "name": "Nombre de categoría",
+            "icon": "Icono de categoría"
+        }
     }
 }

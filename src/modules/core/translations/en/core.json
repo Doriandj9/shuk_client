@@ -56,7 +56,9 @@
                 "light": "Light",
                 "system": "System",
                 "update-success": "Update successful",
-                "loading": "Loading..."
+                "loading": "Loading...",
+                "close": "Close",
+                "return": "Go back"
             }
         },
         "success": {
@@ -74,6 +76,11 @@
                 "share": "Share this post",
                 "copy-link": "Copy link",
                 "link-copied": "Link copied"
+            },
+            "category": {
+                "created": "Category created successfully",
+                "updated": "Category updated successfully",
+                "deleted" :"Category deleted successfully"
             }
         }
     },
@@ -82,7 +89,8 @@
             "configuration": "Configuration",
             "login": "Login",
             "logout": "Log Out",
-            "account-setting": "Account setting"
+            "account-setting": "Account setting",
+            "administration": "Administration"
         }
     }
 }

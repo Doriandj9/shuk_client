@@ -1,7 +1,7 @@
 import { ThemeOptions } from "@/config/@types/app";
 import AppSelect from "@/modules/core/components/AppSelect";
 import AppSwitch from "@/modules/core/components/AppSwitch";
-import AppToast from "@/modules/core/components/AppToast";
+import { useAppToast } from "@/modules/core/hooks/useAppToast";
 import { useUpdateUserConfig } from "@/modules/web/hooks/user/hook";
 import { SecurityFormType, useSecuritySchema } from "@/modules/web/validations/securitySchema";
 import { useAuthStore } from "@/store/auth";
@@ -9,11 +9,9 @@ import { useLanguageApp } from "@/store/language";
 import { useThemeMode } from "@/store/themeMode";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@mui/material";
-import moment from "moment";
 import { useMemo } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
 const languages = [
     {
@@ -37,8 +35,10 @@ const Security = () => {
     const changeAppLanguage = useLanguageApp((state) => state.update);
     const changeTheme = useThemeMode((state) => state.update);
     const reloadUser = useAuthStore((state) => state.updateUser);
+    const { toastPromise } = useAppToast();
 
-    const {config} = useUpdateUserConfig();
+
+    const { config } = useUpdateUserConfig();
 
     const [t] = useTranslation('web');
     const [tCore] = useTranslation('core');
@@ -71,20 +71,22 @@ const Security = () => {
 
 
     const saveChanges: SubmitHandler<SecurityFormType> = (data) => {
-        const idToast =  moment().unix();
-        toast.promise(config.mutateAsync(data,{
-            onSuccess(response) {
-                reloadUser(response.jwt);
-            },
-        }),{
-            id: idToast,
-            loading: tCore('messages.labels.app.loading'),
-            success() {
-                return <AppToast id={idToast} message={tCore('messages.labels.app.update-success')}  status="success" fullWidth />;
-            },
-            error: <AppToast id={idToast} message={tCore('messages.errors.requests.unknown')}  status="error" fullWidth />,
-            position: "top-center"
+        const prom = new Promise((resolve, reject) => {
+            config.mutateAsync(data)
+                .then(resolve)
+                .catch(reject);
         });
+
+        toastPromise(
+            prom,
+            tCore('messages.labels.app.update-success'),
+            tCore('messages.errors.requests.unknown'),
+            (response) => {
+                if (response && 'jwt' in response && typeof response.jwt === 'string') {
+                    reloadUser(response.jwt);
+                }
+            },
+        );
     };
 
     useMemo(() => {

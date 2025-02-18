@@ -7,7 +7,7 @@
         "inputs": {
             "email": {
                 "placeholder": "Enter your email"
-            },  
+            },
             "password": {
                 "placeholder": "Enter your password"
             }
@@ -48,40 +48,50 @@
             },
             "username": {
                 "label": "Username",
-                "placeholder": "Ex: tito123" 
+                "placeholder": "Ex: tito123"
             },
             "nationality": {
                 "label": "Nationality",
-                "placeholder": "Ex: United States" 
+                "placeholder": "Ex: United States"
             },
             "gender": {
                 "label": "Gender",
-                "placeholder": "Ex: Men" 
+                "placeholder": "Ex: Men"
             },
             "about-me": {
                 "label": "About me",
-                "placeholder": "Ex: I am a calm person" 
+                "placeholder": "Ex: I am a calm person"
             },
             "new-password": {
                 "label": "New password",
-                "placeholder": "Ex: ******" 
+                "placeholder": "Ex: ******"
             },
             "odl-password": {
                 "label": "Old password",
-                "placeholder": "Ex: ******" 
+                "placeholder": "Ex: ******"
             },
             "repeat-password": {
                 "label": "Re-type new password",
-                "placeholder": "Ex: ******" 
+                "placeholder": "Ex: ******"
+            },
+            "category-name": {
+                "label": "Name",
+                "placeholder": "Ex: Family"
+            },
+            "category-icon": {
+                "label": "Icon SVG",
+                "placeholder": "Ex: <svg>...."
             }
         },
         "buttons": {
-            "save": "Continue with registration"
+            "save": "Continue with registration",
+            "new-category": "Create category"
         },
         "labels": {
             "whit-account": "Do you have an account?",
             "login": "Sign in",
-            "save-post": "Congratulations on your post."
+            "save-post": "Congratulations on your post.",
+            "preview": "Preview"
         }
     },
     "validations": {
@@ -100,11 +110,23 @@
             "max-length": "Enter a maximum of {count} characters",
             "special-characters": "Enter at least {count} special characters",
             "letters-uppercase": "Enter at least {count} uppercase letters",
-            "number-count": "Enter at least {count} numbers"
+            "number-count": "Enter at least {count} numbers",
+            "one-img-post": "You cannot drag more than one image per post",
+            "empty-img-post": "I don't drag an image",
+            "not-img-post": "The dragged file is not an image",
+            "unknown-img-post": "There was an error when trying to upload the file",
+            "not-selected-img": "I don't select an image"
         }
     },
     "titles": {
-        "create-post": "Create new post"
+        "create-post": "Create new post",
+        "new-category": "New category",
+        "edit-category": "Edit category",
+        "categories": "Categories",
+        "drop-file": "Drag a file.",
+        "file-search": "Search file.",
+        "drag-file": "Release the image"
+
     },
     "descriptions": {
         "post": "Post",
@@ -135,5 +157,14 @@
     "helpers": {
         "email-not-show": "Email will not be displayed publicly.",
         "username-unique": "It must be a unique name"
+    },
+    "columns": {
+        "created_at": "Creation date",
+        "updated_at": "Update date",
+        "actions": "Actions",
+        "category": {
+            "name": "Category name",
+            "icon": "Category icon"
+        }
     }
 }

@@ -56,7 +56,9 @@ interface Resources {
           "light": "Claro",
           "system": "Sistema",
           "update-success": "Actualización exitosa",
-          "loading": "Cargando..."
+          "loading": "Cargando...",
+          "close": "Cerrar",
+          "return": "Regresar"
         }
       },
       "success": {
@@ -74,6 +76,11 @@ interface Resources {
           "share": "Compartir esta publicación",
           "copy-link": "Copiar enlace",
           "link-copied": "Enlace copiado"
+        },
+        "category": {
+          "created": "Categoría creado con éxito",
+          "updated": "Categoría actualizada con éxito",
+          "deleted": "Categoría eliminado con éxito"
         }
       }
     },
@@ -82,7 +89,8 @@ interface Resources {
         "configuration": "Configuración",
         "login": "Iniciar Sesión",
         "logout": "Cerrar Sesión",
-        "account-settings": "Configuración de cuenta"
+        "account-settings": "Configuración de cuenta",
+        "administration": "Administración"
       }
     }
   }

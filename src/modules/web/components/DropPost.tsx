@@ -4,8 +4,9 @@ import LaptopIcon from '@mui/icons-material/Laptop';
 import Close from '@mui/icons-material/Close';
 import { CircularProgress, IconButton } from "@mui/material";
 import { usePostStore } from "@/store/postStore";
+import { useTranslation } from "react-i18next";
 
-type DropPostState = 'INITIAL' | 'DRAG-START' | 'DRAG-LEAVE' | 'DROP' | 'ERROR' | 'DROP-LOAD' | 'PREVIEW';
+export type DropPostState = 'INITIAL' | 'DRAG-START' | 'DRAG-LEAVE' | 'DROP' | 'ERROR' | 'DROP-LOAD' | 'PREVIEW';
 
 
 const clasesForState = {
@@ -21,6 +22,7 @@ const clasesForState = {
 
 const DropPost = () => {
     const fileStore = usePostStore((state) => state.value.file);
+    const [t] = useTranslation('web');
     const updateFile = usePostStore((state) => state.updateValueFile);
     const [file, setFile] = useState<string | null | ArrayBuffer>(null);
     
@@ -44,13 +46,13 @@ const DropPost = () => {
             setDropState('DROP');
             const files = e.dataTransfer.files;
             if (files.length > 1) {
-                setError('No puede arrastrar mas de una imagen por publicación');
+                setError(t('validations.messages.one-img-post'));
                 setDropState('ERROR');
                 return;
             }
 
             if (files.length == 0) {
-                setError('No arrastro una imagen');
+                setError(t('validations.messages.empty-img-post'));
                 setDropState('ERROR');
                 return;
             }
@@ -58,7 +60,7 @@ const DropPost = () => {
             const fileDrop = files[0];
 
             if(!fileDrop.type.includes('image/')){
-                setError('El archivo arrastrado no es una imagen');
+                setError(t('validations.messages.not-img-post'));
                 setDropState('ERROR');
                 return; 
             }
@@ -77,7 +79,7 @@ const DropPost = () => {
 
         } catch (e) {
             console.error(e);
-            setError('Existe un error al intentar subir el archivo');
+            setError(t('validations.messages.unknown-img-post'));
             setDropState('ERROR');
         }
     };
@@ -99,13 +101,13 @@ const DropPost = () => {
     const handleChangeInputFile = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if(!files){
-            setError('No selecciono una imagen');
+            setError(t('validations.messages.not-selected-img'));
             setDropState('ERROR');
             return;
         }
 
         if (files.length == 0) {
-            setError('No selecciono una imagen');
+            setError(t('validations.messages.not-selected-img'));
             setDropState('ERROR');
             return;
         }
@@ -137,13 +139,13 @@ const DropPost = () => {
                                     <section className="flex justify-center items-center gap-1">
                                         <ArrowDropUp />
                                         <span className="">
-                                            Arrastre un archivo.
+                                            {t('titles.drop-file')}
                                         </span>
                                     </section>
-                                    <span>O</span>
+                                    <span>{t('login.labels.or')}</span>
                                     <label htmlFor="file-post" className="block flex items-center gap-1 cursor-pointer">
                                         <LaptopIcon />
-                                        Buscar archivo
+                                        {t('titles.file-search')}
                                         <input type="file" id="file-post" accept="image/*" 
                                         onChange={(e) => handleChangeInputFile(e)}
                                         className="opacity-0 w-0" />
@@ -186,7 +188,7 @@ const DropPost = () => {
                     onDrop={(e) => handleDropFile(e)}
                     draggable
                 >
-                    {dropState == 'DRAG-START' && <span className="text-mode-primary">Suelte la imagen</span>}
+                    {dropState == 'DRAG-START' && <span className="text-mode-primary"></span>}
                 </div>
             </div>
 

@@ -28,5 +28,22 @@ export const webRoutes = {
                 path: 'privacy'
             } 
         }
+    },
+    dashboard_admin: {
+        path: '/dashboard/admin',
+        children: {
+            statistics: {
+                path: 'statistics',
+                uri: function(){
+                    return `/dashboard/admin/${this.path}`;
+                }
+            },
+            categories: {
+                path: 'categories',
+                uri: function(){
+                    return `/dashboard/admin/${this.path}`;
+                }
+            },
+        }
     }
 };

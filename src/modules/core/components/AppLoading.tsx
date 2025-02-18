@@ -1,4 +1,3 @@
-import { appTheme } from "@/config/app";
 import { useThemeMode } from "@/store/themeMode";
 import { Backdrop, CircularProgress } from "@mui/material";
 
@@ -17,9 +16,7 @@ const AppLoading: React.FC<AppLoadingProps> = ({ isOpen }) => {
               themeMode === "system" || themeMode === "light"
                 ? "rgba(250,250,250,0.75)"
                 : "rgba(250,250,250,0.25)",
-            zIndex: appTheme.zIndex?.drawer
-              ? appTheme.zIndex?.drawer + 1
-              : 999,
+            zIndex: 99999,
             position: "fixed",
             top: 0,
             left: 0,

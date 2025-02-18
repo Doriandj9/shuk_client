@@ -32,3 +32,14 @@ export const mergeUserProvider = (user: User): User => {
 
     return user;
 };
+
+
+export const verifyAdminUser = (payload: string) => {
+    const json = JSON.parse(payload);
+    
+    if(typeof json === 'object' && json.is_admin){
+        return true;
+    }
+
+    return false;
+}; 

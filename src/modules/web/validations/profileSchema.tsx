@@ -9,6 +9,7 @@ type ProfileSchemaType = {
     gender?: z.ZodTypeAny;
     birthday?: z.ZodTypeAny;
     about_me?: z.ZodTypeAny;
+    phone?: z.ZodTypeAny;
 };
 
 export type ProfileFormTYpe = {
@@ -18,6 +19,7 @@ export type ProfileFormTYpe = {
     gender?: string;
     birthday?: string;
     about_me?: string;
+    phone?: string;
 };
 
 export const useProfileSchema = () => {
@@ -32,7 +34,11 @@ export const useProfileSchema = () => {
                 .max(80, t('validations.messages.max-length').replace('{count}', '80')).optional(),
             gender: z.string().optional(),
             nationality: z.string().optional(),
-            photo: z.union([z.instanceof(FileList), z.string(), z.null()]).optional()
+            photo: z.union([z.instanceof(FileList), z.undefined()]).optional(),
+            phone: z.union([z.string().min(5, t('validations.messages.min-length').replace('{count}',String(5))), z.undefined()]).optional()
+        }).partial({
+            about_me: true,
+            phone: true
         });
     }, [t]);
 

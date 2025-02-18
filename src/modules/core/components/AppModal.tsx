@@ -63,10 +63,7 @@ const AppModal: React.FC<AppModalProps> = ({ title = '', buttonClose = true, isN
                                 </header>
                                 {
                                     title != '' &&
-                                    <div className="mb-4">
                                         <Divider />
-
-                                    </div>
                                 }
                                 <div className="p-4">
                                     <>

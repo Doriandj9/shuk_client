@@ -22,7 +22,7 @@ const ContentInfo: React.FC<ContentInfoProps> = ({countPosts, user}) => {
     const countries = useDataCountries((state) => state.countries);
     const selectCountry = countries.find((country) => country.alpha2Code === user?.nationality);
     const nameCountry = appLanguage === 'en' ? selectCountry?.name : selectCountry?.translations[appLanguage];
-
+    const settings = user?.config;
 
     return (
         <>
@@ -35,7 +35,8 @@ const ContentInfo: React.FC<ContentInfoProps> = ({countPosts, user}) => {
                                 <ListItemIcon>
                                     <PhoneIphoneIcon color='primary' />
                                 </ListItemIcon>
-                                <ListItemText  primary={user?.phone ?? '___ ___ ___'} />
+                                <ListItemText  primary={ settings?.hidden_phone_number
+                                    ? '___ ___ ___' :  user?.phone ?? '___ ___ ___'} />
                                 
                             </ListItem>
                             <ListItem>
