@@ -5,6 +5,7 @@ import { cloneObject } from "@/modules/core/utilities/objects";
 import { useAuthStore } from "@/store/auth";
 import moment from "moment";
 import { InfinityData } from "../../@types/web";
+import { useQueriesKeyStore } from "@/store/keysQueriesStore";
 
 type OnMutateProp = {
     pageParams?: number[];
@@ -19,11 +20,11 @@ export const useCreateComment = (postId: number | string) => {
         onMutate: (data) => {
             const previousComments = cloneObject(queryClient.getQueryData(['comment', 'list', postId]));
             const currentUser = useAuthStore.getState().user;
-            const tempData = {...data};
+            const tempData = { ...data };
             tempData.id = `${currentUser?.id}-comment-temp-${moment().unix()}`;
             tempData.user = currentUser || undefined;
 
-            queryClient.setQueryData(['comment','list',postId], (old: OnMutateProp) => {
+            queryClient.setQueryData(['comment', 'list', postId], (old: OnMutateProp) => {
                 const oldValues = { ...old };
 
                 oldValues.pages.unshift({
@@ -47,7 +48,7 @@ export const useCreateComment = (postId: number | string) => {
             });
 
 
-            return () => queryClient.setQueryData(['comment','list',postId], previousComments);
+            return () => queryClient.setQueryData(['comment', 'list', postId], previousComments);
         },
         onError: (error, values, rollback) => {
             if (rollback) {
@@ -55,7 +56,7 @@ export const useCreateComment = (postId: number | string) => {
             }
         },
         onSuccess: () => {
-            let previosData = queryClient.getQueryData(['comment','list',postId]);
+            let previosData = queryClient.getQueryData(['comment', 'list', postId]);
 
             if (previosData && typeof previosData == 'object') {
                 let pageParams: OnMutateProp['pageParams'] = Reflect.get(previosData, 'pageParams');
@@ -66,20 +67,20 @@ export const useCreateComment = (postId: number | string) => {
 
                 previosData = { pageParams, pages };
             }
-            queryClient.setQueryData(['comment','list',postId], previosData);
-            queryClient.invalidateQueries({ queryKey: ['comment','list',postId] });
-            queryClient.invalidateQueries({ queryKey: ['posts'] });
+            queryClient.setQueryData(['comment', 'list', postId], previosData);
+            queryClient.invalidateQueries({ queryKey: ['comment', 'list', postId] });
+            queryClient.invalidateQueries({ queryKey: useQueriesKeyStore.getState().posts });
         }
     });
 
-    return {comment};
+    return { comment };
 };
 
 export const useInfinityCommentPost = (postId: number | string) => {
 
     const hook = useInfiniteQuery({
         queryKey: ['comment', 'list', postId],
-        queryFn: (arg) => getInfinityCommentPost(arg,postId),
+        queryFn: (arg) => getInfinityCommentPost(arg, postId),
         initialPageParam: 1,
         getNextPageParam: (lastPage) => {
             if (lastPage.next_page_url) {
@@ -89,5 +90,5 @@ export const useInfinityCommentPost = (postId: number | string) => {
         }
     });
 
-    return {...hook};
+    return { ...hook };
 };

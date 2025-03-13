@@ -5,7 +5,7 @@ import RootRoutes from "./routes/RootRoutes";
 // import { useTranslation } from "react-i18next";
 import { useGetCountries } from "./modules/web/hooks/countries/hook";
 import { useDataCountries } from "./store/countries";
-import { useMemo } from "react";
+import { useEffect } from "react";
 import { useCategories } from "./store/categories";
 import { useGetCategories } from "./modules/admin/hooks/categories/hook";
 
@@ -21,7 +21,7 @@ function App() {
   const loadCategories = useCategories((state) => state.updateCategories);
   const setErrorCategory = useCategories((state) => state.setIsError);
 
-  useMemo(() => {
+  useEffect(() => {
       loadCountries(data ?? []);
       loadCategories(categories ?? []);
   }, [data,categories]);

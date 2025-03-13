@@ -9,8 +9,9 @@ import { useCreteCategory, useGetCategory, useUpdateCategory } from "@/modules/a
 import AppLoading from "@/modules/core/components/AppLoading";
 import { showError } from "@/modules/core/utilities/errors";
 import { useAppToast } from "@/modules/core/hooks/useAppToast";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AppInputFile } from "@/modules/core/components/AppInputFile";
+import { appLoadImage } from "@/modules/core/utilities/img/convert";
 
 type ModalCategoriesProps = {
     isOpen: boolean;
@@ -22,6 +23,7 @@ type ModalCategoriesProps = {
 export const ModalCategories: React.FC<ModalCategoriesProps> = ({ isOpen, onClose, isEdit = false, id = null }) => {
     const [t] = useTranslation('web');
     const [tCore] = useTranslation('core');
+    const [previewIcon, setPreviewIcon] = useState('');
     const schema = useCategoriesSchema();
     const { create } = useCreteCategory();
     const { update } = useUpdateCategory(id);
@@ -33,15 +35,17 @@ export const ModalCategories: React.FC<ModalCategoriesProps> = ({ isOpen, onClos
         resolver: zodResolver(schema)
     });
 
+   
+
     const save: SubmitHandler<NewCategoriesForm> = (data) => {
 
         if (isEdit) {
             update.mutate(data, {
-                onSuccess() {
+                onSuccess(response) {
                     show({ message: tCore('messages.success.category.created'), status: 'success' });
                     reset({
-                        icon: '',
-                        name: ''
+                        icon: response.icon,
+                        name: response.name
                     });
                     onClose();
                 },
@@ -59,6 +63,7 @@ export const ModalCategories: React.FC<ModalCategoriesProps> = ({ isOpen, onClos
                     icon: '',
                     name: ''
                 });
+                setPreviewIcon('');
                 onClose();
             },
             onError(error) {
@@ -74,6 +79,7 @@ export const ModalCategories: React.FC<ModalCategoriesProps> = ({ isOpen, onClos
                 name: category.name,
                 icon: category.icon
             });
+            setPreviewIcon(appLoadImage(category.icon));
         }
 
         if (!id) {
@@ -81,10 +87,12 @@ export const ModalCategories: React.FC<ModalCategoriesProps> = ({ isOpen, onClos
                 name: undefined,
                 icon: undefined
             });
+            setPreviewIcon('');
         }
     }, [isEdit, category]);
 
     console.log(watch());
+
     return (
         <>
             <AppLoading isOpen={create.isPending || update.isPending} />
@@ -109,23 +117,17 @@ export const ModalCategories: React.FC<ModalCategoriesProps> = ({ isOpen, onClos
                                     label={t('register.inputs.category-name.label')}
                                     loading={isCategoryLoading}
                                 />
-                                <AppInput
-                                    className="mt-2"
-                                    control={control}
-                                    fullWidth
-                                    labelStrong
-                                    inputProps={{
-                                        name: 'icon',
-                                        type: 'file'
-                                    }}
-                                    label={t('register.inputs.category-icon.label')}
-                                    loading={isCategoryLoading}
-                                />
 
-                                <AppInputFile 
+                                <AppInputFile
                                     name="icon"
                                     label={t('register.inputs.category-icon.label')}
                                     control={control}
+                                    labelStrong
+                                    render={(file, filePreview) => {
+                                        if (file) {
+                                            setPreviewIcon(filePreview);
+                                        }
+                                    }}
                                 />
 
                             </div>
@@ -136,6 +138,10 @@ export const ModalCategories: React.FC<ModalCategoriesProps> = ({ isOpen, onClos
 
                                 <div className="mt-2 ps-2 flex justify-center items-center">
                                     <div className="flex gap-2 items-center">
+                                        {
+                                            previewIcon !== '' &&
+                                            <img className="w-6 h-6 img-shadow" src={previewIcon} alt="preview" />
+                                        }
                                         <span>{watch('name')}</span>
                                     </div>
                                 </div>

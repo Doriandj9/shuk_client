@@ -18,7 +18,11 @@ export const getCategory: GetCategoryFn = async (id) => {
 
 export const createCategory: CreateCategoryFn = async (data) => {
 
-    const response = await api.post(routesApi.admin.resource_categories.path, data);
+    const response = await api.post(routesApi.admin.resource_categories.path, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 
     return response.data?.data || null;
 };
@@ -26,7 +30,11 @@ export const createCategory: CreateCategoryFn = async (data) => {
 
 export const updateCategory: UpdateCategoryFn = async (data,id) => {
 
-    const response = await api.put(`${routesApi.admin.resource_categories.path}/${id}`, data);
+    const response = await api.post(`${routesApi.admin.resource_categories.path}/${id}`, data,{
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 
     return response.data?.data || null;
 };

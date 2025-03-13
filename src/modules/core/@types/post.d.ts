@@ -53,12 +53,14 @@ export type ContentFormPost = {
         html: string;
         file?: Blob | null;
     };
+    categories: string[];
     updateType: (payload: PostTypesBack) => unknown,
     updateModifierStyle: (payload: CSSProperties) => unknown,
     updateModifierBg: (payload: boolean) => unknown,
     updateModifierStilePrg: (payload: CSSProperties) => unknown,
     updateValueHtm: (payload: string) => unknown,
     updateValueFile: (payload: Blob | null) => unknown
+    updateCategories:  (categories: string[]) => unknown;
     reset: () => void
   };
 

@@ -126,7 +126,8 @@ interface Resources {
       "categories": "Categorías",
       "drop-file": "Arrastre un archivo.",
       "file-search": "Buscar archivo.",
-      "drag-file": "Suelte la imagen"
+      "drag-file": "Suelte la imagen",
+      "tag-post": "Etiquete el post en una o mas categorías"
     },
     "descriptions": {
       "post": "Publicar",

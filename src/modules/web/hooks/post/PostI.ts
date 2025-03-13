@@ -89,3 +89,14 @@ export interface PostDataInfinity {
   to: number;
   total: number;
 }
+
+export type ParamsPostInfinityFn = {
+  per_page: string;
+  page?: number;
+  category_id?: string;
+  category_name?: string;
+};
+
+export type getPostsFn = {
+    (params: ParamsPostInfinityFn ): Promise<PostDataInfinity>
+};

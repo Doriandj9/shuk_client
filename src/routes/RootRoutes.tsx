@@ -16,17 +16,23 @@ import AuthAdmin from "./AuthAdmin";
 import { StatisticsAdmin } from "@/modules/admin/pages/StatisticsAdmin";
 import { DashboardAdmin } from "@/modules/admin/pages/DashboardAdmin";
 import { Categories } from "@/modules/admin/pages/Categories/Categories";
+import { Interest } from "@/modules/web/pages/Home/Interest";
 
 const RootRoutes = () => {
   return (
     <>
       <CustomRoutes>
         <Route path={webRoutes.home.path} element={<Home />} />
+        <Route path={webRoutes.interest.path} element={<Interest />} />
+
+
         <Route element={<MiddlewareLogin />}>
           <Route path={webRoutes.login.path} element={<Login />} />
         </Route>
+
         <Route path={webRoutes.view_posts.path} element={<ViewPosts />} />
         <Route path={webRoutes.dashboard_user.path} element={<DashboardUser />} />
+
         <Route element={<AuthPages />}>
           <Route path={webRoutes.config_user.path} element={<Configuration />} >
             <Route index element={<Account />} />

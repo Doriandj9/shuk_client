@@ -3,6 +3,9 @@ export const webRoutes = {
     home: {
         path: '/'
     },
+    interest: {
+        path: '/interest/:name'
+    },
     login: {
         path: '/auth/login'
     },

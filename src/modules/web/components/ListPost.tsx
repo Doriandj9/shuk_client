@@ -4,9 +4,19 @@ import AppLoadingPosts from "@/modules/core/components/AppLoadinPosts";
 import AppNotPosts from "@/modules/core/components/AppNotPosts";
 import InfinityScroll from "@/modules/core/components/InfinityScroll";
 import { useGetInfinityPosts } from "@web/hooks/post/hooks";
+import { ParamsPostInfinityFn } from "../hooks/post/PostI";
+import { useQueriesKeyStore } from "@/store/keysQueriesStore";
 
+type ListPostProps= {
+  category_name?: string;
+  category_id?: string;
+};
 
-const ListPost = () => {
+const ListPost: React.FC<ListPostProps> = ({category_id,category_name}) => {
+  const params: ParamsPostInfinityFn = {per_page: '2',category_name, category_id};
+  const updateKeys = useQueriesKeyStore((state) => state.updatePostKeys);
+  updateKeys(['posts', params]);
+
   const {
     data,
     error,
@@ -15,7 +25,7 @@ const ListPost = () => {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useGetInfinityPosts();
+  } = useGetInfinityPosts(params);
 
   return (
     <>

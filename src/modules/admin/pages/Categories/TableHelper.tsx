@@ -1,6 +1,7 @@
 import { TableHelperHook } from "@/modules/core/@types/core";
 import { CategoriesModelType } from "../../hooks/categories/categories";
 import { useTranslation } from "react-i18next";
+import { appLoadImage } from "@/modules/core/utilities/img/convert";
 
 export const useTableHelperCategories: TableHelperHook<CategoriesModelType> = (actionFn) => {
     const [t] = useTranslation('web');
@@ -9,7 +10,7 @@ export const useTableHelperCategories: TableHelperHook<CategoriesModelType> = (a
         columns: [{
             header: 'N°. ',
             render(item, index) {
-                
+
                 return index;
             },
         }, {
@@ -20,8 +21,9 @@ export const useTableHelperCategories: TableHelperHook<CategoriesModelType> = (a
         }, {
             header: t('columns.category.icon'),
             render(item) {
-                return <span className="block flex justify-center items-center"
-                    dangerouslySetInnerHTML={{ __html: item?.icon ?? '' }} />;
+                return <span className="flex justify-center">
+                    <img className="img-shadow w-8 h-8" src={appLoadImage(item?.icon ?? '')} alt="icon" />
+                </span>;
             },
         }],
         actions: {

@@ -4,6 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Divider } from "@mui/material";
+import { appLoadImage } from "../utilities/img/convert";
 
 export type AppNavbarProps = {
     isAdmin?: boolean;
@@ -13,7 +14,9 @@ export type AppNavbarProps = {
 const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
     const categories = useCategories((state) => state.categories);
     const [t] = useTranslation('web');
+
     const handleClose = () => {
+
         if (onClose) {
             onClose();
         }
@@ -32,7 +35,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                                         to={webRoutes.dashboard_admin.children.categories.uri()}
                                         onClick={() => handleClose()}
                                         className="app-container-fade w-full h-10">
-                                        Categorias
+                                        {t('titles.categories')}
                                     </Link>
                                 </li>
 
@@ -64,13 +67,14 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                             <ul className="flex flex-col">
                                 {
                                     categories.map((category) => (
-                                        <li>
-                                            <Link to={''}
-                                                className="flex text-sm items-center gap-1 
-                                            hover:bg-gray-200 hover:rounded-tl-lg hover:rounded-bl-lg
-                                            p-2
-                                            ">
-                                                <span dangerouslySetInnerHTML={{ __html: category.icon }} />
+                                        <li key={category.id}>
+                                            <Link to={`/interest/${category.name.toLowerCase().replaceAll(' ', '_')}?i=${category.id}`}
+                                                className="flex text-sm items-center gap-3 font-extralight
+                                            hover:bg-gray-200 hover:rounded-tl-lg hover:rounded-bl-lg p-2
+                                            "
+                                            onClick={() => { if(onClose) { onClose(); };  }}
+                                            >
+                                                <img className="w-5 h-5 img-shadow" alt="img" src={appLoadImage(category.icon)} />
                                                 <span>
                                                     {category.name}
                                                 </span>

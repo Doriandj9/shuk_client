@@ -306,7 +306,6 @@ const AppLayout: React.FC< AppLayoutProps > = ({ children, isAdmin }) => {
                 </React.Fragment>
               )}
             </AnimatePresence>
-
             <div className="flex-grow p-2 xl:p-4 max-w-full">{children}</div>
             <div className="w-64 hidden md:block flex-shrink-0" />
             <div className="app-navbar-right hidden md:block"></div>

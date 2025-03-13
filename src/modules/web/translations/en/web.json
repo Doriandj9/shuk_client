@@ -125,7 +125,8 @@
         "categories": "Categories",
         "drop-file": "Drag a file.",
         "file-search": "Search file.",
-        "drag-file": "Release the image"
+        "drag-file": "Release the image",
+        "tag-post": "Tag the post in one or more categories"
 
     },
     "descriptions": {

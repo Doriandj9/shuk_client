@@ -1,10 +1,11 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createPost, DataPostSend, getInfinityPosts, getInfinityPostUser, getPost, putPost, putPostShared } from "./queries";
 import moment from "moment";
-import { PathResourcesType, PostData, PostDataInfinity } from "./PostI";
+import { ParamsPostInfinityFn, PathResourcesType, PostData, PostDataInfinity } from "./PostI";
 import { User } from "../../@types/web";
-import {  DataUpdatePost } from "@/modules/core/components/AppEventClickPost";
+import { DataUpdatePost } from "@/modules/core/components/AppEventClickPost";
 import { cloneObject } from "@/modules/core/utilities/objects";
+import { useQueriesKeyStore } from "@/store/keysQueriesStore";
 
 
 type OnMutateProp = {
@@ -25,78 +26,79 @@ export const useCreatePost = (user: User | null) => {
         mutationKey: [`${user?.id}-temp`],
         mutationFn: (data: DataPostSend) => createPost(data),
         onMutate: (data) => {
-            const previosData = client.getQueryData(['posts']);
-            const prevData: object | unknown = cloneObject(previosData);
+                const previosData = client.getQueryData(useQueriesKeyStore.getState().posts);
+                const prevData: object | unknown = cloneObject(previosData);
 
-            const tempPost: PostData = {
-                id: `${user?.id}-temp`,
-                description: data.payload.value.html,
-                date: moment().format('YYYY-MM-DD'),
-                doc_status: 'TM',
-                is_active: true,
-                type_post: data.type,
-                path_resource: null,
-                likes: 0,
-                comments: 0,
-                shared: 0,
-                payload_post: data.payload,
-                is_multiple: false,
-                user_id: user?.id,
-                is_temp: true,
-                user: user || userTemp,
-                files: null,
-                img: null,
-                file_temp: data.payload.value.file || undefined
-            };
-
-            if (data.type == 'PI') {
-                const pathResource: PathResourcesType = {
-                    path: '',
-                    meta: {
-                        aspectRadio: null,
-                        typeAspectRadio: null,
-                        width: 0,
-                        height: 0,
-                        needContainer: false,
-                        metaColors: {
-                            max: null,
-                            middle: null,
-                            min: null,
-                        },
-                        isResize: false
-                    }
+                const tempPost: PostData = {
+                    id: `${user?.id}-temp`,
+                    description: data.payload.value.html,
+                    date: moment().format('YYYY-MM-DD'),
+                    doc_status: 'TM',
+                    is_active: true,
+                    type_post: data.type,
+                    path_resource: null,
+                    likes: 0,
+                    comments: 0,
+                    shared: 0,
+                    payload_post: data.payload,
+                    is_multiple: false,
+                    user_id: user?.id,
+                    is_temp: true,
+                    user: user || userTemp,
+                    files: null,
+                    img: null,
+                    file_temp: data.payload.value.file || undefined
                 };
 
-                Reflect.set(tempPost, 'path_resource', pathResource);
-            }
+                if (data.type == 'PI') {
+                    const pathResource: PathResourcesType = {
+                        path: '',
+                        meta: {
+                            aspectRadio: null,
+                            typeAspectRadio: null,
+                            width: 0,
+                            height: 0,
+                            needContainer: false,
+                            metaColors: {
+                                max: null,
+                                middle: null,
+                                min: null,
+                            },
+                            isResize: false
+                        }
+                    };
+
+                    Reflect.set(tempPost, 'path_resource', pathResource);
+                }
 
 
 
 
-            client.setQueryData(['posts'], (old: OnMutateProp) => {
-                const oldValues = { ...old };
+                client.setQueryData(useQueriesKeyStore.getState().posts, (old: OnMutateProp) => {
+                    const oldValues = { ...old };
 
-                oldValues.pages.unshift({
-                    current_page: 0,
-                    data: [tempPost],
-                    first_page_url: '',
-                    from: 0,
-                    last_page: 0,
-                    last_page_url: '',
-                    links: [],
-                    next_page_url: '',
-                    path: '',
-                    per_page: 2,
-                    prev_page_url: null,
-                    to: 0,
-                    total: 0,
+                    oldValues.pages.unshift({
+                        current_page: 0,
+                        data: [tempPost],
+                        first_page_url: '',
+                        from: 0,
+                        last_page: 0,
+                        last_page_url: '',
+                        links: [],
+                        next_page_url: '',
+                        path: '',
+                        per_page: 2,
+                        prev_page_url: null,
+                        to: 0,
+                        total: 0,
+                    });
+                    oldValues.pageParams?.unshift(0);
+
+                    return oldValues;
                 });
-                oldValues.pageParams?.unshift(0);
 
-                return oldValues;
-            });
-
-            return () => client.setQueryData(['posts'], prevData);
+                return () => client.setQueryData(useQueriesKeyStore.getState().posts, prevData);
+       
         },
         onError: (error, values, rollback) => {
             if (rollback) {
@@ -104,7 +106,7 @@ export const useCreatePost = (user: User | null) => {
             }
         },
         onSuccess: () => {
-            let previosData = client.getQueryData(['posts']);
+            let previosData = client.getQueryData(useQueriesKeyStore.getState().posts);
             if (previosData && typeof previosData == 'object') {
                 let pageParams: OnMutateProp['pageParams'] = Reflect.get(previosData, 'pageParams');
                 let pages: OnMutateProp['pages'] = Reflect.get(previosData, 'pages');
@@ -114,19 +116,19 @@ export const useCreatePost = (user: User | null) => {
 
                 previosData = { pageParams, pages };
             }
-            client.setQueryData(['posts'], previosData);
-            client.invalidateQueries({ queryKey: ['posts'] });
+            client.setQueryData(useQueriesKeyStore.getState().posts, previosData);
+            client.invalidateQueries({ queryKey: useQueriesKeyStore.getState().posts });
         }
     });
 
     return { create };
 };
 
-export const useGetInfinityPosts = () => {
+export const useGetInfinityPosts = (params: ParamsPostInfinityFn) => {
     let currentPage = 1;
     const hook = useInfiniteQuery({
-        queryKey: ['posts'],
-        queryFn: getInfinityPosts,
+        queryKey: ['posts', params],
+        queryFn: (op) => getInfinityPosts({ ...params, page: op.pageParam }),
         initialPageParam: 1,
         getNextPageParam: (lastPage) => {
             if (lastPage.next_page_url) {
@@ -145,13 +147,13 @@ export const useUpdatePost = (id: number | string) => {
     const client = useQueryClient();
 
     const put = useMutation({
-        mutationKey: ['posts'],
-        mutationFn: (data: unknown) => putPost(id,data),
+        mutationKey: useQueriesKeyStore.getState().posts,
+        mutationFn: (data: unknown) => putPost(id, data),
         onMutate: (data: DataUpdatePost) => {
-            const previosData = client.getQueryData(['posts']);
+            const previosData = client.getQueryData(useQueriesKeyStore.getState().posts);
             const prevData: object | unknown = cloneObject(previosData);
 
-            client.setQueryData(['posts'], (old: OnMutateProp) => {
+            client.setQueryData(useQueriesKeyStore.getState().posts, (old: OnMutateProp) => {
 
                 const tempValues = { ...old };
 
@@ -167,13 +169,13 @@ export const useUpdatePost = (id: number | string) => {
 
                     return page;
                 });
-                
+
 
                 return tempValues;
 
             });
 
-            return () => client.setQueryData(['posts'], prevData);
+            return () => client.setQueryData(useQueriesKeyStore.getState().posts, prevData);
         },
         onError: (error, values, rollback) => {
             if (rollback) {
@@ -182,7 +184,7 @@ export const useUpdatePost = (id: number | string) => {
         },
     });
 
-    return {put};
+    return { put };
 };
 
 
@@ -191,12 +193,12 @@ export const useUpdateSharedPost = (id: number | string) => {
 
     const put = useMutation({
         mutationKey: ['posts-shared'],
-        mutationFn: (data: unknown) => putPostShared(id,data),
+        mutationFn: (data: unknown) => putPostShared(id, data),
         onMutate: (data: DataUpdatePost) => {
-            const previosData = client.getQueryData(['posts']);
+            const previosData = client.getQueryData(useQueriesKeyStore.getState().posts);
             const prevData: object | unknown = cloneObject(previosData);
 
-            client.setQueryData(['posts'], (old: OnMutateProp) => {
+            client.setQueryData(useQueriesKeyStore.getState().posts, (old: OnMutateProp) => {
 
                 const tempValues = { ...old };
 
@@ -212,13 +214,13 @@ export const useUpdateSharedPost = (id: number | string) => {
 
                     return page;
                 });
-                
+
 
                 return tempValues;
 
             });
 
-            return () => client.setQueryData(['posts'], prevData);
+            return () => client.setQueryData(useQueriesKeyStore.getState().posts, prevData);
         },
         onError: (error, values, rollback) => {
             if (rollback) {
@@ -227,7 +229,7 @@ export const useUpdateSharedPost = (id: number | string) => {
         },
     });
 
-    return {put};
+    return { put };
 };
 
 export const useGetPost = (id: number | string | null) => {
@@ -237,15 +239,15 @@ export const useGetPost = (id: number | string | null) => {
         enabled: !!id
     });
 
-    return {...hook};
+    return { ...hook };
 };
 
 
 export const useGetInfinityPostsUser = (username: string | undefined | null) => {
 
     const hook = useInfiniteQuery({
-        queryKey: [username,'posts'],
-        queryFn: (arg) => getInfinityPostUser(arg,username ?? ''),
+        queryKey: [username, 'posts'],
+        queryFn: (arg) => getInfinityPostUser(arg, username ?? ''),
         initialPageParam: 1,
         getNextPageParam: (lastPage) => {
             if (lastPage.next_page_url) {
@@ -256,5 +258,5 @@ export const useGetInfinityPostsUser = (username: string | undefined | null) => 
         enabled: !!username
     });
 
-    return {...hook};
+    return { ...hook };
 };

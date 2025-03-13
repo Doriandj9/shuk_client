@@ -6,6 +6,7 @@ import { create } from 'zustand';
 
 export const usePostStore = create<ContentFormPostHook>()((set) => ({
     type: 'PT',
+    categories: [],
     modifier: {
         style: {},
         isModifyBackground: false,
@@ -55,6 +56,10 @@ export const usePostStore = create<ContentFormPostHook>()((set) => ({
         }
     })),
 
+    updateCategories: (values: string[]) => set(() => ({
+        categories: values,
+    })),
+
     reset: () => set(() => ({
         type: 'PT',
         modifier: {
@@ -62,6 +67,7 @@ export const usePostStore = create<ContentFormPostHook>()((set) => ({
             isModifyBackground: false,
             styleParagraph: {}
         },
+        categories: [],
         value: {
             html: '',
             file: null

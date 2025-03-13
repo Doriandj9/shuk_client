@@ -24,9 +24,9 @@ type ContextPostType = {
 
 export const CreatePostContext = React.createContext<ContextPostType>({
   hastContent: false,
-  setHasContent: () => {},
+  setHasContent: () => { },
   content: null,
-  setContent: () => {},
+  setContent: () => { },
 });
 
 const AppNewPost = () => {
@@ -67,7 +67,7 @@ const AppNewPost = () => {
   const handleCreatePost = (e: FormEvent) => {
     e.preventDefault();
     try {
-      const { type, modifier, value } = usePostStore.getState();
+      const { type, modifier, value, categories } = usePostStore.getState();
 
       if (type !== "PT" && type !== "PI" && type !== "PV") {
         throw Error(tWeb("validations.messages.nan-type-post"));
@@ -90,14 +90,15 @@ const AppNewPost = () => {
 
       setIsOpen(false);
 
-      const data = { type, payload: { type, modifier, value } };
+      const data = { type, payload: { type, modifier, value }, categories };
 
       create.mutate(data, {
         onSuccess: () => {
-          show({message: tWeb('register.labels.save-post'), status: 'success', position: 'top-center'});
+          show({ message: tWeb('register.labels.save-post'), status: 'success', position: 'top-center' });
           usePostStore.getState().reset();
         },
       });
+
     } catch (error: unknown) {
       if (error instanceof Error) {
         show({ message: error.message || "", status: "error" });

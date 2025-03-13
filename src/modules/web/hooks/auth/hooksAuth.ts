@@ -1,13 +1,16 @@
-import { useMutation, useQuery, } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
 import { authFn, authLogOut, authProviderFn, infoUserGoogle } from "./requestsAuth";
 import { api } from "@/config/app";
+import { useQueriesKeyStore } from "@/store/keysQueriesStore";
 
 
-export const useAuth = (handleSuccessLogin?:CallableFunction | null, handleSuccessLoginProvider?: CallableFunction) => {
+export const useAuth = (handleSuccessLogin?: CallableFunction | null, handleSuccessLoginProvider?: CallableFunction) => {
+    const client = useQueryClient();
 
     const auth = useMutation({
         mutationFn: (data: object) => authFn(data),
         onSuccess(data) {
+            client.invalidateQueries({queryKey: useQueriesKeyStore.getState().posts});
             return handleSuccessLogin && handleSuccessLogin(data);
         },
     });
@@ -24,7 +27,7 @@ export const useAuth = (handleSuccessLogin?:CallableFunction | null, handleSucce
         return useQuery({
             queryKey: ['user_google', accessToken],
             queryFn: async () => await infoUserGoogle(accessToken),
-            enabled: accessToken  !== ''
+            enabled: accessToken !== ''
         });
     };
 
@@ -45,7 +48,7 @@ export const useAuthLogout = (handleFn: CallableFunction) => {
         }
     });
 
-    return {logout};
+    return { logout };
 };
 
 
@@ -56,6 +59,6 @@ export const useTest = () => {
             const response = await api.get('test');
             return response.data?.data;
         },
-        
+
     });
 };

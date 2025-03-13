@@ -35,7 +35,7 @@
     @apply text-primary dark:text-slate-400;
   }
 
-  .border-mode-primary{
+  .border-mode-primary {
     @apply border-primary dark:border-slate-400;
   }
 
@@ -74,6 +74,7 @@
   .bg-mode-comment {
     @apply bg-slate-100 dark:bg-slate-800;
   }
+
   .border-mode-slate {
     @apply border-slate-300 dark:border-slate-400;
   }
@@ -202,7 +203,7 @@
   }
 
   .app-description-post {
-    @apply w-full h-full text-start border-none focus:border-none focus:outline-none relative h-72;
+    @apply w-full h-full text-start border-none focus:border-none focus:outline-none relative h-40;
     white-space: normal;
     word-wrap: break-word;
     overflow-x: scroll;
@@ -264,8 +265,9 @@
   }
 
   .text-container-post {
-    @apply  w-full md:min-h-[--h-container-t-post-2]  2xl:min-h-[--h-container-t-post];
+    @apply w-full md:min-h-[--h-container-t-post-2] 2xl:min-h-[--h-container-t-post];
   }
+
   .card-post-img {
     @apply object-cover block;
   }
@@ -287,37 +289,41 @@
     @apply text-sm;
   }
 
-  .app-link-menu{
+  .app-link-menu {
     @apply flex gap-1 text-sm items-center hover:bg-black/5 p-2 dark:hover:bg-black/25;
   }
 
-  .text-container-overflow{
-    white-space: nowrap;  
-    overflow: hidden;     
+  .text-container-overflow {
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
   }
-  
-.scrollable-container::-webkit-scrollbar {
-  width: 12px;  
-}
 
-.scrollable-container::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 10px;
-}
+  .scrollable-container::-webkit-scrollbar {
+    width: 12px;
+  }
 
-.scrollable-container::-webkit-scrollbar-track {
-  background: transparent;  
-}
+  .scrollable-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+  }
 
-.scrollable-container {
-  scrollbar-color: #ccc transparent; 
-  scrollbar-width: thin;  
-}
+  .scrollable-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-.scrollable-container:target {
-  overflow: auto;  
-}
+  .scrollable-container {
+    scrollbar-color: #ccc transparent;
+    scrollbar-width: thin;
+  }
+
+  .scrollable-container:target {
+    overflow: auto;
+  }
+
+  .img-shadow {
+    @apply drop-shadow-sm;
+  }
 }
 
 @media (max-width: 770px) {

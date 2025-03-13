@@ -21,7 +21,6 @@ const TabPostText = () => {
     }
     element.onkeyup = () => {
       const html = element.innerHTML;
-      console.log(html);
       if(html  !== '' && html.trim() !== '<br>'){
         removePlaceholder();
       } else {
