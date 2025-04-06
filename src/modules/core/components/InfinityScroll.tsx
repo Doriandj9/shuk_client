@@ -17,7 +17,7 @@ const InfinityScroll: React.FC<InfinityScrollProps> = ({render}) => {
         const totalHeightWindow = document.documentElement.scrollHeight;
         // const heightNearEnd =  heightScroll + 20;
 
-        if(heightScroll >= totalHeightWindow ){
+        if(heightScroll + 25 >= totalHeightWindow ){
             setScroll({...scroll, action: true});
         }
         

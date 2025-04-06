@@ -3,14 +3,16 @@ import AppErrorFetchingPosts from "@/modules/core/components/AppErrorFetchingPos
 import AppLoadingPosts from "@/modules/core/components/AppLoadinPosts";
 import AppNotPosts from "@/modules/core/components/AppNotPosts";
 import InfinityScroll from "@/modules/core/components/InfinityScroll";
-import { useGetInfinityPosts } from "@web/hooks/post/hooks";
+import { useGetInfinityPostsForCategory } from "@web/hooks/post/hooks";
+import { ParamsPostInfinityFn } from "../hooks/post/PostI";
 
 type ListPostProps= {
   category_name?: string;
   category_id?: string;
 };
 
-const ListPost: React.FC<ListPostProps> = () => {
+const ListPostForCategory: React.FC<ListPostProps> = ({category_id,category_name}) => {
+  const params: ParamsPostInfinityFn = {per_page: '2',category_name, category_id};
 
   const {
     data,
@@ -20,7 +22,7 @@ const ListPost: React.FC<ListPostProps> = () => {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useGetInfinityPosts();
+  } = useGetInfinityPostsForCategory(params);
 
   return (
     <>
@@ -61,4 +63,4 @@ const ListPost: React.FC<ListPostProps> = () => {
   );
 };
 
-export default ListPost;
+export default ListPostForCategory;

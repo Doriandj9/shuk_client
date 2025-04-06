@@ -5,7 +5,6 @@ import { cloneObject } from "@/modules/core/utilities/objects";
 import { useAuthStore } from "@/store/auth";
 import moment from "moment";
 import { InfinityData } from "../../@types/web";
-import { useQueriesKeyStore } from "@/store/keysQueriesStore";
 
 type OnMutateProp = {
     pageParams?: number[];
@@ -69,7 +68,7 @@ export const useCreateComment = (postId: number | string) => {
             }
             queryClient.setQueryData(['comment', 'list', postId], previosData);
             queryClient.invalidateQueries({ queryKey: ['comment', 'list', postId] });
-            queryClient.invalidateQueries({ queryKey: useQueriesKeyStore.getState().posts });
+            queryClient.invalidateQueries({ queryKey: ['posts'] });
         }
     });
 

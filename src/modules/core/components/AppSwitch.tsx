@@ -5,7 +5,8 @@ type AppSwitchProps = {
     label: string;
     labelStrong?: boolean;
     name: string;
-    control?: unknown,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    control?: any;
     isChecked?: boolean;
     className?: string;
     propsFormControl?: FormLabelProps

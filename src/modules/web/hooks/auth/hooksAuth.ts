@@ -10,7 +10,7 @@ export const useAuth = (handleSuccessLogin?: CallableFunction | null, handleSucc
     const auth = useMutation({
         mutationFn: (data: object) => authFn(data),
         onSuccess(data) {
-            client.invalidateQueries({queryKey: useQueriesKeyStore.getState().posts});
+            client.invalidateQueries({queryKey: ['posts']});
             return handleSuccessLogin && handleSuccessLogin(data);
         },
     });

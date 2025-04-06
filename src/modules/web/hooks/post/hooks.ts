@@ -5,7 +5,6 @@ import { ParamsPostInfinityFn, PathResourcesType, PostData, PostDataInfinity } f
 import { User } from "../../@types/web";
 import { DataUpdatePost } from "@/modules/core/components/AppEventClickPost";
 import { cloneObject } from "@/modules/core/utilities/objects";
-import { useQueriesKeyStore } from "@/store/keysQueriesStore";
 
 
 type OnMutateProp = {
@@ -26,7 +25,7 @@ export const useCreatePost = (user: User | null) => {
         mutationKey: [`${user?.id}-temp`],
         mutationFn: (data: DataPostSend) => createPost(data),
         onMutate: (data) => {
-                const previosData = client.getQueryData(useQueriesKeyStore.getState().posts);
+                const previosData = client.getQueryData(['posts']);
                 const prevData: object | unknown = cloneObject(previosData);
 
                 const tempPost: PostData = {
@@ -74,7 +73,7 @@ export const useCreatePost = (user: User | null) => {
 
 
 
-                client.setQueryData(useQueriesKeyStore.getState().posts, (old: OnMutateProp) => {
+                client.setQueryData(['posts'], (old: OnMutateProp) => {
                     const oldValues = { ...old };
 
                     oldValues.pages.unshift({
@@ -97,7 +96,7 @@ export const useCreatePost = (user: User | null) => {
                     return oldValues;
                 });
 
-                return () => client.setQueryData(useQueriesKeyStore.getState().posts, prevData);
+                return () => client.setQueryData(['posts'], prevData);
        
         },
         onError: (error, values, rollback) => {
@@ -106,7 +105,7 @@ export const useCreatePost = (user: User | null) => {
             }
         },
         onSuccess: () => {
-            let previosData = client.getQueryData(useQueriesKeyStore.getState().posts);
+            let previosData = client.getQueryData(['posts']);
             if (previosData && typeof previosData == 'object') {
                 let pageParams: OnMutateProp['pageParams'] = Reflect.get(previosData, 'pageParams');
                 let pages: OnMutateProp['pages'] = Reflect.get(previosData, 'pages');
@@ -116,18 +115,37 @@ export const useCreatePost = (user: User | null) => {
 
                 previosData = { pageParams, pages };
             }
-            client.setQueryData(useQueriesKeyStore.getState().posts, previosData);
-            client.invalidateQueries({ queryKey: useQueriesKeyStore.getState().posts });
+            client.setQueryData(['posts'], previosData);
+            client.invalidateQueries({ queryKey: ['posts'] });
         }
     });
 
     return { create };
 };
 
-export const useGetInfinityPosts = (params: ParamsPostInfinityFn) => {
+export const useGetInfinityPosts = () => {
     let currentPage = 1;
     const hook = useInfiniteQuery({
-        queryKey: ['posts', params],
+        queryKey: ['posts'],
+        queryFn: (op) => getInfinityPosts({ per_page: '2', page: op.pageParam }),
+        initialPageParam: 1,
+        getNextPageParam: (lastPage) => {
+            if (lastPage.next_page_url) {
+                currentPage = lastPage.current_page + 1;
+                return lastPage.current_page + 1;
+            }
+
+            return null;
+        },
+    });
+
+    return { ...hook, page: currentPage };
+};
+
+export const useGetInfinityPostsForCategory = (params: ParamsPostInfinityFn) => {
+    let currentPage = 1;
+    const hook = useInfiniteQuery({
+        queryKey: [params],
         queryFn: (op) => getInfinityPosts({ ...params, page: op.pageParam }),
         initialPageParam: 1,
         getNextPageParam: (lastPage) => {
@@ -147,13 +165,13 @@ export const useUpdatePost = (id: number | string) => {
     const client = useQueryClient();
 
     const put = useMutation({
-        mutationKey: useQueriesKeyStore.getState().posts,
+        mutationKey: ['posts'],
         mutationFn: (data: unknown) => putPost(id, data),
         onMutate: (data: DataUpdatePost) => {
-            const previosData = client.getQueryData(useQueriesKeyStore.getState().posts);
+            const previosData = client.getQueryData(['posts']);
             const prevData: object | unknown = cloneObject(previosData);
 
-            client.setQueryData(useQueriesKeyStore.getState().posts, (old: OnMutateProp) => {
+            client.setQueryData(['posts'], (old: OnMutateProp) => {
 
                 const tempValues = { ...old };
 
@@ -175,7 +193,7 @@ export const useUpdatePost = (id: number | string) => {
 
             });
 
-            return () => client.setQueryData(useQueriesKeyStore.getState().posts, prevData);
+            return () => client.setQueryData(['posts'], prevData);
         },
         onError: (error, values, rollback) => {
             if (rollback) {
@@ -195,10 +213,10 @@ export const useUpdateSharedPost = (id: number | string) => {
         mutationKey: ['posts-shared'],
         mutationFn: (data: unknown) => putPostShared(id, data),
         onMutate: (data: DataUpdatePost) => {
-            const previosData = client.getQueryData(useQueriesKeyStore.getState().posts);
+            const previosData = client.getQueryData(['posts']);
             const prevData: object | unknown = cloneObject(previosData);
 
-            client.setQueryData(useQueriesKeyStore.getState().posts, (old: OnMutateProp) => {
+            client.setQueryData(['posts'], (old: OnMutateProp) => {
 
                 const tempValues = { ...old };
 
@@ -220,7 +238,7 @@ export const useUpdateSharedPost = (id: number | string) => {
 
             });
 
-            return () => client.setQueryData(useQueriesKeyStore.getState().posts, prevData);
+            return () => client.setQueryData(['posts'], prevData);
         },
         onError: (error, values, rollback) => {
             if (rollback) {

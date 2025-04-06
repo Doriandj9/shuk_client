@@ -10,6 +10,7 @@ type AppActionLikePostProps = {
 };
 
 const AppActionLikePost: React.FC<AppActionLikePostProps> = ({ post }) => {
+    console.log(post);
 
     return (
         <>
@@ -27,4 +28,4 @@ const AppActionLikePost: React.FC<AppActionLikePostProps> = ({ post }) => {
 };
 
 
-export default AppActionLikePost;
+export default AppActionLikePost;   
