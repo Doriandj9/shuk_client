@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createCategory, getCategories, getCategory, updateCategory } from "./queries";
 import { NewCategoriesForm } from "@/modules/web/validations/categoriesSchema";
+import { showError } from "@/modules/core/utilities/errors";
 
 
 export const useGetCategories = () => {
@@ -31,7 +32,10 @@ export const useCreteCategory = () => {
         mutationFn: (data: NewCategoriesForm) => createCategory(data),
         onSuccess(){
             client.invalidateQueries({queryKey: ['categories','list']});
-        }
+        },
+        onError(error) {
+            showError(error);
+        },
     });
 
     return {create};
@@ -45,6 +49,9 @@ export const useUpdateCategory = (id?: string | number | null) => {
         mutationFn: (data: NewCategoriesForm) => updateCategory(data, String(id)),
         onSuccess(){
             client.invalidateQueries({queryKey: ['categories','list']});
+        },
+        onError(error) {
+            showError(error);
         },
     });
 

@@ -5,6 +5,7 @@ import { cloneObject } from "@/modules/core/utilities/objects";
 import { useAuthStore } from "@/store/auth";
 import moment from "moment";
 import { InfinityData } from "../../@types/web";
+import { showError } from "@/modules/core/utilities/errors";
 
 type OnMutateProp = {
     pageParams?: number[];
@@ -50,6 +51,7 @@ export const useCreateComment = (postId: number | string) => {
             return () => queryClient.setQueryData(['comment', 'list', postId], previousComments);
         },
         onError: (error, values, rollback) => {
+            showError(error);
             if (rollback) {
                 rollback();
             }

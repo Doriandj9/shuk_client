@@ -11,9 +11,10 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { appTheme } from "@/config/app";
-import logo from "@/assets/img/shuk_logo.png";
-import logo_dark from "@/assets/img/logo_shuks/shuk_bn.png";
+import logo from "@/assets/img/logo_shuks/shuk_logo.png";
+import logo_dark from "@/assets/img/logo_shuks/shuk_logo-bn.png";
 import logo_mobile from "@/assets/img/logo_shuks/SHUK-ICONO.png";
+import logo_mobile_dark from "@/assets/img/logo_shuks/SHUK-ICONO-bn.png";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import AppSearchHome from "../components/AppSearchHome";
@@ -182,7 +183,7 @@ const AppLayout: React.FC< AppLayoutProps > = ({ children, isAdmin }) => {
                       src={
                         themeMode === "system" || themeMode === "light"
                           ? logo_mobile
-                          : logo_mobile
+                          : logo_mobile_dark
                       }
                       alt="LOGO SHUK"
                       className="w-28 xl:w-32 h-10 mt-2"

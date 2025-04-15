@@ -1,7 +1,7 @@
 import { Card, CardActions, CardContent, CardHeader, CardMedia, Divider } from "@mui/material";
 import AppAvatar from "./AppAvatar";
 import { PostData } from "@/modules/web/hooks/post/PostI";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { mergeUserProvider } from "../utilities/mergeUserProvider";
 import { TimePostFormat } from "./AppTimePostFomats";
 import AppCardMediaDisplay from "./AppCardMediaDisplay";
@@ -15,11 +15,15 @@ type AppDisplayPostProps = {
     post: PostData
 };
 
-const AppDisplayPost: React.FC<AppDisplayPostProps> = ({ post }) => {
+const AppDisplayPost: React.FC<AppDisplayPostProps> = ({ post: postModel }) => {
+    const [post, setPost] = useState(postModel);
     const user = mergeUserProvider(post.user);
     const [showComments, setShowComments] = React.useState(false);
     const refElement = React.useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+        setPost(post);
+    }, [post]);
     return (
         <>
             <div className={`w-full overflow-hidden`}>

@@ -5,6 +5,7 @@ import { ParamsPostInfinityFn, PathResourcesType, PostData, PostDataInfinity } f
 import { User } from "../../@types/web";
 import { DataUpdatePost } from "@/modules/core/components/AppEventClickPost";
 import { cloneObject } from "@/modules/core/utilities/objects";
+import { showError } from "@/modules/core/utilities/errors";
 
 
 type OnMutateProp = {
@@ -100,6 +101,7 @@ export const useCreatePost = (user: User | null) => {
        
         },
         onError: (error, values, rollback) => {
+            showError(error);
             if (rollback) {
                 rollback();
             }
@@ -196,6 +198,7 @@ export const useUpdatePost = (id: number | string) => {
             return () => client.setQueryData(['posts'], prevData);
         },
         onError: (error, values, rollback) => {
+            showError(error);
             if (rollback) {
                 rollback();
             }
@@ -241,6 +244,7 @@ export const useUpdateSharedPost = (id: number | string) => {
             return () => client.setQueryData(['posts'], prevData);
         },
         onError: (error, values, rollback) => {
+            showError(error);
             if (rollback) {
                 rollback();
             }
