@@ -2,15 +2,18 @@ import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
 import { authFn, authLogOut, authProviderFn, infoUserGoogle } from "./requestsAuth";
 import { api } from "@/config/app";
 import { showError } from "@/modules/core/utilities/errors";
+import { useContext } from "react";
+import { KeysPostContext } from "../../providers/KeysPosts";
 
 
 export const useAuth = (handleSuccessLogin?: CallableFunction | null, handleSuccessLoginProvider?: CallableFunction) => {
     const client = useQueryClient();
-
+    const {keys} = useContext(KeysPostContext);
     const auth = useMutation({
         mutationFn: (data: object) => authFn(data),
         onSuccess(data) {
             client.invalidateQueries({queryKey: ['posts']});
+            client.invalidateQueries({queryKey: keys});
             return handleSuccessLogin && handleSuccessLogin(data);
         },
         onError(error) {

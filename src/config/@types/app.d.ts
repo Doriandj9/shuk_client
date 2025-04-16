@@ -55,6 +55,11 @@ export type AppConfig = {
      */
 
     host: string;
+
+    /**
+     * @param {number} timeRefetchInterval time for interval refetch requests
+     */
+    timeRefetchInterval?: number;
 };
 
 

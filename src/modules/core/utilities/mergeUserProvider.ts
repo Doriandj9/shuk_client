@@ -6,7 +6,7 @@ import { app } from "@/config/app";
 export const mergeUserProvider = (user: User): User => {
     let googleUser: googleUser | null = null;
     let facebookUser: facebookUser | null = null;
-
+    console.log('inter', user);
     if(user.is_merge){
         return user;
     }

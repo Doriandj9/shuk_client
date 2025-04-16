@@ -6,6 +6,8 @@ import { useAuthStore } from "@/store/auth";
 import moment from "moment";
 import { InfinityData } from "../../@types/web";
 import { showError } from "@/modules/core/utilities/errors";
+import { useContext } from "react";
+import { KeysPostContext } from "../../providers/KeysPosts";
 
 type OnMutateProp = {
     pageParams?: number[];
@@ -14,6 +16,8 @@ type OnMutateProp = {
 
 export const useCreateComment = (postId: number | string) => {
     const queryClient = useQueryClient();
+    const {keys} = useContext(KeysPostContext);
+    
     const comment = useMutation({
         mutationKey: ['comment', 'create', postId],
         mutationFn: (data: CommentData) => createPost(data),
@@ -71,6 +75,8 @@ export const useCreateComment = (postId: number | string) => {
             queryClient.setQueryData(['comment', 'list', postId], previosData);
             queryClient.invalidateQueries({ queryKey: ['comment', 'list', postId] });
             queryClient.invalidateQueries({ queryKey: ['posts'] });
+            queryClient.invalidateQueries({queryKey: keys});
+
         }
     });
 

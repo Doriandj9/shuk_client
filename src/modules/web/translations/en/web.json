@@ -22,7 +22,8 @@
             "register-account": "Register here",
             "problems-login": "Having issues?",
             "contact": "Contact us",
-            "or": "or"
+            "or": "or",
+            "add": "Add"
         }
     },
     "register": {

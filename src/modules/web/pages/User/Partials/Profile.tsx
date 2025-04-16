@@ -166,7 +166,7 @@ const Profile = () => {
                         control={control}
                         labelStrong
                         label={t('register.inputs.phone.label')}
-                        className="mt-4"
+                        className="mt-4 dark:text-black"
                         fullWidth
                     />
 

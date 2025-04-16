@@ -23,7 +23,8 @@ interface Resources {
         "register-account": "Regístrate aquí",
         "problems-login": "¿Tienes problemas?",
         "contact": "Contacta con nosotros",
-        "or": "o"
+        "or": "o",
+        "add": "Agregar"
       }
     },
     "register": {

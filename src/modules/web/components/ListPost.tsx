@@ -33,7 +33,8 @@ const ListPost: React.FC<ListPostProps> = () => {
 
           return (
             <div className="flex flex-col gap-2 md:items-center">
-              {data?.pages.map(({ data: posts }) => {
+              {status && data?.pages.map(({ data: posts }) => {
+                
                 return posts.map((post) => (
                   <div
                     className={`app-container-fade text-sm mt-2 

@@ -7,6 +7,8 @@ const versionApp = import.meta.env.VITE_APP_VERSION;
 const endPointApi = import.meta.env.VITE_ENDPOINT_API;
 const apiWhatsAppHost = import.meta.env.VITE_API_WHATSAPP_URL;
 const shareFacebookHost = import.meta.env.VITE_API_FACEBOOK_URL || 'https://www.facebook.com/sharer/sharer.php';
+const idFacebook = import.meta.env.VITE_FACEBOOK_ID || '1179066826681637';
+const idGoogle = import.meta.env.VITE_GOOGLE_ID || '1179066826681637';
 const hostApp = import.meta.env.VITE_APP_HOST || ''; //(new URL(window.location.href)).origin;
 
 
@@ -19,8 +21,8 @@ export const app: AppConfig = {
         ternary: '#E42823'
     },
     environment: 'local',
-    oAuthIdGoogle: '913311559669-4lp0mh31a80mdd9favrsvoch3ks0skqr.apps.googleusercontent.com',
-    oAuthIdFacebook: '1179066826681637',
+    oAuthIdGoogle: idGoogle,
+    oAuthIdFacebook: idFacebook,
     apiV: versionApp,
     socialProviders: {
         google: 1,
@@ -29,7 +31,8 @@ export const app: AppConfig = {
     },
     apiWhatsAppHost: apiWhatsAppHost,
     host: hostApp,
-    shareFacebookHost: shareFacebookHost
+    shareFacebookHost: shareFacebookHost,
+    timeRefetchInterval: (1000 * 30),
 };
 
 

@@ -28,14 +28,14 @@ export const useProfileSchema = () => {
     const handleSchema = useCallback(() => {
         return z.object<ProfileSchemaType>({
             full_name: z.string().min(5, t('validations.messages.min-length').replace('{count}', '5')),
-            birthday: z.string().min(8, t('validations.messages.min-length').replace('{count}', '8'))
-                .min(8, t('validations.messages.min-length').replace('{count}', '8')).optional(),
-            about_me: z.string().min(5, t('validations.messages.min-length').replace('{count}', '5'))
-                .max(80, t('validations.messages.max-length').replace('{count}', '80')).optional(),
-            gender: z.string().optional(),
-            nationality: z.string().optional(),
+            birthday: z.union([z.string().min(8, t('validations.messages.min-length').replace('{count}', '8')).min(8, t('validations.messages.min-length').replace('{count}', '8')), z.null(), z.undefined()])
+                .optional(),
+            about_me: z.union([z.string().min(5, t('validations.messages.min-length').replace('{count}', '5'))
+                .max(80, t('validations.messages.max-length').replace('{count}', '80')), z.null(), z.undefined()]),
+            gender: z.union([z.null(), z.undefined(),z.string()]).optional(),
+            nationality: z.union([z.null(), z.undefined(),z.string()]).optional(),
             photo: z.union([z.instanceof(FileList), z.undefined()]).optional(),
-            phone: z.union([z.string().min(5, t('validations.messages.min-length').replace('{count}',String(5))), z.undefined()]).optional()
+            phone: z.union([z.string().min(5, t('validations.messages.min-length').replace('{count}',String(5))), z.null(), z.undefined()]).optional()
         }).partial({
             about_me: true,
             phone: true

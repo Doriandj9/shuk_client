@@ -6,6 +6,9 @@ import { User } from "../../@types/web";
 import { DataUpdatePost } from "@/modules/core/components/AppEventClickPost";
 import { cloneObject } from "@/modules/core/utilities/objects";
 import { showError } from "@/modules/core/utilities/errors";
+import { app } from "@/config/app";
+import { useContext } from "react";
+import { KeysPostContext } from "../../providers/KeysPosts";
 
 
 type OnMutateProp = {
@@ -21,7 +24,8 @@ const userTemp: User = {
 
 export const useCreatePost = (user: User | null) => {
     const client = useQueryClient();
-
+    const {keys} = useContext(KeysPostContext);
+    
     const create = useMutation({
         mutationKey: [`${user?.id}-temp`],
         mutationFn: (data: DataPostSend) => createPost(data),
@@ -119,6 +123,8 @@ export const useCreatePost = (user: User | null) => {
             }
             client.setQueryData(['posts'], previosData);
             client.invalidateQueries({ queryKey: ['posts'] });
+            client.invalidateQueries({queryKey: keys});
+
         }
     });
 
@@ -139,6 +145,7 @@ export const useGetInfinityPosts = () => {
 
             return null;
         },
+        refetchInterval: app.timeRefetchInterval
     });
 
     return { ...hook, page: currentPage };
@@ -158,6 +165,7 @@ export const useGetInfinityPostsForCategory = (params: ParamsPostInfinityFn) => 
 
             return null;
         },
+        refetchInterval: app.timeRefetchInterval
     });
 
     return { ...hook, page: currentPage };
@@ -258,7 +266,9 @@ export const useGetPost = (id: number | string | null) => {
     const hook = useQuery({
         queryKey: ['posts', id],
         queryFn: () => getPost(id ?? ''),
-        enabled: !!id
+        enabled: !!id,
+        refetchInterval: app.timeRefetchInterval
+
     });
 
     return { ...hook };
@@ -277,7 +287,9 @@ export const useGetInfinityPostsUser = (username: string | undefined | null) => 
             }
             return null;
         },
-        enabled: !!username
+        enabled: !!username,
+        refetchInterval: app.timeRefetchInterval
+
     });
 
     return { ...hook };

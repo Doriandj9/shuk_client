@@ -4,14 +4,14 @@ import { PostData } from "@/modules/web/hooks/post/PostI";
 import React from "react";
 import AppRenderNumberLikes from "./AppRenderNumberLikes";
 import AppEventClickPost from "./AppEventClickPost";
+import { useAuthStore } from "@/store/auth";
 
 type AppActionLikePostProps = {
     post: PostData
 };
 
 const AppActionLikePost: React.FC<AppActionLikePostProps> = ({ post }) => {
-    console.log(post);
-
+    const isLogin = useAuthStore((state) => state.isLogin);
     return (
         <>
             <AppEventClickPost post={post} defaultIsClick={post.your_liked} defaultCount={post.likes} render={({ count, click, isClick }) => (
@@ -20,7 +20,7 @@ const AppActionLikePost: React.FC<AppActionLikePostProps> = ({ post }) => {
                     click({ likes: isClick ? -1 : 1, type: post.type_post, total_likes: isClick ? count - 1 : count + 1 }, value);
                 }}>
                     <AppRenderNumberLikes likes={count} />
-                    <FavoriteIcon color={  isClick ? 'error' : 'action'} />
+                    <FavoriteIcon color={  !isClick || !isLogin ? 'action' : 'error'} />
                 </IconButton>
             )} />
         </>
