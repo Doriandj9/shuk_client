@@ -128,7 +128,6 @@
         "file-search": "Search file.",
         "drag-file": "Release the image",
         "tag-post": "Tag the post in one or more categories"
-
     },
     "descriptions": {
         "post": "Post",
@@ -168,5 +167,10 @@
             "name": "Category name",
             "icon": "Category icon"
         }
+    },
+    "notifications": {
+        "new-notification": "Shared a new post",
+        "like-post": "I liked your post",
+        "comment-post":"I comment on your post"
     }
 }

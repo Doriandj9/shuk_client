@@ -59,4 +59,5 @@ export interface InfinityData<T>{
       prev_page_url: string | null;
       to: number;
       total: number;
+      total_draft?: number;
 }

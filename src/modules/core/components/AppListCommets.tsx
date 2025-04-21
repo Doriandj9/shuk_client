@@ -35,7 +35,7 @@ const AppListComments: React.FC<AppListCommentsProps> = ({ postId, refElement })
                         <div className="flex flex-col gap-0 md:items-center">
                             {data?.pages.map(({ data: comments }) => {
                                 return comments.map((comment) => (
-                                    <AppDisplayComment key={comment.id} comment={comment} />
+                                    <AppDisplayComment idPost={String(postId)} key={comment.id} comment={comment} />
                                 ));
                             })}
                             {status == 'error' && (<AppErrorFetchingPosts error={error} />)}

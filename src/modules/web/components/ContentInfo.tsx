@@ -28,12 +28,13 @@ const ContentInfo: React.FC<ContentInfoProps> = ({ countPosts, user }) => {
     const nameCountry = appLanguage === 'en' ? selectCountry?.name : selectCountry?.translations[appLanguage];
     const settings = user?.config;
     const isLogin = useAuthStore((state) => state.isLogin);
+    const userAuth = useAuthStore((state) => state.user);
 
     const redirectConfigComponent = <>
         <span className='flex gap-2 items-end'>
             ___ ___ ___
             {
-            isLogin &&
+            (isLogin && user?.id === userAuth?.id) &&
             <span className='flex'>
                 <Link target='_blank'
                     className='hover:bg-slate-100 text-xs px-1 rounded-lg dark:hover:bg-slate-400'

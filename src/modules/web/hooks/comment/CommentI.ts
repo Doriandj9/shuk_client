@@ -1,3 +1,4 @@
+import { ResponseCreateApi } from "@/modules/core/@types/core";
 import { User } from "../../@types/web";
 import { DocStatusData, PostData } from "../post/PostI";
 
@@ -18,3 +19,8 @@ export interface CommentData {
     replyComment?: CommentData;
     created_at?: string;
 }
+
+
+export type CreateCommentPost = {
+    (data: CommentData): Promise<ResponseCreateApi<{comment: CommentData , post: PostData}>['data']>;
+};

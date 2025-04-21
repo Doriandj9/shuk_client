@@ -1,5 +1,7 @@
 import { ContentFormPost, FileRecord, PostTypesBack } from "@/modules/core/@types/post";
 import { User } from "@web/@types/web";
+import { DataPostSend } from "./queries";
+import { ResponseCreateApi } from "@/modules/core/@types/core";
 
 export type DocStatusData = 'CO' | 'DR' | 'AC' | 'DL' | 'ED' | 'TM';
 
@@ -99,4 +101,8 @@ export type ParamsPostInfinityFn = {
 
 export type getPostsFn = {
     (params: ParamsPostInfinityFn ): Promise<PostDataInfinity>
+};
+
+export type CreatePost = {
+  (data: DataPostSend): Promise<ResponseCreateApi<PostData>['data']>;
 };

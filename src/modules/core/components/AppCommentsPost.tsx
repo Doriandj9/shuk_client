@@ -18,7 +18,7 @@ const AppCommentsPost: React.FC<AppCommentsPostProps> = ({ post,refElement }) =>
             <h3 className="text-mode-slate text-sm font-semibold tracking-wide">
                 {t('messages.labels.comment.comments')}
             </h3>
-            <AppNewCommentPost postId={post.id} />
+            <AppNewCommentPost postId={post.id} ownerId={post.user.id}  />
             <div className="my-2">
                 <Divider />
             </div>

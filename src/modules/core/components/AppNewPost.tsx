@@ -14,6 +14,10 @@ import { ContentFormPost } from "../@types/post";
 import { usePostStore } from "@/store/postStore";
 import { useAppToast } from "../hooks/useAppToast";
 import { useCreatePost } from "@/modules/web/hooks/post/hooks";
+import { useStoreNotifyUser } from "@/modules/web/hooks/notifications/hook";
+import { StoreNotificationUser } from "@/modules/web/hooks/notifications/notifications";
+import { useBuildMessagePost } from "../hooks/useMessageAndTransPost";
+import { useLanguageApp } from "@/store/language";
 
 type ContextPostType = {
   hastContent: boolean;
@@ -32,9 +36,13 @@ export const CreatePostContext = React.createContext<ContextPostType>({
 const AppNewPost = () => {
   const [t] = useTranslation("core");
   const [tWeb] = useTranslation("web");
+  const lang = useLanguageApp((state) => state.language);
   const navigate = useNavigate();
   const { show } = useAppToast();
+  const { store } = useStoreNotifyUser();
+  const buildMessageTrans = useBuildMessagePost();
   const user = useAuthStore((state) => state.user);
+  const isAdmin = useAuthStore((state) => state.isAdmin);
 
   const isLoginUser = useAuthStore((state) => state.isLogin);
 
@@ -93,7 +101,27 @@ const AppNewPost = () => {
       const data = { type, payload: { type, modifier, value }, categories };
 
       create.mutate(data, {
-        onSuccess: () => {
+        onSuccess: (response) => {
+          console.log(response);
+          if (isAdmin) {
+            const { message, trans } = buildMessageTrans('NEW_POST', lang,response.description?.slice(0,7) + '...');
+            const data: StoreNotificationUser = {
+              type: 'TASP',
+              action: 'New Post',
+              message,
+              trans,
+              payload: {
+                relative_path: `/view/posts/${response.id}`
+              },
+              receiver: user?.id,
+              sender: user?.id
+            };
+            store.mutate(data, {
+              onSuccess(){
+                show({message: tWeb('notifications.new-notification'), status: 'success',position: 'bottom-center'});
+              }
+            });
+          }
           show({ message: tWeb('register.labels.save-post'), status: 'success', position: 'top-center' });
           usePostStore.getState().reset();
         },

@@ -3,7 +3,6 @@ import { Children } from "../@types/core";
 import { useEffect, useMemo } from "react";
 import { useThemeMode } from "@/store/themeMode";
 import {
-  Badge,
   createTheme,
   CssBaseline,
   IconButton,
@@ -31,11 +30,11 @@ import AppNavbar, { AppNavbarProps } from "@core/components/AppNavbar";
 import { webRoutes } from "@/config/webRoutes";
 import { useAuthStore } from "@/store/auth";
 import AppUserMenu from "../components/AppUserMenu";
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useAppLoading } from "@/store/loadingStore";
 import AppLoading from "../components/AppLoading";
 import MenuMobile from "./partials/MenuMobile";
 import { inputsCustomizations } from "@/config/theme/customizations/inputs";
+import { HeaderNotifications } from "./partials/HeaderNotifications";
 
 
 const { path: pathLogin } = webRoutes.login;
@@ -257,11 +256,7 @@ const AppLayout: React.FC< AppLayoutProps > = ({ children, isAdmin }) => {
                     {
                       isLogin &&
                       <li className="mr-2">
-                        <IconButton>
-                          <Badge color="primary" badgeContent={993} max={99}>
-                            <NotificationsIcon className="text-mode-primary" />
-                          </Badge>
-                        </IconButton>
+                        <HeaderNotifications />
                       </li>
                     }
                     <li className="hidden md:block border-2 rounded-full border-primary mr-2 dark:border-slate-400">

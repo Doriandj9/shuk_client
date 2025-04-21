@@ -1,4 +1,6 @@
 import {AppConfig} from '@/config/@types/app';
+import { DocStatus as DocStatusType } from '@/modules/core/@types/core';
+import { User } from '@/modules/web/@types/web';
 import { ThemeOptions } from "@mui/material";
 import axios from 'axios';
 
@@ -151,4 +153,22 @@ export const genderValues = {
         value: 'PND',
         label: 'I prefer not to say it'
     }]
+};
+
+
+export const DocStatus: DocStatusType = {
+    ACTIVE: 'AC',
+    COMPLETE: 'CO',
+    DELETE: 'DL',
+    DRAFT: 'DR',
+    EDIT: 'ED',
+    NOT_SHOW_NOTIFY: 'NS',
+    PENDING_NOTIFY: 'PN',
+    VIEW_NOTIFY: 'VN',
+    COLUMN_NAME: 'doc_status'
+} as const;
+
+
+export const userDefault: User = {
+    id: 0
 };

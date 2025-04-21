@@ -168,6 +168,11 @@ interface Resources {
         "name": "Nombre de categoría",
         "icon": "Icono de categoría"
       }
+    },
+    "notifications": {
+      "new-notification": "Compartió una nueva publicación",
+      "like-post": "Le gusto tu publicación",
+      "comment-post": "Comento tu publicación"
     }
   }
 }

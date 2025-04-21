@@ -49,7 +49,9 @@
                 "send": "Send",
                 "comments": "Comments",
                 "end-comments": "And that's all for now! We've reached the end of the comments for this post, but don't worry, more will be coming soon!"
-
+            },
+            "notifications":{
+                "end-notifications": "You have no more notifications today, more will surely arrive soon."
             },
             "app": {
                 "dark": "Dark",
@@ -90,7 +92,9 @@
             "login": "Login",
             "logout": "Log Out",
             "account-setting": "Account setting",
-            "administration": "Administration"
+            "administration": "Administration",
+            "notifications": "Notifications"
+
         }
     }
 }

@@ -37,6 +37,12 @@ export const routesApi = {
         },
         update_settings: {
             path: 'settings-update-user'
+        },
+        resource_notifies: {
+            path: 'notifications/user'
+        },
+        put_all_notifies_draft: {
+            path: 'notifications/user/all/draft/{user_id}'
         }
     },
     admin: {

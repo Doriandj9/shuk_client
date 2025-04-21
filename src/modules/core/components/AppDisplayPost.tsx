@@ -1,7 +1,7 @@
 import { Card, CardActions, CardContent, CardHeader, CardMedia, Divider } from "@mui/material";
 import AppAvatar from "./AppAvatar";
 import { PostData } from "@/modules/web/hooks/post/PostI";
-import React from "react";
+import React, { useEffect } from "react";
 import { mergeUserProvider } from "../utilities/mergeUserProvider";
 import { TimePostFormat } from "./AppTimePostFomats";
 import AppCardMediaDisplay from "./AppCardMediaDisplay";
@@ -19,9 +19,21 @@ type AppDisplayPostProps = {
 
 const AppDisplayPost: React.FC<AppDisplayPostProps> = ({ post }) => {
     const user = mergeUserProvider(post.user);
-    const [showComments, setShowComments] = React.useState(false);
+    const uri = new URL(window.location.href);
+    const idComment =  uri.searchParams.get('cm');
+    const [showComments, setShowComments] = React.useState(Boolean(idComment));
     const refElement = React.useRef<HTMLDivElement>(null);
-    console.log(user);
+
+    useEffect(() => {
+        const id = atob(idComment || '');
+        if (id && refElement.current) {
+        const element = document.getElementById(`post-${post.id}-comment-${id}`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+    },[showComments, idComment]);
     return (
         <>
             {

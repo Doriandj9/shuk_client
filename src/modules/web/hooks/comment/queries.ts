@@ -1,6 +1,6 @@
 import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
-import { CommentData } from "./CommentI";
+import { CommentData, CreateCommentPost } from "./CommentI";
 import { useAuthStore } from "@/store/auth";
 import { InfinityData } from "../../@types/web";
 
@@ -8,7 +8,7 @@ type GetInfinityCommentPostFn = {
     (args: {pageParam: number}, postId: number | string): Promise<InfinityData<CommentData>>;
 };
 
-export const createPost = async (data: CommentData) => {
+export const createComment: CreateCommentPost = async (data) => {
     const response = await api.post(routesApi.user.resource_comment.path, data, {
         headers: {
             'Content-Type': 'multipart/form-data',

@@ -2,13 +2,13 @@ import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
 import { ContentFormPost, PostTypesBack } from "@/modules/core/@types/post";
 import { useAuthStore } from "@/store/auth";
-import { getPostsFn, PostData } from "./PostI";
+import { CreatePost, getPostsFn, PostData } from "./PostI";
 import { InfinityData } from "../../@types/web";
 
 export type DataPostSend = {type: PostTypesBack; payload: ContentFormPost; categories?: string[]};
 
 
-export const createPost = async (data: DataPostSend) => {
+export const createPost: CreatePost = async (data) => {
     
     const response = await api.post(routesApi.user.resource_post.path, data, {headers: {
         'Content-Type': 'multipart/form-data',

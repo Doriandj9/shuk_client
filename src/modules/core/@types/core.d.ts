@@ -10,6 +10,9 @@ export type DocStatus = {
     ACTIVE: 'AC';
     DELETE: 'DL';
     EDIT: 'ED';
+    VIEW_NOTIFY: 'VN';
+    PENDING_NOTIFY: 'PN';
+    NOT_SHOW_NOTIFY: 'NS'
     COLUMN_NAME?: 'doc_status';
 };
 

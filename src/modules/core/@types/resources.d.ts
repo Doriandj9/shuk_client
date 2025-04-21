@@ -51,6 +51,9 @@ interface Resources {
           "comments": "Comentarios",
           "end-comments": "¡Y eso es todo por ahora! Hemos llegado al final de los comentarios de este post, pero no te preocupes, ¡pronto llegarán más!"
         },
+        "notifications": {
+          "end-notifications": "No tienes más notificaciones hoy, seguramente llegarán más pronto."
+        },
         "app": {
           "dark": "Oscuro",
           "light": "Claro",
@@ -90,7 +93,8 @@ interface Resources {
         "login": "Iniciar Sesión",
         "logout": "Cerrar Sesión",
         "account-settings": "Configuración de cuenta",
-        "administration": "Administración"
+        "administration": "Administración",
+        "notifications": "Notificaciones"
       }
     }
   }

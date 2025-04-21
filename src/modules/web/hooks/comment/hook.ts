@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentData } from "./CommentI";
-import { createPost, getInfinityCommentPost } from "./queries";
+import { createComment, getInfinityCommentPost } from "./queries";
 import { cloneObject } from "@/modules/core/utilities/objects";
 import { useAuthStore } from "@/store/auth";
 import moment from "moment";
@@ -20,7 +20,7 @@ export const useCreateComment = (postId: number | string) => {
     
     const comment = useMutation({
         mutationKey: ['comment', 'create', postId],
-        mutationFn: (data: CommentData) => createPost(data),
+        mutationFn: (data: CommentData) => createComment(data),
         onMutate: (data) => {
             const previousComments = cloneObject(queryClient.getQueryData(['comment', 'list', postId]));
             const currentUser = useAuthStore.getState().user;

@@ -1,10 +1,16 @@
 import AppLayout from "@/modules/core/layouts/AppLayout";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import NavbarConfig from "../../components/NavbarConfig";
+import { useAuthStore } from "@/store/auth";
 
 
 const Configuration = () => {
+    const params = useParams();
+    const user  = useAuthStore((state) => state.user);
+    if(params.username !== user?.username) {
+        return  'Recurso no encontrado';
 
+    };
     return (
         <>
             <AppLayout>
