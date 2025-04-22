@@ -6,7 +6,13 @@ interface Resources {
     },
     "menu": {
       "menu": "Menú",
-      "profile": "Mi perfil"
+      "profile": "Mi perfil",
+      "home": "Inicio",
+      "posts": "Publicaciones",
+      "statistics": "Estadísticas",
+      "messages": "Mensajes",
+      "notifications": "Notificaciones",
+      "users": "Usuarios"
     },
     "post": {
       "introduction": "Nosotros sabemos de tus ganar de compartir tus ideales, realiza un nuevo post y comparte con la comunidad SHUK",

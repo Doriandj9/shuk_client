@@ -324,6 +324,43 @@
   .img-shadow {
     @apply drop-shadow-sm;
   }
+
+  .item-category-navbar {
+    @apply 
+    flex text-sm 
+    items-center 
+    gap-3 
+    font-normal
+    hover:bg-slate-100
+    hover:rounded-sm p-2
+    dark:hover:bg-slate-700 
+    dark:text-slate-400 
+    dark:hover:text-slate-200
+    border-b 
+    border-secondary
+    dark:border-slate-500 
+    transition-all duration-300
+    ;
+  }
+
+  .item-category-navbar-active {
+    @apply 
+    flex text-sm 
+    items-center 
+    gap-3 
+    font-normal
+    bg-stone-100 
+    hover:bg-slate-100
+    rounded-sm p-2
+    dark:hover:bg-slate-700 
+    dark:text-slate-400 
+    dark:hover:text-slate-200
+    border-b 
+    border-secondary
+    dark:border-slate-500 
+    transition-all duration-300
+    ;
+  }
 }
 
 @media (max-width: 770px) {

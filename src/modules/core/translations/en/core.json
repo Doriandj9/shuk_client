@@ -5,7 +5,13 @@
     },
     "menu": {
         "menu": "Menu",
-        "profile": "My profile"
+        "profile": "My profile",
+        "home": "Home",
+        "posts": "Posts",
+        "statistics": "Statistics",
+        "messages": "Messages",
+        "notifications": "Notifications",
+        "users": "Users"
     },
     "post": {
         "introduction": "We know about your desire to share your ideals, make a new post and share with the SHUK community",
@@ -94,7 +100,6 @@
             "account-setting": "Account setting",
             "administration": "Administration",
             "notifications": "Notifications"
-
         }
     }
 }
