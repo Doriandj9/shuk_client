@@ -49,7 +49,7 @@ const ListPost: React.FC<ListPostProps> = () => {
               {status == 'error' && (<AppErrorFetchingPosts error={error} />)}
               {status != 'error' && status == 'pending' && (<AppLoadingPosts />)}
               {status != 'error' && isFetchingNextPage && (<AppLoadingPosts />)}
-              {status !== 'error' && !isFetching && !hasNextPage && (
+              {status !== 'error' && !hasNextPage && (
                 <div className="mt-4">
                   <AppNotPosts />
                 </div>

@@ -39,6 +39,8 @@ const AppUserMenu = () => {
 
     const handleLogOut = () => {
         logout.mutate();
+        logoutStore();
+        navigate(webRoutes.home.path);
     };
 
     const handleConfig = () => {

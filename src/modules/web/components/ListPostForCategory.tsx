@@ -58,7 +58,7 @@ const ListPostForCategory: React.FC<ListPostProps> = ({ category_id, category_na
                 {status == 'error' && (<AppErrorFetchingPosts error={error} />)}
                 {status != 'error' && status == 'pending' && (<AppLoadingPosts />)}
                 {status != 'error' && isFetchingNextPage && (<AppLoadingPosts />)}
-                {status !== 'error' && !isFetching && !hasNextPage && (
+                {status !== 'error' && !hasNextPage && (
                   <div className="mt-4">
                     <AppNotPosts />
                   </div>

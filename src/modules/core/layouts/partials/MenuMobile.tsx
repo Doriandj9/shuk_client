@@ -44,6 +44,8 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ handleShowMovil, mobileLogin })
 
     const handleLogOut = () => {
         logout.mutate();
+        logoutStore();
+        navigate(webRoutes.home.path);
     };
 
     const handleConfig = () => {

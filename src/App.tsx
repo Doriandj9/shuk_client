@@ -6,28 +6,22 @@ import RootRoutes from "./routes/RootRoutes";
 import { useGetCountries } from "./modules/web/hooks/countries/hook";
 import { useDataCountries } from "./store/countries";
 import { useEffect } from "react";
-import { useCategories } from "./store/categories";
-import { useGetCategories } from "./modules/admin/hooks/categories/hook";
+
 
 
 function App() {
   // const [t] = useTranslation('core');
   const { data , isError } = useGetCountries();
-  const { data: categories, isError: hasErrorCategory } = useGetCategories();
 
   const loadCountries = useDataCountries((state) => state.updateCountries);
   const setError = useDataCountries((state) => state.setIsError);
 
-  const loadCategories = useCategories((state) => state.updateCategories);
-  const setErrorCategory = useCategories((state) => state.setIsError);
 
   useEffect(() => {
       loadCountries(data ?? []);
-      loadCategories(categories ?? []);
-  }, [data,categories]);
+  }, [data]);
 
   setError(isError);
-  setErrorCategory(hasErrorCategory);
 
 //  api.interceptors.response.use((response) => {
 //     return response;

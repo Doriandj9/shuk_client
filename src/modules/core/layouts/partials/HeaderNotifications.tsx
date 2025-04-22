@@ -1,17 +1,17 @@
 import { Badge, IconButton, Menu, Tooltip } from "@mui/material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAuthStore } from "@/store/auth";
 import { useTranslation } from "react-i18next";
 import Fade from '@mui/material/Fade';
 import UserNotification from "../../components/UserNotification";
 import { useGetNotificationsUser, usePutNotifiesUserAllDraft } from "@/modules/web/hooks/notifications/hook";
-import InfinityScroll from "../../components/InfinityScroll";
 import AppErrorFetchingPosts from "../../components/AppErrorFetchingPosts";
 import { AppLoadingNotificationUser } from "../../components/AppLoadinNotificationUser";
 import { AppNotNotifies } from "../../components/AppNotNotifies";
 import { DocStatus } from "@/config/app";
 import { useTimeFormatPost } from "../../hooks/useTimesFormats";
+import InfinityScrollElement from "../../components/InfinityScrollElement";
 
 
 export const HeaderNotifications = () => {
@@ -19,8 +19,10 @@ export const HeaderNotifications = () => {
     const [t] = useTranslation('core');
     const isLogin = useAuthStore((state) => state.isLogin);
     const user = useAuthStore((state) => state.user);
-    const {format} = useTimeFormatPost('full');
-    const {put} = usePutNotifiesUserAllDraft(user?.id);
+    const { format } = useTimeFormatPost('full');
+    const { put } = usePutNotifiesUserAllDraft(user?.id);
+    const refElement = useRef<HTMLDivElement>(null);
+
     const { data,
         error,
         fetchNextPage,
@@ -35,7 +37,7 @@ export const HeaderNotifications = () => {
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         if (isLogin) {
-            put.mutate({doc_status: DocStatus.PENDING_NOTIFY});
+            put.mutate({ doc_status: DocStatus.PENDING_NOTIFY });
             setAnchorEl(event.currentTarget);
         }
     };
@@ -55,9 +57,9 @@ export const HeaderNotifications = () => {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                        <Badge color="primary" badgeContent={data?.pages[0]?.total_draft} max={99}>
-                            <NotificationsIcon className="text-mode-primary" />
-                        </Badge>
+                    <Badge color="primary" badgeContent={data?.pages[0]?.total_draft} max={99}>
+                        <NotificationsIcon className="text-mode-primary" />
+                    </Badge>
                 </IconButton>
             </Tooltip>
 
@@ -71,6 +73,12 @@ export const HeaderNotifications = () => {
                     'aria-labelledby': 'fade-button',
                 }}
                 TransitionComponent={Fade}
+                slotProps={
+                    {paper: {
+                            ref: refElement,
+                        }
+                    }
+                }
             >
                 <li>
                     <div className="w-96 p-2">
@@ -78,7 +86,8 @@ export const HeaderNotifications = () => {
                             {t('mobile.menu.notifications')}
                         </div>
 
-                        <InfinityScroll
+                        <InfinityScrollElement
+                            refElement={refElement}
                             render={(scroll) => {
                                 if (scroll.action && !isFetching && status !== 'pending' && !isFetchingNextPage) {
                                     scroll.changeStatus({ action: false });
@@ -90,18 +99,18 @@ export const HeaderNotifications = () => {
                                         {status && data?.pages.map(({ data: notifications }) => {
 
                                             return notifications.map((notification) => (
-                                                <UserNotification 
-                                                key={notification.id} 
-                                                notification={notification} 
-                                                timeAgo={format(notification.created_at ?? null)}
-                                                onClose={handleClose}
-                                                 />
+                                                <UserNotification
+                                                    key={notification.id}
+                                                    notification={notification}
+                                                    timeAgo={format(notification.created_at ?? null)}
+                                                    onClose={handleClose}
+                                                />
                                             ));
                                         })}
                                         {status == 'error' && (<AppErrorFetchingPosts error={error} />)}
                                         {status != 'error' && status == 'pending' && (<AppLoadingNotificationUser />)}
                                         {status != 'error' && isFetchingNextPage && (<AppLoadingNotificationUser />)}
-                                        {status !== 'error' && !isFetching && !hasNextPage && (
+                                        {status !== 'error' && !hasNextPage && (
                                             <div className="mt-4">
                                                 <AppNotNotifies />
                                             </div>

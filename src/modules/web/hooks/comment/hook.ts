@@ -94,7 +94,8 @@ export const useInfinityCommentPost = (postId: number | string) => {
                 return lastPage.current_page + 1;
             }
             return null;
-        }
+        },
+        refetchInterval: (1000 * 5),
     });
 
     return { ...hook };

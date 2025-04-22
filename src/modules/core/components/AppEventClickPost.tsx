@@ -70,9 +70,12 @@ const AppEventClickPost: React.FC<AppEventClickPostProps> = ({ render, post, def
 
 useEffect(() => { 
     setCount(post.total_likes || post.likes);
-    setIsClick(defaultIsClick ?? false);
-
 }, [post, defaultIsClick]);
+
+useEffect(() => {
+    setIsClick(defaultIsClick ?? false);
+}
+, [defaultIsClick]);
 
     return (
         <>

@@ -41,7 +41,7 @@ const AppListComments: React.FC<AppListCommentsProps> = ({ postId, refElement })
                             {status == 'error' && (<AppErrorFetchingPosts error={error} />)}
                             {status != 'error' && status == 'pending' && (<AppLoadingComments />)}
                             {status != 'error' && isFetchingNextPage && (<AppLoadingComments />)}
-                            {status !== 'error' && !isFetching && !hasNextPage && (
+                            {status !== 'error' && !hasNextPage && (
                                 <div className="mt-4">
                                     <AppNotComments />
                                 </div>

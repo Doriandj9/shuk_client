@@ -12,7 +12,7 @@ import TextMenuPost from "./TabsMenuPost/TextMenuPost";
 import TabPostImg from "./TabsPost/TabPostImg";
 import { PostTypesBack } from "@/modules/core/@types/post";
 import { usePostStore } from "@/store/postStore";
-import { TagCategories } from "./TagCategories";
+import { WrappingTagCategories } from "./WrappingTagCategories";
 
 
 type TabNum = 1 | 2 | 3;
@@ -48,7 +48,7 @@ const TabsPost = () => {
                   ">{tWeb('titles.tag-post')}</h4>
               </div>
               <div className="flex-gow flex gap-1">
-                <TagCategories />
+                <WrappingTagCategories />
               </div>
             </div>
             {tab === 1 &&

@@ -2,12 +2,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createCategory, getCategories, getCategory, updateCategory } from "./queries";
 import { NewCategoriesForm } from "@/modules/web/validations/categoriesSchema";
 import { showError } from "@/modules/core/utilities/errors";
+import { app } from "@/config/app";
 
 
 export const useGetCategories = () => {
     const hook = useQuery({
         queryKey: ['categories','list'],
         queryFn: getCategories,
+        refetchInterval: app.timeRefetchInterval
     });
 
     return {...hook};

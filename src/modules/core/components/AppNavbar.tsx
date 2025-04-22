@@ -1,10 +1,10 @@
 import { webRoutes } from "@/config/webRoutes";
-import { useCategories } from "@/store/categories";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Divider } from "@mui/material";
 import { appLoadImage } from "../utilities/img/convert";
+import { useGetCategories } from "@/modules/admin/hooks/categories/hook";
 
 export type AppNavbarProps = {
     isAdmin?: boolean;
@@ -12,7 +12,7 @@ export type AppNavbarProps = {
 };
 
 const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
-    const categories = useCategories((state) => state.categories);
+    const {data: categories} = useGetCategories(); 
     const [t] = useTranslation('web');
 
     const handleClose = () => {
@@ -66,7 +66,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                             </div>
                             <ul className="flex flex-col">
                                 {
-                                    categories.map((category) => (
+                                    categories?.map((category) => (
                                         <li key={category.id}>
                                             <Link to={`/interest/${category.name.toLowerCase().replaceAll(' ', '_')}?i=${category.id}`}
                                                 className="flex text-sm items-center gap-3 font-extralight
