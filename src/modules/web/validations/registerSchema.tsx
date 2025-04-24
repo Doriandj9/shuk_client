@@ -10,9 +10,7 @@ export const useRegisterSchema = () => {
 
         return z.object({
             full_name: z.string().min(3,t('validations.messages.full-name-min')),
-            email: z.string().email(t('validations.messages.email-type')),
-            birthday: z.string().min(1,t('validations.messages.birthday-required')),
-            phone: z.string().min(3,t('validations.messages.phone-required'))
+            email: z.string().email(t('validations.messages.email-type'))
         });
     },[t]);
 

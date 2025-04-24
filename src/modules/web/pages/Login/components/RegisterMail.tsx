@@ -48,26 +48,18 @@ const RegisterMail: React.FC<PropsLoginMail> = ({ handleChangeMode }) => {
                     />
                     <AppFormInput
                         label={t('register.inputs.email.label')}
-                        propsInputs={{ placeholder: t('register.inputs.email.placeholder'),
-                             type: 'email',
-                             ...register('email')
-                             }}
+                        propsInputs={{
+                            placeholder: t('register.inputs.email.placeholder'),
+                            type: 'email',
+                            ...register('email')
+                        }}
                         propsControl={{
                             isInvalid: Boolean(errors.email?.message)
                         }}
                         validation={errors.email?.message}
                         withProvider={false}
                     />
-                    <AppFormInput
-                        label={t('register.inputs.birthday.label')}
-                        propsInputs={{ placeholder: t('register.inputs.birthday.placeholder'), type: 'date' }}
-                        withProvider={false}
-                    />
-                    <AppFormInput
-                        label={t('register.inputs.phone.label')}
-                        propsInputs={{ placeholder: t('register.inputs.phone.placeholder'), type: 'number' }}
-                        withProvider={false}
-                    />
+
                     <Button type="submit" colorScheme="yellow" className="w-full mt-4">
                         <span className="text-sm">{t('register.buttons.save')}</span>
                     </Button>
