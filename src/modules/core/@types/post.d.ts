@@ -71,7 +71,11 @@ export interface FileRecord {
     action: string | null; 
     docStatus: string; 
     fileable_type: string; 
-    type: string; 
+    filename?: string;
+    extension?: string;
+    size?: number;
+    mime_type?: string;
+    type: string;
     meta_info: MetaInfoImg | null; 
     path: string;
     is_multiple:boolean;

@@ -9,9 +9,11 @@ import { showError } from "@/modules/core/utilities/errors";
 import { app } from "@/config/app";
 import { useContext } from "react";
 import { KeysPostContext } from "../../providers/KeysPosts";
+import { useKeysForLocation } from "@/modules/core/utilities/keysForLocation";
+import { useParams } from "react-router-dom";
 
 
-type OnMutateProp = {
+export type OnMutateProp = {
     pageParams?: number[];
     pages: PostDataInfinity[];
 };
@@ -24,85 +26,87 @@ const userTemp: User = {
 
 export const useCreatePost = (user: User | null) => {
     const client = useQueryClient();
-    const {keys} = useContext(KeysPostContext);
-    
+    const { keys } = useContext(KeysPostContext);
+    const params = useParams();
+    const getKeys = useKeysForLocation();
+
     const create = useMutation({
         mutationKey: [`${user?.id}-temp`],
         mutationFn: (data: DataPostSend) => createPost(data),
         onMutate: (data) => {
-                const previosData = client.getQueryData(['posts']);
-                const prevData: object | unknown = cloneObject(previosData);
+            const previosData = client.getQueryData(getKeys(window.location.href, params));
+            const prevData: object | unknown = cloneObject(previosData);
 
-                const tempPost: PostData = {
-                    id: `${user?.id}-temp`,
-                    description: data.payload.value.html,
-                    date: moment().format('YYYY-MM-DD'),
-                    doc_status: 'TM',
-                    is_active: true,
-                    type_post: data.type,
-                    path_resource: null,
-                    likes: 0,
-                    comments: 0,
-                    shared: 0,
-                    payload_post: data.payload,
-                    is_multiple: false,
-                    user_id: user?.id,
-                    is_temp: true,
-                    user: user || userTemp,
-                    files: null,
-                    img: null,
-                    file_temp: data.payload.value.file || undefined
+            const tempPost: PostData = {
+                id: `${user?.id}-temp`,
+                description: data.payload.value.html,
+                date: moment().format('YYYY-MM-DD'),
+                doc_status: 'TM',
+                is_active: true,
+                type_post: data.type,
+                path_resource: null,
+                likes: 0,
+                comments: 0,
+                shared: 0,
+                payload_post: data.payload,
+                is_multiple: false,
+                user_id: user?.id,
+                is_temp: true,
+                user: user || userTemp,
+                files: null,
+                img: null,
+                file_temp: data.payload.value.file || undefined
+            };
+
+            if (data.type == 'PI') {
+                const pathResource: PathResourcesType = {
+                    path: '',
+                    meta: {
+                        aspectRadio: null,
+                        typeAspectRadio: null,
+                        width: 0,
+                        height: 0,
+                        needContainer: false,
+                        metaColors: {
+                            max: null,
+                            middle: null,
+                            min: null,
+                        },
+                        isResize: false
+                    }
                 };
 
-                if (data.type == 'PI') {
-                    const pathResource: PathResourcesType = {
-                        path: '',
-                        meta: {
-                            aspectRadio: null,
-                            typeAspectRadio: null,
-                            width: 0,
-                            height: 0,
-                            needContainer: false,
-                            metaColors: {
-                                max: null,
-                                middle: null,
-                                min: null,
-                            },
-                            isResize: false
-                        }
-                    };
-
-                    Reflect.set(tempPost, 'path_resource', pathResource);
-                }
+                Reflect.set(tempPost, 'path_resource', pathResource);
+            }
 
 
 
 
-                client.setQueryData(['posts'], (old: OnMutateProp) => {
-                    const oldValues = { ...old };
+            client.setQueryData(getKeys(window.location.href,params), (old: OnMutateProp) => {
+                const oldValues = { ...old };
 
-                    oldValues.pages.unshift({
-                        current_page: 0,
-                        data: [tempPost],
-                        first_page_url: '',
-                        from: 0,
-                        last_page: 0,
-                        last_page_url: '',
-                        links: [],
-                        next_page_url: '',
-                        path: '',
-                        per_page: 2,
-                        prev_page_url: null,
-                        to: 0,
-                        total: 0,
-                    });
-                    oldValues.pageParams?.unshift(0);
-
-                    return oldValues;
+                oldValues.pages.unshift({
+                    current_page: 0,
+                    data: [tempPost],
+                    first_page_url: '',
+                    from: 0,
+                    last_page: 0,
+                    last_page_url: '',
+                    links: [],
+                    next_page_url: '',
+                    path: '',
+                    per_page: 2,
+                    prev_page_url: null,
+                    to: 0,
+                    total: 0,
                 });
+                oldValues.pageParams?.unshift(0);
 
-                return () => client.setQueryData(['posts'], prevData);
-       
+                return oldValues;
+            });
+
+            return () => client.setQueryData(getKeys(window.location.href,params), prevData);
+
         },
         onError: (error, values, rollback) => {
             showError(error);
@@ -111,7 +115,7 @@ export const useCreatePost = (user: User | null) => {
             }
         },
         onSuccess: () => {
-            let previosData = client.getQueryData(['posts']);
+            let previosData = client.getQueryData(getKeys(window.location.href, params));
             if (previosData && typeof previosData == 'object') {
                 let pageParams: OnMutateProp['pageParams'] = Reflect.get(previosData, 'pageParams');
                 let pages: OnMutateProp['pages'] = Reflect.get(previosData, 'pages');
@@ -121,9 +125,9 @@ export const useCreatePost = (user: User | null) => {
 
                 previosData = { pageParams, pages };
             }
-            client.setQueryData(['posts'], previosData);
+            client.setQueryData(getKeys(window.location.href,params), previosData);
             client.invalidateQueries({ queryKey: ['posts'] });
-            client.invalidateQueries({queryKey: keys});
+            client.invalidateQueries({ queryKey: keys });
 
         }
     });
@@ -173,37 +177,53 @@ export const useGetInfinityPostsForCategory = (params: ParamsPostInfinityFn) => 
 
 export const useUpdatePost = (id: number | string) => {
     const client = useQueryClient();
+    const params = useParams();
+    const getKeys = useKeysForLocation();
 
     const put = useMutation({
         mutationKey: ['posts'],
         mutationFn: (data: unknown) => putPost(id, data),
         onMutate: (data: DataUpdatePost) => {
-            const previosData = client.getQueryData(['posts']);
+            const previosData = client.getQueryData(getKeys(window.location.href, params));
+            
             const prevData: object | unknown = cloneObject(previosData);
 
-            client.setQueryData(['posts'], (old: OnMutateProp) => {
-
-                const tempValues = { ...old };
-
-                tempValues.pages = tempValues.pages.map((page) => {
-                    page.data = page.data.map((post) => {
-                        if (post.id == id) {
-                            const postUpdate = { ...post, ...data };
-                            return postUpdate;
-                        }
-
-                        return post;
-                    });
-
-                    return page;
+            if(params?.id){
+                client.setQueryData(getKeys(window.location.href,params), (old: object) => {
+                    return {...old,...data};
                 });
+            } else {
+                client.setQueryData(getKeys(window.location.href,params), (old: OnMutateProp) => {
 
+                    const tempValues = { ...old };
+    
+                    tempValues.pages = tempValues.pages?.map((page) => {
+                        page.data = page.data?.map((post) => {
+                            if (post.id == id) {
+                                const postUpdate = { ...post, ...data };
+                                return postUpdate;
+                            }
+    
+                            return post;
+                        });
+    
+                        return page;
+                    });
+    
+                    if(data?.doc_status === 'DL'){
+                        tempValues.pages = tempValues.pages?.map((page) => {
+                            page.data = page.data?.filter((post) => post.id != id);
+                            return page;
+                        });
+                    }
+    
+                    return tempValues;
+    
+                });
+            }
+           
 
-                return tempValues;
-
-            });
-
-            return () => client.setQueryData(['posts'], prevData);
+            return () => client.setQueryData(getKeys(window.location.href,params), prevData);
         },
         onError: (error, values, rollback) => {
             showError(error);
@@ -219,20 +239,22 @@ export const useUpdatePost = (id: number | string) => {
 
 export const useUpdateSharedPost = (id: number | string) => {
     const client = useQueryClient();
+    const params = useParams();
+    const getKeys = useKeysForLocation();
 
     const put = useMutation({
         mutationKey: ['posts-shared'],
         mutationFn: (data: unknown) => putPostShared(id, data),
         onMutate: (data: DataUpdatePost) => {
-            const previosData = client.getQueryData(['posts']);
+            const previosData = client.getQueryData(getKeys(window.location.href, params));
             const prevData: object | unknown = cloneObject(previosData);
 
-            client.setQueryData(['posts'], (old: OnMutateProp) => {
+            client.setQueryData(getKeys(window.location.href,params), (old: OnMutateProp) => {
 
                 const tempValues = { ...old };
 
-                tempValues.pages = tempValues.pages.map((page) => {
-                    page.data = page.data.map((post) => {
+                tempValues.pages = tempValues.pages?.map((page) => {
+                    page.data = page.data?.map((post) => {
                         if (post.id == id) {
                             const postUpdate = { ...post, ...data };
                             return postUpdate;
@@ -249,7 +271,7 @@ export const useUpdateSharedPost = (id: number | string) => {
 
             });
 
-            return () => client.setQueryData(['posts'], prevData);
+            return () => client.setQueryData(getKeys(window.location.href,params), prevData);
         },
         onError: (error, values, rollback) => {
             showError(error);

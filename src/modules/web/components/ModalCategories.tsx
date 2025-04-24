@@ -91,8 +91,6 @@ export const ModalCategories: React.FC<ModalCategoriesProps> = ({ isOpen, onClos
         }
     }, [isEdit, category]);
 
-    console.log(watch());
-
     return (
         <>
             <AppLoading isOpen={create.isPending || update.isPending} />

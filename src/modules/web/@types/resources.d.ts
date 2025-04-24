@@ -128,7 +128,8 @@ interface Resources {
       "drop-file": "Arrastre un archivo.",
       "file-search": "Buscar archivo.",
       "drag-file": "Suelte la imagen",
-      "tag-post": "Etiquete el post en una o mas categorías"
+      "tag-post": "Etiquete el post en una o mas categorías",
+      "edit-post": "Editar publicación"
     },
     "descriptions": {
       "post": "Publicar",
@@ -154,7 +155,9 @@ interface Resources {
       "has-notify-app": "Permitir notificaciones de aplicación",
       "hidden-mail": "Ocultar correo electrónico",
       "hidden-phone": "Ocultar numero de celular",
-      "theme-app": "Seleccione el tema de la aplicación"
+      "theme-app": "Seleccione el tema de la aplicación",
+      "hidden-posts": "No tiene configuración por favor agrega en configuración",
+      "post-already-hidden": "La publicación ya esta oculta"
     },
     "helpers": {
       "email-not-show": "El correo electrónico no se mostrará públicamente.",

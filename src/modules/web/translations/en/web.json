@@ -127,7 +127,8 @@
         "drop-file": "Drag a file.",
         "file-search": "Search file.",
         "drag-file": "Release the image",
-        "tag-post": "Tag the post in one or more categories"
+        "tag-post": "Tag the post in one or more categories",
+        "edit-post": "Edit post"
     },
     "descriptions": {
         "post": "Post",
@@ -153,7 +154,9 @@
         "has-notify-app": "Allow app notifications",
         "hidden-mail": "Allow app notifications",
         "hidden-phone": "Hide cell phone number",
-        "theme-app": "Select the application theme"
+        "theme-app": "Select the application theme",
+        "hidden-posts": "It doesn't have a configuration please believe me in configuration",
+        "post-already-hidden": "The post is already hidden"
     },
     "helpers": {
         "email-not-show": "Email will not be displayed publicly.",

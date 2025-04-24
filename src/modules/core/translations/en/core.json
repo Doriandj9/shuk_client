@@ -48,7 +48,8 @@
                 "shared": "Share",
                 "hidden": "Disguise",
                 "delete": "Delete",
-                "edit": "Edit"
+                "edit": "Edit",
+                "download-image": "Download image"
             },
             "comment": {
                 "write": "Write a comment...",
@@ -66,7 +67,8 @@
                 "update-success": "Update successful",
                 "loading": "Loading...",
                 "close": "Close",
-                "return": "Go back"
+                "return": "Go back",
+                "sure-continue": "Are you sure you want to continue?"
             }
         },
         "success": {

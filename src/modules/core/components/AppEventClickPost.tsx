@@ -19,6 +19,8 @@ export type DataUpdatePost = {
     total_likes?: number;
     total_shared?: number;
     social_provider_id?: number | string;
+    description?: string;
+    doc_status?: 'CO' | 'DR' | 'AC' | 'DL' | 'ED' | 'TM';
 };
 
 type AppEventClickPostProps = {

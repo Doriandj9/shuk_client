@@ -36,6 +36,13 @@ export type User = {
     gender?: 'M' | 'F';
 }
 
+export type HidePostsUser = {
+    id_posts: string[]
+};
+export type HidePostsCommentsUser = {
+    id_comments: string[]
+};
+
 export type UserSettings = {
     language: LanguageApp;
     notifications_by_mail: boolean;
@@ -43,6 +50,8 @@ export type UserSettings = {
     hidden_mail: boolean;
     hidden_phone_number: boolean;
     theme: ThemeOptions;
+    hide_posts: HidePostsUser;
+    hide_comments: HidePostsCommentsUser;
 };
 
 export interface InfinityData<T>{

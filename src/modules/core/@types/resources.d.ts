@@ -49,7 +49,8 @@ interface Resources {
           "shared": "Compartir",
           "hidden": "Ocultar",
           "delete": "Eliminar",
-          "edit": "Editar"
+          "edit": "Editar",
+          "download-image": "Descargar imagen"
         },
         "comment": {
           "write": "Escribe un comentario...",
@@ -67,7 +68,8 @@ interface Resources {
           "update-success": "Actualización exitosa",
           "loading": "Cargando...",
           "close": "Cerrar",
-          "return": "Regresar"
+          "return": "Regresar",
+          "sure-continue": "¿Está seguro de que desea continuar?"
         }
       },
       "success": {
