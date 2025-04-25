@@ -1,23 +1,25 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Pagination, PaginationItem, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { ResultTableHelperHook } from "../@types/core";
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 type AppTableComponentProps<TData> = {
     tableHelper: ResultTableHelperHook<TData>;
     isLoading: boolean;
     error: unknown;
     data: TData[];
+    count?: number;
+    onPage?: (page: number) => unknown;
 };
 
-export function AppTableComponent<TData>({ tableHelper, isLoading, error, data }: AppTableComponentProps<TData>) {
+export function AppTableComponent<TData>({ tableHelper, isLoading, error, data, count, onPage }: AppTableComponentProps<TData>) {
     const { actions, columns } = tableHelper; // columns debería ser un array de Column<TData>
-    console.log(status);
 
-    if(isLoading){
+    if (isLoading) {
         return 'cargando...';
     }
 
-    if(error){
+    if (error) {
         return 'error';
     }
 
@@ -50,14 +52,36 @@ export function AppTableComponent<TData>({ tableHelper, isLoading, error, data }
                                 <TableCell style={{
                                     width: actions.width ?? '1.8rem'
                                 }}>
-                                    {actions.list?.render ? actions.list.render(row,++index) : ''}
+                                    {actions.list?.render ? actions.list.render(row, ++index) : ''}
                                 </TableCell>
-                          
+
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+            <div className="mt-2">
+                <Stack spacing={2}>
+                    <Pagination
+                        count={count}
+                        renderItem={(item) => {
+
+                            if (onPage) {
+                                item.onClick = () => onPage(item?.page ?? 1);
+                            }
+                            return (
+                                <PaginationItem
+
+                                    slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                                    {
+                                    ...item
+                                    }
+                                />
+                            );
+                        }}
+                    />
+                </Stack>
+            </div>
         </>
     );
 }

@@ -15,7 +15,7 @@ const AppActionLikePost: React.FC<AppActionLikePostProps> = ({ post }) => {
     return (
         <>
             <AppEventClickPost post={post} defaultIsClick={post.your_liked} defaultCount={post.likes} render={({ count, click, isClick }) => (
-                <IconButton onClick={() => {
+                <IconButton disabled={post.is_temp} onClick={() => {
                     const value = isClick ? count - 1 : count + 1;
                     click({ likes: isClick ? -1 : 1, type: post.type_post, total_likes: isClick ? count - 1 : count + 1 }, value);
                 }}>

@@ -20,7 +20,8 @@ export const createCategory: CreateCategoryFn = async (data) => {
 
     const response = await api.post(routesApi.admin.resource_categories.path, data, {
         headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
 
@@ -32,7 +33,8 @@ export const updateCategory: UpdateCategoryFn = async (data,id) => {
 
     const response = await api.post(`${routesApi.admin.resource_categories.path}/${id}`, data,{
         headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
 

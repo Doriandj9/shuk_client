@@ -17,6 +17,7 @@ import { StatisticsAdmin } from "@/modules/admin/pages/StatisticsAdmin";
 import { DashboardAdmin } from "@/modules/admin/pages/DashboardAdmin";
 import { Categories } from "@/modules/admin/pages/Categories/Categories";
 import { Interest } from "@/modules/web/pages/Home/Interest";
+import { CompleteRegisterMail } from "@/modules/web/pages/Login/components/CompleteRegister";
 
 const RootRoutes = () => {
   return (
@@ -28,6 +29,7 @@ const RootRoutes = () => {
 
         <Route element={<MiddlewareLogin />}>
           <Route path={webRoutes.login.path} element={<Login />} />
+          <Route path={webRoutes.complete_register.path} element={<CompleteRegisterMail />} />
         </Route>
 
         <Route path={webRoutes.view_posts.path} element={<ViewPosts />} />

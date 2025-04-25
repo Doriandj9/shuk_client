@@ -15,6 +15,12 @@ export const routesApi = {
         shared_post: {
             path: 'shared/post/{id}'
         },
+        initial_register: {
+            path: 'security/initial-register'
+        },
+        complete_register: {
+            path: 'security/complete-register'
+        },
     },
     user: {
         resource_post: {

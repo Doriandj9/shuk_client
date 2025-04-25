@@ -12,7 +12,8 @@ export const createComment: CreateCommentPost = async (data) => {
     const response = await api.post(routesApi.user.resource_comment.path, data, {
         headers: {
             'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
 
@@ -25,7 +26,8 @@ export const getInfinityCommentPost: GetInfinityCommentPostFn = async ({pagePara
     const response = await api.get(`${path}?per_page=10&page=${pageParam}`, {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         },
     });
 

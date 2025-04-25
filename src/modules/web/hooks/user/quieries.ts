@@ -18,7 +18,8 @@ export const updateConfig = async (data: unknown) => {
     const response = await api.post(routesApi.user.config.path, data, {
         headers: {
             'Authorization': `Bearer ${useAuthStore.getState().token}`,
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
 
@@ -29,7 +30,8 @@ export const updateUserSettings = async (data: unknown) => {
     const response = await api.post(routesApi.user.update_settings.path, data, {
         headers: {
             'Authorization': `Bearer ${useAuthStore.getState().token}`,
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
 

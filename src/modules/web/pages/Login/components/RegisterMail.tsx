@@ -1,32 +1,45 @@
 import AppFormInput from "@/modules/core/components/AppFormInput";
+import { useInitialRegister } from "@/modules/web/hooks/auth/hooksAuth";
+import { DataRegisterInitial } from "@/modules/web/hooks/auth/request";
 import { useRegisterSchema } from "@/modules/web/validations/registerSchema";
 import { Button } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { RegisterContext } from "../contexts/registerContext";
+import { LoadingAuthContext } from "../Login";
+import { useLanguageApp } from "@/store/language";
 
 type PropsLoginMail = {
     handleChangeMode: CallableFunction
 };
 
-type Inputs = {
-    full_name: string;
-    email: string;
-    birthday: string;
-    phone: string;
-};
 
 const RegisterMail: React.FC<PropsLoginMail> = ({ handleChangeMode }) => {
     const [t] = useTranslation('web');
+    const lang = useLanguageApp((state) => state.language);
     const registerSchema = useRegisterSchema();
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
+    const { register, handleSubmit, formState: { errors } } = useForm<DataRegisterInitial>({
         resolver: zodResolver(registerSchema)
     });
 
-    const handleRegister = (data: Inputs) => {
-        console.log(data);
+    const { updateState } = React.useContext(RegisterContext);
+    const {setAuthLogin} = React.useContext(LoadingAuthContext);
+
+    const { register: initialRegister } = useInitialRegister();
+
+    const handleRegister = (data: DataRegisterInitial) => {
+        initialRegister.mutate({...data,language: lang},{
+            onSuccess(){
+                updateState(true);
+            }
+        });
     };
+
+    useEffect(() => {
+        setAuthLogin(initialRegister.isPending);
+    },[initialRegister.isPending]);
 
 
     return (
@@ -60,7 +73,10 @@ const RegisterMail: React.FC<PropsLoginMail> = ({ handleChangeMode }) => {
                         withProvider={false}
                     />
 
-                    <Button type="submit" colorScheme="yellow" className="w-full mt-4">
+                    <Button
+                    disabled={initialRegister.isPending}
+                    isLoading={initialRegister.isPending}
+                     type="submit" colorScheme="yellow" className="w-full mt-4">
                         <span className="text-sm">{t('register.buttons.save')}</span>
                     </Button>
                 </form>

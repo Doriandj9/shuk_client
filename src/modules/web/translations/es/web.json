@@ -27,6 +27,9 @@
         }
     },
     "register": {
+        "messages": {
+            "success-initial-register": "Gracias por completar el registro. Hemos enviado un correo electrónico a la dirección que proporcionaste para confirmar que eres tú la persona que desea registrarse.<br>Para finalizar el proceso y completar el último paso del registro, por favor sigue el enlace que hemos enviado a tu correo.<br>Si no ves el correo en tu bandeja de entrada, revisa también la carpeta de spam o correo no deseado.<br>¡Gracias por registrarte y bienvenido!"
+        },
         "header": {
             "title": "Regístrate en Shuk"
         },
@@ -116,7 +119,9 @@
             "empty-img-post": "No arrastro una imagen",
             "not-img-post": "El archivo arrastrado no es una imagen",
             "unknown-img-post": "Existe un error al intentar subir el archivo",
-            "not-selected-img": "No selecciono una imagen"
+            "not-selected-img": "No selecciono una imagen",
+            "password-type": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
+            "password-confirm": "La contraseña y la contraseña de confirmación no coinciden."
         }
     },
     "titles": {

@@ -12,7 +12,8 @@ export const createPost: CreatePost = async (data) => {
     
     const response = await api.post(routesApi.user.resource_post.path, data, {headers: {
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+        'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+        'X-lang': localStorage.getItem('languageApp') ?? 'es'
     }});
 
     return response.data?.data || null;
@@ -27,7 +28,8 @@ export const getInfinityPosts: getPostsFn = async (params) => {
     const response  = await api.get(routesApi.public.infinity_post.path, {
         params,
         headers: {
-            'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         },
     });
 
@@ -37,6 +39,7 @@ export const getInfinityPosts: getPostsFn = async (params) => {
 export const putPost =  async (id: number | string,data: unknown) => {
     const response = await api.put(`${routesApi.user.resource_post.path}/${id}`, data, {headers: {
         'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+        'X-lang': localStorage.getItem('languageApp') ?? 'es'
     }});
 
     return response.data?.data || null;
@@ -45,6 +48,7 @@ export const putPost =  async (id: number | string,data: unknown) => {
 export const putPostShared =  async (id: number | string,data: unknown) => {
     const response = await api.put(`${routesApi.public.shared_post.path.replace(`{id}`, String(id))}`, data, {headers: {
         'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+        'X-lang': localStorage.getItem('languageApp') ?? 'es'
     }});
 
     return response.data?.data || null;
@@ -59,6 +63,7 @@ export const getPost: getPostFn = async (id) => {
     const response = await api.get(`${routesApi.user.resource_post.path}/${id}`,{
         headers: {
         'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+        'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
 
@@ -74,7 +79,8 @@ export const getInfinityPostUser: getInfinityPostUserFn = async ({pageParam}, us
     const response = await api.get(`${path}?per_page=2&page=${pageParam}`, {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         },
     });
 

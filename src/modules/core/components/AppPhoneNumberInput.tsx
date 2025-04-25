@@ -23,8 +23,9 @@ export const AppPhoneNumberInput: React.FC<AppPhoneNumberInputProps> = ({ name, 
                 <Controller
                     name={name}
                     control={control}
-                    render={(({ field }) => (
-                        <FormControl fullWidth={fullWidth}>
+                    render={(({ field, fieldState }) => (
+                        <FormControl fullWidth={fullWidth} 
+                        >
                             <FormLabel sx={{ fontWeight: labelStrong ? 'bold' : 'normal' }}>{label}</FormLabel>
                             <PhoneInput
                                 ref={field.ref}
@@ -34,6 +35,9 @@ export const AppPhoneNumberInput: React.FC<AppPhoneNumberInputProps> = ({ name, 
                                 className="border border-gray-300 p-2 w-full rounded-lg"
 
                             />
+                            {fieldState.error && (
+                                <span className="text-red-400 text-xs">Invalid phone number</span>
+                            )}
                         </FormControl>
                     ))}
 

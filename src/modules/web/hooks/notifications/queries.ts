@@ -8,7 +8,8 @@ export const getUserNotifies: GetNotifiesForUser = async (params) => {
     const response = await api.get(`${routesApi.user.resource_notifies.path}`,{
         params,
         headers: {
-            'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
     const treatment = {...response.data?.data, total_draft: response.data?.total_draft};
@@ -20,7 +21,8 @@ export const getUserNotifies: GetNotifiesForUser = async (params) => {
 export const putNotifiesUserAllDraft: PutNotifiesUserAllDraft = async (userId,data) => {
     const response = await api.put(`${routesApi.user.put_all_notifies_draft.path.replace('{user_id}', userId)}`,data,{
         headers: {
-            'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
 
@@ -31,7 +33,8 @@ export const putNotifiesUserAllDraft: PutNotifiesUserAllDraft = async (userId,da
 export const updateNotifyUser: UpdateNotifyUser = async (data) => {
     const response = await api.put(`${routesApi.user.resource_notifies.path}/${data.id}`,data,{
         headers: {
-            'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
 
@@ -42,7 +45,8 @@ export const updateNotifyUser: UpdateNotifyUser = async (data) => {
 export const storeNotificationUser: StoreNotificationUserFn = async (data) => {
     const response = await api.post(routesApi.user.resource_notifies.path,data,{
         headers: {
-            'Authorization': `Bearer ${(useAuthStore.getState()).token}`
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
         }
     });
 

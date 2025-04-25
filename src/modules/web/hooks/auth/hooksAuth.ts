@@ -1,9 +1,10 @@
 import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
-import { authFn, authLogOut, authProviderFn, infoUserGoogle } from "./requestsAuth";
+import { authFn, authLogOut, authProviderFn, completeRegister, infoUserGoogle, initialRegister } from "./requestsAuth";
 import { api } from "@/config/app";
 import { showError } from "@/modules/core/utilities/errors";
 import { useContext } from "react";
 import { KeysPostContext } from "../../providers/KeysPosts";
+import { DataRegisterInitial, RegisterUser } from "./request";
 
 
 export const useAuth = (handleSuccessLogin?: CallableFunction | null, handleSuccessLoginProvider?: CallableFunction) => {
@@ -70,4 +71,32 @@ export const useTest = () => {
         },
 
     });
+};
+
+export const useInitialRegister = () => {
+    const register = useMutation({
+        mutationKey: ['initial-register'],
+        mutationFn: (data: DataRegisterInitial) => initialRegister(data),
+        onError(error) {
+            if(error) {
+                showError(error);
+            }
+        }
+    });
+
+    return { register };
+};
+
+export const useCompleteRegister = () => {
+    const register = useMutation({
+        mutationKey: ['complete-register'],
+        mutationFn: (data: RegisterUser) => completeRegister(data),
+        onError(error) {
+            if(error) {
+                showError(error);
+            }
+        }
+    });
+
+    return { register };
 };

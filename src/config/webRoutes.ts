@@ -9,6 +9,9 @@ export const webRoutes = {
     login: {
         path: '/auth/login'
     },
+    complete_register: {
+        path: '/email-verification/:token'
+    },
     view_posts: {
         path: '/view/posts/:id'
     },

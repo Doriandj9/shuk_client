@@ -67,7 +67,8 @@ export const api = axios.create({
        }
     }],
     headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'X-lang': localStorage.getItem('languageApp') ?? 'es'
     }
 });
 
