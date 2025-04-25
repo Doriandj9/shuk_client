@@ -1,22 +1,34 @@
 import { webRoutes } from "@/config/webRoutes";
-import React from "react";
+import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { appLoadImage } from "../utilities/img/convert";
-import { useGetCategories } from "@/modules/admin/hooks/categories/hook";
+import { useGetInfinityCategories } from "@/modules/admin/hooks/categories/hook";
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import SubjectIcon from '@mui/icons-material/Subject';
 import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import InfinityScrollElement from "./InfinityScrollElement";
+import AppErrorFetchingPosts from "./AppErrorFetchingPosts";
+import { AppLoadingNotificationUser } from "./AppLoadinNotificationUser";
 export type AppNavbarProps = {
     isAdmin?: boolean;
     onClose?: CallableFunction;
 };
 
 const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
-    const { data: categories } = useGetCategories();
+    const {
+        data: categories,
+        error,
+        fetchNextPage,
+        isFetching,
+        isFetchingNextPage,
+        status
+    } = useGetInfinityCategories();
     const [t] = useTranslation('web');
     const [t_core] = useTranslation('core');
+    const refElement = useRef<HTMLDivElement>(null);
+
 
     const handleClose = () => {
 
@@ -93,25 +105,48 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                                     {t('titles.categories')}
                                 </span>
                             </h2>
+                            <div className="min-h-10 max-h-full overflow-y-auto" ref={refElement}>
+                                <ul className="flex flex-col px-2">
 
-                            <ul className="flex flex-col px-2">
+                                    {
+                                        < InfinityScrollElement
+                                            refElement={refElement}
+                                            render={(scroll) => {
+                                                if (scroll.action && !isFetching && status !== 'pending' && !isFetchingNextPage) {
+                                                    scroll.changeStatus({ action: false });
+                                                    fetchNextPage();
+                                                }
 
-                                {
-                                    categories?.map((category) => (
-                                        <li key={category.id}>
-                                            <NavLink to={`/interest/${category.name.toLowerCase().replaceAll(' ', '_')}?i=${category.id}`}
-                                                className={({ isActive }) => isActive ? "item-category-navbar-active" : "item-category-navbar"}
-                                                onClick={() => { if (onClose) { onClose(); }; }}
-                                            >
-                                                <img className="w-5 h-5 img-shadow" alt="img" src={appLoadImage(category.icon)} />
-                                                <span>
-                                                    {category.name}
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                    ))
-                                }
-                            </ul>
+                                                return (
+                                                    < >
+                                                        {status && categories?.pages.map(({ data }) => {
+
+                                                            return data.map((category) => (
+                                                                <li key={category.id}>
+                                                                    <NavLink to={`/interest/${category.name.toLowerCase().replaceAll(' ', '_')}?i=${category.id}`}
+                                                                        className={({ isActive }) => isActive ? "item-category-navbar-active" : "item-category-navbar flex-grow"}
+                                                                        onClick={() => { if (onClose) { onClose(); }; }}
+                                                                    >
+                                                                        <img className="w-5 h-5 img-shadow" alt="img" src={appLoadImage(category.icon)} />
+                                                                        <span>
+                                                                            {category.name}
+                                                                        </span>
+                                                                    </NavLink>
+                                                                </li>
+                                                            ));
+                                                        })}
+                                                        {status == 'error' && (<AppErrorFetchingPosts error={error} />)}
+                                                        {status != 'error' && status == 'pending' && (<AppLoadingNotificationUser />)}
+                                                        {status != 'error' && isFetchingNextPage && (<AppLoadingNotificationUser />)}
+
+                                                    </>
+                                                );
+                                            }}
+                                        />
+                                    }
+
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

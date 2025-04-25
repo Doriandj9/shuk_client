@@ -1,4 +1,5 @@
 import { ResponseCreateApi, ResponseSuccessApi, ResponseUpdateApi } from "@/modules/core/@types/core";
+import { InfinityData } from "@/modules/web/@types/web";
 import { DocStatusData } from "@/modules/web/hooks/post/PostI";
 import { NewCategoriesForm } from "@/modules/web/validations/categoriesSchema";
 
@@ -11,8 +12,15 @@ export type CategoriesModelType = {
     is_active: boolean;
 };
 
+export type ParamsCategoriesInfinityFn = {
+    per_page: string;
+    page?: number;
+    doc_status?: string;
+};
+
+
 export type GetCategoriesFn = {
-    (): Promise<ResponseSuccessApi<CategoriesModelType[]>['data']>;
+    (params: ParamsCategoriesInfinityFn): Promise<InfinityData<CategoriesModelType>>;
 };
 
 export type GetCategoryFn = {
@@ -26,3 +34,4 @@ export type CreateCategoryFn = {
 export type UpdateCategoryFn = {
     (data: NewCategoriesForm, id: string): Promise<ResponseUpdateApi<CategoriesModelType>['data']>;
 }
+

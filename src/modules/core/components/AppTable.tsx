@@ -2,25 +2,29 @@ import { Pagination, PaginationItem, Paper, Stack, Table, TableBody, TableCell, 
 import { ResultTableHelperHook } from "../@types/core";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { AppLoadingTable } from "./AppLoadingTable";
+import AppErrorFetchingPosts from "./AppErrorFetchingPosts";
 
 type AppTableComponentProps<TData> = {
     tableHelper: ResultTableHelperHook<TData>;
     isLoading: boolean;
-    error: unknown;
+    error: Error | null;
     data: TData[];
     count?: number;
     onPage?: (page: number) => unknown;
+    currentPage?: number;
+    perPage?: number;
 };
 
-export function AppTableComponent<TData>({ tableHelper, isLoading, error, data, count, onPage }: AppTableComponentProps<TData>) {
+export function AppTableComponent<TData>({ tableHelper, isLoading, error, data, count, onPage, currentPage }: AppTableComponentProps<TData>) {
     const { actions, columns } = tableHelper; // columns debería ser un array de Column<TData>
 
     if (isLoading) {
-        return 'cargando...';
+        return <AppLoadingTable />;
     }
 
     if (error) {
-        return 'error';
+        return <AppErrorFetchingPosts error={error} />;
     }
 
     return (
@@ -40,19 +44,19 @@ export function AppTableComponent<TData>({ tableHelper, isLoading, error, data, 
                     <TableBody>
                         {data.map((row, index) => (
                             <TableRow
-                                key={++index}
+                                key={currentPage ? currentPage * ++index : ++index}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 {columns.map((item, columnIndex) => (
                                     <TableCell key={columnIndex} align="center">
-                                        {item.render(row, ++index)}
+                                        {item.render(row, currentPage ? currentPage * ++index : ++index)}
                                     </TableCell>
                                 ))}
 
                                 <TableCell style={{
                                     width: actions.width ?? '1.8rem'
                                 }}>
-                                    {actions.list?.render ? actions.list.render(row, ++index) : ''}
+                                    {actions.list?.render ? actions.list.render(row, currentPage ? currentPage * ++index : ++index) : ''}
                                 </TableCell>
 
                             </TableRow>
@@ -65,13 +69,17 @@ export function AppTableComponent<TData>({ tableHelper, isLoading, error, data, 
                     <Pagination
                         count={count}
                         renderItem={(item) => {
-
+                            const originalClick = item.onClick;
                             if (onPage) {
-                                item.onClick = () => onPage(item?.page ?? 1);
+                                item.selected = item.page === currentPage;
+                                item.onClick = (e) =>  {
+                                    onPage(item?.page ?? 1);
+                                    originalClick(e);
+                                };
                             }
                             return (
                                 <PaginationItem
-
+                                    
                                     slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
                                     {
                                     ...item

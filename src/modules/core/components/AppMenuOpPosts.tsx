@@ -208,7 +208,7 @@ const AppMenuOpPosts: React.FC<AppMenuOpPostsProps> = ({ post }) => {
 
             <AppModal
                 open={openModalDeletePost}
-                onClose={handleDeleteModalPost}
+                onClose={handleCloseDeleteModalPost}
 
             >
                 <div>

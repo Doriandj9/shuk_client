@@ -1,20 +1,38 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createCategory, getCategories, getCategory, updateCategory } from "./queries";
 import { NewCategoriesForm } from "@/modules/web/validations/categoriesSchema";
 import { showError } from "@/modules/core/utilities/errors";
 import { app } from "@/config/app";
 
 
-export const useGetCategories = () => {
+export const useGetCategories = (currentPage?: number) => {
+    const perPage = '5';
     const hook = useQuery({
-        queryKey: ['categories','list'],
-        queryFn: getCategories,
+        queryKey: ['categories','list',currentPage],
+        queryFn: () => getCategories({per_page: perPage, page: currentPage}),
         refetchInterval: app.timeRefetchInterval
     });
 
-    return {...hook};
+    return {...hook, perPage: parseInt(perPage)};
 };
 
+
+export const useGetInfinityCategories = () => {
+        const hook = useInfiniteQuery({
+            queryKey: ['categories'],
+            queryFn: (op) => getCategories({ per_page: '10', page: op.pageParam, doc_status: 'AC' }),
+            initialPageParam: 1,
+            getNextPageParam: (lastPage) => {
+                if (lastPage.next_page_url) {
+                    return lastPage.current_page + 1;
+                }
+                return null;
+            },
+            refetchInterval: app.timeRefetchInterval
+        });
+    
+        return { ...hook };
+};
 
 export const useGetCategory = (id: string | number | null) => {
     const hook = useQuery({
@@ -43,14 +61,13 @@ export const useCreteCategory = () => {
     return {create};
 };
 
-export const useUpdateCategory = (id?: string | number | null) => {
+export const useUpdateCategory = (id?: string | number | null,page?: number) => {
     const client = useQueryClient();
-
     const update = useMutation({
         mutationKey: ['categories', 'update'],
         mutationFn: (data: NewCategoriesForm) => updateCategory(data, String(id)),
         onSuccess(){
-            client.invalidateQueries({queryKey: ['categories','list']});
+            client.invalidateQueries({queryKey: ['categories','list',page]});
         },
         onError(error) {
             showError(error);

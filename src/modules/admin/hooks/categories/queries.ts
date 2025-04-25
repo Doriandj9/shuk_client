@@ -3,10 +3,12 @@ import { CreateCategoryFn, GetCategoriesFn, GetCategoryFn, UpdateCategoryFn } fr
 import { routesApi } from "@/config/apiRoutes";
 
 
-export const getCategories: GetCategoriesFn = async () => {
-    const response = await api.get(routesApi.admin.resource_categories.path);
+export const getCategories: GetCategoriesFn = async (params) => {
+    const response = await api.get(routesApi.admin.resource_categories.path,{
+        params
+    });
 
-    return response.data?.data || [];
+    return response.data ;
 };
 
 export const getCategory: GetCategoryFn = async (id) => {
