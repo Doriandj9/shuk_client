@@ -7,18 +7,19 @@ export type InfinityScrollElementType = {
 type InfinityScrollElementProps = {
     render: (scroll: InfinityScrollElementType & {changeStatus: Dispatch<SetStateAction<InfinityScrollElementType>>}) => React.ReactElement,
     refElement?: React.RefObject<HTMLDivElement>
+    className?: string;
+    elementName?: string;
 };
 
-const InfinityScrollElement: React.FC<InfinityScrollElementProps> = ({render, refElement}) => {
+const InfinityScrollElement: React.FC<InfinityScrollElementProps> = ({render, refElement, className}) => {
     const [scroll, setScroll] = useState<InfinityScrollElementType>({action: false});
 
     const handleScroll = () => {
 
         const clientHeight = refElement?.current?.clientHeight || 0 ;
         const scrollTop = refElement?.current?.scrollTop || 0;
-        const heightScroll = clientHeight + scrollTop;
+        const heightScroll = clientHeight + scrollTop  + 25;
         const totalHeightWindow = refElement?.current?.scrollHeight || 0;
-
         if(heightScroll >= totalHeightWindow ){
             setScroll({...scroll, action: true});
         }
@@ -26,6 +27,7 @@ const InfinityScrollElement: React.FC<InfinityScrollElementProps> = ({render, re
     };
 
     useEffect(() => {
+        
         if(refElement){
             refElement.current?.addEventListener('scroll', handleScroll);
             return () => {
@@ -36,7 +38,7 @@ const InfinityScrollElement: React.FC<InfinityScrollElementProps> = ({render, re
     
     return (
         <>
-            <div>
+            <div className={className}>
                 {render({action: scroll.action, changeStatus: setScroll})}
             </div>
         </>

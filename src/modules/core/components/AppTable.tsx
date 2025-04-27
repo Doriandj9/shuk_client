@@ -16,7 +16,7 @@ type AppTableComponentProps<TData> = {
     perPage?: number;
 };
 
-export function AppTableComponent<TData>({ tableHelper, isLoading, error, data, count, onPage, currentPage }: AppTableComponentProps<TData>) {
+export function AppTableComponent<TData>({ tableHelper, isLoading, error, data, count, onPage, currentPage, perPage }: AppTableComponentProps<TData>) {
     const { actions, columns } = tableHelper; // columns debería ser un array de Column<TData>
 
     if (isLoading) {
@@ -42,45 +42,58 @@ export function AppTableComponent<TData>({ tableHelper, isLoading, error, data, 
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((row, index) => (
-                            <TableRow
-                                key={currentPage ? currentPage * ++index : ++index}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                {columns.map((item, columnIndex) => (
-                                    <TableCell key={columnIndex} align="center">
-                                        {item.render(row, currentPage ? currentPage * ++index : ++index)}
+                        {data.map((row, index) => {
+
+                            const ident = perPage ?
+                                currentPage ?
+                                    currentPage === 0 ? (0 * perPage) + (++index)
+                                        : ((currentPage - 1) * perPage) + (++index)
+                                    : ++index
+                                : ++index;
+
+                            return (
+                                <TableRow
+                                    key={ident}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    {columns.map((item, columnIndex) => (
+                                        <TableCell key={columnIndex} align="center">
+                                            {item.render(row, ident)}
+                                        </TableCell>
+                                    ))}
+
+                                    <TableCell style={{
+                                        width: actions.width ?? '1.8rem'
+                                    }}>
+                                        {actions.list?.render ? actions.list.render(row, ident) : ''}
                                     </TableCell>
-                                ))}
 
-                                <TableCell style={{
-                                    width: actions.width ?? '1.8rem'
-                                }}>
-                                    {actions.list?.render ? actions.list.render(row, currentPage ? currentPage * ++index : ++index) : ''}
-                                </TableCell>
-
-                            </TableRow>
-                        ))}
+                                </TableRow>
+                            );
+                        })}
                     </TableBody>
                 </Table>
             </TableContainer>
             <div className="mt-2">
                 <Stack spacing={2}>
                     <Pagination
+                        page={ currentPage ?? 1 }
                         count={count}
-                        renderItem={(item) => {
-                            const originalClick = item.onClick;
+                        onChange={(e, page) => {
                             if (onPage) {
-                                item.selected = item.page === currentPage;
-                                item.onClick = (e) =>  {
-                                    onPage(item?.page ?? 1);
-                                    originalClick(e);
-                                };
+                                onPage(page ?? 1);
                             }
+
+                        }}
+                        renderItem={(item) => {
+
                             return (
                                 <PaginationItem
-                                    
-                                    slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+
+                                    slots={{
+                                        previous: ArrowBackIcon,
+                                        next: ArrowForwardIcon,
+                                    }}
                                     {
                                     ...item
                                     }

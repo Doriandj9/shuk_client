@@ -10,7 +10,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import InfinityScrollElement from "./InfinityScrollElement";
 import AppErrorFetchingPosts from "./AppErrorFetchingPosts";
-import { AppLoadingNotificationUser } from "./AppLoadinNotificationUser";
+import { AppLoadingNavbarCategory } from "./AppLoadingNavbarCategory";
+
 export type AppNavbarProps = {
     isAdmin?: boolean;
     onClose?: CallableFunction;
@@ -97,7 +98,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
         <React.Fragment>
             <div className="flex flex-col justify-between w-full h-full pt-16 overflow-x-auto bg-white dark:bg-slate-800">
                 <div className="h-[85vh]">
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto h-full  max-h-full overflow-y-auto" ref={refElement}>
                         <div className="w-full dark:border-slate-400">
                             <h2 className="text-mode-white text-md mt-2">
                                 <span className="border-b border-secondary dark:border-slate-400 inline-flex items-center gap-1">
@@ -105,7 +106,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                                     {t('titles.categories')}
                                 </span>
                             </h2>
-                            <div className="min-h-10 max-h-full overflow-y-auto" ref={refElement}>
+                            <div className="" >
                                 <ul className="flex flex-col px-2">
 
                                     {
@@ -118,13 +119,13 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                                                 }
 
                                                 return (
-                                                    < >
+                                                    <>
                                                         {status && categories?.pages.map(({ data }) => {
 
                                                             return data.map((category) => (
                                                                 <li key={category.id}>
                                                                     <NavLink to={`/interest/${category.name.toLowerCase().replaceAll(' ', '_')}?i=${category.id}`}
-                                                                        className={({ isActive }) => isActive ? "item-category-navbar-active" : "item-category-navbar flex-grow"}
+                                                                        className={({ isActive }) => isActive ? "item-category-navbar-active" : "item-category-navbar"}
                                                                         onClick={() => { if (onClose) { onClose(); }; }}
                                                                     >
                                                                         <img className="w-5 h-5 img-shadow" alt="img" src={appLoadImage(category.icon)} />
@@ -136,15 +137,14 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                                                             ));
                                                         })}
                                                         {status == 'error' && (<AppErrorFetchingPosts error={error} />)}
-                                                        {status != 'error' && status == 'pending' && (<AppLoadingNotificationUser />)}
-                                                        {status != 'error' && isFetchingNextPage && (<AppLoadingNotificationUser />)}
+                                                        {status != 'error' && status == 'pending' && (<AppLoadingNavbarCategory />)}
+                                                        {status != 'error' && isFetchingNextPage && (<AppLoadingNavbarCategory />)}
 
                                                     </>
                                                 );
                                             }}
                                         />
                                     }
-
                                 </ul>
                             </div>
                         </div>

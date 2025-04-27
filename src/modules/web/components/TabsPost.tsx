@@ -4,7 +4,7 @@ import TextFieldsIcon from '@mui/icons-material/TextFields';
 import ImageIcon from '@mui/icons-material/Image';
 import { useTranslation } from "react-i18next";
 import { Divider } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TabPostText from "./TabsPost/TabPostText";
 import { useAuthStore } from "@/store/auth";
 import AppAvatar from "@/modules/core/components/AppAvatar";
@@ -22,6 +22,7 @@ const TabsPost = () => {
   const { user } = useAuthStore((state) => state);
   const updateType = usePostStore((state) => state.updateType);
   const [tab, setTab] = useState<TabNum>(1);
+  const refDiv = useRef<HTMLDivElement>(null);
 
 
   const handleTab = (value: TabNum, type: PostTypesBack) => {
@@ -42,14 +43,12 @@ const TabsPost = () => {
       <div className="post-grid-content">
         <AppItem>
           <div className="flex flex-col">
-            <div className="border-b flex flex-col gap-1 h-24 overflow-x-auto">
+            <div className="border-b flex flex-col gap-1 h-24 overflow-x-auto" ref={refDiv}>
               <div className="">
                 <h4 className="text-start text-xs text-mode-slate font-bold
                   ">{tWeb('titles.tag-post')}</h4>
               </div>
-              <div className="flex-gow flex gap-1">
-                <WrappingTagCategories />
-              </div>
+                <WrappingTagCategories refElement={refDiv} />
             </div>
             {tab === 1 &&
               <TabPostText />

@@ -20,7 +20,7 @@ export const useGetCategories = (currentPage?: number) => {
 export const useGetInfinityCategories = () => {
         const hook = useInfiniteQuery({
             queryKey: ['categories'],
-            queryFn: (op) => getCategories({ per_page: '10', page: op.pageParam, doc_status: 'AC' }),
+            queryFn: (op) => getCategories({ per_page: '20', page: op.pageParam, doc_status: 'AC' }),
             initialPageParam: 1,
             getNextPageParam: (lastPage) => {
                 if (lastPage.next_page_url) {

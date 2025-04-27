@@ -1,26 +1,25 @@
 
 import { CategoriesModelType } from "@/modules/admin/hooks/categories/categories";
 import { AppChip } from "@/modules/core/components/AppChip";
-import { usePostStore } from "@/store/postStore";
 
 
 type TagCategoriesProps ={
-    categories: CategoriesModelType[];
+    category: CategoriesModelType;
+    setCValues: (categories: string[]) => unknown;
+    cValues: string[];
+    
 }
 
-export const TagCategories: React.FC<TagCategoriesProps> = ({categories}) => {
-    const cValues = usePostStore((state) => state.categories);
-    const setCValues = usePostStore((state) => state.updateCategories);
+export const TagCategories: React.FC<TagCategoriesProps> = ({category, setCValues, cValues}) => {
+    
     
     return (
         <>
-            {categories.map((category) => (
                 <AppChip key={category.id} name="" control={undefined} label={category.name}
                     value={String(category.id)}
                     setValues={setCValues}
                     values={cValues}
                 />
-            ))}
         </>
     );
 };

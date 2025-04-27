@@ -30,7 +30,7 @@ export const Categories = () => {
     const schema = useCategoriesDeleteSchema();
     const { show } = useAppToast();
 
-    const { handleSubmit, reset, watch, formState: { errors } } = useForm<NewCategoriesForm>({
+    const { handleSubmit, reset, watch } = useForm<NewCategoriesForm>({
         resolver: zodResolver(schema)
     });
 
@@ -110,7 +110,6 @@ export const Categories = () => {
         });
     };
 
-    console.log(watch(), errors);
     return (
         <>
             <AppLoading isOpen={update.isPending} />
@@ -161,7 +160,7 @@ export const Categories = () => {
                     </Button>
                 </div>
                 <AppTableComponent isLoading={isLoading} error={error} tableHelper={rendeTable} data={data?.data ?? []}
-                    count={data?.last_page} onPage={(page) => setCurrentPage(page)} currentPage={currentPage} perPage={perPage}
+                    count={data?.last_page} onPage={(page) => setCurrentPage(page)} currentPage={data?.current_page} perPage={perPage}
                 />
 
             </div>
