@@ -18,6 +18,8 @@ import { DashboardAdmin } from "@/modules/admin/pages/DashboardAdmin";
 import { Categories } from "@/modules/admin/pages/Categories/Categories";
 import { Interest } from "@/modules/web/pages/Home/Interest";
 import { CompleteRegisterMail } from "@/modules/web/pages/Login/components/CompleteRegister";
+import { ForwardPassword } from "@/modules/web/pages/Login/components/ForwardPassword";
+import { RecoveryPassword } from "@/modules/web/pages/Login/components/RecoveryPassword";
 
 const RootRoutes = () => {
   return (
@@ -30,6 +32,8 @@ const RootRoutes = () => {
         <Route element={<MiddlewareLogin />}>
           <Route path={webRoutes.login.path} element={<Login />} />
           <Route path={webRoutes.complete_register.path} element={<CompleteRegisterMail />} />
+          <Route path={webRoutes.forward_password.path} element={<ForwardPassword />} />
+          <Route path={webRoutes.recovery_password.path} element={<RecoveryPassword />} />
         </Route>
 
         <Route path={webRoutes.view_posts.path} element={<ViewPosts />} />

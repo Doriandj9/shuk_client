@@ -23,7 +23,9 @@
             "problems-login": "Having issues?",
             "contact": "Contact us",
             "or": "or",
-            "add": "Add"
+            "add": "Add",
+            "recovery-password-title": "Recover your password",
+            "notify-forward-password": "We’ve sent a password reset link to your email. <br> You have one hour to complete the process before it expires."
         }
     },
     "register": {
@@ -95,7 +97,8 @@
             "whit-account": "Do you have an account?",
             "login": "Sign in",
             "save-post": "Congratulations on your post.",
-            "preview": "Preview"
+            "preview": "Preview",
+            "forward-password": "Forgot my password?"
         }
     },
     "validations": {

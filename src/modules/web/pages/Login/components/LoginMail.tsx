@@ -9,7 +9,7 @@ import { useLoginSchema } from "@/modules/web/validations/loginSchema";
 import { LoadingAuthContext } from "../Login";
 import { ResponseUserProps } from "@/modules/web/@types/web";
 import { useAuthStore } from "@/store/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
 
 type PropsLoginMail = {
@@ -111,6 +111,16 @@ const LoginMail: React.FC<PropsLoginMail> = ({ handleChangeMode }) => {
               {t("login.labels.register-account")}
             </button>
           </div>
+
+          <div className="mt-2 text-center">
+            <Link
+            to={webRoutes.forward_password.path}
+              className="text-sm text-blue-500 dark:text-blue-400"
+            >
+              {t("register.labels.forward-password")}
+            </Link>
+          </div>
+
         </div>
       </form>
     </>

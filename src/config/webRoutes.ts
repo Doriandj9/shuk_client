@@ -10,7 +10,13 @@ export const webRoutes = {
         path: '/auth/login'
     },
     complete_register: {
-        path: '/email-verification/:token'
+        path: '/auth/email-verification/:token'
+    },
+    forward_password: {
+        path: '/auth/forward-password'
+    },
+    recovery_password: {
+        path: '/auth/recovery-password/:token'
     },
     view_posts: {
         path: '/view/posts/:id'

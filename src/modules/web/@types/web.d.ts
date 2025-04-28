@@ -33,6 +33,7 @@ export type User = {
     config?: UserSettings;
     is_merge?: boolean;
     about_me?: string;
+    token_reset_password?: string;
     gender?: 'M' | 'F';
 }
 

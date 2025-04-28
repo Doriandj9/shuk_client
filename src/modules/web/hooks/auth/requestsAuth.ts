@@ -2,7 +2,7 @@ import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
 import { useAuthStore } from "@/store/auth";
 import axios from "axios";
-import { CompleteRegisterFn, InitialRegisterFn } from "./request";
+import { CompleteRegisterFn, ForwardPasswordFn, InitialRegisterFn, ResetPasswordFn, VerifyTokenResetPassword } from "./request";
 
 const {path: login} = routesApi.public.auth;
 const {path: loginProvider} = routesApi.public.auth_provider;
@@ -82,6 +82,41 @@ export const completeRegister: CompleteRegisterFn = async (data) => {
 
     return response.data?.data;
 };
+
+export const forwardPassword: ForwardPasswordFn = async (data) => {
+    const response = await api.post(routesApi.public.forward_password.path,data,{
+        headers: {
+            'Accept': `application/json`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
+        }
+    });
+
+    return response.data?.data;
+};
+
+
+export const verifyTokenResetPassword: VerifyTokenResetPassword = async (token) => {
+    const response = await api.get(routesApi.public.recovery_password.path.replace('{token}',token),{
+        headers: {
+            'Accept': `application/json`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
+        }
+    });
+
+    return response.data?.data || null;
+};
+
+export const resetPassword: ResetPasswordFn = async (data) => {
+    const response = await api.post(routesApi.public.reset_password.path,data,{
+        headers: {
+            'Accept': `application/json`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
+        }
+    });
+
+    return response.data?.data;
+};
+
 
 export const testFn = async (data: object) => {
     

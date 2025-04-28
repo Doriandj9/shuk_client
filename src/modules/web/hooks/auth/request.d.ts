@@ -26,3 +26,19 @@ export type InitialRegisterFn = {
 export type CompleteRegisterFn = {
     (data: RegisterUser): Promise<ResponseSuccessApi<ResponseUserProps>['data']>;
 };
+
+export type ForwardPasswordInputs = Pick<DataRegisterInitial,'email'>;
+
+export type ForwardPasswordFn = {
+    (data: ForwardPasswordInputs ): Promise<ResponseSuccessApi<string>['data']>;
+};
+
+export type VerifyTokenResetPassword = {
+    (token: string): Promise<ResponseSuccessApi<{email: string}>['data']>;
+};
+
+export type ResetPasswordForm = Pick<RegisterUser,'email'| 'password' | 'password_confirmation'>;
+
+export type ResetPasswordFn =  {
+    (data: ResetPasswordForm): Promise<ResponseSuccessApi<string>['data']>; 
+};

@@ -21,6 +21,15 @@ export const routesApi = {
         complete_register: {
             path: 'security/complete-register'
         },
+        forward_password: {
+            path: 'security/forward-password'
+        },
+        recovery_password: {
+            path: 'security/recovery-password/{token}'
+        },
+        reset_password: {
+            path: 'security/reset-password'
+        }
     },
     user: {
         resource_post: {

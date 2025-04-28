@@ -24,7 +24,9 @@ interface Resources {
         "problems-login": "¿Tienes problemas?",
         "contact": "Contacta con nosotros",
         "or": "o",
-        "add": "Agregar"
+        "add": "Agregar",
+        "recovery-password-title": "Recupera tu contraseña",
+        "notify-forward-password": "Hemos enviado un enlace para restablecer tu contraseña a tu correo electrónico. <br> Tienes una hora para completar el proceso antes de que expire."
       }
     },
     "register": {
@@ -96,7 +98,8 @@ interface Resources {
         "whit-account": "¿Tienes una cuenta?",
         "login": "Inicia sesión",
         "save-post": "Felicidades por tu publicación.",
-        "preview": "Previsualización"
+        "preview": "Previsualización",
+        "forward-password": "¿Olvidé mi contraseña?"
       }
     },
     "validations": {
