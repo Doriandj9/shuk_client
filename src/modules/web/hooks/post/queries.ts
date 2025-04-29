@@ -2,7 +2,7 @@ import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
 import { ContentFormPost, PostTypesBack } from "@/modules/core/@types/post";
 import { useAuthStore } from "@/store/auth";
-import { CreatePost, getPostsFn, PostData } from "./PostI";
+import { CreatePost, getPostsFn, getSearchInfinityPostsFn, PostData } from "./PostI";
 import { InfinityData } from "../../@types/web";
 
 export type DataPostSend = {type: PostTypesBack; payload: ContentFormPost; categories?: string[]};
@@ -79,6 +79,20 @@ export const getInfinityPostUser: getInfinityPostUserFn = async ({pageParam}, us
     const response = await api.get(`${path}?per_page=2&page=${pageParam}`, {
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
+        },
+    });
+
+    return response.data?.data || [];
+};
+
+
+export const getSearchInfinityPosts: getSearchInfinityPostsFn = async (params) => {
+
+    const response  = await api.get(routesApi.public.search_infinity_posts.path, {
+        params,
+        headers: {
             'Authorization': `Bearer ${(useAuthStore.getState()).token}`,
             'X-lang': localStorage.getItem('languageApp') ?? 'es'
         },

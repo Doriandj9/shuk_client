@@ -4,15 +4,17 @@ import { usePostStore } from "@/store/postStore";
 import InfinityScrollElement from "@/modules/core/components/InfinityScrollElement";
 import AppErrorFetchingPosts from "@/modules/core/components/AppErrorFetchingPosts";
 import { AppLoadingNavbarCategory } from "@/modules/core/components/AppLoadingNavbarCategory";
+import { useRef } from "react";
 
-type WrappingTagCategoriesProps = {
-    refElement: React.RefObject<HTMLDivElement>; 
-};
+// type WrappingTagCategoriesProps = {
+//     refElement: React.RefObject<HTMLDivElement>;
+// };
 
 
-export const WrappingTagCategories: React.FC<WrappingTagCategoriesProps> = ({refElement}) => {
+export const WrappingTagCategories = () => {
     const cValues = usePostStore((state) => state.categories);
     const setCValues = usePostStore((state) => state.updateCategories);
+    const refDiv = useRef<HTMLDivElement>(null);
 
     const {
         data: categories,
@@ -24,10 +26,10 @@ export const WrappingTagCategories: React.FC<WrappingTagCategoriesProps> = ({ref
     } = useGetInfinityCategories();
 
     return (
-        <div className="flex-grow flex gap-1 flex-grow flex-wrap" >
+        <div className="flex-grow flex gap-1 flex-grow flex-wrap h-24 overflow-y-auto" ref={refDiv}>
             {
                 <InfinityScrollElement
-                    refElement={refElement}
+                    refElement={refDiv}
                     className="flex-grow flex gap-1 flex-grow flex-wrap"
                     elementName="Wrapping"
                     render={(scroll) => {

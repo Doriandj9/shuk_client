@@ -1,6 +1,7 @@
 {
     "header" : {
         "search-placeholder": "Search on Shuk",
+        "search-posts": "Search for any publication in your language",
         "login": "Sign Up/Log In"
     },
     "menu": {

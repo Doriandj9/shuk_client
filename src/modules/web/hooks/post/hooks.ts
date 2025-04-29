@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createPost, DataPostSend, getInfinityPosts, getInfinityPostUser, getPost, putPost, putPostShared } from "./queries";
+import { createPost, DataPostSend, getInfinityPosts, getInfinityPostUser, getPost, getSearchInfinityPosts, putPost, putPostShared } from "./queries";
 import moment from "moment";
-import { ParamsPostInfinityFn, PathResourcesType, PostData, PostDataInfinity } from "./PostI";
+import { GetSearchPostsInfinityParams, ParamsPostInfinityFn, PathResourcesType, PostData, PostDataInfinity } from "./PostI";
 import { User } from "../../@types/web";
 import { DataUpdatePost } from "@/modules/core/components/AppEventClickPost";
 import { cloneObject } from "@/modules/core/utilities/objects";
@@ -315,4 +315,25 @@ export const useGetInfinityPostsUser = (username: string | undefined | null) => 
     });
 
     return { ...hook };
+};
+
+
+export const useGetSearchInfinityPosts = (params: GetSearchPostsInfinityParams) => {
+    let currentPage = 1;
+    const hook = useInfiniteQuery({
+        queryKey: [params],
+        queryFn: (op) => getSearchInfinityPosts({ ...params, page: op.pageParam }),
+        enabled: !!params.search,
+        initialPageParam: 1,
+        getNextPageParam: (lastPage) => {
+            if (lastPage.next_page_url) {
+                currentPage = lastPage.current_page + 1;
+                return lastPage.current_page + 1;
+            }
+
+            return null;
+        },
+    });
+
+    return { ...hook, page: currentPage };
 };

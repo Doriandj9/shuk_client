@@ -9,6 +9,9 @@ export const routesApi = {
         infinity_post: {
             path: 'infinity-posts'
         },
+        search_infinity_posts: {
+            path: 'search/posts-full-infinity'
+        },
         infinity_comment_post: {
             path: 'infinity-comment-posts/{post_id}'
         },

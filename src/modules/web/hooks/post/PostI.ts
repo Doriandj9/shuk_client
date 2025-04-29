@@ -103,6 +103,17 @@ export type getPostsFn = {
     (params: ParamsPostInfinityFn ): Promise<PostDataInfinity>
 };
 
+export type GetSearchPostsInfinityParams = Pick<ParamsPostInfinityFn,"per_page" | "page">
+&
+{
+  search?: string | null
+}
+
+export type getSearchInfinityPostsFn = {
+  (params: GetSearchPostsInfinityParams ): Promise<PostDataInfinity>
+};
+
+
 export type CreatePost = {
   (data: DataPostSend): Promise<ResponseCreateApi<PostData>['data']>;
 };

@@ -79,7 +79,7 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ handleShowMovil, mobileLogin })
                             </div>
                             <div className="flex-grow">
                                 <div className="w-full h-full flex justify-center">
-                                    <AppSearchHome mobile />
+                                    <AppSearchHome mobile onClose={handleShowMovil} />
                                 </div>
                             </div>
 

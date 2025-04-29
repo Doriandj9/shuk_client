@@ -2,6 +2,7 @@ interface Resources {
   "core": {
     "header": {
       "search-placeholder": "Buscar en Shuk",
+      "search-posts": "Busca cualquier publicación en tu idioma",
       "login": "Regístrate/Inicia sesión"
     },
     "menu": {
