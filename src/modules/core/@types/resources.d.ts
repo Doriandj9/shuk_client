@@ -3,7 +3,9 @@ interface Resources {
     "header": {
       "search-placeholder": "Buscar en Shuk",
       "search-posts": "Busca cualquier publicación en tu idioma",
-      "login": "Regístrate/Inicia sesión"
+      "login": "Regístrate/Inicia sesión",
+      "thanks-like": "Gracias por tu me gusta",
+      "not like": "Lamentamos que no te guste."
     },
     "menu": {
       "menu": "Menú",

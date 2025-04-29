@@ -2,7 +2,9 @@
     "header" : {
         "search-placeholder": "Search on Shuk",
         "search-posts": "Search for any publication in your language",
-        "login": "Sign Up/Log In"
+        "login": "Sign Up/Log In",
+        "thanks-like": "Thanks for your like",
+        "not like": "We are sorry you don't like it."
     },
     "menu": {
         "menu": "Menu",

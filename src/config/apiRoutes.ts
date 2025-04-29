@@ -32,6 +32,9 @@ export const routesApi = {
         },
         reset_password: {
             path: 'security/reset-password'
+        },
+        app_platform: {
+            path: 'settings/app-platform'
         }
     },
     user: {
@@ -61,6 +64,9 @@ export const routesApi = {
         },
         put_all_notifies_draft: {
             path: 'notifications/user/all/draft/{user_id}'
+        },
+        action_app: {
+            path: 'app-action/{type}'
         }
     },
     admin: {

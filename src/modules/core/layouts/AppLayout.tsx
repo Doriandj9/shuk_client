@@ -14,8 +14,6 @@ import logo from "@/assets/img/logo_shuks/shuk_logo.png";
 import logo_dark from "@/assets/img/logo_shuks/shuk_logo-bn.png";
 import logo_mobile from "@/assets/img/logo_shuks/SHUK-ICONO.png";
 import logo_mobile_dark from "@/assets/img/logo_shuks/SHUK-ICONO-bn.png";
-import { AiOutlineLike } from "react-icons/ai";
-import { AiOutlineDislike } from "react-icons/ai";
 import AppSearchHome from "../components/AppSearchHome";
 import { useTranslation } from "react-i18next";
 import LoginIcon from "@mui/icons-material/Login";
@@ -35,6 +33,7 @@ import AppLoading from "../components/AppLoading";
 import MenuMobile from "./partials/MenuMobile";
 import { inputsCustomizations } from "@/config/theme/customizations/inputs";
 import { HeaderNotifications } from "./partials/HeaderNotifications";
+import { ActionsWrapper } from "./components/ActionsWarpper";
 
 
 const { path: pathLogin } = webRoutes.login;
@@ -42,9 +41,9 @@ const { path: pathHome } = webRoutes.home;
 
 type AppLayoutProps = AppNavbarProps & Children & {}
 
-const AppLayout: React.FC< AppLayoutProps > = ({ children, isAdmin }) => {
+const AppLayout: React.FC<AppLayoutProps> = ({ children, isAdmin }) => {
   const [t, i18n] = useTranslation("core");
-  const {loading} = useAppLoading((state) => state);
+  const { loading } = useAppLoading((state) => state);
   const [showMovil, setShowMovil] = useState<boolean>(true);
   const [showNavbar, setShowNavbar] = useState<boolean>(false);
   const { isLogin } = useAuthStore((state) => state);
@@ -76,14 +75,14 @@ const AppLayout: React.FC< AppLayoutProps > = ({ children, isAdmin }) => {
           //     }
           // },
           ...inputsCustomizations,
-         MuiMenu: {
-          styleOverrides:{
+          MuiMenu: {
+            styleOverrides: {
               root: {
-              
+
               }
+            }
           }
         }
-      }
       }),
     [themeMode]
   );
@@ -117,18 +116,18 @@ const AppLayout: React.FC< AppLayoutProps > = ({ children, isAdmin }) => {
   }, [prefersDarkMode, updateThemeMode]);
 
   useEffect(() => {
-    if(themeMode == 'dark' && !document.body.classList.contains(themeMode)){
+    if (themeMode == 'dark' && !document.body.classList.contains(themeMode)) {
       document.body.classList.remove('light');
 
       document.body.classList.add(themeMode);
     };
 
-    if(themeMode == 'light' && !document.body.classList.contains(themeMode)){
+    if (themeMode == 'light' && !document.body.classList.contains(themeMode)) {
       document.body.classList.remove('dark');
       document.body.classList.add(themeMode);
     };
 
-    if(themeMode == 'system'){
+    if (themeMode == 'system') {
       document.body.classList.remove('dark');
       document.body.classList.remove('system');
       document.body.classList.add('light');
@@ -190,14 +189,8 @@ const AppLayout: React.FC< AppLayoutProps > = ({ children, isAdmin }) => {
                   </Link>
                 </div>
                 <div className="flex gap-2 leading-3">
-                  <div className="flex flex-col justify-center items-center w-6 mt-2">
-                    <AiOutlineLike className="text-mode-primary w-4 h-4" />
-                    <span className="text-[0.5rem]">999+</span>
-                  </div>
-                  <div className="flex flex-col justify-center items-center w-6 mt-2">
-                    <AiOutlineDislike className="text-mode-primary w-4 h-4" />
-                    <span className="text-[0.5rem]">999+</span>
-                  </div>
+
+                  <ActionsWrapper />
                 </div>
               </div>
               {/* 

@@ -1,11 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getUserInfoForUsername, updateConfig, updateUserSettings } from "./quieries";
+import { getSettingsPlatform, getUserInfoForUsername, likeActionApp, updateConfig, updateUserSettings } from "./quieries";
 import { showError } from "@/modules/core/utilities/errors";
 import { cloneObject } from "@/modules/core/utilities/objects";
 import { useKeysForLocation } from "@/modules/core/utilities/keysForLocation";
 import { useParams } from "react-router-dom";
 import { OnMutateProp } from "../post/hooks";
 import { useAuthStore } from "@/store/auth";
+import { app } from "@/config/app";
 
 export const useGetInfoForUsername = (username: string) => {
     const hook = useQuery({
@@ -75,4 +76,32 @@ export const useUpdateUserConfig = (options?:{id_post_hidden: number}) => {
     });
 
     return { config };
+};
+
+export const useGetAppSettings = () => {
+    const hook = useQuery({
+        queryKey: ['settings-app'],
+        queryFn: getSettingsPlatform,
+        refetchInterval: app.timeRefetchInterval
+    });
+
+    return {...hook};
+};
+
+export const useAppActionApp = (type: 'like' | 'dislike') => {
+    const client = useQueryClient();
+    const action = useMutation({
+        mutationKey: ['action-app'],
+        mutationFn: () => likeActionApp(type),
+        onError(error) {
+            if(error){
+                showError(error);
+            }
+        },
+        onSuccess(){
+            client.invalidateQueries({queryKey: ['settings-app']});
+        }
+    });
+
+    return {action};
 };

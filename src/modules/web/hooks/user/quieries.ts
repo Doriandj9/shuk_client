@@ -2,6 +2,7 @@ import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
 import { User } from "../../@types/web";
 import { useAuthStore } from "@/store/auth";
+import { GetSettingsPlatform, LikeAppFn } from "./UserI";
 
 type GetUserInfoForUsernameFn = {
     (username: string):  Promise<User | null>;
@@ -36,4 +37,21 @@ export const updateUserSettings = async (data: unknown) => {
     });
 
     return response?.data?.data || null;
+};
+
+export const likeActionApp: LikeAppFn = async (type) => {
+    const response = await api.post(routesApi.user.action_app.path.replace('{type}', type),undefined,{
+        headers: {
+            'Authorization': `Bearer ${useAuthStore.getState().token}`,
+            'Content-Type': 'multipart/form-data',
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
+        }
+    });
+    return response.data?.data;
+};
+
+
+export const getSettingsPlatform: GetSettingsPlatform = async () => {
+    const response = await api.get(routesApi.public.app_platform.path);
+    return response.data?.data;
 };

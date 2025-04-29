@@ -1,8 +1,10 @@
 {
-    "header" : {
+    "header": {
         "search-placeholder": "Buscar en Shuk",
         "search-posts": "Busca cualquier publicación en tu idioma",
-        "login": "Regístrate/Inicia sesión"
+        "login": "Regístrate/Inicia sesión",
+        "thanks-like": "Gracias por tu me gusta",
+        "not like": "Lamentamos que no te guste."
     },
     "menu": {
         "menu": "Menú",
@@ -42,7 +44,7 @@
         "labels": {
             "post": {
                 "click-here": "Haga clic aquí",
-                "end-posts":"¡Y eso es todo por ahora! Hemos llegado al final de las publicaciones, pero no te preocupes, ¡pronto llegarán más!",
+                "end-posts": "¡Y eso es todo por ahora! Hemos llegado al final de las publicaciones, pero no te preocupes, ¡pronto llegarán más!",
                 "see-more": "Ver más",
                 "see-less": "Ver menos",
                 "view-post": "Ver publicación",
@@ -56,7 +58,7 @@
                 "write": "Escribe un comentario...",
                 "send": "Enviar",
                 "comments": "Comentarios",
-                "end-comments":"¡Y eso es todo por ahora! Hemos llegado al final de los comentarios de este post, pero no te preocupes, ¡pronto llegarán más!"
+                "end-comments": "¡Y eso es todo por ahora! Hemos llegado al final de los comentarios de este post, pero no te preocupes, ¡pronto llegarán más!"
             },
             "notifications": {
                 "end-notifications": "No tienes más notificaciones hoy, seguramente llegarán más pronto."
@@ -83,7 +85,7 @@
                 "updated": "Comentario actualizado con éxito",
                 "deleted": "Comentario eliminado con éxito"
             },
-            "shared":{
+            "shared": {
                 "share": "Compartir esta publicación",
                 "copy-link": "Copiar enlace",
                 "link-copied": "Enlace copiado"
@@ -91,7 +93,7 @@
             "category": {
                 "created": "Categoría creado con éxito",
                 "updated": "Categoría actualizada con éxito",
-                "deleted" :"Categoría eliminado con éxito"
+                "deleted": "Categoría eliminado con éxito"
             }
         }
     },
