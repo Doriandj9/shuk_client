@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import * as z from 'zod';
+import { DocStatusData } from "../hooks/post/PostI";
 
 export type PasswordType = {
     old_password?: z.ZodTypeAny;
@@ -12,6 +13,9 @@ export type PasswordFormType ={
     old_password?: string;
     password:  string;
     repeat_password: string;
+};
+export type ActiveInactiveUserType = {
+    doc_status: DocStatusData;
 };
 
 export const usePassword = (hasPassword: undefined | null | boolean) => {

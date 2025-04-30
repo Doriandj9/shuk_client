@@ -1,6 +1,6 @@
 import { LanguageApp, ThemeOptions } from "@/config/@types/app";
-import { DocStatus } from "@/modules/core/@types/core";
 import { facebookUser, googleUser } from "@/modules/core/@types/gUser";
+import { DocStatusData } from "../hooks/post/PostI";
 
 export type ResponseUserProps = {
     token: string;
@@ -23,7 +23,7 @@ export type User = {
     nationality?: string | null;
     photo?: string | null;
     is_active?: boolean;
-    doc_status?: DocStatus;
+    doc_status?: DocStatusData;
     abilities?: string | null;
     data_login_social_media?: string | null | googleUser | facebookUser;
     is_user_provider?: boolean,
@@ -35,6 +35,8 @@ export type User = {
     about_me?: string;
     token_reset_password?: string;
     gender?: 'M' | 'F';
+    created_at?: string;
+    updated_at?: string;
 }
 
 export type HidePostsUser = {

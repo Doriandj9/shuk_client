@@ -72,6 +72,14 @@ export const routesApi = {
     admin: {
         resource_categories: {
             path: 'admin/categories'
+        },
+        users: {
+            path: 'admin/users'
+        },
+        reports: {
+            data_global: {
+                path: 'admin/reports/data/post'
+            }
         }
     }
  };

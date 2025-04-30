@@ -136,7 +136,11 @@
         "file-search": "Search file.",
         "drag-file": "Release the image",
         "tag-post": "Tag the post in one or more categories",
-        "edit-post": "Edit post"
+        "edit-post": "Edit post",
+        "users": "Users",
+        "reports": "Reports",
+        "type": "Type",
+        "total": "Total"
     },
     "descriptions": {
         "post": "Post",
@@ -177,11 +181,17 @@
         "category": {
             "name": "Category name",
             "icon": "Category icon"
+        },
+        "users": {
+            "name": "Full Name",
+            "email": "Email",
+            "username": "Username",
+            "phone": "Contact Number"
         }
     },
     "notifications": {
         "new-notification": "Shared a new post",
         "like-post": "I liked your post",
-        "comment-post":"I comment on your post"
+        "comment-post": "I comment on your post"
     }
 }

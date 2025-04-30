@@ -137,7 +137,11 @@ interface Resources {
       "file-search": "Buscar archivo.",
       "drag-file": "Suelte la imagen",
       "tag-post": "Etiquete el post en una o mas categorías",
-      "edit-post": "Editar publicación"
+      "edit-post": "Editar publicación",
+      "users": "Usuarios",
+      "reports": "Reportes",
+      "type": "Tipo",
+      "total": "Total"
     },
     "descriptions": {
       "post": "Publicar",
@@ -178,6 +182,12 @@ interface Resources {
       "category": {
         "name": "Nombre de categoría",
         "icon": "Icono de categoría"
+      },
+      "users": {
+        "name": "Nombres",
+        "email": "Correo electrónico",
+        "username": "Nombre de usuario",
+        "phone": "Numero de contacto"
       }
     },
     "notifications": {

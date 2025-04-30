@@ -31,8 +31,8 @@ const AppInput: React.FC<AppInputProps> = ({ label, inputProps, control, labelSt
                             error={fieldState?.error ? true : false}
                             helperText={fieldState?.error?.message || inputProps.helperText}
                             color={fieldState?.error ? 'primary' : 'error'}
-                            value={field.value ?? ''}
-                            disabled={loading}
+                            value={field.value ?? inputProps.value}
+                            disabled={loading || inputProps.disabled}
                             slotProps={{
                                 input: {
                                     endAdornment: (

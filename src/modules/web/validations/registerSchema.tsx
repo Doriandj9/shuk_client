@@ -61,9 +61,9 @@ export const useResetPasswordPublicSchema = () => {
         return z.object({
             email: z.string(),
             password: z.string().min(8,t('validations.messages.min-length').replace('{count}', '8'))
-            .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,t('validations.messages.password-type')),
+            .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$.!%*?&])[A-Za-z\d@$!%.*?&]{8,}$/,t('validations.messages.password-type')),
             password_confirmation: z.string().min(8,t('validations.messages.min-length').replace('{count}', '8'))
-            .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,t('validations.messages.password-type'))
+            .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.$!%*?&])[A-Za-z\d@$!%*?.&]{8,}$/,t('validations.messages.password-type'))
         }).refine((data) => data.password === data.password_confirmation, {
             message: t('validations.messages.password-confirm'),
             path: ['password_confirmation']

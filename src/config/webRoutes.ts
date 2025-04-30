@@ -56,6 +56,12 @@ export const webRoutes = {
                     return `/dashboard/admin/${this.path}`;
                 }
             },
+            users: {
+                path: 'users',
+                uri: function(){
+                    return `/dashboard/admin/${this.path}`;
+                }
+            },
         }
     }
 };

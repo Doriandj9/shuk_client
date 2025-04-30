@@ -13,13 +13,14 @@ import Profile from "@/modules/web/pages/User/Partials/Profile";
 import Security from "@/modules/web/pages/User/Partials/Security";
 import Password from "@/modules/web/pages/User/Partials/Password";
 import AuthAdmin from "./AuthAdmin";
-import { StatisticsAdmin } from "@/modules/admin/pages/StatisticsAdmin";
 import { DashboardAdmin } from "@/modules/admin/pages/DashboardAdmin";
 import { Categories } from "@/modules/admin/pages/Categories/Categories";
 import { Interest } from "@/modules/web/pages/Home/Interest";
 import { CompleteRegisterMail } from "@/modules/web/pages/Login/components/CompleteRegister";
 import { ForwardPassword } from "@/modules/web/pages/Login/components/ForwardPassword";
 import { RecoveryPassword } from "@/modules/web/pages/Login/components/RecoveryPassword";
+import { Users } from "@/modules/admin/pages/Users/UsersAdmin";
+import { StatisticsAdmin } from "@/modules/admin/pages/StatisticsAdmin/StatisticsAdmin";
 
 const RootRoutes = () => {
   return (
@@ -56,6 +57,7 @@ const RootRoutes = () => {
             <Route element={<StatisticsAdmin />} index/>
             <Route element={<StatisticsAdmin />} path={webRoutes.dashboard_admin.children.statistics.path} />
             <Route element={<Categories />} path={webRoutes.dashboard_admin.children.categories.path} />
+            <Route element={<Users />} path={webRoutes.dashboard_admin.children.users.path} />
           </Route>
         </Route>
 

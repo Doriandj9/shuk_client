@@ -11,6 +11,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import InfinityScrollElement from "./InfinityScrollElement";
 import AppErrorFetchingPosts from "./AppErrorFetchingPosts";
 import { AppLoadingNavbarCategory } from "./AppLoadingNavbarCategory";
+import PersonIcon from '@mui/icons-material/Person';
 
 export type AppNavbarProps = {
     isAdmin?: boolean;
@@ -67,7 +68,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                                         onClick={() => { if (onClose) { onClose(); }; }}
                                     >
                                         <BarChartIcon />
-                                        {t_core('menu.statistics')}
+                                        {t('titles.reports')}
                                     </NavLink>
 
                                 </li>
@@ -78,6 +79,16 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                                         className={({ isActive }) => isActive ? "item-category-navbar-active" : "item-category-navbar"}>
                                         <DynamicFeedIcon className="w-5 h-5 img-shadow" />
                                         {t('titles.categories')}
+                                    </NavLink>
+                                </li>
+
+                                <li className="">
+                                    <NavLink
+                                        to={webRoutes.dashboard_admin.children.users.uri()}
+                                        onClick={() => handleClose()}
+                                        className={({ isActive }) => isActive ? "item-category-navbar-active" : "item-category-navbar"}>
+                                        <PersonIcon className="w-5 h-5 img-shadow" />
+                                        {t('titles.users')}
                                     </NavLink>
                                 </li>
 
