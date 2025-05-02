@@ -22,6 +22,8 @@ import { RecoveryPassword } from "@/modules/web/pages/Login/components/RecoveryP
 import { Users } from "@/modules/admin/pages/Users/UsersAdmin";
 import { StatisticsAdmin } from "@/modules/admin/pages/StatisticsAdmin/StatisticsAdmin";
 import { Privacy } from "@/modules/web/pages/Home/Privacy";
+import { DeletedData } from "@/modules/web/pages/Home/DeletedData";
+import { NotFound } from "@/modules/core/components/NotFound";
 
 const RootRoutes = () => {
   return (
@@ -30,6 +32,7 @@ const RootRoutes = () => {
         <Route path={webRoutes.home.path} element={<Home />} />
         <Route path={webRoutes.interest.path} element={<Interest />} />
         <Route path={webRoutes.privacy.path} element={<Privacy />} />
+        <Route path={webRoutes.delete_data.path} element={<DeletedData />} />
 
 
         <Route element={<MiddlewareLogin />}>
@@ -63,7 +66,7 @@ const RootRoutes = () => {
           </Route>
         </Route>
 
-        <Route path="*" element={<>404</>} />
+        <Route path="*" element={<NotFound />} />
 
       </CustomRoutes>
     </>

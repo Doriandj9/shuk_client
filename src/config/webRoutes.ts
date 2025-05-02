@@ -9,6 +9,9 @@ export const webRoutes = {
     privacy:{
         path: '/privacy/privacy-policy'
     },
+    delete_data: {
+        path: 'track-deletion/:code'
+    },
     login: {
         path: '/auth/login'
     },

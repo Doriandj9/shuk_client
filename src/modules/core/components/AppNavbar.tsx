@@ -161,12 +161,26 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                         </div>
                     </div>
                 </div>
-                <div className="h-[15vh] overflow-hidden border-t border-secondary dark:border-slate-400">
-                    <div>
-                        <div className="flex gap-2">
-                            <Link to={webRoutes.privacy.path} className="text-sm text-mode-slate">
-                                    privacy
-                            </Link>
+                <div className="h-[15vh] overflow-y-auto border-t border-secondary dark:border-slate-400">
+                    <div className="p-2 text-xs text-mode-slate xl:text-base">
+                        <ul className="flex items-center list-disc gap-1">
+                            <li className="list-none">
+                                <Link to={webRoutes.privacy.path} className="">
+                                    {t_core('messages.labels.app.privacy')}
+                                </Link>
+                            </li>
+                            <li className="ml-4">
+                                <Link to={webRoutes.privacy.path} className="">
+                                    {t_core('messages.labels.app.conditions')}
+                                </Link>
+                            </li>
+                        </ul>
+                        <div className="mt-1">
+                            version: 1.0.0
+                        </div>
+
+                        <div className="text-center">
+                             Shuk &copy; 2025
                         </div>
                     </div>
                 </div>

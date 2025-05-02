@@ -199,7 +199,7 @@ interface Resources {
       "privacy-polity": {
         "title": "Políticas de Privacidad",
         "Proteccion de Datos Personales": "Protección de Datos Personales",
-        "a proteccion": "Cumplimos con la Ley Orgánica de Protección de Datos Personales y otras normativas aplicables en el Ecuador. Recopilamos únicamente la información necesaria, la tratamos con confidencialidad, y solo la usamos con tu consentimiento para fines específicos",
+        "a proteccion": "Cumplimos con la <strong>Ley Orgánica de Protección de Datos Personales</strong> y otras normativas aplicables en el Ecuador. Recopilamos únicamente la información necesaria, la tratamos con confidencialidad, y solo la usamos con tu consentimiento para fines específicos",
         "b proteccion": "Tienes derecho a acceder, rectificar o eliminar tus datos.",
         "Requisitos de Edad": "Requisitos de Edad",
         "parrafo requisitos": "Nuestro sitio está dirigido exclusivamente a mayores de 18 años. Al usar SHUK, confirmas que tienes la edad legal para acceder a contenido motivacional y de desarrollo personal.",
@@ -216,8 +216,8 @@ interface Resources {
         "b transparencia": "Puedes consultar nuestra Política de Privacidad en todo momento",
         "c transparencia": "En caso de vulneración de datos, serás notificado con prontitud",
         "Modificaciones y Terminación": "Modificaciones y Terminación",
-        "a modificadores": "La plataforma SHUK se reserva el derecho de modificar, suspender o terminar los servicios en cualquier momento y sin previo aviso.",
-        "b modificadores": "Los usuarios serán notificados de cualquier cambio de las políticas de privacidad a través de la plataforma SHUK y medios electrónicos."
+        "a modificadores": "La plataforma <strong>SHUK</strong> se reserva el derecho de modificar, suspender o terminar los servicios en cualquier momento y sin previo aviso.",
+        "b modificadores": "Los usuarios serán notificados de cualquier cambio de las políticas de privacidad a través de la plataforma <strong>SHUK</strong> y medios electrónicos."
       }
     }
   }

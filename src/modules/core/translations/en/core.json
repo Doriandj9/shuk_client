@@ -71,7 +71,10 @@
                 "loading": "Loading...",
                 "close": "Close",
                 "return": "Go back",
-                "sure-continue": "Are you sure you want to continue?"
+                "sure-continue": "Are you sure you want to continue?",
+                "not-resource": "This requested resource is not available",
+                "privacy": "Privacy",
+                "conditions": "Conditions"
             }
         },
         "success": {

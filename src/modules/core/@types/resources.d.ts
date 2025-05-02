@@ -72,7 +72,10 @@ interface Resources {
           "loading": "Cargando...",
           "close": "Cerrar",
           "return": "Regresar",
-          "sure-continue": "¿Está seguro de que desea continuar?"
+          "sure-continue": "¿Está seguro de que desea continuar?",
+          "not-resource": "Este recurso solicitado no esta disponible.",
+          "privacy": "Privacidad",
+          "conditions": "Condiciones"
         }
       },
       "success": {
