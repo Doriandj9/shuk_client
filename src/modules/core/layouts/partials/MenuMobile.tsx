@@ -17,6 +17,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
 import { useAuthLogout } from "@/modules/web/hooks/auth/hooksAuth";
+import AppNavbar from "../../components/AppNavbar";
 
 type MenuMobileProps = {
     handleShowMovil: CallableFunction;
@@ -69,7 +70,7 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ handleShowMovil, mobileLogin })
                     exit={{ x: "100vw", y: "100vh" }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
-                    <div className="w-100 h-100 flex flex-col">
+                    <div className="w-full h-full flex flex-col p-2">
                         {/* Header */}
                         <div className="flex py-2">
                             <div className="w-20 flex items-center justify-center">
@@ -169,6 +170,10 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ handleShowMovil, mobileLogin })
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="mt-2 app-container-fade flex-grow">
+                            <AppNavbar onClose={handleShowMovil} isMobile />
                         </div>
                     </div>
                 </motion.div>

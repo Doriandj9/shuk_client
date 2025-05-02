@@ -16,9 +16,10 @@ import PersonIcon from '@mui/icons-material/Person';
 export type AppNavbarProps = {
     isAdmin?: boolean;
     onClose?: CallableFunction;
+    isMobile?: boolean;
 };
 
-const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
+const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin,isMobile,onClose }) => {
     const {
         data: categories,
         error,
@@ -107,7 +108,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
 
     return (
         <React.Fragment>
-            <div className="flex flex-col justify-between w-full h-full pt-16 overflow-x-auto bg-white dark:bg-slate-800">
+            <div className={`flex flex-col justify-between w-full h-full ${isMobile ? "pt-2": "pt-16"} overflow-x-auto bg-white dark:bg-slate-800`}>
                 <div className="h-[85vh]">
                     <div className="overflow-x-auto h-full  max-h-full overflow-y-auto" ref={refElement}>
                         <div className="w-full dark:border-slate-400">
