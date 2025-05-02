@@ -194,6 +194,31 @@ interface Resources {
       "new-notification": "Compartió una nueva publicación",
       "like-post": "Le gusto tu publicación",
       "comment-post": "Comento tu publicación"
+    },
+    "privacy": {
+      "privacy-polity": {
+        "title": "Políticas de Privacidad",
+        "Proteccion de Datos Personales": "Protección de Datos Personales",
+        "a proteccion": "Cumplimos con la Ley Orgánica de Protección de Datos Personales y otras normativas aplicables en el Ecuador. Recopilamos únicamente la información necesaria, la tratamos con confidencialidad, y solo la usamos con tu consentimiento para fines específicos",
+        "b proteccion": "Tienes derecho a acceder, rectificar o eliminar tus datos.",
+        "Requisitos de Edad": "Requisitos de Edad",
+        "parrafo requisitos": "Nuestro sitio está dirigido exclusivamente a mayores de 18 años. Al usar SHUK, confirmas que tienes la edad legal para acceder a contenido motivacional y de desarrollo personal.",
+        "Seguridad Tecnica": "Seguridad Técnica",
+        "a seg tec": "Navegación segura con HTTPS y cifrado TLS",
+        "b seg tec": "Acceso administrativo protegido con contraseñas robustas.",
+        "c seg tec": "Protección contra ataques comunes (XSS, CSRF, inyecciones)",
+        "d seg tec": "Copias de seguridad y encriptadas",
+        "e seg tec": "Monitoreo continuo de actividad sospechosa",
+        "Privacidad de Sesiones": "Privacidad de Sesiones",
+        "parrafo sesiones": "Sesiones expiran tras inactividad prolongada para proteger tu cuenta",
+        "Transparencia y Control": "Transparencia y Control",
+        "a transparencia": "No vendemos ni compartimos tu información personal con terceros",
+        "b transparencia": "Puedes consultar nuestra Política de Privacidad en todo momento",
+        "c transparencia": "En caso de vulneración de datos, serás notificado con prontitud",
+        "Modificaciones y Terminación": "Modificaciones y Terminación",
+        "a modificadores": "La plataforma SHUK se reserva el derecho de modificar, suspender o terminar los servicios en cualquier momento y sin previo aviso.",
+        "b modificadores": "Los usuarios serán notificados de cualquier cambio de las políticas de privacidad a través de la plataforma SHUK y medios electrónicos."
+      }
     }
   }
 }

@@ -6,6 +6,9 @@ export const webRoutes = {
     interest: {
         path: '/interest/:name'
     },
+    privacy:{
+        path: '/privacy/privacy-policy'
+    },
     login: {
         path: '/auth/login'
     },

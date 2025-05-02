@@ -1,6 +1,6 @@
 import { webRoutes } from "@/config/webRoutes";
 import React, { useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { appLoadImage } from "../utilities/img/convert";
 import { useGetInfinityCategories } from "@/modules/admin/hooks/categories/hook";
@@ -163,7 +163,11 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin, onClose }) => {
                 </div>
                 <div className="h-[15vh] overflow-hidden border-t border-secondary dark:border-slate-400">
                     <div>
-
+                        <div className="flex gap-2">
+                            <Link to={webRoutes.privacy.path} className="text-sm text-mode-slate">
+                                    privacy
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

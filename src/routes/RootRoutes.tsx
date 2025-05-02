@@ -21,6 +21,7 @@ import { ForwardPassword } from "@/modules/web/pages/Login/components/ForwardPas
 import { RecoveryPassword } from "@/modules/web/pages/Login/components/RecoveryPassword";
 import { Users } from "@/modules/admin/pages/Users/UsersAdmin";
 import { StatisticsAdmin } from "@/modules/admin/pages/StatisticsAdmin/StatisticsAdmin";
+import { Privacy } from "@/modules/web/pages/Home/Privacy";
 
 const RootRoutes = () => {
   return (
@@ -28,6 +29,7 @@ const RootRoutes = () => {
       <CustomRoutes>
         <Route path={webRoutes.home.path} element={<Home />} />
         <Route path={webRoutes.interest.path} element={<Interest />} />
+        <Route path={webRoutes.privacy.path} element={<Privacy />} />
 
 
         <Route element={<MiddlewareLogin />}>

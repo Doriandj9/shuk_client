@@ -193,5 +193,31 @@
         "new-notification": "Shared a new post",
         "like-post": "I liked your post",
         "comment-post": "I comment on your post"
+    },
+    "privacy": {
+    "privacy-polity": {
+        "title": "Privacy Policies",
+        "Proteccion de Datos Personales": "Personal Data Protection",
+        "a proteccion": "We comply with the <strong>Organic Law on Personal Data Protection</strong> and other applicable regulations in Ecuador. We only collect necessary information, handle it confidentially, and use it solely with your consent for specific purposes.",
+        "b proteccion": "You have the right to access, rectify, or delete your data.",
+        "Requisitos de Edad": "Age Requirements",
+        "parrafo requisitos": "Our site is intended exclusively for individuals over 18 years old. By using SHUK, you confirm that you are of legal age to access motivational and personal development content.",
+        "Seguridad Tecnica": "Technical Security",
+        "a seg tec": "Secure browsing with HTTPS and TLS encryption",
+        "b seg tec": "Administrative access protected with strong passwords.",
+        "c seg tec": "Protection against common attacks (XSS, CSRF, injections)",
+        "d seg tec": "Encrypted backups",
+        "e seg tec": "Continuous monitoring of suspicious activity",
+        "Privacidad de Sesiones": "Session Privacy",
+        "parrafo sesiones": "Sessions expire after prolonged inactivity to protect your account",
+        "Transparencia y Control": "Transparency and Control",
+        "a transparencia": "We do not sell or share your personal information with third parties",
+        "b transparencia": "You can consult our Privacy Policy at any time",
+        "c transparencia": "In case of a data breach, you will be promptly notified",
+        "Modificaciones y Terminación": "Modifications and Termination",
+        "a modificadores": "The <strong>SHUK</strong> platform reserves the right to modify, suspend, or terminate services at any time without prior notice.",
+        "b modificadores": "Users will be notified of any changes to the privacy policies through the <strong>SHUK</strong> platform and electronic means."
     }
+}
+
 }
