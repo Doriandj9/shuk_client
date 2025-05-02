@@ -1630,6 +1630,10 @@ video {
   min-height: 15rem;
 }
 
+.min-h-28 {
+  min-height: 7rem;
+}
+
 .w-0 {
   width: 0px;
 }

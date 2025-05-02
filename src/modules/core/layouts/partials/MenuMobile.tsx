@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
 import { useAuthLogout } from "@/modules/web/hooks/auth/hooksAuth";
 import AppNavbar from "../../components/AppNavbar";
+import AppsIcon from '@mui/icons-material/Apps';
+
 
 type MenuMobileProps = {
     handleShowMovil: CallableFunction;
@@ -28,7 +30,7 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ handleShowMovil, mobileLogin })
     const { theme: themeMode, update: updateThemeMode } = useThemeMode((state) => state);
     const [t, i18n] = useTranslation('core');
     const navigate = useNavigate();
-    const { isLogin, user, logout:logoutStore } = useAuthStore((state) => state);
+    const { isLogin, user, logout: logoutStore, isAdmin } = useAuthStore((state) => state);
     const { logout } = useAuthLogout(logOutFn);
 
 
@@ -38,7 +40,7 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ handleShowMovil, mobileLogin })
     };
 
     const handleProfile = () => {
-        if(!user) return;
+        if (!user) return;
         handleShowMovil();
         navigate(webRoutes.dashboard_user.path.replace(':username', user?.username ?? '___'));
     };
@@ -51,8 +53,13 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ handleShowMovil, mobileLogin })
 
     const handleConfig = () => {
         handleShowMovil();
-        navigate(webRoutes.config_user.path.replace(':username',user?.username ?? ''));
+        navigate(webRoutes.config_user.path.replace(':username', user?.username ?? ''));
 
+    };
+
+    const handleAdministration = () => {
+        handleShowMovil();
+        navigate(webRoutes.dashboard_admin.children.statistics.uri());
     };
 
     function logOutFn() {
@@ -121,7 +128,7 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ handleShowMovil, mobileLogin })
 
                         <div>
                             <div className="px-2">
-                                <div className="app-container-fade w-full h-28">
+                                <div className="app-container-fade w-full min-h-28">
                                     <h3 className="text-mode-slate text-center text-sm pt-1">
                                         {t("menu.profile")}
                                     </h3>
@@ -135,17 +142,29 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ handleShowMovil, mobileLogin })
                                             </p>
                                         )}
                                     </div>
-                                    <div className="mt-1 flex justify-center items-center">
+                                    <div className="mt-1 flex justify-center items-center flex-wrap">
                                         {isLogin ? (
                                             <>
                                                 <div>
                                                     <IconButton color="secondary" onClick={handleConfig}>
                                                         <ManageAccountsIcon />
-                                                        <span className="text-xs text-mode-primary">
+                                                        <span className="text-mode-primary text-xs">
                                                             {t("mobile.menu.configuration")}
                                                         </span>
                                                     </IconButton>
                                                 </div>
+                                                {
+                                                    isAdmin &&
+                                                    <div>
+                                                        <IconButton onClick={handleAdministration}
+                                                            color="info">
+                                                            <AppsIcon />
+                                                            <span className="text-mode-primary text-xs">
+                                                                {t('mobile.menu.administration')}
+                                                            </span>
+                                                        </IconButton>
+                                                    </div>
+                                                }
                                                 <div>
                                                     <IconButton color="error" onClick={handleLogOut}>
                                                         <LogoutIcon />
