@@ -7,7 +7,7 @@ export const webRoutes = {
         path: '/interest/:name'
     },
     privacy:{
-        path: '/privacy/privacy-policy'
+        path: '/privacy/terms-of-service'
     },
     delete_data: {
         path: 'track-deletion/:code'
