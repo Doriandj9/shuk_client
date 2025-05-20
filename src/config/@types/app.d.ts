@@ -60,6 +60,10 @@ export type AppConfig = {
      * @param {number} timeRefetchInterval time for interval refetch requests
      */
     timeRefetchInterval?: number;
+    /**
+     * @param {string} emailContact contact for app email
+     */
+    emailContact?: string;
 };
 
 

@@ -136,7 +136,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin,isMobile,onClose }) => {
 
                                                             return data.map((category) => (
                                                                 <li key={category.id}>
-                                                                    <NavLink to={`/interest/${category.name.toLowerCase().replaceAll(' ', '_')}?i=${category.id}`}
+                                                                    <NavLink to={`/interest/${category.name.replaceAll(' ', '_')}?i=${category.id}`}
                                                                         className={({ isActive }) => isActive ? "item-category-navbar-active" : "item-category-navbar"}
                                                                         onClick={() => { if (onClose) { onClose(); }; }}
                                                                     >
@@ -181,7 +181,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin,isMobile,onClose }) => {
                         </div>
 
                         <div className="text-center">
-                             Shuk &copy; 2025
+                             SHUK &copy; 2025
                         </div>
                     </div>
                 </div>

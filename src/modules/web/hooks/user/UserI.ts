@@ -26,3 +26,12 @@ export type AppPlatformModel = {
 export type GetSettingsPlatform = {
     (): Promise<ResponseSuccessApi<AppPlatformModel>['data']>;
 };
+
+export type NotEmailsForm = {
+  email: string;
+  not_email: true;
+};
+
+export type PutNotEmails = {
+  (data: NotEmailsForm ): Promise<ResponseSuccessApi<'OK'>['data']>;
+};

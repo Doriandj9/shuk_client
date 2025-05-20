@@ -6,11 +6,19 @@ import AppLoadingComments from "@/modules/core/components/AppLoadinComments";
 import AppDisplayPost from "@/modules/core/components/AppDisplayPost";
 import { setMetaData } from "@/modules/core/utilities/metaData";
 import { useMemo } from "react";
+import { setAppTitle } from "@/modules/core/utilities/titles";
+import { serializeText } from "@/modules/core/utilities/lettersAndComponents";
 
 const ViewPosts = () => {
     const params = useParams();
 
     const { isLoading, data: post, isError, error } = useGetPost(params.id ?? null);
+
+    if(post){
+        const title = serializeText(post.description ?? '');
+        
+        setAppTitle(title.length > 50 ? `${title.substring(0,50)}...` : title);
+    }
 
     useMemo(() => {
         if (post) {

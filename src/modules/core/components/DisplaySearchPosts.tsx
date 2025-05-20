@@ -7,6 +7,7 @@ import { AppNotNotifies } from "./AppNotNotifies";
 import ShowListsPost from "./ShowListPost";
 import { app } from "@/config/app";
 import { useTranslation } from "react-i18next";
+import { serializeText } from "../utilities/lettersAndComponents";
 
 
 type DisplaySearchPostsProps = {
@@ -51,7 +52,7 @@ export const DisplaySearchPosts: React.FC<DisplaySearchPostsProps> = ({searchTex
                                             key={post.id}
                                             picture={post.type_post === 'PI' ? `${app.base_server}${post.path_resource?.path}` : undefined }
                                             postId={post.id}
-                                            title={post?.description ?? post.user.full_name ?? ''}
+                                            title={post.description ? serializeText(post.description) : post.user.full_name ?? ''}
                                             user={post.user}
                                             onClose={onClose ? onClose : () => {}}
 

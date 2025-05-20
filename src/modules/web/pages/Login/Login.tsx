@@ -73,7 +73,7 @@ const Login: React.FC<Children> = () => {
                                 <span className="text-mode-white-primary">
                                   {t("login.labels.problems-login")}
                                 </span>
-                                <a className="text-blue-500 text-sm">
+                                <a href={`mailto:${app.emailContact}`} className="text-blue-500 text-sm">
                                   {t("login.labels.contact")}
                                 </a>
                               </div>
@@ -112,7 +112,7 @@ const Login: React.FC<Children> = () => {
                                 <span className="text-mode-white-primary">
                                   {t("login.labels.problems-login")}
                                 </span>
-                                <a className="text-blue-500 text-sm">
+                                <a href={`mailto:${app.emailContact}`} className="text-blue-500 text-sm">
                                   {t("login.labels.contact")}
                                 </a>
                               </div>
@@ -156,7 +156,7 @@ const Login: React.FC<Children> = () => {
                                 <span className="text-mode-white-primary">
                                   {t("login.labels.problems-login")}
                                 </span>
-                                <a className="text-blue-500 text-sm">
+                                <a href={`mailto:${app.emailContact}`} className="text-blue-500 text-sm">
                                   {t("login.labels.contact")}
                                 </a>
                               </div>

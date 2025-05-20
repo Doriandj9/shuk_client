@@ -31,7 +31,7 @@ ChartJS.register(
 );
 
 
-export const options = {
+const options = {
     responsive: true,
     plugins: {
         legend: {
@@ -49,7 +49,11 @@ function eliminarEtiquetasHTML(texto?: string) {
   }
 
 export const GraphDataGlobal: React.FC<GraphDataGlobalProps> = ({ data, error, isLoading, columnName }) => {
-    const labels = data.map((post) => eliminarEtiquetasHTML(post.description?.slice(0,20)) + '...' );
+    
+    const labels = data.map((post) =>{
+        const lLabels = eliminarEtiquetasHTML(post?.description);
+        return lLabels && lLabels?.length > 50 ?  lLabels.slice(0,50) + '...': lLabels;
+    });
     const dataGraph = {
         labels,
         datasets: [

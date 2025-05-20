@@ -11,7 +11,7 @@ import { useAppToast } from "../hooks/useAppToast";
 import { DataUpdatePost } from "./AppEventClickPost";
 import { useUpdateSharedPost } from "@/modules/web/hooks/post/hooks";
 
-const testUri = 'https://developers.facebook.com/docs/plugins';
+// const testUri = 'https://developers.facebook.com/docs/plugins';
 
 type AppEventClickSharedProps = {
     render: (props: { open: CallableFunction }) => React.ReactNode;
@@ -39,7 +39,7 @@ const AppEventClickShared: React.FC<AppEventClickSharedProps> = ({ render, post 
     };
 
     const sharedFacebook = () => {
-        if (sendShareFacebook(encodeURI(testUri))) {
+        if (sendShareFacebook(encodeURI(urlPost))) {
             updateData({ shared: post.shared + 1, type: post.type_post, total_shared: post.shared + 1, social_provider_id: app.socialProviders.facebook });
 
         }

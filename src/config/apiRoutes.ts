@@ -35,6 +35,9 @@ export const routesApi = {
         },
         app_platform: {
             path: 'settings/app-platform'
+        },
+        not_emails: {
+            path: 'not-notifications-emails'
         }
     },
     user: {

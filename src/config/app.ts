@@ -12,6 +12,7 @@ const shareFacebookHost = import.meta.env.VITE_API_FACEBOOK_URL || 'https://www.
 const idFacebook = import.meta.env.VITE_FACEBOOK_ID || '1179066826681637';
 const idGoogle = import.meta.env.VITE_GOOGLE_ID || '1179066826681637';
 const hostApp = import.meta.env.VITE_APP_HOST || ''; //(new URL(window.location.href)).origin;
+const emailContact = import.meta.env.VITE_EMAIL_CONTACT || ''; //(new URL(window.location.href)).origin;
 
 
 export const app: AppConfig = {
@@ -35,6 +36,7 @@ export const app: AppConfig = {
     host: hostApp,
     shareFacebookHost: shareFacebookHost,
     timeRefetchInterval: (1000 * 30),
+    emailContact: emailContact
 };
 
 

@@ -32,10 +32,10 @@ export const useChangesModeSchema = () => {
 
     const handleSchema = useCallback(() => {
             return z.object({
-                limit: z.string({ message: 'Es un campo requerido' }).regex(/^\d+$/, 'No es un numero valido').min(0, 'No puede ser un numero negativo')
+                limit: z.string({ message: t('validations.messages.fiel-required') }).regex(/^\d+$/, t('validations.messages.number-invalid')).min(0, t('validations.messages.not_number_negative'))
                 .transform((val) => parseInt(val))
                 .refine((val) => val > 500, {
-                    message: 'No puede ser mayor a 500 debido al rendimiento'
+                    message: t('validations.messages.max-length').replace('{count}','500')
                 }),
                 doc_status: z.string()
             });

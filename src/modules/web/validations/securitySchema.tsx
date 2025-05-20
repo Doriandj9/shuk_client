@@ -37,3 +37,18 @@ export const useSecuritySchema = () => {
     
         return handleSchema();
 };
+
+
+export const useNotEmailsSchema = () => {
+const [t] =  useTranslation('web');
+    
+     const handleSchema = useCallback(() => {
+        return z.object({
+            email: z.string({message: t('validations.messages.email-type')}).email(t('validations.messages.email-type')),
+            not_email: z.literal(true, {message: t('validations.messages.fiel-required')})
+          });
+    },[t]);
+    
+        return handleSchema();
+
+};

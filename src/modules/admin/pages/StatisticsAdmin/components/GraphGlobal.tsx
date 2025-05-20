@@ -124,8 +124,8 @@ export const GraphGlobal: React.FC<GraphGlobalProps> = ({ open, onCLose }) => {
                             value={paramsGlobals.doc_status}
                             onChange={(e) => setParamsGlobals({ ...paramsGlobals, doc_status: e.target.value as DocStatusData })}
                             >
-                                {DataDocStatus.map((item) => (
-                                    <MenuItem value={item.value}>{item.label}</MenuItem>
+                                {DataDocStatus.map((item, index) => (
+                                    <MenuItem key={index} value={item.value}>{item.label}</MenuItem>
                                 ))}
                             </Select>
                         </div>

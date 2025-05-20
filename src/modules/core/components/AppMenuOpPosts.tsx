@@ -14,6 +14,7 @@ import { useUpdateUserConfig } from "@/modules/web/hooks/user/hook";
 import { useAppToast } from "../hooks/useAppToast";
 import AppModal from "./AppModal";
 import { useUpdatePost } from "@/modules/web/hooks/post/hooks";
+import { showError } from "../utilities/errors";
 
 type AppMenuOpPostsProps = {
     post: PostData;
@@ -30,7 +31,7 @@ const AppMenuOpPosts: React.FC<AppMenuOpPostsProps> = ({ post }) => {
     const { show } = useAppToast();
     const [openModalHiddenPost, setOpenModalHiddenPost] = React.useState(false);
     const [openModalDeletePost, setOpenModalDeletePost] = React.useState(false);
-    const {put} = useUpdatePost(post.id);
+    const { put } = useUpdatePost(post.id);
 
     const [openModalEditPost, setOpenModalEditPost] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -43,14 +44,31 @@ const AppMenuOpPosts: React.FC<AppMenuOpPostsProps> = ({ post }) => {
         setAnchorEl(null);
     };
 
-    const handleDownloadImage = () => {
-        const link = document.createElement('a');
-        link.href = `${app.base_server}${post.img?.path}` || '';
-        link.download = post.img?.filename || moment().format('YYYYMMDD_HHmmss') + '.jpg';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        handleClose();
+    const handleDownloadImage = async () => {
+        try {
+            const request = await fetch(`${app.base_server}${post.img?.path}`);
+            const response = await request.blob();
+            const url = window.URL.createObjectURL(response);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = post.img?.filename || moment().format('YYYYMMDD_HHmmss') + '.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            handleClose();
+        } catch (er) {
+            if (typeof er === 'object' && er) {
+                const error: Error =
+                {
+                    message: Reflect.get(er, 'message') ?? 'Download Image',
+                    name: Reflect.get(er, 'name') ?? 'Not Image',
+                    cause: Reflect.get(er, 'cause'),
+                    stack: Reflect.get(er, 'stack')
+                };
+                showError(error);
+            }
+        }
+
     };
 
     const handleCloseModalEditPost = () => {
@@ -89,7 +107,7 @@ const AppMenuOpPosts: React.FC<AppMenuOpPostsProps> = ({ post }) => {
     };
 
     const handleDeleteModalPost = () => {
-        put.mutate({type: post.type_post, doc_status: 'DL'},
+        put.mutate({ type: post.type_post, doc_status: 'DL' },
             {
                 onSuccess() {
                     show({ message: t('messages.success.post.deleted'), status: 'success' });

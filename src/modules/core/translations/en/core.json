@@ -1,6 +1,6 @@
 {
-    "header" : {
-        "search-placeholder": "Search on Shuk",
+    "header": {
+        "search-placeholder": "Search on SHUK",
         "search-posts": "Search for any publication in your language",
         "login": "Sign Up/Log In",
         "thanks-like": "Thanks for your like",
@@ -60,7 +60,7 @@
                 "comments": "Comments",
                 "end-comments": "And that's all for now! We've reached the end of the comments for this post, but don't worry, more will be coming soon!"
             },
-            "notifications":{
+            "notifications": {
                 "end-notifications": "You have no more notifications today, more will surely arrive soon."
             },
             "app": {
@@ -96,7 +96,7 @@
             "category": {
                 "created": "Category created successfully",
                 "updated": "Category updated successfully",
-                "deleted" :"Category deleted successfully"
+                "deleted": "Category deleted successfully"
             }
         }
     },
@@ -109,5 +109,15 @@
             "administration": "Administration",
             "notifications": "Notifications"
         }
+    },
+    "titles": {
+        "home": "Home",
+        "terms-service": "Terms of Service",
+        "forward-password": "Recover Your Password",
+        "dashboard-admin": "Admin Dashboard",
+        "dashboard-admin-statistics": "Admin Dashboard | Statistics",
+        "dashboard-admin-categories": "Admin Dashboard | Categories",
+        "dashboard-admin-users": "Admin Dashboard | Users",
+        "not_mails": "Stop receiving emails"
     }
 }

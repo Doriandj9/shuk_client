@@ -24,6 +24,7 @@ import { StatisticsAdmin } from "@/modules/admin/pages/StatisticsAdmin/Statistic
 import { Privacy } from "@/modules/web/pages/Home/Privacy";
 import { DeletedData } from "@/modules/web/pages/Home/DeletedData";
 import { NotFound } from "@/modules/core/components/NotFound";
+import { NotSendEmails } from "@/modules/web/pages/Home/NotSendEmail";
 
 const RootRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const RootRoutes = () => {
       <CustomRoutes>
         <Route path={webRoutes.home.path} element={<Home />} />
         <Route path={webRoutes.interest.path} element={<Interest />} />
+        <Route path={webRoutes.not_mails.path} element={<NotSendEmails />} />
         <Route path={webRoutes.privacy.path} element={<Privacy />} />
         <Route path={webRoutes.delete_data.path} element={<DeletedData />} />
 

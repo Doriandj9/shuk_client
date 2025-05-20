@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getSettingsPlatform, getUserInfoForUsername, likeActionApp, updateConfig, updateUserSettings } from "./quieries";
+import { getSettingsPlatform, getUserInfoForUsername, likeActionApp, putNotEmails, updateConfig, updateUserSettings } from "./quieries";
 import { showError } from "@/modules/core/utilities/errors";
 import { cloneObject } from "@/modules/core/utilities/objects";
 import { useKeysForLocation } from "@/modules/core/utilities/keysForLocation";
@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { OnMutateProp } from "../post/hooks";
 import { useAuthStore } from "@/store/auth";
 import { app } from "@/config/app";
+import { NotEmailsForm } from "./UserI";
 
 export const useGetInfoForUsername = (username: string) => {
     const hook = useQuery({
@@ -104,4 +105,18 @@ export const useAppActionApp = (type: 'like' | 'dislike') => {
     });
 
     return {action};
+};
+
+export const usePutNotEmails = () => {
+    const put = useMutation({
+        mutationKey: ['not-emails'],
+        mutationFn: (data: NotEmailsForm) => putNotEmails(data),
+        onError(error) {
+            if(error){
+                showError(error);
+            }
+        },
+    });
+
+    return {put};
 };

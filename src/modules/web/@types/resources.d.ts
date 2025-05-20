@@ -34,7 +34,7 @@ interface Resources {
         "success-initial-register": "Gracias por completar el registro. Hemos enviado un correo electrónico a la dirección que proporcionaste para confirmar que eres tú la persona que desea registrarse.<br>Para finalizar el proceso y completar el último paso del registro, por favor sigue el enlace que hemos enviado a tu correo.<br>Si no ves el correo en tu bandeja de entrada, revisa también la carpeta de spam o correo no deseado.<br>¡Gracias por registrarte y bienvenido!"
       },
       "header": {
-        "title": "Regístrate en Shuk"
+        "title": "Regístrate en SHUK"
       },
       "inputs": {
         "full-name": {
@@ -125,7 +125,10 @@ interface Resources {
         "unknown-img-post": "Existe un error al intentar subir el archivo",
         "not-selected-img": "No selecciono una imagen",
         "password-type": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
-        "password-confirm": "La contraseña y la contraseña de confirmación no coinciden."
+        "password-confirm": "La contraseña y la contraseña de confirmación no coinciden.",
+        "fiel-required": "Es un campo requerido",
+        "number-invalid": "No es un numero valido",
+        "not_number_negative": "No puede ser un numero negativo"
       }
     },
     "titles": {
@@ -197,7 +200,7 @@ interface Resources {
     },
     "privacy": {
       "privacy-polity": {
-        "title": "Políticas de Privacidad",
+        "title": "Términos y Condiciones de SHUK",
         "Proteccion de Datos Personales": "Protección de Datos Personales",
         "a proteccion": "Cumplimos con la <strong>Ley Orgánica de Protección de Datos Personales</strong> y otras normativas aplicables en el Ecuador. Recopilamos únicamente la información necesaria, la tratamos con confidencialidad, y solo la usamos con tu consentimiento para fines específicos",
         "b proteccion": "Tienes derecho a acceder, rectificar o eliminar tus datos.",

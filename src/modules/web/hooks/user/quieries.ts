@@ -2,7 +2,7 @@ import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
 import { User } from "../../@types/web";
 import { useAuthStore } from "@/store/auth";
-import { GetSettingsPlatform, LikeAppFn } from "./UserI";
+import { GetSettingsPlatform, LikeAppFn, PutNotEmails } from "./UserI";
 
 type GetUserInfoForUsernameFn = {
     (username: string):  Promise<User | null>;
@@ -54,4 +54,15 @@ export const likeActionApp: LikeAppFn = async (type) => {
 export const getSettingsPlatform: GetSettingsPlatform = async () => {
     const response = await api.get(routesApi.public.app_platform.path);
     return response.data?.data;
+};
+
+
+export const putNotEmails: PutNotEmails = async (data) => {
+    const response = await api.put(routesApi.public.not_emails.path, data, {
+        headers: {
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
+        }
+    });
+
+    return response?.data?.data || null;
 };
