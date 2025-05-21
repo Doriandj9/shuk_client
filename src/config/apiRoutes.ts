@@ -1,5 +1,8 @@
 export const routesApi = {
     public: {
+        view_post: {
+            path: '/view-post/{id}'
+        },
         auth: {
             path: 'security/login'
         },

@@ -1,3 +1,4 @@
+import { routesApi } from "@/config/apiRoutes";
 import { app } from "@/config/app";
 
 type SharedWhatsAppFn = {
@@ -5,7 +6,7 @@ type SharedWhatsAppFn = {
 };
 
 type ShareFacebookFn = {
-    (referentUri: string): boolean;
+    (idPost: string): boolean;
 };
 
 export const sendShareWhatsApp: SharedWhatsAppFn = (text) => {
@@ -20,10 +21,10 @@ export const sendShareWhatsApp: SharedWhatsAppFn = (text) => {
     }
 };
 
-export const sendShareFacebook: ShareFacebookFn = (referentUri) => {
+export const sendShareFacebook: ShareFacebookFn = (idPost) => {
     try {
         const url = new URL(app.shareFacebookHost);
-        url.searchParams.append('u', referentUri);
+        url.searchParams.append('u', encodeURI(app.base_server + routesApi.public.view_post.path.replace('{id}', String(idPost))));
         url.searchParams.append('src', 'sdkpreparse');
         window.open(url,'_blank');
         return true;

@@ -39,7 +39,7 @@ const AppEventClickShared: React.FC<AppEventClickSharedProps> = ({ render, post 
     };
 
     const sharedFacebook = () => {
-        if (sendShareFacebook(encodeURI(urlPost))) {
+        if (sendShareFacebook(String(post.id))) {
             updateData({ shared: post.shared + 1, type: post.type_post, total_shared: post.shared + 1, social_provider_id: app.socialProviders.facebook });
 
         }

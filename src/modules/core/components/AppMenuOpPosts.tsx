@@ -7,7 +7,7 @@ import { webRoutes } from "@/config/webRoutes";
 import { PostData } from "@/modules/web/hooks/post/PostI";
 import AppEventClickShared from "./AppEventClickShared";
 import { useAuthStore } from "@/store/auth";
-import { app } from "@/config/app";
+import { api } from "@/config/app";
 import moment from "moment";
 import { ModalEditPost } from "@/modules/web/components/ModalEditPost";
 import { useUpdateUserConfig } from "@/modules/web/hooks/user/hook";
@@ -46,11 +46,10 @@ const AppMenuOpPosts: React.FC<AppMenuOpPostsProps> = ({ post }) => {
 
     const handleDownloadImage = async () => {
         try {
-            const request = await fetch(`${app.base_server}${post.img?.path}`);
-            const response = await request.blob();
-            const url = window.URL.createObjectURL(response);
+            const request = await api.get(`picture?path=${post.img?.path}`);
+            const response = await request.data;
             const link = document.createElement('a');
-            link.href = url;
+            link.href = 'data:image/png;base64,' + response?.data as string;
             link.download = post.img?.filename || moment().format('YYYYMMDD_HHmmss') + '.jpg';
             document.body.appendChild(link);
             link.click();
