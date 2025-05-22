@@ -50,7 +50,7 @@ const AppEventClickPost: React.FC<AppEventClickPostProps> = ({ render, post, def
         put.mutate(data, {
             onSuccess(){
                 if(post.user.id === user?.id) return;
-                const {message,trans} = buildMessage('LIKE_POST',language,post.description?.replaceAll(/style="(.+);"/g, '').slice(0,7) + '...');
+                const {message,trans} = buildMessage('LIKE_POST',language,post.description?.replaceAll(/style="(.+);"/g, '').slice(0,35) + '...');
                 const data: StoreNotificationUser = {
                     type: 'TLP',
                     action: 'Like for post',

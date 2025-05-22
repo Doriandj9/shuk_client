@@ -40,7 +40,7 @@ const AppNewCommentPost: React.FC<AppNewCommentPostProps> = ({ postId, ownerId }
                 show({ message: t('messages.success.comment.created'), status: 'success' });
                 if(user?.id ===  ownerId) return;
 
-                const {message, trans} = buildMessage('COMMENT_POST',lang, data.comment.slice(0, 10));
+                const {message, trans} = buildMessage('COMMENT_POST',lang, data.comment.slice(0, 25));
                 const dataServer: StoreNotificationUser = {
                     type: 'TCP',
                     action: 'Comment for post',

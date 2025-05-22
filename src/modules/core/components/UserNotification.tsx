@@ -55,7 +55,7 @@ const UserNotification: React.FC<UserNotificationProps> = ({
           <p className="text-sm font-medium text-gray-900">
             <span className="font-bold">{mergeUserProvider(notification.sender ?? userDefault)?.full_name}</span>
             &nbsp;
-            <span className='font-regular'>{notification?.trans?.languages[lang]?.message ?? notification?.message}</span>
+            <span className='font-regular' dangerouslySetInnerHTML={{__html: notification?.trans?.languages[lang]?.message ?? notification?.message ?? 's'}}></span>
           </p>
           <p className="text-xs text-gray-500 dark:text-slate-300">{timeAgo}</p>
         </div>

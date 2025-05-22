@@ -103,7 +103,7 @@ const AppNewPost = () => {
       create.mutate(data, {
         onSuccess: (response) => {
           if (isAdmin) {
-            const { message, trans } = buildMessageTrans('NEW_POST', lang,response.description?.slice(0,7) + '...');
+            const { message, trans } = buildMessageTrans('NEW_POST', lang,response.description?.slice(0,25) + '...');
             const data: StoreNotificationUser = {
               type: 'TASP',
               action: 'New Post',
