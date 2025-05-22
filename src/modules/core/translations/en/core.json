@@ -118,6 +118,8 @@
         "dashboard-admin-statistics": "Admin Dashboard | Statistics",
         "dashboard-admin-categories": "Admin Dashboard | Categories",
         "dashboard-admin-users": "Admin Dashboard | Users",
-        "not_mails": "Stop receiving emails"
+        "not_mails": "Stop receiving emails",
+        "manager-digital-educas": "General Manager of DigitalEducas",
+        "privacy-policy": "Privacy Policy"
     }
 }

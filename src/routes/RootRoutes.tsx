@@ -25,6 +25,7 @@ import { Privacy } from "@/modules/web/pages/Home/Privacy";
 import { DeletedData } from "@/modules/web/pages/Home/DeletedData";
 import { NotFound } from "@/modules/core/components/NotFound";
 import { NotSendEmails } from "@/modules/web/pages/Home/NotSendEmail";
+import { TermsOfService } from "@/modules/web/pages/Home/Terms";
 
 const RootRoutes = () => {
   return (
@@ -34,6 +35,7 @@ const RootRoutes = () => {
         <Route path={webRoutes.interest.path} element={<Interest />} />
         <Route path={webRoutes.not_mails.path} element={<NotSendEmails />} />
         <Route path={webRoutes.privacy.path} element={<Privacy />} />
+        <Route path={webRoutes.terms_of_service.path} element={<TermsOfService />} />
         <Route path={webRoutes.delete_data.path} element={<DeletedData />} />
 
 

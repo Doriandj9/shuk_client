@@ -35,7 +35,7 @@ const TextMenuPost = () => {
                   animate={{ x: 0 }}
                   exit={{ x: "100vw" }}
                   transition={{ type: "tween", stiffness: 300, damping: 30 }}
-                  className="h-full w-full flex absolute top-0 left-0 w-full h-full z-10 bg-mode-principal items-center gap-2"
+                  className="h-full w-full flex absolute top-0 left-0 z-10 bg-mode-principal items-center gap-2"
                 >
                   <div>
                     <IconButton onClick={handleExitOp} className="" sx={{borderRadius: 0}}>

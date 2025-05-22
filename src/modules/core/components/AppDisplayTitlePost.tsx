@@ -29,12 +29,13 @@ const AppDisplayTitlePost: React.FC<AppDisplayTitlePostProps> = ({ content }) =>
         }
 
     }, [contentRef]);
+
     return (
         <>
             <CardContent sx={{ marginTop: 0, paddingTop: 0 }}>
                 <p
                     ref={contentRef}
-                    className="text-title-post"
+                    className="text-title-post dark:text-white"
                     dangerouslySetInnerHTML={{ __html: content }}
                     style={!more ? styleBase : styleExpand}
                 />

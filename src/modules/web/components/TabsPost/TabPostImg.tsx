@@ -19,7 +19,7 @@ const TabPostImg = () => {
       onRenderPost(element);
       onRenderPlaceholder(element);
     }
-    element.onkeyup = () => {
+    element.oninput = () => {
       const html = element.innerHTML;
       if (html !== '' && html.trim() !== '<br>') {
         removePlaceholder();

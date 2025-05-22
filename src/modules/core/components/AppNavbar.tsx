@@ -171,7 +171,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({ isAdmin,isMobile,onClose }) => {
                                 </Link>
                             </li>
                             <li className="ml-4">
-                                <Link to={webRoutes.privacy.path} className="">
+                                <Link to={webRoutes.terms_of_service.path} className="">
                                     {t_core('messages.labels.app.conditions')}
                                 </Link>
                             </li>

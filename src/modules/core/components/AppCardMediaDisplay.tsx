@@ -10,8 +10,9 @@ type AppCardMediaDisplayProps = {
 
 const AppCardMediaDisplay: React.FC<AppCardMediaDisplayProps> = ({ post }) => {
     if (post.type_post == 'PI') {
+        
         return (<>
-            <AppDisplayTitlePost content={post.description?.replaceAll(/style="(.+);"/g, '') || ''} />
+            <AppDisplayTitlePost content={post.description || ''} />
             <AppMediaPostImg pathResource={post.path_resource || null} file={post.img} isTemp={post.is_temp} fileTem={post.file_temp} />
         </>);
     }

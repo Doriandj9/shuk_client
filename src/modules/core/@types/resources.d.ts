@@ -119,7 +119,9 @@ interface Resources {
       "dashboard-admin-statistics": "Panel de Administrador | Estadísticas",
       "dashboard-admin-categories": "Panel de Administrador | Categorías",
       "dashboard-admin-users": "Panel de Administrador | Usuarios",
-      "not_mails": "Dejar de recibir correos electrónicos"
+      "not_mails": "Dejar de recibir correos electrónicos",
+      "manager-digital-educas": "Gerente General de DigitalEducas",
+      "privacy-policy": "Política de Privacidad"
     }
   }
 }

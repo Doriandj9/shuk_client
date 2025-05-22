@@ -199,7 +199,7 @@
     },
     "privacy": {
         "privacy-polity": {
-            "title": "SHUK Terms and Conditions",
+            "title": "Privacy Policy",
             "Proteccion de Datos Personales": "Personal Data Protection",
             "a proteccion": "We comply with the <strong>Organic Law on Personal Data Protection</strong> and other applicable regulations in Ecuador. We only collect necessary information, handle it confidentially, and use it solely with your consent for specific purposes.",
             "b proteccion": "You have the right to access, rectify, or delete your data.",
@@ -221,5 +221,39 @@
             "a modificadores": "The <strong>SHUK</strong> platform reserves the right to modify, suspend, or terminate services at any time without prior notice.",
             "b modificadores": "Users will be notified of any changes to the privacy policies through the <strong>SHUK</strong> platform and electronic means."
         }
+    },
+    "terms-of-service": {
+    "privacy-polity": {
+        "title": "Terms and Conditions",
+        "description": "These Terms and Conditions govern the use of the website and services offered by <strong>SHUK</strong>, a platform dedicated to personal motivation and life reflections. Our purpose is to inspire, support, and provide value through content such as messages and videos. By accessing, browsing, or using any of our services, you expressly agree to comply with these Terms and Conditions, as well as with the current privacy and data use policies.",
+        "Definiciones": "Definitions",
+        "a Definiciones": "<strong>User:</strong> A person who browses, accesses, or uses the services offered by SHUK.",
+        "b Definiciones": "<strong>Content:</strong> Motivational posts, videos, texts, and any other material shared by SHUK.",
+        "c Definiciones": "<strong>Platform:</strong> Official website and social media accounts associated with SHUK.",
+        "Requisitos de Edad": "Age Requirements",
+        "parrafo requisitos": "Our website is intended for individuals over the age of 18. By using our services, you confirm that you meet this age requirement or have the required legal consent.",
+        "Uso del Sitio": "Site Usage",
+        "a Uso del Sitio": "The user agrees to use the SHUK platform in an ethical, legal, responsible, and respectful manner, in line with its motivational purpose.",
+        "b Uso del Sitio": "It is strictly prohibited to reproduce, distribute, or use the content published on SHUK for commercial or promotional purposes without prior written authorization.",
+        "c Uso del Sitio": "Comments, opinions, or contributions made by users must use respectful language and must not violate the rights, dignity, or beliefs of others.",
+        "Registro": "<strong>Registration:</strong> You agree to the terms and conditions at all times when using the service.",
+        "a Registro": "Only individuals over the age of 18 or those of legal age according to the laws of their country of residence may access and use the website.",
+        "b Registro": "We reserve the right to reject registration requests at our sole discretion and without the obligation to provide a specific reason.",
+        "c Registro": "Before using the service, you must personally complete the registration form and read and accept the terms and conditions published on the platform.",
+        "d Registro": "To ensure transparency, SHUK may request documentation to verify the user’s identity when necessary.",
+        "Protección de Datos Personales": "Personal Data Protection",
+        "a Protección de Datos Personales": "We comply with the <strong>Organic Law on Personal Data Protection</strong> and other applicable regulations in Ecuador. We collect only the necessary information, treat it confidentially, and use it only with your consent for specific purposes.",
+        "b Protección de Datos Personales": "You have the right to access, rectify, or delete your data.",
+        "Propiedad Intelectual": "Intellectual Property",
+        "parrafo Propiedad Intelectual": "All SHUK content is protected by copyright. Total or partial reproduction without the express authorization of the rights holder is not allowed.",
+        "Prohibiciones de usuarios": "User Prohibitions",
+        "a Prohibiciones de usuarios": "Each user is responsible for maintaining the confidentiality of their personal information, including their account and password. SHUK is not responsible for the misuse of this information by third parties if it occurs due to the user's negligence or direct action.",
+        "b Prohibiciones de usuarios": "The use of offensive, discriminatory, vulgar, or obscene language is not permitted anywhere on the site, including usernames, emails, passwords, or other registration fields. SHUK reserves the right to restrict or suspend access to those who violate this rule in order to protect community harmony.",
+        "c Prohibiciones de usuarios": "It is not allowed to publish content that does not align with SHUK’s purpose, such as offensive, political, advertising material, or anything unrelated to personal motivation and life reflections.",
+        "Modificaciones y Terminación": "Modifications and Termination",
+        "a Modificaciones y Terminación": "The <strong>SHUK</strong> platform reserves the right to modify, suspend, or terminate services at any time without prior notice.",
+        "b Modificaciones y Terminación": "Users will be notified of any changes to the terms, conditions, and privacy policies through the <strong>SHUK</strong> platform and electronic means."
     }
+}
+
 }
