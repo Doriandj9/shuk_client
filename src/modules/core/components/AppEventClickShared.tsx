@@ -30,9 +30,9 @@ const AppEventClickShared: React.FC<AppEventClickSharedProps> = ({ render, post 
     const urlPost = `${app.host}/view/posts/${post.id}?op=view`;
 
     const sharedWhatsApp = () => {
-        const senText = serializeText(post.description || '') + '\n' + encodeURI(urlPost);
+        const senText = serializeText(post.description || '') + '\n';
 
-        if (sendShareWhatsApp(senText)) {
+        if (sendShareWhatsApp(senText, String(post.id))) {
            updateData({ shared: post.shared + 1, type: post.type_post, total_shared: post.shared + 1, social_provider_id: app.socialProviders.whatsapp });
         }
 

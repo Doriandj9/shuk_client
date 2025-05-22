@@ -2,17 +2,17 @@ import { routesApi } from "@/config/apiRoutes";
 import { app } from "@/config/app";
 
 type SharedWhatsAppFn = {
-    (text: string): boolean;
+    (text: string, postId: string): boolean;
 };
 
 type ShareFacebookFn = {
     (idPost: string): boolean;
 };
 
-export const sendShareWhatsApp: SharedWhatsAppFn = (text) => {
+export const sendShareWhatsApp: SharedWhatsAppFn = (text,idPost) => {
     try {
         const url = new URL(app.apiWhatsAppHost);
-        url.searchParams.append('text', text);
+        url.searchParams.append('text', text + encodeURI(app.base_server + routesApi.public.view_post.path.replace('{id}', String(idPost)) + '?op=view'));
         window.open(url,'_blank');
         return true;
     } catch (error) {
