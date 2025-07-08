@@ -361,6 +361,29 @@
     transition-all duration-300
     ;
   }
+
+   /* loader app*/
+  #loader {
+    @apply bg-primary flex justify-center items-center flex-col fixed h-full top-0 left-0 w-full;
+  }
+
+  #root {
+    opacity: 0;
+  }
+
+  body.loaded #root {
+    opacity: 1;
+    @apply duration-1000;
+  }
+
+  #loader>img {
+    @apply w-20 h-20;
+  }
+
+  body.loaded #loader {
+    @apply duration-700;
+    transform: translateX(-100%);
+  }
 }
 
 @media (max-width: 770px) {

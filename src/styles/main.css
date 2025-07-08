@@ -1362,6 +1362,41 @@ video {
   color: rgb(226 232 240 / var(--tw-text-opacity));
 }
 
+/* loader app*/
+
+#loader {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  --tw-bg-opacity: 1;
+  background-color: rgb(35 44 86 / var(--tw-bg-opacity));
+}
+
+#root {
+  opacity: 0;
+}
+
+body.loaded #root {
+  opacity: 1;
+  transition-duration: 1000ms;
+}
+
+#loader>img {
+  height: 5rem;
+  width: 5rem;
+}
+
+body.loaded #loader {
+  transition-duration: 700ms;
+  transform: translateX(-100%);
+}
+
 .pointer-events-none {
   pointer-events: none;
 }

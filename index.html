@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- FAVICON -->
   <link rel="apple-touch-icon" sizes="57x57" href="/src/assets/favicon/apple-icon-57x57.png">
@@ -57,9 +56,59 @@
 
   <!--  -->
   <title>Shuk</title>
+  <style>
+    /* loader app*/
+
+    #loader {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      display: flex;
+      height: 100%;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      --tw-bg-opacity: 1;
+      background-color: rgb(35 44 86 / var(--tw-bg-opacity));
+    }
+
+    #root {
+      opacity: 0;
+    }
+
+    body.loaded #root {
+      opacity: 1;
+      transition-duration: 1000ms;
+    }
+
+    #loader>img {
+      height: 5rem;
+      width: 5rem;
+    }
+
+    body.loaded #loader {
+      transition-duration: 700ms;
+      transform: translateX(-100%);
+    }
+
+    .text-slate-600 {
+      --tw-text-opacity: 1;
+      color: rgb(71 85 105 / var(--tw-text-opacity, 1));
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  </style>
 </head>
 
 <body>
+  <div id="loader">
+    <span class="text-slate-600 text-xl">SHUK...</span>
+    <img src='/public/ball-triangle.svg' alt="loading..." />
+  </div>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
   <div id="fb-root"></div>

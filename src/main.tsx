@@ -12,29 +12,29 @@ import core_es from '@core/translations/es/core.json';
 import core_en from '@core/translations/en/core.json';
 import web_es from '@web/translations/es/web.json';
 import web_en from '@web/translations/en/web.json';
-import {LanguageApp} from '@/config/@types/app';
+import { LanguageApp } from '@/config/@types/app';
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 
 
 let lngDefault: LanguageApp = 'es';
 
-if(localStorage.languageApp){
+if (localStorage.languageApp) {
   const op = localStorage.languageApp;
 
-  switch(op){
-    case 'es': 
-        lngDefault = 'es';
-    break;
+  switch (op) {
+    case 'es':
+      lngDefault = 'es';
+      break;
 
-    case 'en': 
-        lngDefault = 'en';
-    break;
+    case 'en':
+      lngDefault = 'en';
+      break;
 
-    default: 
-        lngDefault= 'es';
-}
+    default:
+      lngDefault = 'es';
+  }
 }
 
 i18next.init({
@@ -58,12 +58,22 @@ const client = new QueryClient();
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <I18nextProvider i18n={i18next}>
-    <QueryClientProvider client={client}>
+      <QueryClientProvider client={client}>
         <Router>
           <App />
         </Router>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </I18nextProvider>
   </React.StrictMode>,
 );
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+});
+
+
+// window.addEventListener("load:astro-island", () => {
+//   window.document.body.classList.add("loaded");
+// });

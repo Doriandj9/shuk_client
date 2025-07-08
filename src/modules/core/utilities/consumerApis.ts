@@ -1,5 +1,5 @@
-import { routesApi } from "@/config/apiRoutes";
 import { app } from "@/config/app";
+import { webRoutes } from "@/config/webRoutes";
 
 type SharedWhatsAppFn = {
     (text: string, postId: string): boolean;
@@ -12,7 +12,7 @@ type ShareFacebookFn = {
 export const sendShareWhatsApp: SharedWhatsAppFn = (text,idPost) => {
     try {
         const url = new URL(app.apiWhatsAppHost);
-        url.searchParams.append('text', text + encodeURI(app.base_server + routesApi.public.view_post.path.replace('{id}', String(idPost)) + '?op=view'));
+        url.searchParams.append('text', text + encodeURI(app.host + webRoutes.view_posts.path.replace(':id', String(idPost))));
         window.open(url,'_blank');
         return true;
     } catch (error) {
@@ -24,7 +24,7 @@ export const sendShareWhatsApp: SharedWhatsAppFn = (text,idPost) => {
 export const sendShareFacebook: ShareFacebookFn = (idPost) => {
     try {
         const url = new URL(app.shareFacebookHost);
-        url.searchParams.append('u', encodeURI(app.base_server + routesApi.public.view_post.path.replace('{id}', String(idPost))));
+        url.searchParams.append('u', encodeURI(app.host + webRoutes.view_posts.path.replace(':id', String(idPost))));
         url.searchParams.append('src', 'sdkpreparse');
         window.open(url,'_blank');
         return true;
