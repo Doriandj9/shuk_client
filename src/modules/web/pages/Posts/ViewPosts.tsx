@@ -8,11 +8,12 @@ import { setMetaData } from "@/modules/core/utilities/metaData";
 import { useMemo } from "react";
 import { setAppTitle } from "@/modules/core/utilities/titles";
 import { serializeText } from "@/modules/core/utilities/lettersAndComponents";
+import { NotFound } from "@/modules/core/components/NotFound";
 
 const ViewPosts = () => {
     const params = useParams();
 
-    const { isLoading, data: post, isError, error } = useGetPost(params.id ?? null);
+    const { isLoading, data: post, isError } = useGetPost(params.id ?? null);
 
     if(post){
         const title = serializeText(post.description ?? '');
@@ -37,7 +38,7 @@ const ViewPosts = () => {
                 }
 
                 {
-                    post &&
+                    (!isError && post) &&
                     <div
                         className={`app-container-fade text-sm mt-2 
                       ${post?.path_resource?.meta?.typeAspectRadio?.neutral?.value == 'vertical' && post?.path_resource?.meta?.typeAspectRadio?.neutral?.height > 500
@@ -47,13 +48,13 @@ const ViewPosts = () => {
                         <AppDisplayPost post={post} />
                     </div>
                 }
-                {
-                    isError &&
-                    <div>
-                        {error.message}
-                    </div>
-                }
             </div>
+            {
+                isError &&
+                <div className="w-full">
+                    <NotFound isNotComponent={false} />
+                </div>
+            }
         </AppLayout>
     );
 };
