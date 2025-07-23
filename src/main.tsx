@@ -71,6 +71,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 window.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
+  document.getElementById('temp-footer')?.remove();
 });
 
 
