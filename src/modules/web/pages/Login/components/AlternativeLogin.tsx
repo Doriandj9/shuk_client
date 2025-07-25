@@ -14,6 +14,7 @@ import { ResponseUserProps } from "@/modules/web/@types/web";
 import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
 import { useAppLoading } from "@/store/loadingStore";
+import { showError } from "@/modules/core/utilities/errors";
 
 const AlternativeLogin = () => {
   const [t] = useTranslation("web");
@@ -54,7 +55,8 @@ const AlternativeLogin = () => {
           email: data?.email
         },
         {
-          onError: () => {
+          onError: (e) => {
+            showError(e);
             googleLogout();
           },
         }

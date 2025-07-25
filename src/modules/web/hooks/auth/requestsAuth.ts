@@ -1,7 +1,6 @@
 import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
 import { useAuthStore } from "@/store/auth";
-import axios from "axios";
 import { CompleteRegisterFn, ForwardPasswordFn, InitialRegisterFn, ResetPasswordFn, VerifyTokenResetPassword } from "./request";
 
 const {path: login} = routesApi.public.auth;
@@ -46,14 +45,9 @@ export const authLogOut = async () => {
 
 export const infoUserGoogle = async (accessToken: string) => {
     if(accessToken !== ''){
-        const response = await axios.get("https://www.googleapis.com/oauth2/v2/userinfo",{
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'X-lang': localStorage.getItem('languageApp') ?? 'es'
-            }
-        });
+        const response = await api.post(routesApi.public.get_data_google,{client_token: accessToken});
 
-        return response.data;
+        return response.data.data;
     }
 
     return null;
