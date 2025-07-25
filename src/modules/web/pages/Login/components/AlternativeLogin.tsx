@@ -5,7 +5,7 @@ import { LoginSocialFacebook } from "reactjs-social-login";
 import { app } from "@/config/app";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/modules/web/hooks/auth/hooksAuth";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { LoadingAuthContext } from "../Login";
 import { toast } from "sonner";
 import AppToast from "@/modules/core/components/AppToast";
@@ -14,7 +14,6 @@ import { ResponseUserProps } from "@/modules/web/@types/web";
 import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
 import { useAppLoading } from "@/store/loadingStore";
-import { showError } from "@/modules/core/utilities/errors";
 import { useAppToast } from "@/modules/core/hooks/useAppToast";
 
 const AlternativeLogin = () => {
@@ -22,17 +21,33 @@ const AlternativeLogin = () => {
   const navigate = useNavigate();
 
   const { authLogin, setAuthLogin } = useContext(LoadingAuthContext);
-  const [googleUserToken, setGoogleUserToken] = useState<string | null>(null);
   const { updateToken, updateUser } = useAuthStore((state) => state);
   const { update } = useAppLoading((state) => state);
-  const { authProvider, useGetInfoGoogle } = useAuth(null, successLogin);
-  const {show} = useAppToast();
+  const { authProvider, useQueryGoogleInfo } = useAuth(null, successLogin);
+  const { show } = useAppToast();
 
-  const { data, isLoading } = useGetInfoGoogle(googleUserToken || "");
+  const { googleQuery } = useQueryGoogleInfo();
 
   const loginGoogle = useGoogleLogin({
     onSuccess: (response) => {
-      setGoogleUserToken(response.access_token);
+      googleQuery.mutate(response.access_token, {
+        onSuccess(data) {
+          authProvider.mutate(
+            {
+              id_client: data?.id,
+              id_provider: app.socialProviders.google,
+              payload: JSON.stringify(data),
+              email: data?.email
+            },
+            {
+              onError: () => {
+                googleLogout();
+              },
+            }
+          );
+          setAuthLogin(authProvider.isPending);
+        },
+      });
     },
     onError: (error) =>
       toast.custom((id) => (
@@ -45,34 +60,13 @@ const AlternativeLogin = () => {
     updateUser(data.jwt);
     update(false);
     navigate(webRoutes.home.path);
-    show({message: t('descriptions.welcome')});
+    show({ message: t('descriptions.welcome') });
 
   }
-  
-  useEffect(() => {
-    if (data) {
-      authProvider.mutate(
-        {
-          id_client: data?.id,
-          id_provider: app.socialProviders.google,
-          payload: JSON.stringify(data),
-          email: data?.email
-        },
-        {
-          onError: (e) => {
-            showError(e);
-            googleLogout();
-          },
-        }
-      );
-      setAuthLogin(authProvider.isPending);
-    }
-  }, [data]);
 
   useEffect(() => {
-    
-    update(isLoading || authProvider.isPending);
-  },[isLoading, authProvider.isPending]);
+    update(authProvider.isPending);
+  }, [authProvider.isPending]);
 
   return (
     <>
@@ -100,7 +94,7 @@ const AlternativeLogin = () => {
                 email: response.data?.email
               },
               {
-                onError: () => {}
+                onError: () => { }
               }
             );
             setAuthLogin(authProvider.isPending);

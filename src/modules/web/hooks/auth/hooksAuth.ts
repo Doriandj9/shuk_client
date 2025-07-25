@@ -32,19 +32,20 @@ export const useAuth = (handleSuccessLogin?: CallableFunction | null, handleSucc
         },
     });
 
-    const useGetInfoGoogle = (accessToken: string) => {
+    const useQueryGoogleInfo = () => {
 
-        return useQuery({
-            queryKey: ['user_google', accessToken],
-            queryFn: async () => await infoUserGoogle(accessToken),
-            enabled: accessToken !== '',
+        const googleQuery = useMutation({
+            mutationKey: ['user_google'],
+            mutationFn: async (accessToken: string) => await infoUserGoogle(accessToken),
         });
+
+        return {googleQuery};
     };
 
     return {
         auth,
         authProvider,
-        useGetInfoGoogle
+        useQueryGoogleInfo
     };
 };
 
