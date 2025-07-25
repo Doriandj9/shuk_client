@@ -173,7 +173,8 @@
         "hidden-phone": "Ocultar numero de celular",
         "theme-app": "Seleccione el tema de la aplicación",
         "hidden-posts": "No tiene configuración por favor agrega en configuración",
-        "post-already-hidden": "La publicación ya esta oculta"
+        "post-already-hidden": "La publicación ya esta oculta",
+        "welcome": "Bienvenido a Shuk 👍"
 
     },
     "helpers": {

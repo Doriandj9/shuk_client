@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
 import { useAppLoading } from "@/store/loadingStore";
 import { showError } from "@/modules/core/utilities/errors";
+import { useAppToast } from "@/modules/core/hooks/useAppToast";
 
 const AlternativeLogin = () => {
   const [t] = useTranslation("web");
@@ -25,6 +26,7 @@ const AlternativeLogin = () => {
   const { updateToken, updateUser } = useAuthStore((state) => state);
   const { update } = useAppLoading((state) => state);
   const { authProvider, useGetInfoGoogle } = useAuth(null, successLogin);
+  const {show} = useAppToast();
 
   const { data, isLoading } = useGetInfoGoogle(googleUserToken || "");
 
@@ -43,6 +45,8 @@ const AlternativeLogin = () => {
     updateUser(data.jwt);
     update(false);
     navigate(webRoutes.home.path);
+    show({message: t('descriptions.welcome')});
+
   }
   
   useEffect(() => {

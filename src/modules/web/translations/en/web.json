@@ -171,7 +171,8 @@
         "hidden-phone": "Hide cell phone number",
         "theme-app": "Select the application theme",
         "hidden-posts": "It doesn't have a configuration please believe me in configuration",
-        "post-already-hidden": "The post is already hidden"
+        "post-already-hidden": "The post is already hidden",
+        "welcome": "Welcome to Shuk 👍"
     },
     "helpers": {
         "email-not-show": "Email will not be displayed publicly.",

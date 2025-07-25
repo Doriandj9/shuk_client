@@ -11,6 +11,7 @@ import { ResponseUserProps } from "@/modules/web/@types/web";
 import { useAuthStore } from "@/store/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
+import { useAppToast } from "@/modules/core/hooks/useAppToast";
 
 type PropsLoginMail = {
   handleChangeMode: CallableFunction;
@@ -26,6 +27,7 @@ const LoginMail: React.FC<PropsLoginMail> = ({ handleChangeMode }) => {
   const [t] = useTranslation("web");
   const { setAuthLogin, authLogin } = useContext(LoadingAuthContext);
   const { updateToken, updateUser } = useAuthStore((state) => state);
+  const {show} = useAppToast();
 
   const schema = useLoginSchema();
 
@@ -52,6 +54,7 @@ const LoginMail: React.FC<PropsLoginMail> = ({ handleChangeMode }) => {
     updateToken(data.token, data.time_expired_token);
     updateUser(data.jwt);
     navigate(webRoutes.home.path);
+    show({message: t('descriptions.welcome')});
   }
 
   useEffect(() => {
