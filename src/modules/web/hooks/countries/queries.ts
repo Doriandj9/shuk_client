@@ -6,7 +6,7 @@ type GetCountriesFn = {
 };
 
 export const getCounties: GetCountriesFn =  async () => {
-    const response = await axios.get('https://restcountries.com/v2/all');
+    const response = await axios.get('https://restcountries.com/v2/all?fields=alpha2Code,name,capital,languages,region');
 
     return response.data;
 };
