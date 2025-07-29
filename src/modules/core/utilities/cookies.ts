@@ -14,7 +14,10 @@ export const getCookie = (nameCookie: string): string | null => {
 
 export const setCookie = (name: string, value: string, timeExpired: string, path: string='/') => {
     const time = moment(timeExpired).toDate().toUTCString();
-    document.cookie = `${name}=${value}; Secure; SameSite=Strict; expires=${time}; path=${path}`;
+    const isSecure = window.location.protocol === 'https:' ? 'Secure;' : '';
+    // Usamos SameSite=Lax para mejor compatibilidad
+    document.cookie = `${name}=${value}; ${isSecure} SameSite=Lax; expires=${time}; path=${path}`;
+
 };
 
 export const deleteCookie = (nameCookie: string) => {

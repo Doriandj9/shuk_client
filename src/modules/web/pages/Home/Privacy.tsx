@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 
 export const Privacy = () => {
     const [t] = useTranslation('web');
-    const [t_core] = useTranslation('core');
 
     return (
         <AppLayout>
@@ -63,13 +62,6 @@ export const Privacy = () => {
                             </ol>
                         </li>
                     </ol>
-
-                    <div className="mt-6">
-                        <div className="flex flex-col items-center text-center  font-semibold">
-                                <h4>Ing. Gonzalo Guanipatín</h4>
-                                <h5>{t_core('titles.manager-digital-educas')}</h5>
-                        </div>
-                    </div>
                 </div>
             </div>
         </AppLayout>
