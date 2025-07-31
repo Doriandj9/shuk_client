@@ -42,7 +42,8 @@ export const routesApi = {
         not_emails: {
             path: 'not-notifications-emails'
         },
-        get_data_google: 'get-data-google'
+        get_data_google: 'get-data-google',
+        get_data_facebook: 'callback/facebook'
     },
     user: {
         resource_post: {

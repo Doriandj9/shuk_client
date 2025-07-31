@@ -16,6 +16,7 @@ import { webRoutes } from "@/config/webRoutes";
 import { useAppLoading } from "@/store/loadingStore";
 import { useAppToast } from "@/modules/core/hooks/useAppToast";
 import { isAndroid } from 'react-device-detect'; // Para detectar si es Android
+import { routesApi } from "@/config/apiRoutes";
 
 const AlternativeLogin = () => {
   const [t] = useTranslation("web");
@@ -89,6 +90,7 @@ const AlternativeLogin = () => {
         </Button>
         <LoginSocialFacebook
           appId={app.oAuthIdFacebook || ""}
+          redirect_uri={app.server + routesApi.public.get_data_facebook}
           onResolve={(response) => {
             authProvider.mutate(
               {
