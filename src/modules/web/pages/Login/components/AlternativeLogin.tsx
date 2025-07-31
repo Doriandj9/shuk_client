@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { webRoutes } from "@/config/webRoutes";
 import { useAppLoading } from "@/store/loadingStore";
 import { useAppToast } from "@/modules/core/hooks/useAppToast";
+import { isAndroid } from 'react-device-detect'; // Para detectar si es Android
 
 const AlternativeLogin = () => {
   const [t] = useTranslation("web");
@@ -46,6 +47,9 @@ const AlternativeLogin = () => {
             }
           );
           setAuthLogin(authProvider.isPending);
+          if (isAndroid) {
+            window.close(); // Cierra la ventana emergente en Android
+          }
         },
       });
     },
