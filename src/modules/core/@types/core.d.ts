@@ -75,30 +75,35 @@ interface AppToastT {
 
 
 export type ResponseSuccessApi<T> = {
+    code: number;
     status: boolean;
     message: 'OK',
     data: T
 };
 
 export type ResponseCreateApi<T> = {
+    code: number;
     status: true;
     message: 'Resource created successfully.' | string,
     data: T
 };
 
 export type ResponseUpdateApi<T> = {
+    code: number;
     status: true;
     message: 'Resource updated successfully.' | string,
     data: T
 };
 
 export type ResponseDeleteApi<T> = {
+    code: number;
     status: true;
     message: 'Resource deleted successfully.' | string,
     data: T
 };
 
 export type ResponseErrorApi = {
+    code: number;
     status: false;
     message: 'An error occurred on the server, please try again later.' | string,
     _error: string

@@ -1,5 +1,6 @@
-import {AppConfig} from '@/config/@types/app';
+import { AppConfig } from '@/config/@types/app';
 import { DocStatus as DocStatusType } from '@/modules/core/@types/core';
+import { showError } from '@/modules/core/utilities/errors';
 import { User } from '@/modules/web/@types/web';
 import { ThemeOptions } from "@mui/material";
 import axios from 'axios';
@@ -51,27 +52,47 @@ export const appTheme: ThemeOptions = {
     },
 };
 
+
 export const api = axios.create({
     baseURL: app.server + app.apiV,
-    transformResponse: [function(data){
-       try {
+    transformResponse: [function (data) {
+
+        try {
+
             const response = JSON.parse(data);
-            if(app.environment !== 'prod' && !response.status) {
-                return {...response, _error: response.message, message: response._error };
+
+            Promise.resolve().then(async () => {
+                const { useAuthStore } = await import('@/store/auth'); // ajusta la ruta
+
+                if (useAuthStore.getState().isLogin && response.code === 401) {
+                    useAuthStore.getState().logout();
+
+                    const e = {
+                        name: 'Unauthenticated',
+                        message: typeof response.message === 'string' ? response.message : 'Error unknown',
+                    } as Error;
+
+                    showError(e, 5000);
+                }
+            });
+
+
+            if (app.environment !== 'prod' && !response.status) {
+                return { ...response, _error: response.message, message: response._error };
             }
 
             return response;
-       } catch (e) {
-            if(app.environment !== 'prod'){
+        } catch (e) {
+            if (app.environment !== 'prod') {
                 console.error(e);
             }
-        return data;
-       }
+            return data;
+        }
     }],
     headers: {
         'Accept': 'application/json',
         // 'X-lang': localStorage.getItem('languageApp') ?? 'es'
-    }
+    },
 });
 
 export const moment_locale_es = {
@@ -123,7 +144,7 @@ export const moment_locale_es = {
     },
     meridiem: function (hours: number, minutes?: number, isLower?: boolean) {
 
-        if(isLower){
+        if (isLower) {
             return hours < 12 ? 'am' : 'pm';
         }
 
@@ -139,20 +160,20 @@ export const genderValues = {
     'es': [{
         value: 'M',
         label: 'Masculino'
-    },{
+    }, {
         value: 'F',
         label: 'Femenino'
-    },{
+    }, {
         value: 'PND',
         label: 'Prefiero no decirlo'
     }],
     'en': [{
         value: 'M',
         label: 'Male'
-    },{
+    }, {
         value: 'F',
         label: 'Female'
-    },{
+    }, {
         value: 'PND',
         label: 'I prefer not to say it'
     }]
@@ -175,3 +196,6 @@ export const DocStatus: DocStatusType = {
 export const userDefault: User = {
     id: 0
 };
+
+
+
