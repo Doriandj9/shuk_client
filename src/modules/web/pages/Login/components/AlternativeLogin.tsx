@@ -1,8 +1,7 @@
 import { Google, Facebook } from "@core/components/SVGComponents";
 import { Button } from "@chakra-ui/react";
 import { useGoogleLogin, googleLogout } from "@react-oauth/google";
-import { LoginSocialFacebook } from "reactjs-social-login";
-import { app } from "@/config/app";
+import { api, app } from "@/config/app";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/modules/web/hooks/auth/hooksAuth";
 import { useContext, useEffect } from "react";
@@ -27,6 +26,10 @@ const AlternativeLogin = () => {
   const { update } = useAppLoading((state) => state);
   const { authProvider, useQueryGoogleInfo } = useAuth(null, successLogin);
   const { show } = useAppToast();
+
+  const url = new URL(window.location.href);
+  const token = url.searchParams.get('token');
+
 
   const { googleQuery } = useQueryGoogleInfo();
 
@@ -66,12 +69,49 @@ const AlternativeLogin = () => {
     update(false);
     navigate(webRoutes.home.path);
     show({ message: t('descriptions.welcome') });
-
   }
+
+  const loginWithFacebook = () => {
+    const fbAuthUrl = `https://www.facebook.com/v22.0/dialog/oauth?client_id=${app.oAuthIdFacebook}&redirect_uri=${encodeURIComponent(api.getUri() + '/' + routesApi.public.get_data_facebook)}&response_type=code&scope=email,public_profile`;
+    window.open(fbAuthUrl, '_blank', 'width=500,height=600');
+
+  };
 
   useEffect(() => {
     update(authProvider.isPending);
   }, [authProvider.isPending]);
+
+
+  useEffect(() => {
+    if (token) {
+      update(true);
+      localStorage.setItem('__t_dto', token);
+      window.close();
+    }
+
+  }, [token]);
+
+
+  useEffect(() => {
+    const onStorageChange = (event: StorageEvent) => {
+      if (event.key === '__t_dto') {
+        // location.replace('/?f=true');
+        const token = localStorage.getItem('__t_dto');
+        if (token) {
+          const response = JSON.parse(atob(token)) as ResponseUserProps;
+          updateToken(response.token, response.time_expired_token);
+          updateUser(response.jwt);
+          localStorage.removeItem('__t_dto');
+          update(false);
+          navigate(webRoutes.home.path);
+          show({ message: t('descriptions.welcome') });
+        }
+      }
+    };
+
+    window.addEventListener('storage', onStorageChange);
+    return () => window.removeEventListener('storage', onStorageChange);
+  }, []);
 
   return (
     <>
@@ -88,39 +128,19 @@ const AlternativeLogin = () => {
             {t("login.buttons.google")}
           </span>
         </Button>
-        <LoginSocialFacebook
-          appId={app.oAuthIdFacebook || ""}
-          redirect_uri={app.server + routesApi.public.get_data_facebook}
-          onResolve={(response) => {
-            authProvider.mutate(
-              {
-                id_client: response.data?.userID,
-                id_provider: app.socialProviders.facebook,
-                payload: JSON.stringify(response.data),
-                email: response.data?.email
-              },
-              {
-                onError: () => { }
-              }
-            );
-            setAuthLogin(authProvider.isPending);
-          }}
-          onReject={(err) => {
-            console.log(err);
-          }}
+
+        <Button
+          colorScheme="gray"
+          variant="outline"
+          className="w-full mt-2 flex gap-2 group items-center"
+          isDisabled={authLogin}
+          onClick={() => loginWithFacebook()}
         >
-          <Button
-            colorScheme="gray"
-            variant="outline"
-            className="w-full mt-2 flex gap-2 group items-center"
-            isDisabled={authLogin}
-          >
-            <Facebook className="w-4 h-4 text-blue-500" />
-            <span className="text-mode-white dark:group-hover:text-black">
-              {t("login.buttons.facebook")}
-            </span>
-          </Button>
-        </LoginSocialFacebook>
+          <Facebook className="w-4 h-4 text-blue-500" />
+          <span className="text-mode-white dark:group-hover:text-black">
+            {t("login.buttons.facebook")}
+          </span>
+        </Button>
       </div>
     </>
   );
