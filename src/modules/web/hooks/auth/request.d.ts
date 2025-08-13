@@ -42,3 +42,7 @@ export type ResetPasswordForm = Pick<RegisterUser,'email'| 'password' | 'passwor
 export type ResetPasswordFn =  {
     (data: ResetPasswordForm): Promise<ResponseSuccessApi<string>['data']>; 
 };
+
+export type GetJwtUser = {
+    (token:string): Promise<ResponseSuccessApi<string>['data']>;
+};

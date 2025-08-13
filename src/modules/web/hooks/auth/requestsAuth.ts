@@ -1,7 +1,7 @@
 import { routesApi } from "@/config/apiRoutes";
 import { api } from "@/config/app";
 import { useAuthStore } from "@/store/auth";
-import { CompleteRegisterFn, ForwardPasswordFn, InitialRegisterFn, ResetPasswordFn, VerifyTokenResetPassword } from "./request";
+import { CompleteRegisterFn, ForwardPasswordFn, GetJwtUser, InitialRegisterFn, ResetPasswordFn, VerifyTokenResetPassword } from "./request";
 
 const {path: login} = routesApi.public.auth;
 const {path: loginProvider} = routesApi.public.auth_provider;
@@ -119,3 +119,14 @@ export const testFn = async (data: object) => {
     return response.data;
 };
 
+
+export const getJwt: GetJwtUser = async (token) => {
+    const response = await api.get(routesApi.public.get_jwt, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'X-lang': localStorage.getItem('languageApp') ?? 'es'
+        }
+    });
+
+    return response.data.data;
+};

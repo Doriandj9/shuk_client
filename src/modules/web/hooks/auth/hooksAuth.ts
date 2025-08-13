@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
-import { authFn, authLogOut, authProviderFn, completeRegister, forwardPassword, infoUserGoogle, initialRegister, resetPassword, verifyTokenResetPassword } from "./requestsAuth";
+import { authFn, authLogOut, authProviderFn, completeRegister, forwardPassword, getJwt, infoUserGoogle, initialRegister, resetPassword, verifyTokenResetPassword } from "./requestsAuth";
 import { api } from "@/config/app";
 import { showError } from "@/modules/core/utilities/errors";
 import { useContext } from "react";
@@ -139,4 +139,14 @@ export const useResetPassword = () => {
     });
 
     return { forward };
+};
+
+export const useUserJwt = () => {
+    const tokenQuery = useMutation({
+        mutationKey: ['jtw-user'],
+        mutationFn: (token: string) => getJwt(token),
+    });
+
+
+    return {tokenQuery};
 };

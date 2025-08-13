@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/react";
 import { useGoogleLogin, googleLogout } from "@react-oauth/google";
 import { api, app } from "@/config/app";
 import { useTranslation } from "react-i18next";
-import { useAuth } from "@/modules/web/hooks/auth/hooksAuth";
+import { useAuth, useUserJwt } from "@/modules/web/hooks/auth/hooksAuth";
 import { useContext, useEffect } from "react";
 import { LoadingAuthContext } from "../Login";
 import { toast } from "sonner";
@@ -27,9 +27,10 @@ const AlternativeLogin = () => {
   const { authProvider, useQueryGoogleInfo } = useAuth(null, successLogin);
   const { show } = useAppToast();
 
+
   const url = new URL(window.location.href);
   const token = url.searchParams.get('token');
-
+  const { tokenQuery } = useUserJwt();
 
   const { googleQuery } = useQueryGoogleInfo();
 
@@ -78,8 +79,8 @@ const AlternativeLogin = () => {
   };
 
   useEffect(() => {
-    update(authProvider.isPending);
-  }, [authProvider.isPending]);
+    update(authProvider.isPending || tokenQuery.isPending);
+  }, [authProvider.isPending, tokenQuery.isPending]);
 
 
   useEffect(() => {
@@ -95,16 +96,22 @@ const AlternativeLogin = () => {
   useEffect(() => {
     const onStorageChange = (event: StorageEvent) => {
       if (event.key === '__t_dto') {
-        // location.replace('/?f=true');
         const token = localStorage.getItem('__t_dto');
         if (token) {
           const response = JSON.parse(atob(token)) as ResponseUserProps;
-          updateToken(response.token, response.time_expired_token);
-          updateUser(response.jwt);
-          localStorage.removeItem('__t_dto');
-          update(false);
-          navigate(webRoutes.home.path);
-          show({ message: t('descriptions.welcome') });
+          tokenQuery.mutate(response.token, {
+            onSuccess(data) {
+              if (data) {
+                updateUser(data);
+                updateToken(response.token, response.time_expired_token);
+                localStorage.removeItem('__t_dto');
+                show({ message: t('descriptions.welcome') });
+                update(false);
+                navigate(webRoutes.home.path);
+              }
+
+            },
+          });
         }
       }
     };
